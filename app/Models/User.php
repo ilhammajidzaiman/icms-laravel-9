@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'level_id',
+        'status_id',
+        'uuid',
         'password',
+        'username',
+        'email',
+        'name',
+        'file',
     ];
 
     /**
@@ -41,4 +46,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function level()
+    {
+        return $this->hasOne(UserLevel::class, 'id', 'level_id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(UserStatus::class, 'id', 'status_id');
+    }
 }
