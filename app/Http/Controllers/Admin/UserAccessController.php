@@ -65,7 +65,6 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            // 'level'         => Level::where('slug', $id)->first(),
             'menus'         => UserMenu::orderByDesc('id')->get(),
         ];
         return view('private.menu-access.update', $data);
@@ -78,9 +77,37 @@ class UserAccessController extends Controller
      * @param  \App\Models\UserAccess $userAccess
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserAccess $access)
+    public function update(Request $request, UserLevel $access)
     {
-        //
+        // detail data
+        $oldId              = $access->id;
+        $oldLevel           = $access->name;
+
+        // data input
+        $menu               = $request->menu;
+        $message            = $oldLevel;
+
+        // delete data on table accesses
+        UserAccess::where('level_id', $oldId)->delete();
+
+        // insert menu to table accesses
+        if ($menu) :
+            $data2 = [];
+            foreach ($menu as $key) :
+                $data2[] =
+                    [
+                        'level_id'      => $oldId,
+                        'menu_id'       => $key,
+                    ];
+            endforeach;
+            UserAccess::insert($data2);
+        endif;
+
+        $flashData = [
+            'message'       => 'Data "' . $message . '" diubah',
+            'alert'         => 'success',
+        ];
+        return redirect('/admin/master/access')->with($flashData);
     }
 
     /**

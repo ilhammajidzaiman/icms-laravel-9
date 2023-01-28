@@ -17,15 +17,15 @@
                     <div class="text-capitalize mb-3">
                         <label>akses menu</label>
                         @foreach ($menus as $menu)
-                        {{-- @php
-                        $accesses=App\Models\Access::where('level_id',$access->id)->where('menu_id',$menu->id)->get();
-                        @endphp --}}
+                        @php
+                        $accesses=App\Models\UserAccess::where('level_id',$level->id)->where('menu_id',$menu->id)->get();
+                        @endphp
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="menu[]" id="{{ $menu->id }}"
-                                value="{{ $menu->id }}" {{-- @foreach ($accesses as $acces) {{$menu->id ==
+                                value="{{ $menu->id }}" @foreach ($accesses as $acces) {{$menu->id ==
                             $acces->menu_id
                             ?
-                            'checked':''}}@endforeach --}}
+                            'checked':''}}@endforeach
                             >
                             <label class="form-check-label" for="{{ $menu->id }}">
                                 <i class="{{ $menu->icon }}"></i>
