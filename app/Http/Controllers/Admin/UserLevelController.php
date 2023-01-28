@@ -86,8 +86,6 @@ class UserLevelController extends Controller
     public function edit(UserLevel $level)
     {
         $data = [
-            'controller'    => 'level',
-            'title'         => 'edit level',
             'level'         => $level,
         ];
         return view('private.level.update', $data);

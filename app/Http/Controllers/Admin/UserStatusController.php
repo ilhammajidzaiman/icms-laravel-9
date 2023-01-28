@@ -69,7 +69,7 @@ class UserStatusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserStatus  $userStatus
+     * @param  \App\Models\UserStatus  $userrStatus
      * @return \Illuminate\Http\Response
      */
     public function show(UserStatus $status)
@@ -83,14 +83,14 @@ class UserStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserStatus  $userStatus
+     * @param  \App\Models\UserStatus  $userrStatus
      * @return \Illuminate\Http\Response
      */
     public function edit(UserStatus $status)
     {
         $data = [
             'status'        => $status,
-            // 'status'        => $userStatus->where('slug', $id)->first(),
+            // 'status'        => $Status->where('slug', $id)->first(),
         ];
         return view('private.status.update', $data);
     }
@@ -99,7 +99,7 @@ class UserStatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserStatus  $userStatus
+     * @param  \App\Models\UserStatus  $userrStatus
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserStatus $status)
@@ -139,7 +139,7 @@ class UserStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserStatus  $userStatus
+     * @param  \App\Models\UserStatus  $userrStatus
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserStatus $status)

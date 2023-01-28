@@ -65,6 +65,20 @@
                                 <p class="text">level</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/'.$segment1.'/master/menu') }}"
+                                class="nav-link {{ Request::is($segment1.'/'.$segment2.'/menu*')?'active':'' }}">
+                                <i class="nav-icon fa-fw fas fa-list"></i>
+                                <p class="text">menu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/'.$segment1.'/master/access') }}"
+                                class="nav-link {{ Request::is($segment1.'/'.$segment2.'/access*')?'active':'' }}">
+                                <i class="nav-icon fa-fw fas fa-shield-alt"></i>
+                                <p class="text">akses</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

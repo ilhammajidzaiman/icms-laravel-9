@@ -53,6 +53,13 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->controller()->group(
             function () {
                 Route::resource('/status', App\Http\Controllers\Admin\UserStatusController::class)->scoped(['status' => 'slug']);
                 Route::resource('/level', App\Http\Controllers\Admin\UserLevelController::class)->scoped(['level' => 'slug']);
+                Route::controller(App\Http\Controllers\Admin\UserMenuController::class)->group(function () {
+                    Route::resource('/menu', App\Http\Controllers\Admin\UserMenuController::class)->scoped(['menu' => 'slug']);
+                    Route::get('menu/{menu:slug}/create_sub', 'create_sub')->name('menu.create_sub');
+                    Route::post('menu/{menu:slug}/create_sub', 'store_sub')->name('menu.create_sub');
+                });
+
+                Route::resource('/access', App\Http\Controllers\Admin\UserAccessController::class)->scoped(['access' => 'slug']);
             }
         );
 
