@@ -9,4 +9,9 @@ class UserLevel extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function menus()
+    {
+        return $this->belongsToMany(UserMenu::class, 'user_accesses', 'level_id', 'menu_id');
+    }
 }

@@ -16,16 +16,16 @@
                         <label for="menu">Akses Menu</label>
                         <ol>
                             @php
-                            $menus= App\Models\Level::where('id', '=', $access->id)->first();
+                            $menus= App\Models\UserLevel::where('id', '=', $level->id)->first();
                             @endphp
                             @forelse ($menus->menus as $menu)
                             <li>
                                 <i class="{{ $menu->icon }}"></i>
-                                {{ $menu->menu }}
+                                {{ $menu->name }}
                             </li>
                             @empty
                             <li>
-                                <x-alert.empty-alert />
+                                <x-private.alert.alert-empty />
                             </li>
                             @endforelse
                         </ol>

@@ -18,7 +18,7 @@ class UserAccessController extends Controller
     public function index()
     {
         $data = [
-            'levels'        => UserLevel::orderByDesc('id')->get(),
+            'levels'        => UserLevel::orderBy('id')->get(),
         ];
         return view('private.menu-access.index', $data);
     }
@@ -50,9 +50,12 @@ class UserAccessController extends Controller
      * @param  \App\Models\UserAccess $userAccess
      * @return \Illuminate\Http\Response
      */
-    public function show(UserAccess $ccess)
+    public function show(UserLevel $access)
     {
-        //
+        $data = [
+            'level'         => $access,
+        ];
+        return view('private.menu-access.show', $data);
     }
 
     /**
@@ -65,7 +68,7 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            'menus'         => UserMenu::orderByDesc('id')->get(),
+            'menus'         => UserMenu::where('parent_id', 0)->orderByDesc('id')->get(),
         ];
         return view('private.menu-access.update', $data);
     }
