@@ -36,18 +36,20 @@
                 @php
                 $parents= App\Models\UserAccess::where('level_id',auth()->user()->level_id)->with(['menu'])->get();
                 // $parents= App\Models\UserMenu::where('parent_id',0)->get();
+
                 @endphp
-
                 @forelse ($parents as $parent)
-                {{-- ada data parents --}}
 
-                @if ((empty($parent->menu->url)) || ($parent->menu->url==='#'))
+                @if ((empty($parent->url)) || ($parent->url==='#'))
+                {{-- @php
+                dd($parent);
+                @endphp --}}
                 {{-- url kosong atau pagar --}}
                 <li class="nav-item {{ $segment2 == 'master' ? 'menu-open' : ''}}">
                     <a href="#" class="nav-link {{ $segment2 == 'master' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p class="textt">
-                            {{ $parent->menu->name }}
+                            {{ $parent->name }}
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -79,16 +81,18 @@
                 @else
                 {{-- url ada --}}
                 <li class="nav-item">
-                    <a href="{{ url('/'.$segment1.$parent->menu->url) }}"
-                        class="nav-link {{ Request::is($segment1.$parent->menu->url.'*')?'active':'' }}">
-                        <i class="nav-icon {{ $parent->menu->icon }}"></i>
-                        <p class="text">{{ $parent->menu->name }}</p>
+                    <a href="{{ url('/'.$segment1.$parent->url) }}"
+                        class="nav-link {{ Request::is($segment1.$parent->url.'*')?'active':'' }}">
+                        <i class="nav-icon {{ $parent->icon }}"></i>
+                        <p class="text">{{ $parent->name }}</p>
                     </a>
                 </li>
                 @endif
 
+
+
                 @empty
-                {{-- tidak ada data parents --}}
+                {{-- jika tidak ada akses menu --}}
                 <li class="nav-item">
                     <a href="{{ url('/'.$segment1.'/dashboard') }}" class="nav-link">
                         <i class="nav-icon fa-fw fas fa-info-circle"></i>
@@ -96,7 +100,9 @@
                     </a>
                 </li>
                 @endforelse
+
                 <li class="nav-header mx-2 mb-3" style="border-bottom: 1px solid #4f5962"></li>
+
                 <li class="nav-item">
                     <a href="{{ url('/logout') }}" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt "></i>

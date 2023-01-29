@@ -40,6 +40,14 @@
                                 }}</a>
                         </li>
                         @endif
+
+                        @if ($segment5)
+                        <li class="breadcrumb-item"><a
+                                href="{{ url($segment1.'/'.$segment2.'/'.$segment3.'/'.$segment4.'/'.$segment5) }}">{{
+                                $segment5
+                                }}</a>
+                        </li>
+                        @endif
                     </ol>
                 </div>
             </div>

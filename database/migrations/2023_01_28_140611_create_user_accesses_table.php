@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_accesses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('level_id')->comment('id table levels')->constrained('user_levels')->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('menu_id')->comment('id table menus')->constrained('user_menus')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('level_id')->comment('id table user_levels')->constrained('user_levels')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('menu_id')->comment('id table user_menus')->constrained('user_menus')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });
     }

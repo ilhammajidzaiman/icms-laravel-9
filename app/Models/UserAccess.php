@@ -9,4 +9,9 @@ class UserAccess extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function menu()
+    {
+        return $this->belongsTo(UserMenu::class, 'menu_id', 'id');
+    }
 }

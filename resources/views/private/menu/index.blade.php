@@ -47,7 +47,7 @@
                                             $menus2=App\Models\UserMenu::where('parent_id',$menu1->id)->orderBy('id')->get();
                                             @endphp
                                             @forelse ($menus2 as $menu2)
-                                            <tr class="table-primary">
+                                            <tr class="table-secondary">
                                                 <td>
                                                     <i class="text-dark fas fa-caret-right fa-fw"></i>
                                                     <span class="badge badge-secondary mr-2">{{ $menu2->order }}</span>
@@ -65,7 +65,7 @@
                                                 </td>
                                             </tr>
                                             @empty
-                                            <tr class="table-primary">
+                                            <tr class="table-secondary">
                                                 <td>
                                                     <x-private.alert.alert-empty />
                                                 </td>
