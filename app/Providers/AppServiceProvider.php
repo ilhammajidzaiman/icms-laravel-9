@@ -28,9 +28,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Gate::define('admin', function (User $user) {
-        //     return $user->level_id == 1;
-        // });
+        Gate::define('superAdmin', function (User $user) {
+            return $user->level_id == 1;
+        });
+        Gate::define('admin', function (User $user) {
+            return $user->level_id == 2;
+        });
+        Gate::define('user', function (User $user) {
+            return $user->level_id == 3;
+        });
 
         $segment1 = Request::segment(1);
         $segment2 = Request::segment(2);

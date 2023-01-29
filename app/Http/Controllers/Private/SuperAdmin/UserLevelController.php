@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin\Admin;
+namespace App\Http\Controllers\Private\SuperAdmin;
 
 use App\Models\UserLevel;
 use Illuminate\Support\Str;

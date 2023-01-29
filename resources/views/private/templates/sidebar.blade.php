@@ -54,7 +54,7 @@
                     <ul class="nav nav-treeview">
 
                         @php
-                        $childs= App\Models\UserMenu::where('parent_id',$parent->id)->get();
+                        $childs= App\Models\UserMenu::where('parent_id',$parent->menu->id)->get();
                         @endphp
                         @forelse ($childs as $child)
                         <li class="nav-item">

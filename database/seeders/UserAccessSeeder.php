@@ -35,19 +35,19 @@ class UserAccessSeeder extends Seeder
         // admin access
 
         UserAccess::create([
-            'level_id'  => '1',
+            'level_id'  => '2',
             'menu_id'   => '2',
         ]);
 
         UserAccess::create([
-            'level_id'  => '1',
+            'level_id'  => '2',
             'menu_id'   => '3',
         ]);
 
         // user access
 
         UserAccess::create([
-            'level_id'  => '2',
+            'level_id'  => '3',
             'menu_id'   => '3',
         ]);
     }

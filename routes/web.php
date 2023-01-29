@@ -56,7 +56,9 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
         Route::prefix('master')->group(
             function () {
                 Route::resource('/status', App\Http\Controllers\Private\SuperAdmin\UserStatusController::class)->scoped(['status' => 'slug']);
+
                 Route::resource('/level', App\Http\Controllers\Private\SuperAdmin\UserLevelController::class)->scoped(['level' => 'slug']);
+
                 Route::controller(App\Http\Controllers\Private\SuperAdmin\UserMenuController::class)->group(function () {
                     Route::resource('/menu', App\Http\Controllers\Private\SuperAdmin\UserMenuController::class)->scoped(['menu' => 'slug']);
                     Route::get('menu/{menu:slug}/create_sub', 'create_sub')->name('menu.create_sub');
@@ -85,16 +87,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->controller()->group(
             Route::put('/{uuid}', 'update2')->name('admin.profil.update2');
         });
 
-        Route::prefix('config')->controller(App\Http\Controllers\Private\Admin\ConfigController::class)->group(function () {
-            Route::get('/', 'index')->name('admin.config');
-            Route::get('/edit', 'edit')->name('admin.config.edit');
-            Route::put('/edit', 'update')->name('admin.config.edit');
-        });
-
         Route::prefix('master')->group(
             function () {
                 Route::resource('/status', App\Http\Controllers\Private\Admin\UserStatusController::class)->scoped(['status' => 'slug']);
+
                 Route::resource('/level', App\Http\Controllers\Private\Admin\UserLevelController::class)->scoped(['level' => 'slug']);
+
                 Route::controller(App\Http\Controllers\Private\Admin\UserMenuController::class)->group(function () {
                     Route::resource('/menu', App\Http\Controllers\Private\Admin\UserMenuController::class)->scoped(['menu' => 'slug']);
                     Route::get('menu/{menu:slug}/create_sub', 'create_sub')->name('menu.create_sub');
@@ -118,6 +116,7 @@ Route::prefix('user')->middleware(['auth', 'isUser'])->group(
             Route::get('/{uuid}/edit', 'edit')->name('admin.profil.edit');
             Route::put('/{uuid}', 'update')->name('admin.profil.update');
         });
+
         Route::get('/dashboard', [App\Http\Controllers\Private\DashboardController::class, 'index'])->name('user.dashboard');
     }
 );
