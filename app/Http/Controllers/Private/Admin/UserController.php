@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Private\Admin;
 
 use App\Models\User;
 use Illuminate\Support\Str;

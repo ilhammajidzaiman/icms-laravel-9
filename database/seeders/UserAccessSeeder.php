@@ -15,7 +15,7 @@ class UserAccessSeeder extends Seeder
      */
     public function run()
     {
-        // admin access
+        // super admin access
 
         UserAccess::create([
             'level_id'  => '1',
@@ -32,12 +32,19 @@ class UserAccessSeeder extends Seeder
             'menu_id'   => '3',
         ]);
 
-        // user access
+        // admin access
 
         UserAccess::create([
-            'level_id'  => '2',
-            'menu_id'   => '1',
+            'level_id'  => '1',
+            'menu_id'   => '2',
         ]);
+
+        UserAccess::create([
+            'level_id'  => '1',
+            'menu_id'   => '3',
+        ]);
+
+        // user access
 
         UserAccess::create([
             'level_id'  => '2',

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Private;
 
-use App\Http\Controllers\Controller;
-use App\Models\dashboard;
+use App\Models\Dashboard;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -42,10 +42,10 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\dashboard  $dashboard
+     * @param  \App\Models\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function show(dashboard $dashboard)
+    public function show(Dashboard $dashboard)
     {
         //
     }
@@ -53,10 +53,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\dashboard  $dashboard
+     * @param  \App\Models\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function edit(dashboard $dashboard)
+    public function edit(Dashboard $dashboard)
     {
         //
     }
@@ -65,10 +65,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\dashboard  $dashboard
+     * @param  \App\Models\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, dashboard $dashboard)
+    public function update(Request $request, Dashboard $dashboard)
     {
         //
     }
@@ -76,10 +76,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\dashboard  $dashboard
+     * @param  \App\Models\Dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(dashboard $dashboard)
+    public function destroy(Dashboard $dashboard)
     {
         //
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\SuperAdmin\Admin;
 
 use App\Models\UserStatus;
 use Illuminate\Support\Str;

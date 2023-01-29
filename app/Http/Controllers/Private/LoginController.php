@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Private;
 
 use App\Models\Login;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -39,8 +40,10 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $levelId = auth()->user()->level_id;
             if ($levelId == 1) :
-                return redirect()->intended('admin/dashboard');
+                return redirect()->intended('superadmin/dashboard');
             elseif ($levelId == 2) :
+                return redirect()->intended('admin/dashboard');
+            elseif ($levelId == 3) :
                 return redirect()->intended('user/dashboard');
             endif;
         }

@@ -21,6 +21,17 @@ class UserSeeder extends Seeder
             'uuid'          => Str::uuid(),
             'level_id'      => '1',
             'status_id'     => '1',
+            'name'          => 'My Name Super',
+            'username'      => 'superadmin',
+            'password'      => Hash::make('*#superadmin'),
+            'email'         => 'superadmin@gmail.com',
+            'file'          => 'default-user.svg',
+        ]);
+
+        User::create([
+            'uuid'          => Str::uuid(),
+            'level_id'      => '2',
+            'status_id'     => '1',
             'name'          => 'My Name Admin',
             'username'      => 'admin',
             'password'      => Hash::make('*#admin'),
@@ -30,7 +41,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'uuid'          => Str::uuid(),
-            'level_id'      => '2',
+            'level_id'      => '3',
             'status_id'     => '1',
             'name'          => 'My Name User',
             'username'      => 'user',
