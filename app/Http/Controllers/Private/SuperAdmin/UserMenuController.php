@@ -17,7 +17,6 @@ class UserMenuController extends Controller
     public function index()
     {
         $data = [
-            // 'menus' => Menu::orderBy('order')->get(),
             'menus' => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
         ];
         return view('private.menu.index', $data);
@@ -46,6 +45,7 @@ class UserMenuController extends Controller
         $order              = $request->order;
         $name               = $request->name;
         $icon               = $request->icon;
+        $prefix             = strtolower($request->prefix);
         $url                = $request->url;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
@@ -54,6 +54,8 @@ class UserMenuController extends Controller
         // validation
         $validatedData      = $request->validate([
             'name'          => ['required', 'max:255', 'unique:user_menus'],
+            'icon'          => ['required', 'max:255'],
+            'order'         => ['required', 'max:255'],
         ]);
 
         // masukkan ke table
@@ -64,6 +66,7 @@ class UserMenuController extends Controller
             'name'          => $name,
             'slug'          => $slug,
             'icon'          => $icon,
+            'prefix'        => $prefix,
             'url'           => $url,
         ];
         UserMenu::create($data);
@@ -73,7 +76,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/superadmin/master/menu')->with($flashData);
     }
 
     /**
@@ -119,6 +122,7 @@ class UserMenuController extends Controller
         $order              = $request->order;
         $name               = $request->name;
         $icon               = $request->icon;
+        $prefix             = strtolower($request->prefix);
         $url                = $request->url;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
@@ -130,7 +134,9 @@ class UserMenuController extends Controller
         endif;
 
         $validatedData      = $request->validate([
-            'name'      => ['required', 'max:255', $uniqueSlug]
+            'name'          => ['required', 'max:255', $uniqueSlug],
+            'icon'          => ['required', 'max:255'],
+            'order'         => ['required', 'max:255'],
         ]);
 
         $data = [
@@ -138,6 +144,7 @@ class UserMenuController extends Controller
             'name'          => $name,
             'slug'          => $slug,
             'icon'          => $icon,
+            'prefix'        => $prefix,
             'url'           => $url,
         ];
 
@@ -147,7 +154,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/superadmin/master/menu')->with($flashData);
     }
 
     /**
@@ -165,7 +172,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/superadmin/master/menu')->with($flashData);
     }
 
 
@@ -183,6 +190,7 @@ class UserMenuController extends Controller
         $order              = $request->order;
         $name               = $request->name;
         $icon               = $request->icon;
+        $prefix             = strtolower($request->prefix);
         $url                = $request->url;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
@@ -199,6 +207,7 @@ class UserMenuController extends Controller
             'name'          => $name,
             'slug'          => $slug,
             'icon'          => $icon,
+            'prefix'        => $prefix,
             'url'           => $url,
         ];
 
@@ -207,6 +216,6 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/superadmin/master/menu')->with($flashData);
     }
 }

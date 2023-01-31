@@ -63,7 +63,7 @@ class UserStatusController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/status')->with($flashData);
+        return redirect('/superadmin/master/status')->with($flashData);
     }
 
     /**
@@ -133,7 +133,7 @@ class UserStatusController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/status')->with($flashData);
+        return redirect('/superadmin/master/status')->with($flashData);
     }
 
     /**
@@ -157,6 +157,6 @@ class UserStatusController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/admin/master/status')->with($flashData);
+        return redirect('/superadmin/master/status')->with($flashData);
     }
 }

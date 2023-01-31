@@ -19,8 +19,12 @@
                         :value="old('icon',$menu->icon)" class="col-md-4" />
                 </div>
                 <div class="form-row">
+                    <x-private.form.input-row-readonly type="text" name="prefix" label="prefix"
+                        :value="old('prefix',$menu->prefix)" class="col" />
+                </div>
+                <div class="form-row">
                     <x-private.form.input-row-readonly type="text" name="url" label="url" :value="old('url',$menu->url)"
-                        class="col-md-4" />
+                        class="col" />
                 </div>
 
                 <div class="form-row">

@@ -118,5 +118,7 @@ Route::prefix('user')->middleware(['auth', 'isUser'])->group(
         });
 
         Route::get('/dashboard', [App\Http\Controllers\Private\DashboardController::class, 'index'])->name('user.dashboard');
+
+        Route::resource('/user', App\Http\Controllers\Private\User\UserController::class)->scoped(['user' => 'uuid']);
     }
 );

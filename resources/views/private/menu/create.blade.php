@@ -21,6 +21,10 @@
                             class="col-md-4" />
                     </div>
                     <div class="form-row">
+                        <x-private.form.input-row type="text" name="prefix" label="prefix" :value="old('prefix')"
+                            class="col" />
+                    </div>
+                    <div class="form-row">
                         <x-private.form.input-row type="text" name="url" label="url" :value="old('url')" class="col" />
                     </div>
                     <x-private.button.button-save />

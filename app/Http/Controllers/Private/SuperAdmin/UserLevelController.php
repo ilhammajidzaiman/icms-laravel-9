@@ -17,8 +17,6 @@ class UserLevelController extends Controller
     public function index()
     {
         $data = [
-            'controller'    => 'level',
-            'title'         => 'level',
             'levels'        => UserLevel::orderByDesc('id')->get(),
         ];
         return view('private.level.index', $data);
@@ -60,7 +58,7 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/level')->with($flashData);
+        return redirect('/superadmin/master/level')->with($flashData);
     }
 
     /**
@@ -129,7 +127,7 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/level')->with($flashData);
+        return redirect('/superadmin/master/level')->with($flashData);
     }
 
     /**
@@ -153,6 +151,6 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/admin/master/level')->with($flashData);
+        return redirect('/superadmin/master/level')->with($flashData);
     }
 }

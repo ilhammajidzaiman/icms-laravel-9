@@ -93,6 +93,6 @@ class ConfigController extends Controller
             'message'       => 'config Aplikasi diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/config')->with($flashData);
+        return redirect('/superadmin/config')->with($flashData);
     }
 }

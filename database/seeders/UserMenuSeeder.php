@@ -24,8 +24,9 @@ class UserMenuSeeder extends Seeder
             'parent_id'     => '0',
             'order'         => '1',
             'name'          => 'Konfigurasi',
-            'slug'          => 'config.html',
+            'slug'          => 'konfigurasi.html',
             'icon'          => 'fa-fw fas fa-cog',
+            'prefix'        => 'config',
             'url'           => '/config',
         ]);
 
@@ -37,6 +38,7 @@ class UserMenuSeeder extends Seeder
             'name'          => 'Master',
             'slug'          => 'master.html',
             'icon'          => 'fa-fw fas fa-th',
+            'prefix'        => 'master',
             'url'           => '#',
         ]);
 
@@ -48,52 +50,53 @@ class UserMenuSeeder extends Seeder
             'name'          => 'User',
             'slug'          => 'user.html',
             'icon'          => 'fa-fw fas fa-users',
+            'prefix'        => 'user',
             'url'           => '/user',
         ]);
 
         // child menu
 
         UserMenu::create([
-            'id'            => '4',
             'uuid'          => Str::uuid(),
             'parent_id'     => '2',
             'order'         => '1',
             'name'          => 'Status',
             'slug'          => 'status.html',
             'icon'          => 'fa-fw fas fa-check',
+            'prefix'        => 'master',
             'url'           => '/master/status',
         ]);
 
         UserMenu::create([
-            'id'            => '5',
             'uuid'          => Str::uuid(),
             'parent_id'     => '2',
             'order'         => '2',
             'name'          => 'Level',
             'slug'          => 'level.html',
             'icon'          => 'fa-fw fas fa-star',
+            'prefix'        => 'master',
             'url'           => '/master/level',
         ]);
 
         UserMenu::create([
-            'id'            => '6',
             'uuid'          => Str::uuid(),
             'parent_id'     => '2',
             'order'         => '3',
             'name'          => 'Menu',
             'slug'          => 'menu.html',
             'icon'          => 'fa-fw fas fa-list',
+            'prefix'        => 'master',
             'url'           => '/master/menu',
         ]);
 
         UserMenu::create([
-            'id'            => '7',
             'uuid'          => Str::uuid(),
             'parent_id'     => '2',
             'order'         => '4',
             'name'          => 'Akses',
             'slug'          => 'access.html',
             'icon'          => 'fa-fw fas fa-shield-alt',
+            'prefix'        => 'master',
             'url'           => '/master/access',
         ]);
     }

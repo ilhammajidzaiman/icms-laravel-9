@@ -3,6 +3,12 @@
 <x-private.button.link-create :href="$segmentHref" />
 <x-private.alert.dismissing />
 
+<form action="{{ $segmentForm }}" method="get">
+    <div class="row">
+        <x-private.search name="search" id="search" :value="request('search')" class="col-md-4" />
+    </div>
+</form>
+
 <div class="row">
     <div class="col-lg">
         <div class="card">
@@ -42,6 +48,7 @@
                 </table>
             </div>
         </div>
+        <x-private.pagination :pages="$users" side="1" />
     </div>
 </div>
 

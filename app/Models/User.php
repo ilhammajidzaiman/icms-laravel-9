@@ -47,6 +47,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('name', 'like', '%' . $search . '%');
+        });
+    }
+
     public function level()
     {
         return $this->hasOne(UserLevel::class, 'id', 'level_id');

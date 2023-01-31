@@ -34,8 +34,8 @@
                 </li>
 
                 @php
-                $parents= App\Models\UserAccess::where('level_id',auth()->user()->level_id)->with(['menu'])->get();
-                // $parents= App\Models\UserMenu::where('parent_id',0)->get();
+                $parents=
+                App\Models\UserAccess::orderBy('id')->where('level_id',auth()->user()->level_id)->with(['menu'])->get();
                 @endphp
 
                 @forelse ($parents as $parent)
@@ -43,10 +43,11 @@
 
                 @if ((empty($parent->menu->url)) || ($parent->menu->url==='#'))
                 {{-- url kosong atau pagar --}}
-                <li class="nav-item {{ $segment2 == 'master' ? 'menu-open' : ''}}">
-                    <a href="#" class="nav-link {{ $segment2 == 'master' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p class="textt">
+                <li class="nav-item {{ $segment2 == $parent->menu->prefix ? 'menu-open' : ''}}">
+                    <a href="{{ '/'.$segment1.'/'.$parent->menu->prefix }}"
+                        class="nav-link {{ $segment2 == $parent->menu->prefix ? 'active' : '' }}">
+                        <i class="nav-icon {{ $parent->menu->icon }}"></i>
+                        <p class="text">
                             {{ $parent->menu->name }}
                             <i class="right fas fa-angle-left"></i>
                         </p>
@@ -54,7 +55,7 @@
                     <ul class="nav nav-treeview">
 
                         @php
-                        $childs= App\Models\UserMenu::where('parent_id',$parent->menu->id)->get();
+                        $childs= App\Models\UserMenu::where('parent_id',$parent->menu->id)->orderBy('order')->get();
                         @endphp
                         @forelse ($childs as $child)
                         <li class="nav-item">
@@ -68,7 +69,7 @@
                         <li class="nav-item">
                             <a href="{{ url('/'.$segment1.'/dashboard') }}" class="nav-link">
                                 <i class="nav-icon fa-fw fas fa-info-circle"></i>
-                                <p class="text">anda tidak memiliki akses</p>
+                                <p class="text">anda tidak punya akses!</p>
                             </a>
                         </li>
                         @endforelse
@@ -92,7 +93,7 @@
                 <li class="nav-item">
                     <a href="{{ url('/'.$segment1.'/dashboard') }}" class="nav-link">
                         <i class="nav-icon fa-fw fas fa-info-circle"></i>
-                        <p class="text">anda tidak memiliki akses!</p>
+                        <p class="text">anda tidak punya akses!</p>
                     </a>
                 </li>
                 @endforelse

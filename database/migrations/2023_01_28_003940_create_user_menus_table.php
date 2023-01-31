@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('name')->comment('nama menu yang ditampilkan');
             $table->string('slug')->comment('slug menu');
             $table->string('icon')->nullable()->comment('icon menu jika ada');
+            $table->string('prefix')->nullable()->comment('link url yang dituju atau akan di buka');
             $table->string('url')->nullable()->comment('link url yang dituju atau akan di buka');
             $table->timestamps();
         });

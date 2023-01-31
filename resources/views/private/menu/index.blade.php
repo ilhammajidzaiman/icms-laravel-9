@@ -44,7 +44,7 @@
                                     <table class="table table-hover">
                                         <tbody>
                                             @php
-                                            $menus2=App\Models\UserMenu::where('parent_id',$menu1->id)->orderBy('id')->get();
+                                            $menus2=App\Models\UserMenu::where('parent_id',$menu1->id)->orderBy('order')->get();
                                             @endphp
                                             @forelse ($menus2 as $menu2)
                                             <tr class="table-secondary">

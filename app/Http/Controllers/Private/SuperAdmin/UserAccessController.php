@@ -68,7 +68,7 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            'menus'         => UserMenu::where('parent_id', 0)->orderByDesc('id')->get(),
+            'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
         ];
         return view('private.menu-access.update', $data);
     }
@@ -106,11 +106,13 @@ class UserAccessController extends Controller
             UserAccess::insert($data2);
         endif;
 
+
+
         $flashData = [
             'message'       => 'Data "' . $message . '" diubah',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/access')->with($flashData);
+        return redirect('/superadmin/master/access')->with($flashData);
     }
 
     /**

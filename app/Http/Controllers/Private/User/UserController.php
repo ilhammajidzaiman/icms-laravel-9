@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\SuperAdmin;
+namespace App\Http\Controllers\Private\User;
 
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -20,7 +20,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $search             = request(['search']);
         $data = [
             'users'         => User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString(),
@@ -99,7 +98,7 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/user')->with($flashData);
+        return redirect('/user/user')->with($flashData);
     }
 
     /**
@@ -202,7 +201,7 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" diubah',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/user')->with($flashData);
+        return redirect('/user/user')->with($flashData);
     }
 
     /**
@@ -233,6 +232,6 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/user')->with($flashData);
+        return redirect('/user/user')->with($flashData);
     }
 }

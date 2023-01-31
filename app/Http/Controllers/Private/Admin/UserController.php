@@ -20,8 +20,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        $search             = request(['search']);
         $data = [
-            'users' => User::orderByDesc('id')->get(),
+            'users'         => User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString(),
         ];
         return view('private.user.index', $data);
     }

@@ -17,6 +17,7 @@
                     <div class="text-capitalize mb-3">
                         <label>akses menu</label>
                         @foreach ($menus as $menu)
+
                         @php
                         $accesses=App\Models\UserAccess::where('level_id',$level->id)->where('menu_id',$menu->id)->get();
                         @endphp
