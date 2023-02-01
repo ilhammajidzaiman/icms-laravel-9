@@ -50,15 +50,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // data input
-        $uuid               = Str::uuid();
         $name               = $request->name;
         $username           = $request->username;
         $email              = $request->email;
-        $password           = Hash::make($request->password);
         $status             = $request->status;
         $level              = $request->level;
         $file               = $request->file('file');
         $message            = $name;
+        $uuid               = Str::uuid();
+        $password           = Hash::make($request->password);
         $folder             = 'user';
         $default            = 'default-user.svg';
 
@@ -150,11 +150,11 @@ class UserController extends Controller
         $name               = $request->name;
         $username           = $request->username;
         $email              = $request->email;
-        $password           = Hash::make($request->password);
         $status             = $request->status;
         $level              = $request->level;
         $file               = $request->file('file');
         $message            = $name;
+        $password           = Hash::make($request->password);
         $folder             = 'user';
         $default            = 'default-user.svg';
 

@@ -17,7 +17,6 @@ class UserMenuController extends Controller
     public function index()
     {
         $data = [
-            // 'menus' => Menu::orderBy('order')->get(),
             'menus' => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
         ];
         return view('private.menu.index', $data);

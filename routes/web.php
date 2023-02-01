@@ -42,7 +42,7 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
         Route::prefix('profil')->controller(App\Http\Controllers\Private\ProfilController::class)->group(function () {
             Route::get('/{uuid}', 'index')->name('superadmin.profil');
             Route::get('/{uuid}/edit', 'edit')->name('superadmin.profil.edit');
-            Route::put('/{uuid}', 'update')->name('superadmin.profil.update');
+            Route::put('/{uuid}/edit', 'update')->name('superadmin.profil.update');
             Route::get('/{uuid}/password', 'password')->name('superadmin.profil.password');
             Route::put('/{uuid}', 'update2')->name('superadmin.profil.update2');
         });

@@ -4,7 +4,8 @@
         $value = $config->file;
         $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
         @endphp
-        <img src="{{ $url }}" alt="{{ $url }}" class="brand-image img-circlee elevation-22" width="86" height="86">
+        <img src="{{ $url }}" alt="{{ $url }}" class="brand-image img-circlee elevation-22"
+            style="width:30px;height:30px;">
         <span class="brand-text font-weight-lightt">{{ $config->app }}</span>
     </a>
 
@@ -15,7 +16,7 @@
                 $value=auth()->user()->file;
                 $value == 'default-user.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
                 @endphp
-                <img src="{{ $url }}" class="img-circle elevation-22" alt="{{ $url }}" width="120" height="120">
+                <img src="{{ $url }}" class="img-circle elevation-22" alt="{{ $url }}" style="width:30px;height:30px;">
             </div>
             <div class="info">
                 <a href="{{ url('/'.$segment1.'/profil/'.auth()->user()->uuid) }}" class="d-block">{{

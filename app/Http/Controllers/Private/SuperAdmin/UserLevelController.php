@@ -41,9 +41,9 @@ class UserLevelController extends Controller
     public function store(Request $request)
     {
         $name               = $request->name;
+        $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
         $uuid               = Str::uuid();
-        $message            = $name;
 
         $validatedData      = $request->validate([
             'name'          => ['required', 'max:255', 'unique:user_levels']
@@ -104,8 +104,8 @@ class UserLevelController extends Controller
 
         // data input
         $name               = $request->name;
-        $slug               = Str::slug($name, '-') . '.html';
         $message            = $name;
+        $slug               = Str::slug($name, '-') . '.html';
 
         // validation logic
         $oldName            !== $name ? $uName = "unique:user_statuses" : $uName = "";

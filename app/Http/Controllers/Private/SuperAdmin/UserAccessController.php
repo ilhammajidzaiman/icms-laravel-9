@@ -30,7 +30,7 @@ class UserAccessController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('/superadmin/master/access');
     }
 
     /**
@@ -41,7 +41,7 @@ class UserAccessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('/superadmin/master/access');
     }
 
     /**

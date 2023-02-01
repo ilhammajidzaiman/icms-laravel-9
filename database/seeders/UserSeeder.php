@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'uuid'          => Str::uuid(),
             'level_id'      => '1',
             'status_id'     => '1',
-            'name'          => 'My Name Super',
+            'name'          => 'My Name Super Admin',
             'username'      => 'superadmin',
             'password'      => Hash::make('*#superadmin'),
             'email'         => 'superadmin@gmail.com',

@@ -2,7 +2,7 @@
 @section('container')
 <x-private.button.link-back :href="'../'.$profil->uuid" />
 
-<form action="{{ $segmentForm.'/'.$profil->uuid }}" method="post" enctype="multipart/form-data">
+<form action="{{ $segmentForm.'/'.$profil->uuid .'/edit'}}" method="post" enctype="multipart/form-data">
     @method('put')
     @csrf
     <div class="row">

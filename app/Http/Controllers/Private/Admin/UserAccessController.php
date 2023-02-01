@@ -30,7 +30,7 @@ class UserAccessController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('/admin/master/access');
     }
 
     /**
@@ -41,7 +41,7 @@ class UserAccessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('/admin/master/access');
     }
 
     /**
@@ -68,7 +68,7 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            'menus'         => UserMenu::where('parent_id', 0)->orderByDesc('id')->get(),
+            'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
         ];
         return view('private.menu-access.update', $data);
     }
@@ -105,6 +105,8 @@ class UserAccessController extends Controller
             endforeach;
             UserAccess::insert($data2);
         endif;
+
+
 
         $flashData = [
             'message'       => 'Data "' . $message . '" diubah',

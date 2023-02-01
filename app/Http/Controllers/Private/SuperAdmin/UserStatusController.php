@@ -41,9 +41,9 @@ class UserStatusController extends Controller
     public function store(Request $request)
     {
         $name               = $request->name;
+        $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
         $uuid               = Str::uuid();
-        $message            = $name;
 
         // validation
         $validatedData      = $request->validate([
@@ -90,7 +90,6 @@ class UserStatusController extends Controller
     {
         $data = [
             'status'        => $status,
-            // 'status'        => $Status->where('slug', $id)->first(),
         ];
         return view('private.status.update', $data);
     }
@@ -110,8 +109,8 @@ class UserStatusController extends Controller
 
         // data input
         $name               = $request->name;
-        $slug               = Str::slug($name, '-') . '.html';
         $message            = $name;
+        $slug               = Str::slug($name, '-') . '.html';
 
         // validation logic
         $oldName            !== $name ? $uName = "unique:user_statuses" : $uName = "";

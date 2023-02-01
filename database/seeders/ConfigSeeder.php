@@ -18,9 +18,9 @@ class ConfigSeeder extends Seeder
     {
         Config::create([
             'uuid'          => Str::uuid(),
-            'app'           => 'app name',
-            'detail'        => 'app detail',
-            'copyright'     => 'app copyright',
+            'app'           => 'application',
+            'detail'        => 'details application',
+            'copyright'     => 'copyright',
             'file'          => 'logo.svg',
         ]);
     }

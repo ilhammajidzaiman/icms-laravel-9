@@ -2,18 +2,14 @@
 @section('container')
 <div class="row">
     <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint placeat
-                    praesentium, quod excepturi accusantium animi obcaecati doloremque ipsum
-                    fugit explicabo distinctio ullam sapiente? Officia alias a mollitia
-                    harum, velit debitis soluta esse ducimus, deserunt dolorem adipisci
-                    culpa iusto porro! Laborum praesentium, quas earum ullam magnam nobis
-                    quisquam corporis quidem inventore!
-                </p>
-            </div>
+        <div class="text-center my-5 py-5">
+            @php
+            $value = $config->file;
+            $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
+            @endphp
+            <img src="{{ $url }}" alt="{{ $url }}" class="mb-5" width="180">
+            <h3>Hi {{ auth()->user()->name }}!</h3>
+            <h1>Welcome to {{ $config->app }}</h1>
         </div>
     </div>
 </div>

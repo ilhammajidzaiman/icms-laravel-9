@@ -17,8 +17,8 @@
                         $value == 'default-user.svg' ? $url=url('assets/images/'.$value) :
                         $url=asset('storage/'.$value);
                         @endphp
-                        <img src="{{ $url }}" alt="{{ $url }}" class="img-size-50 mr-3 img-circle" width="160"
-                            height="160">
+                        <img src="{{ $url }}" alt="{{ $url }}" class="img-size-50 mr-3 img-circle"
+                            style="width:50px;height:50px; overflow:hidden;">
                         <div class="media-body">
                             <h3 class="dropdown-item-title mb-2">
                                 {{ auth()->user()->name }}
