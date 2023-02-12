@@ -32,7 +32,7 @@
             // alert("level id:"+level_id+", menu id:"+menu_id);
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentForm.'/ubah') }}/"+level_id+"/"+menu_id+"/"+order,
+                url: "{{ url($segmentForm.'/update-access') }}/"+level_id+"/"+menu_id+"/"+order,
                 // url: "/superadmin/master/access/ubah/"+level_id+"/"+menu_id+"/"+order,
                 success: function(request){
                     alert("Akses menu diubah")

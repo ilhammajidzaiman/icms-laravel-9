@@ -23,7 +23,7 @@
                             <td>{{ $level->name }}</td>
                             <td class="text-right">
                                 <x-private.button.link-read :href="$segmentHref.'/'.$level->slug" />
-                                <x-private.button.link-access :href="$segmentHref.'/level/'.$level->slug" />
+                                <x-private.button.link-update :href="$segmentHref.'/'.$level->slug" />
                             </td>
                         </tr>
                         @empty

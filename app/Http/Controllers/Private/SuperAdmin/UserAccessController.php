@@ -82,37 +82,7 @@ class UserAccessController extends Controller
      */
     public function update(Request $request, UserLevel $access)
     {
-        // detail data
-        $oldId              = $access->id;
-        $oldLevel           = $access->name;
-
-        // data input
-        $menu               = $request->menu;
-        $message            = $oldLevel;
-
-        // delete data on table accesses
-        UserAccess::where('level_id', $oldId)->delete();
-
-        // insert menu to table accesses
-        if ($menu) :
-            $data2 = [];
-            foreach ($menu as $key) :
-                $data2[] =
-                    [
-                        'level_id'      => $oldId,
-                        'menu_id'       => $key,
-                    ];
-            endforeach;
-            UserAccess::insert($data2);
-        endif;
-
-
-
-        $flashData = [
-            'message'       => 'Data "' . $message . '" diubah',
-            'alert'         => 'success',
-        ];
-        return redirect('/superadmin/master/access')->with($flashData);
+        return redirect('/superadmin/master/access');
     }
 
     /**
@@ -123,30 +93,10 @@ class UserAccessController extends Controller
      */
     public function destroy(UserAccess $access)
     {
-        //
+        return redirect('/superadmin/master/access');
     }
 
-
-
-
-
-
-
-
-
-
-
-    public function accesslevel(UserLevel $access)
-    {
-        $data = [
-            'level'         => $access,
-            'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
-        ];
-        return view('private.menu-access.access', $data);
-    }
-
-
-    public function ubah($id1, $id2, $id3)
+    public function updateAccess($id1, $id2, $id3)
     {
         $userAccess = UserAccess::where('level_id', $id1)->where('menu_id', $id2)->where('order', $id3)->first();
         if ($userAccess) :

@@ -67,8 +67,7 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
 
                 Route::controller(App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->group(function () {
                     Route::resource('/access', App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->scoped(['access' => 'slug']);
-                    Route::get('access/level/{access:slug}', 'accesslevel')->name('access.accesslevel');
-                    Route::get('access/ubah/{id1}/{id2}/{id3}', 'ubah')->name('access.ubah');
+                    Route::get('access/update-access/{id1}/{id2}/{id3}', 'updateAccess')->name('access.update-access');
                 });
             }
         );
