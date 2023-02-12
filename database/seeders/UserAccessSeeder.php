@@ -20,16 +20,19 @@ class UserAccessSeeder extends Seeder
         UserAccess::create([
             'level_id'  => '1',
             'menu_id'   => '1',
+            'order'     => '1',
         ]);
 
         UserAccess::create([
             'level_id'  => '1',
             'menu_id'   => '2',
+            'order'     => '2',
         ]);
 
         UserAccess::create([
             'level_id'  => '1',
             'menu_id'   => '3',
+            'order'     => '3',
         ]);
 
         // admin access
@@ -37,11 +40,13 @@ class UserAccessSeeder extends Seeder
         UserAccess::create([
             'level_id'  => '2',
             'menu_id'   => '2',
+            'order'     => '2',
         ]);
 
         UserAccess::create([
             'level_id'  => '2',
             'menu_id'   => '3',
+            'order'     => '3',
         ]);
 
         // user access
@@ -49,6 +54,7 @@ class UserAccessSeeder extends Seeder
         UserAccess::create([
             'level_id'  => '3',
             'menu_id'   => '3',
+            'order'     => '3',
         ]);
     }
 }

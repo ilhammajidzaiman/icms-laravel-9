@@ -36,7 +36,7 @@
 
                 @php
                 $parents=
-                App\Models\UserAccess::orderBy('id')->where('level_id',auth()->user()->level_id)->with(['menu'])->get();
+                App\Models\UserAccess::where('level_id',auth()->user()->level_id)->with(['menu'])->orderBy('order')->get();
                 @endphp
 
                 @forelse ($parents as $parent)

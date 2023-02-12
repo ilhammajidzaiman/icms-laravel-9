@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('level_id')->comment('id table user_levels')->constrained('user_levels')->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('menu_id')->comment('id table user_menus')->constrained('user_menus')->cascadeOnUpdate()->restrictOnDelete();
+            $table->integer('order')->nullable()->comment('nomor urut menu');
             $table->timestamps();
         });
     }

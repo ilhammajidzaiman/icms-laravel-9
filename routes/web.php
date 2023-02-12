@@ -65,7 +65,11 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
                     Route::post('menu/{menu:slug}/create_sub', 'store_sub')->name('menu.create_sub');
                 });
 
-                Route::resource('/access', App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->scoped(['access' => 'slug']);
+                Route::controller(App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->group(function () {
+                    Route::resource('/access', App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->scoped(['access' => 'slug']);
+                    Route::get('access/level/{access:slug}', 'accesslevel')->name('access.accesslevel');
+                    Route::get('access/ubah/{id1}/{id2}/{id3}', 'ubah')->name('access.ubah');
+                });
             }
         );
 

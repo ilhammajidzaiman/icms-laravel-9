@@ -125,4 +125,40 @@ class UserAccessController extends Controller
     {
         //
     }
+
+
+
+
+
+
+
+
+
+
+
+    public function accesslevel(UserLevel $access)
+    {
+        $data = [
+            'level'         => $access,
+            'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
+        ];
+        return view('private.menu-access.access', $data);
+    }
+
+
+    public function ubah($id1, $id2, $id3)
+    {
+        $userAccess = UserAccess::where('level_id', $id1)->where('menu_id', $id2)->where('order', $id3)->first();
+        if ($userAccess) :
+            UserAccess::where('level_id', $id1)->where('menu_id', $id2)->where('order', $id3)->delete();
+        else :
+            $data =
+                [
+                    'level_id'      => $id1,
+                    'menu_id'       => $id2,
+                    'order'         => $id3,
+                ];
+            UserAccess::insert($data);
+        endif;
+    }
 }

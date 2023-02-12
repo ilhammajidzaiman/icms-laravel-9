@@ -13,7 +13,6 @@
                         <tr class="text-capitalize">
                             <th scope="col">#</th>
                             <th scope="col">nama</th>
-                            <th scope="col">&nbsp;</th>
                             <th scope="col" width="250">&nbsp;</th>
                         </tr>
                     </thead>
@@ -22,12 +21,9 @@
                         <tr>
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $level->name }}</td>
-                            <td class="text-right text-secondary">
-                                {{ $level->created_at->format('D, d-m-Y, H:i:s') }}
-                            </td>
                             <td class="text-right">
                                 <x-private.button.link-read :href="$segmentHref.'/'.$level->slug" />
-                                <x-private.button.link-update :href="$segmentHref.'/'.$level->slug" />
+                                <x-private.button.link-access :href="$segmentHref.'/level/'.$level->slug" />
                             </td>
                         </tr>
                         @empty
