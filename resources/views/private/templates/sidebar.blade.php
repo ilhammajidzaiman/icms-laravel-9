@@ -56,14 +56,15 @@
                     <ul class="nav nav-treeview">
 
                         @php
-                        $children= App\Models\UserMenu::where('parent_id',$parent->menu->id)->orderBy('order')->get();
+
+                        $children=App\Models\UserAccessChild::where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
                         @endphp
                         @forelse ($children as $child)
                         <li class="nav-item">
-                            <a href="{{ url('/'.$segment1.$child->url) }}"
-                                class="nav-link {{ Request::is($segment1.$child->url.'*')?'active':'' }}">
-                                <i class="nav-icon {{ $child->icon }}"></i>
-                                <p class="text">{{ $child->name }}</p>
+                            <a href="{{ url('/'.$segment1.$child->menu->url) }}"
+                                class="nav-link {{ Request::is($segment1.$child->menu->url.'*')?'active':'' }}">
+                                <i class="nav-icon {{ $child->menu->icon }}"></i>
+                                <p class="text">{{ $child->menu->name }}</p>
                             </a>
                         </li>
                         @empty
