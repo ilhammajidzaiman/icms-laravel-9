@@ -6,6 +6,7 @@ use App\Models\UserMenu;
 use App\Models\UserLevel;
 use App\Models\UserAccess;
 use Illuminate\Http\Request;
+use App\Models\UserAccessChild;
 use App\Http\Controllers\Controller;
 
 class UserAccessController extends Controller
@@ -96,7 +97,7 @@ class UserAccessController extends Controller
         return redirect('/superadmin/master/access');
     }
 
-    public function updateAccess($id1, $id2, $id3)
+    public function updateParent($id1, $id2, $id3)
     {
         $userAccess = UserAccess::where('level_id', $id1)->where('menu_id', $id2)->where('order', $id3)->first();
         if ($userAccess) :
@@ -108,7 +109,23 @@ class UserAccessController extends Controller
                     'menu_id'       => $id2,
                     'order'         => $id3,
                 ];
-            UserAccess::insert($data);
+            UserAccess::create($data);
+        endif;
+    }
+
+    public function updateChild($id1, $id2, $id3)
+    {
+        $userChild = UserAccessChild::where('menu_id', $id1)->where('child_id', $id2)->where('order', $id3)->first();
+        if ($userChild) :
+            UserAccessChild::where('menu_id', $id1)->where('child_id', $id2)->where('order', $id3)->delete();
+        else :
+            $data =
+                [
+                    'menu_id'       => $id1,
+                    'child_id'      => $id2,
+                    'order'         => $id3,
+                ];
+            UserAccessChild::create($data);
         endif;
     }
 }
