@@ -1,5 +1,6 @@
 @extends('private.templates.main')
 @section('container')
+
 <x-private.button.link-back href="./" />
 
 <div class="row">
@@ -14,26 +15,26 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="menu">Akses Menu</label>
-                        <ol>
+                        <ol class="pl-3">
                             @php
-                            $menus= App\Models\UserLevel::where('id', '=', $level->id)->first();
+                            $parents=App\Models\UserAccess::where('level_id',$level->id)->with(['menu'])->orderBy('order')->get();
                             @endphp
-                            @forelse ($menus->menus as $menu)
+                            @foreach ($parents as $parent)
                             <li>
-                                <i class="{{ $menu->icon }}"></i>
-                                {{ $menu->name }}
+                                {{ $parent->menu->name }}
+                                <ol class="pl-3">
+                                    @php
+                                    $children=App\Models\UserAccessChild::where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
+                                    @endphp
+                                    @foreach ($children as $child)
+                                    <li>{{ $child->menu->name }}</li>
+                                    @endforeach
+                                </ol>
                             </li>
-                            @empty
-                            <li>
-                                <x-private.alert.alert-empty />
-                            </li>
-                            @endforelse
+                            @endforeach
                         </ol>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>

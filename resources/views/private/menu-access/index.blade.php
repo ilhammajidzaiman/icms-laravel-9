@@ -1,7 +1,7 @@
 @extends('private.templates.main')
 @section('container')
 
-<x-private.button.link-create :href="$segmentHref" />
+<div class="mb-5"></div>
 <x-private.alert.dismissing />
 
 <div class="row">
