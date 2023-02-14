@@ -7,17 +7,17 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Tentang
+# Tentang
 
 Starter Kits Aplikasi Content Management System dibangun menggunakan Laravel 9
 
-Level:
+### Level:
 
--   Super Admin
--   Admin
--   User
+1. Super Admin
+2. Admin
+3. User
 
-Akses Menu:
+### Akses Menu:
 
 -   Super Admin
     -   Konfigurasi
