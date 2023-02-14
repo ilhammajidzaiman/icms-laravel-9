@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Private\SuperAdmin;
 
 use App\Models\UserMenu;
 use App\Models\UserLevel;
-use App\Models\UserAccess;
 use Illuminate\Http\Request;
 use App\Models\UserAccessChild;
+use App\Models\UserAccessParent;
 use App\Http\Controllers\Controller;
 
 class UserAccessController extends Controller
@@ -92,37 +92,37 @@ class UserAccessController extends Controller
      * @param  \App\Models\UserAccess $userAccess
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserAccess $access)
+    public function destroy(UserAccessParent $access)
     {
         return redirect('/superadmin/master/access');
     }
 
     public function updateParent($level, $parent, $order)
     {
-        $userAccess = UserAccess::where('level_id', $level)->where('menu_id', $parent)->where('order', $order)->first();
+        $userAccess = UserAccessParent::where('level_id', $level)->where('parent_id', $parent)->where('order', $order)->first();
         if ($userAccess) :
-            UserAccess::where('level_id', $level)->where('menu_id', $parent)->where('order', $order)->delete();
+            UserAccessParent::where('level_id', $level)->where('parent_id', $parent)->where('order', $order)->delete();
         else :
             $data =
                 [
                     'level_id'      => $level,
-                    'menu_id'       => $parent,
+                    'parent_id'     => $parent,
                     'order'         => $order,
                 ];
-            UserAccess::create($data);
+            UserAccessParent::create($data);
         endif;
     }
 
     public function updateChild($level, $parent, $child, $order)
     {
-        $userChild = UserAccessChild::where('level_id', $level)->where('menu_id', $parent)->where('child_id', $child)->first();
+        $userChild = UserAccessChild::where('level_id', $level)->where('parent_id', $parent)->where('child_id', $child)->first();
         if ($userChild) :
-            UserAccessChild::where('level_id', $level)->where('menu_id', $parent)->where('child_id', $child)->delete();
+            UserAccessChild::where('level_id', $level)->where('parent_id', $parent)->where('child_id', $child)->delete();
         else :
             $data =
                 [
                     'level_id'      => $level,
-                    'menu_id'       => $parent,
+                    'parent_id'     => $parent,
                     'child_id'      => $child,
                     'order'         => $order,
                 ];

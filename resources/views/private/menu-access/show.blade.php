@@ -17,7 +17,7 @@
                         <label for="menu">Akses Menu</label>
                         <ol class="pl-3">
                             @php
-                            $parents=App\Models\UserAccess::where('level_id',$level->id)->with(['menu'])->orderBy('order')->get();
+                            $parents=App\Models\UserAccessParent::where('level_id',$level->id)->with(['menu'])->orderBy('order')->get();
                             @endphp
                             @foreach ($parents as $parent)
                             {{-- data parent menu --}}
@@ -26,7 +26,7 @@
                                 {{-- data child menu --}}
                                 <ol class="pl-3">
                                     @php
-                                    $children=App\Models\UserAccessChild::where('level_id',$level->id)->where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
+                                    $children=App\Models\UserAccessChild::where('level_id',$level->id)->where('parent_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
                                     @endphp
                                     @foreach ($children as $child)
                                     <li>{{ $child->menu->name }}</li>

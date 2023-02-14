@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_accesses', function (Blueprint $table) {
+        Schema::create('user_access_parents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('level_id')->comment('id table user_levels')->constrained('user_levels')->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('menu_id')->comment('id table user_menus')->constrained('user_menus')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('level_id')->comment('id table user_levels');
+            $table->foreignId('parent_id')->comment('id table user_menus');
             $table->integer('order')->nullable()->comment('nomor urut menu');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_accesses');
+        Schema::dropIfExists('user_access_parents');
     }
 };

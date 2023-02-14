@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserAccess extends Model
+class UserAccessParent extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
     public function menu()
     {
-        return $this->belongsTo(UserMenu::class, 'menu_id', 'id');
+        return $this->belongsTo(UserMenu::class, 'parent_id', 'id');
     }
 }

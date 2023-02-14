@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserAccess;
 use Illuminate\Database\Seeder;
+use App\Models\UserAccessParent;
+use App\Models\UserAccessChild;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserAccessSeeder extends Seeder
@@ -16,45 +17,99 @@ class UserAccessSeeder extends Seeder
     public function run()
     {
         // super admin access
-
-        UserAccess::create([
+        UserAccessParent::create([
             'level_id'  => '1',
-            'menu_id'   => '1',
+            'parent_id' => '1',
             'order'     => '1',
         ]);
 
-        UserAccess::create([
+        UserAccessParent::create([
             'level_id'  => '1',
-            'menu_id'   => '2',
+            'parent_id' => '2',
             'order'     => '2',
         ]);
 
-        UserAccess::create([
+        UserAccessParent::create([
             'level_id'  => '1',
-            'menu_id'   => '3',
+            'parent_id' => '3',
             'order'     => '3',
         ]);
 
         // admin access
-
-        UserAccess::create([
+        UserAccessParent::create([
             'level_id'  => '2',
-            'menu_id'   => '2',
+            'parent_id' => '2',
             'order'     => '2',
         ]);
 
-        UserAccess::create([
+        UserAccessParent::create([
             'level_id'  => '2',
-            'menu_id'   => '3',
+            'parent_id' => '3',
             'order'     => '3',
         ]);
 
         // user access
-
-        UserAccess::create([
+        UserAccessParent::create([
             'level_id'  => '3',
-            'menu_id'   => '3',
+            'parent_id' => '3',
             'order'     => '3',
+        ]);
+
+        //
+        UserAccessChild::create([
+            'level_id'  => '1',
+            'parent_id' => '2',
+            'child_id'  => '4',
+            'order'     => '1',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '1',
+            'parent_id' => '2',
+            'child_id'  => '5',
+            'order'     => '2',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '1',
+            'parent_id' => '2',
+            'child_id'  => '6',
+            'order'     => '3',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '1',
+            'parent_id' => '2',
+            'child_id'  => '7',
+            'order'     => '4',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '2',
+            'parent_id' => '2',
+            'child_id'  => '4',
+            'order'     => '1',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '2',
+            'parent_id' => '2',
+            'child_id'  => '5',
+            'order'     => '2',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '2',
+            'parent_id' => '2',
+            'child_id'  => '6',
+            'order'     => '3',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '2',
+            'parent_id' => '2',
+            'child_id'  => '7',
+            'order'     => '4',
         ]);
     }
 }
