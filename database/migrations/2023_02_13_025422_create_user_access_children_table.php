@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_access_children', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('level_id')->comment('id table user_levels');
             $table->foreignId('menu_id')->comment('id');
             $table->foreignId('child_id')->comment('id');
             $table->integer('order')->nullable()->comment('nomor urut menu');

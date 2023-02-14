@@ -26,12 +26,12 @@
 <script>
     $(document).ready(function() {
         $('.check-parent').on('click',function(){
-            const level_id = $(this).data('level');
-            const menu_id = $(this).data('menu');
-            const order = $(this).data('order');
+            const level         = $(this).data('parent-level');
+            const parent        = $(this).data('parent');
+            const order         = $(this).data('parent-order');
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentForm.'/parent') }}/"+level_id+"/"+menu_id+"/"+order,
+                url: "{{ url($segmentForm.'/parent') }}/"+level+"/"+parent+"/"+order,
                 success: function(request){
                     alert("Akses menu diubah!");
                 }
@@ -39,12 +39,13 @@
         });
 
         $('.check-child').on('click',function(){
-            const parent_id = $(this).data('parent');
-            const child_id = $(this).data('child');
-            const child_order = $(this).data('child-order');
+            const level         = $(this).data('child-level');
+            const parent        = $(this).data('child-parent');
+            const child         = $(this).data('child');
+            const order         = $(this).data('child-order');
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentForm.'/child') }}/"+parent_id+"/"+child_id+"/"+child_order,
+                url: "{{ url($segmentForm.'/child') }}/"+level+"/"+parent+"/"+child+"/"+order,
                 success: function(request){
                     alert("Akses sub menu diubah!");
                 }

@@ -16,51 +16,54 @@
                     <ul class="list-unstyled">
                         @foreach ($menus as $menu)
                         @php
-                        $accesses=App\Models\UserAccess::where('level_id',$level->id)->where('menu_id',$menu->id)->orderBy('order')->get();
+                        $checkedParents=App\Models\UserAccess::where('level_id',$level->id)->where('menu_id',$menu->id)->orderBy('order')->get();
                         @endphp
+                        {{-- parent --}}
                         <li>
                             {{-- data parent menu --}}
                             <div class="form-check">
                                 <input class="form-check-input check-parent" type="checkbox" name="menu"
-                                    id="{{ $menu->id }}" value="{{ $menu->id }}" @foreach ($accesses as $acces) {{
-                                    $menu->id
-                                == $acces->menu_id ? 'checked':'' }} @endforeach
-                                data-level="{{$level->id}}"
-                                data-menu="{{ $menu->id }}" data-order="{{ $menu->order }}" >
+                                    id="{{ $menu->id }}" value="{{ $menu->id }}" @foreach ($checkedParents as $parent)
+                                    {{ $menu->id == $parent->menu_id ? 'checked':'' }} @endforeach
+                                data-parent-level="{{$level->id}}"
+                                data-parent="{{ $menu->id }}" data-parent-order="{{ $menu->order }}" >
                                 <label class="form-check-label" for="{{ $menu->id }}">
                                     <i class="{{ $menu->icon }}"></i>
                                     {{ $menu->name }}
                                 </label>
                             </div>
                             {{-- end data parent menu --}}
-
+                            {{-- child --}}
                             <ol class="list-unstyled pl-4">
                                 @php
-                                $childs= App\Models\UserMenu::where('parent_id',$menu->id)->orderBy('order')->get();
+                                $children = App\Models\UserMenu::where('parent_id',$menu->id)->orderBy('order')->get();
                                 @endphp
-                                @foreach ($childs as $child)
+                                @foreach ($children as $child)
                                 @php
-                                $checkedChild=App\Models\UserAccessChild::where('menu_id',$menu->id)->where('child_id',$child->id)->orderBy('order')->get();
+                                $checkedChildren=App\Models\UserAccessChild::where('level_id',$level->id)->where('menu_id',$menu->id)->where('child_id',$child->id)->orderBy('order')->get();
                                 @endphp
+                                {{-- data child menu --}}
                                 <li>
-                                    {{-- data child menu --}}
                                     <div class="form-check">
                                         <input class="form-check-input check-child" type="checkbox" name="menu"
-                                            id="{{ $child->id }}" value="{{ $child->id }}" data-parent="{{$menu->id}}"
-                                            @foreach ($checkedChild as $acces) {{ $menu->id == $acces->menu_id ?
-                                        'checked':'' }} @endforeach
-                                        data-child="{{ $child->id }}" data-child-order="{{ $child->order }}" >
+                                            id="{{ $child->id }}" value="{{ $child->id }}"
+                                            data-child-level="{{$level->id}}" data-child-parent="{{$menu->id}}"
+                                            data-child="{{ $child->id }}" data-child-order="{{ $child->order }}"
+                                            @foreach ($checkedChildren as $checkedChild) {{ $menu->id ==
+                                        $checkedChild->menu_id ? 'checked':'' }} @endforeach >
                                         <label class="form-check-label" for="{{ $child->id }}">
                                             <i class="{{ $child->icon }}"></i>
                                             {{ $child->name }}
                                             {{ $child->order }}
                                         </label>
                                     </div>
-                                    {{-- end data child menu --}}
                                 </li>
+                                {{-- end data child menu --}}
                                 @endforeach
                             </ol>
+                            {{-- end child --}}
                         </li>
+                        {{-- end parent --}}
                         @endforeach
                     </ul>
                 </div>

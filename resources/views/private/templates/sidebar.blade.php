@@ -57,7 +57,7 @@
 
                         @php
 
-                        $children=App\Models\UserAccessChild::where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
+                        $children=App\Models\UserAccessChild::where('level_id',auth()->user()->level_id)->where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
                         @endphp
                         @forelse ($children as $child)
                         <li class="nav-item">

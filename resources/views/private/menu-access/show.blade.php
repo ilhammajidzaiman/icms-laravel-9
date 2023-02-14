@@ -20,17 +20,21 @@
                             $parents=App\Models\UserAccess::where('level_id',$level->id)->with(['menu'])->orderBy('order')->get();
                             @endphp
                             @foreach ($parents as $parent)
+                            {{-- data parent menu --}}
                             <li>
                                 {{ $parent->menu->name }}
+                                {{-- data child menu --}}
                                 <ol class="pl-3">
                                     @php
-                                    $children=App\Models\UserAccessChild::where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
+                                    $children=App\Models\UserAccessChild::where('level_id',$level->id)->where('menu_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
                                     @endphp
                                     @foreach ($children as $child)
                                     <li>{{ $child->menu->name }}</li>
                                     @endforeach
                                 </ol>
+                                {{-- end data child menu --}}
                             </li>
+                            {{-- end data parent menu --}}
                             @endforeach
                         </ol>
                     </div>

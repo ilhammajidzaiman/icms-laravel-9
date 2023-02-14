@@ -97,33 +97,34 @@ class UserAccessController extends Controller
         return redirect('/superadmin/master/access');
     }
 
-    public function updateParent($id1, $id2, $id3)
+    public function updateParent($level, $parent, $order)
     {
-        $userAccess = UserAccess::where('level_id', $id1)->where('menu_id', $id2)->where('order', $id3)->first();
+        $userAccess = UserAccess::where('level_id', $level)->where('menu_id', $parent)->where('order', $order)->first();
         if ($userAccess) :
-            UserAccess::where('level_id', $id1)->where('menu_id', $id2)->where('order', $id3)->delete();
+            UserAccess::where('level_id', $level)->where('menu_id', $parent)->where('order', $order)->delete();
         else :
             $data =
                 [
-                    'level_id'      => $id1,
-                    'menu_id'       => $id2,
-                    'order'         => $id3,
+                    'level_id'      => $level,
+                    'menu_id'       => $parent,
+                    'order'         => $order,
                 ];
             UserAccess::create($data);
         endif;
     }
 
-    public function updateChild($id1, $id2, $id3)
+    public function updateChild($level, $parent, $child, $order)
     {
-        $userChild = UserAccessChild::where('menu_id', $id1)->where('child_id', $id2)->where('order', $id3)->first();
+        $userChild = UserAccessChild::where('level_id', $level)->where('menu_id', $parent)->where('child_id', $child)->first();
         if ($userChild) :
-            UserAccessChild::where('menu_id', $id1)->where('child_id', $id2)->where('order', $id3)->delete();
+            UserAccessChild::where('level_id', $level)->where('menu_id', $parent)->where('child_id', $child)->delete();
         else :
             $data =
                 [
-                    'menu_id'       => $id1,
-                    'child_id'      => $id2,
-                    'order'         => $id3,
+                    'level_id'      => $level,
+                    'menu_id'       => $parent,
+                    'child_id'      => $child,
+                    'order'         => $order,
                 ];
             UserAccessChild::create($data);
         endif;

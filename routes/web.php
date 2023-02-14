@@ -67,8 +67,8 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
 
                 Route::controller(App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->group(function () {
                     Route::resource('/access', App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->scoped(['access' => 'slug']);
-                    Route::get('access/parent/{id1}/{id2}/{id3}', 'updateParent')->name('access.parent');
-                    Route::get('access/child/{id1}/{id2}/{id3}', 'updateChild')->name('access.child');
+                    Route::get('access/parent/{level}/{parent}/{order}', 'updateParent')->name('access.parent');
+                    Route::get('access/child/{level}/{parent}/{child}/{order}', 'updateChild')->name('access.child');
                 });
             }
         );
