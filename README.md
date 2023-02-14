@@ -2,6 +2,10 @@
 
 <p align="center"><a href="https://ilhammajidzaiman.github.io" target="_blank">ilhammajidzaiman.github.io</a></p>
 
+visit my portfolio <https://ilhammajidzaiman.github.io>
+
+[ilhammajidzaiman.github.io](https://ilhammajidzaiman.github.io)
+
 # Tentang
 
 Starter Kits Aplikasi Content Management System dibangun menggunakan Laravel 9
