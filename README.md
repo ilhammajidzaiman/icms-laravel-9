@@ -11,24 +11,35 @@
 
 Starter Kits Aplikasi Content Management System dibangun menggunakan Laravel 9
 
-### Level:
+## Level:
 
 1. Super Admin
 2. Admin
 3. User
 
-### Akses Menu:
+## Akses Menu:
 
--   Super Admin
+1.  Super Admin
+
     -   Konfigurasi
     -   Master
         -   Status
         -   Level
         -   Menu
         -   Akses
--   User
--   Admin
--   User
+    -   User
+
+2.  Admin
+
+    -   Master
+        -   Status
+        -   Level
+        -   Menu
+        -   Akses
+    -   User
+
+3.  User
+    -   User
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
