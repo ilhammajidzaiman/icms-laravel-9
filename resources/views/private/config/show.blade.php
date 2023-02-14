@@ -3,13 +3,13 @@
 <x-private.button.link-edit :href="$segmentHref" />
 <x-private.alert.dismissing />
 
-<div class="row mt-3">
+<div class="row">
     <div class="col-md-3 p-5">
         @php
         $value = $config->file;
         $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
         @endphp
-        <img src="{{ $url }}" alt="{{ $url }}" class="img-fluid rounded w-100 mb-3 mb-4">
+        <img src="{{ $url }}" alt="{{ $url }}" class="img-fluid rounded w-100">
     </div>
     <div class="col-md-9">
         <div class="card">
