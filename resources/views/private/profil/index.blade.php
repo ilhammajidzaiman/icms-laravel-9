@@ -1,5 +1,7 @@
 @extends('private.templates.main')
 @section('container')
+
+<div class="mb-5"></div>
 <x-private.alert.dismissing />
 
 <div class="row">

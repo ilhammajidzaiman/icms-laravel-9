@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a class="text-dark" href="{{ url($segmentForm) }}">
+                    <a class="text-dark" href="{{ url($segmentUrl) }}">
                         <h1 class="text-capitalize">{{ $segment2=='master'?$segment3:$segment2 }}</h1>
                     </a>
                 </div>
@@ -30,24 +30,26 @@
                         @endif
 
                         @if ($segment3)
-                        <li class="breadcrumb-item"><a href="{{ url($segment1.'/'.$segment2.'/'.$segment3) }}">{{
-                                $segment3 }}</a>
+                        <li class="breadcrumb-item">
+                            <a href="{{ url($segment1.'/'.$segment2.'/'.$segment3) }}">
+                                {{ $segment3 }}
+                            </a>
                         </li>
                         @endif
 
                         @if ($segment4)
-                        <li class="breadcrumb-item"><a
-                                href="{{ url($segment1.'/'.$segment2.'/'.$segment3.'/'.$segment4) }}">{{
-                                $segment4
-                                }}</a>
+                        <li class="breadcrumb-item">
+                            <a href="{{ url($segment1.'/'.$segment2.'/'.$segment3.'/'.$segment4) }}">
+                                {{ $segment4 }}
+                            </a>
                         </li>
                         @endif
 
                         @if ($segment5)
-                        <li class="breadcrumb-item"><a
-                                href="{{ url($segment1.'/'.$segment2.'/'.$segment3.'/'.$segment4.'/'.$segment5) }}">{{
-                                $segment5
-                                }}</a>
+                        <li class="breadcrumb-item">
+                            <a href="{{ url($segment1.'/'.$segment2.'/'.$segment3.'/'.$segment4.'/'.$segment5) }}">
+                                {{ $segment5 }}
+                            </a>
                         </li>
                         @endif
                     </ol>
