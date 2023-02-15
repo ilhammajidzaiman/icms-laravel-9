@@ -19,7 +19,7 @@ class UserLevelController extends Controller
         $data = [
             'levels'        => UserLevel::orderByDesc('id')->get(),
         ];
-        return view('private.level.index', $data);
+        return view('private.user-level.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        return view('private.level.create');
+        return view('private.user-level.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class UserLevelController extends Controller
         $data = [
             'level'         => $level,
         ];
-        return view('private.level.show', $data);
+        return view('private.user-level.show', $data);
     }
 
     /**
@@ -86,7 +86,7 @@ class UserLevelController extends Controller
         $data = [
             'level'         => $level,
         ];
-        return view('private.level.update', $data);
+        return view('private.user-level.update', $data);
     }
 
     /**

@@ -14,10 +14,19 @@ Starter Kits Aplikasi Content Management System dibangun menggunakan Laravel 9
 2. Admin
 3. User
 
+## Menu
+
+1.  Konfigurasi
+2.  Master
+    -   Status
+    -   Level
+    -   Menu
+    -   Akses
+3.  User
+
 ## Akses Menu:
 
 1.  Super Admin
-
     -   Konfigurasi
     -   Master
         -   Status
@@ -25,15 +34,12 @@ Starter Kits Aplikasi Content Management System dibangun menggunakan Laravel 9
         -   Menu
         -   Akses
     -   User
-
 2.  Admin
-
     -   Master
         -   Status
         -   Level
         -   Menu
         -   Akses
     -   User
-
 3.  User
     -   User

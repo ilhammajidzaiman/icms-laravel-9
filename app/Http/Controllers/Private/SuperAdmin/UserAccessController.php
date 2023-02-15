@@ -21,7 +21,7 @@ class UserAccessController extends Controller
         $data = [
             'levels'        => UserLevel::orderBy('id')->get(),
         ];
-        return view('private.menu-access.index', $data);
+        return view('private.user-access.index', $data);
     }
 
     /**
@@ -56,7 +56,7 @@ class UserAccessController extends Controller
         $data = [
             'level'         => $access,
         ];
-        return view('private.menu-access.show', $data);
+        return view('private.user-access.show', $data);
     }
 
     /**
@@ -71,7 +71,7 @@ class UserAccessController extends Controller
             'level'         => $access,
             'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
         ];
-        return view('private.menu-access.update', $data);
+        return view('private.user-access.update', $data);
     }
 
     /**

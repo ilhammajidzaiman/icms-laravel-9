@@ -23,7 +23,8 @@
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $level->name }}</td>
                             <td class="text-right text-secondary">
-                                {{ $level->created_at->format('D, d-m-Y, H:i:s') }}
+                                {{ $level->created_at->format('d-m-Y, H:i:s').', '.$level->created_at->diffForHumans()
+                                }}
                             </td>
                             <td class="text-right">
                                 <x-private.button.link-read :href="$segmentHref.'/'.$level->slug" />

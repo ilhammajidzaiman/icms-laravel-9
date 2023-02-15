@@ -22,7 +22,8 @@
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $status->name }}</td>
                             <td class="text-right text-secondary">
-                                {{ $status->created_at->format('D, d-m-Y, H:i:s') }}
+                                {{ $status->created_at->format('d-m-Y, H:i:s').', '.$status->created_at->diffForHumans()
+                                }}
                             </td>
                             <td class="text-right">
                                 <x-private.button.link-read :href="$segmentHref.'/'.$status->slug" />

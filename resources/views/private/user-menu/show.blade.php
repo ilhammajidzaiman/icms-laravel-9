@@ -29,9 +29,11 @@
 
                 <div class="form-row">
                     <x-private.form.input-row-readonly type="text" name="created_at" label="dibuat"
-                        :value="$menu->created_at" class="col" />
+                        :value="$menu->created_at->format('d-m-Y, H:i:s').', '.$menu->created_at->diffForHumans()"
+                        class="col" />
                     <x-private.form.input-row-readonly type="text" name="updated_at" label="diedit"
-                        :value="$menu->updated_at" class="col" />
+                        :value="$menu->updated_at->format('d-m-Y, H:i:s').', '.$menu->updated_at->diffForHumans()"
+                        class="col" />
                 </div>
             </div>
         </div>

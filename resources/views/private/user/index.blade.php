@@ -28,13 +28,17 @@
                             <th>{{ $loop->iteration }}</th>
                             <td class="text-capitalize">{{ $user->name }}</td>
                             <td class="text-right text-secondary">
-                                {{ $user->created_at->format('D, d-m-Y, H:i:s') }}
+                                {{ $user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans() }}
                             </td>
                             <td class="text-right">
                                 <x-private.button.link-read :href="$segmentHref.'/'.$user->uuid" />
                                 <x-private.button.link-update :href="$segmentHref.'/'.$user->uuid" />
+                                @if (auth()->user()->id==$user->id)
+                                <x-private.button.button-delete-disabled />
+                                @else
                                 <x-private.button.button-delete :href="$segmentHref.'/'.$user->uuid"
                                     :confirm="$user->nama" />
+                                @endif
                             </td>
                         </tr>
                         @empty

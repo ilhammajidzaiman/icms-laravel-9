@@ -27,9 +27,11 @@
                 </div>
                 <div class="form-row">
                     <x-private.form.input-row-readonly type="text" name="created_at" label="dibuat pada"
-                        :value="$user->created_at" class="col" />
+                        :value="$user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans()"
+                        class="col" />
                     <x-private.form.input-row-readonly type="text" name="updated_at" label="terakhir di edit"
-                        :value="$user->updated_at" class="col" />
+                        :value="$user->updated_at->format('d-m-Y, H:i:s').', '.$user->updated_at->diffForHumans()"
+                        class="col" />
                 </div>
             </div>
         </div>

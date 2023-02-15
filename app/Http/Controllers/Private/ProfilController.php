@@ -22,7 +22,7 @@ class ProfilController extends Controller
         $data = [
             'profil' => User::where('uuid', $uuid)->where('id', $id)->first(),
         ];
-        return view('private.profil.index', $data);
+        return view('private.user-profil.index', $data);
     }
 
     /**
@@ -37,7 +37,7 @@ class ProfilController extends Controller
         $data = [
             'profil' => User::where('uuid', $uuid)->where('id', $id)->first(),
         ];
-        return view('private.profil.update', $data);
+        return view('private.user-profil.update', $data);
     }
 
     /**
@@ -111,7 +111,7 @@ class ProfilController extends Controller
         $data = [
             'profil' => User::where('uuid', $uuid)->where('id', $id)->first(),
         ];
-        return view('private.profil.password', $data);
+        return view('private.user-profil.password', $data);
     }
 
     /**
