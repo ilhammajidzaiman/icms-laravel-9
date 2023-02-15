@@ -19,7 +19,9 @@
 
                         @if ($segment2)
                         <li class="breadcrumb-item">
-                            @if ($segment2==='master')
+                            @if ($segment2==='management')
+                            {{ $segment2 }}
+                            @elseif ($segment2==='master')
                             {{ $segment2 }}
                             @elseif ($segment2==='profil')
                             {{ $segment2 }}

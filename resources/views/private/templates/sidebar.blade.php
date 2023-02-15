@@ -36,7 +36,7 @@
 
                 @php
                 $parents=
-                App\Models\UserAccessParent::where('level_id',auth()->user()->level_id)->with(['menu'])->orderBy('order')->get();
+                App\Models\UserAccessParent::where('level_id',auth()->user()->level_id)->orderBy('order')->with(['menu'])->get();
                 @endphp
 
                 @forelse ($parents as $parent)
@@ -78,7 +78,7 @@
 
                     </ul>
                 </li>
-
+                {{-- end url kosong atau pagar --}}
                 @else
                 {{-- url ada --}}
                 <li class="nav-item">
@@ -88,6 +88,7 @@
                         <p class="text">{{ $parent->menu->name }}</p>
                     </a>
                 </li>
+                {{-- end url ada --}}
                 @endif
 
                 @empty
@@ -98,6 +99,7 @@
                         <p class="text">anda tidak punya akses!</p>
                     </a>
                 </li>
+                {{-- end tidak ada data parents --}}
                 @endforelse
                 <li class="nav-header mx-2 mb-3" style="border-bottom: 1px solid #4f5962"></li>
                 <li class="nav-item">

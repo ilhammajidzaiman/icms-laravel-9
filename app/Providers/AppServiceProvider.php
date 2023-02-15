@@ -47,8 +47,8 @@ class AppServiceProvider extends ServiceProvider
         $segment4 = Request::segment(4);
         $segment5 = Request::segment(5);
         $segmentUrl = $segment1 . '/' . $segment2 . '/' . $segment3 . '/' . $segment4 . '/' . $segment5;
-        $segment2 === 'master' ? $segmentHref = $segment3 : $segmentHref = $segment2;
-        $segment2 === 'master' ? $segmentForm = '/' . $segment1 . '/' . $segment2 . '/' . $segment3 : $segmentForm = '/' . $segment1 . '/' . $segment2;
+        $segment2 === 'management' || 'master' ? $segmentHref = $segment3 : $segmentHref = $segment2;
+        $segment2 === 'management' || 'master' ? $segmentForm = '/' . $segment1 . '/' . $segment2 . '/' . $segment3 : $segmentForm = '/' . $segment1 . '/' . $segment2;
 
         View::share(
             [

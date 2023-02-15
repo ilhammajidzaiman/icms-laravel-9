@@ -53,7 +53,7 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
             Route::put('/edit', 'update')->name('superadmin.config.edit');
         });
 
-        Route::prefix('master')->group(
+        Route::prefix('management')->group(
             function () {
                 Route::resource('/status', App\Http\Controllers\Private\SuperAdmin\UserStatusController::class)->scoped(['status' => 'slug']);
 
@@ -70,10 +70,31 @@ Route::prefix('superadmin')->middleware(['auth', 'isSuperAdmin'])->controller()-
                     Route::get('access/parent/{level}/{parent}/{order}', 'updateParent')->name('access.parent');
                     Route::get('access/child/{level}/{parent}/{child}/{order}', 'updateChild')->name('access.child');
                 });
+
+                Route::resource('/user', App\Http\Controllers\Private\SuperAdmin\UserController::class)->scoped(['user' => 'uuid']);
             }
         );
+        // Route::prefix('master')->group(
+        //     function () {
+        //         Route::resource('/status', App\Http\Controllers\Private\SuperAdmin\UserStatusController::class)->scoped(['status' => 'slug']);
 
-        Route::resource('/user', App\Http\Controllers\Private\SuperAdmin\UserController::class)->scoped(['user' => 'uuid']);
+        //         Route::resource('/level', App\Http\Controllers\Private\SuperAdmin\UserLevelController::class)->scoped(['level' => 'slug']);
+
+        //         Route::controller(App\Http\Controllers\Private\SuperAdmin\UserMenuController::class)->group(function () {
+        //             Route::resource('/menu', App\Http\Controllers\Private\SuperAdmin\UserMenuController::class)->scoped(['menu' => 'slug']);
+        //             Route::get('menu/{menu:slug}/create_sub', 'create_sub')->name('menu.create_sub');
+        //             Route::post('menu/{menu:slug}/create_sub', 'store_sub')->name('menu.create_sub');
+        //         });
+
+        //         Route::controller(App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->group(function () {
+        //             Route::resource('/access', App\Http\Controllers\Private\SuperAdmin\UserAccessController::class)->scoped(['access' => 'slug']);
+        //             Route::get('access/parent/{level}/{parent}/{order}', 'updateParent')->name('access.parent');
+        //             Route::get('access/child/{level}/{parent}/{child}/{order}', 'updateChild')->name('access.child');
+        //         });
+
+        //         Route::resource('/user', App\Http\Controllers\Private\SuperAdmin\UserController::class)->scoped(['user' => 'uuid']);
+        //     }
+        // );
     }
 );
 
