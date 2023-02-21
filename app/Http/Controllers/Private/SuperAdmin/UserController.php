@@ -99,7 +99,7 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/user')->with($flashData);
+        return redirect('/superadmin/management/user')->with($flashData);
     }
 
     /**
@@ -202,7 +202,7 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" diubah',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/user')->with($flashData);
+        return redirect('/superadmin/management/user')->with($flashData);
     }
 
     /**
@@ -233,6 +233,6 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/user')->with($flashData);
+        return redirect('/superadmin/management/user')->with($flashData);
     }
 }
