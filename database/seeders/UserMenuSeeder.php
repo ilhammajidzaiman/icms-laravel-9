@@ -19,7 +19,6 @@ class UserMenuSeeder extends Seeder
         // parent menu
 
         UserMenu::create([
-            'id'            => '1',
             'uuid'          => Str::uuid(),
             'parent_id'     => '0',
             'order'         => '1',
@@ -31,10 +30,20 @@ class UserMenuSeeder extends Seeder
         ]);
 
         UserMenu::create([
-            'id'            => '2',
             'uuid'          => Str::uuid(),
             'parent_id'     => '0',
             'order'         => '2',
+            'name'          => 'Manajemen User',
+            'slug'          => 'manajemen-user.html',
+            'icon'          => 'fa-fw fas fa-users-cog',
+            'prefix'        => 'management',
+            'url'           => '#',
+        ]);
+
+        UserMenu::create([
+            'uuid'          => Str::uuid(),
+            'parent_id'     => '0',
+            'order'         => '3',
             'name'          => 'Master',
             'slug'          => 'master.html',
             'icon'          => 'fa-fw fas fa-th',
@@ -42,20 +51,7 @@ class UserMenuSeeder extends Seeder
             'url'           => '#',
         ]);
 
-        UserMenu::create([
-            'id'            => '3',
-            'uuid'          => Str::uuid(),
-            'parent_id'     => '0',
-            'order'         => '3',
-            'name'          => 'User',
-            'slug'          => 'user.html',
-            'icon'          => 'fa-fw fas fa-users',
-            'prefix'        => 'user',
-            'url'           => '/user',
-        ]);
-
         // child menu
-
         UserMenu::create([
             'uuid'          => Str::uuid(),
             'parent_id'     => '2',
@@ -63,8 +59,8 @@ class UserMenuSeeder extends Seeder
             'name'          => 'Status',
             'slug'          => 'status.html',
             'icon'          => 'fa-fw fas fa-check',
-            'prefix'        => 'master',
-            'url'           => '/master/status',
+            'prefix'        => 'management',
+            'url'           => '/management/status',
         ]);
 
         UserMenu::create([
@@ -74,8 +70,8 @@ class UserMenuSeeder extends Seeder
             'name'          => 'Level',
             'slug'          => 'level.html',
             'icon'          => 'fa-fw fas fa-star',
-            'prefix'        => 'master',
-            'url'           => '/master/level',
+            'prefix'        => 'management',
+            'url'           => '/management/level',
         ]);
 
         UserMenu::create([
@@ -85,8 +81,8 @@ class UserMenuSeeder extends Seeder
             'name'          => 'Menu',
             'slug'          => 'menu.html',
             'icon'          => 'fa-fw fas fa-list',
-            'prefix'        => 'master',
-            'url'           => '/master/menu',
+            'prefix'        => 'management',
+            'url'           => '/management/menu',
         ]);
 
         UserMenu::create([
@@ -96,8 +92,19 @@ class UserMenuSeeder extends Seeder
             'name'          => 'Akses',
             'slug'          => 'access.html',
             'icon'          => 'fa-fw fas fa-shield-alt',
-            'prefix'        => 'master',
-            'url'           => '/master/access',
+            'prefix'        => 'management',
+            'url'           => '/management/access',
+        ]);
+
+        UserMenu::create([
+            'uuid'          => Str::uuid(),
+            'parent_id'     => '2',
+            'order'         => '5',
+            'name'          => 'User',
+            'slug'          => 'user.html',
+            'icon'          => 'fa-fw fas fa-users',
+            'prefix'        => 'management',
+            'url'           => '/management/user',
         ]);
     }
 }

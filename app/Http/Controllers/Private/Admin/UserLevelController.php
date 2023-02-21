@@ -19,7 +19,7 @@ class UserLevelController extends Controller
         $data = [
             'levels'        => UserLevel::orderByDesc('id')->get(),
         ];
-        return view('private.level.index', $data);
+        return view('private.user-level.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        return view('private.level.create');
+        return view('private.user-level.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/level')->with($flashData);
+        return redirect('/admin/management/level')->with($flashData);
     }
 
     /**
@@ -72,7 +72,7 @@ class UserLevelController extends Controller
         $data = [
             'level'         => $level,
         ];
-        return view('private.level.show', $data);
+        return view('private.user-level.show', $data);
     }
 
     /**
@@ -86,7 +86,7 @@ class UserLevelController extends Controller
         $data = [
             'level'         => $level,
         ];
-        return view('private.level.update', $data);
+        return view('private.user-level.update', $data);
     }
 
     /**
@@ -127,7 +127,7 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/level')->with($flashData);
+        return redirect('/admin/management/level')->with($flashData);
     }
 
     /**
@@ -151,6 +151,6 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/admin/master/level')->with($flashData);
+        return redirect('/admin/management/level')->with($flashData);
     }
 }

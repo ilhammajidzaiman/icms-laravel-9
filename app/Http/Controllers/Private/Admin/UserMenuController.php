@@ -19,7 +19,7 @@ class UserMenuController extends Controller
         $data = [
             'menus' => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
         ];
-        return view('private.menu.index', $data);
+        return view('private.user-menu.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserMenuController extends Controller
      */
     public function create()
     {
-        return view('private.menu.create');
+        return view('private.user-menu.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/admin/management/menu')->with($flashData);
     }
 
     /**
@@ -86,7 +86,7 @@ class UserMenuController extends Controller
         $data = [
             'menu'          => $menu,
         ];
-        return view('private.menu.show', $data);
+        return view('private.user-menu.show', $data);
     }
 
     /**
@@ -100,7 +100,7 @@ class UserMenuController extends Controller
         $data = [
             'menu'          => $menu,
         ];
-        return view('private.menu.update', $data);
+        return view('private.user-menu.update', $data);
     }
 
     /**
@@ -146,7 +146,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/admin/management/menu')->with($flashData);
     }
 
     /**
@@ -164,7 +164,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/admin/management/menu')->with($flashData);
     }
 
 
@@ -173,7 +173,7 @@ class UserMenuController extends Controller
         $data = [
             'menu'          => $menu,
         ];
-        return view('private.menu.create-sub', $data);
+        return view('private.user-menu.create-sub', $data);
     }
 
     public function store_sub(Request $request, UserMenu $menu)
@@ -206,6 +206,6 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/menu')->with($flashData);
+        return redirect('/admin/management/menu')->with($flashData);
     }
 }

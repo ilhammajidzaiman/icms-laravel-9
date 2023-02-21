@@ -19,7 +19,7 @@ class UserStatusController extends Controller
         $data = [
             'statuses'    => UserStatus::orderByDesc('id')->get(),
         ];
-        return view('private.status.index', $data);
+        return view('private.user-status.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserStatusController extends Controller
      */
     public function create()
     {
-        return view('private.status.create');
+        return view('private.user-status.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class UserStatusController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/admin/master/status')->with($flashData);
+        return redirect('/admin/management/status')->with($flashData);
     }
 
     /**
@@ -77,7 +77,7 @@ class UserStatusController extends Controller
         $data = [
             'status'        => $status,
         ];
-        return view('private.status.show', $data);
+        return view('private.user-status.show', $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class UserStatusController extends Controller
             'status'        => $status,
             // 'status'        => $Status->where('slug', $id)->first(),
         ];
-        return view('private.status.update', $data);
+        return view('private.user-status.update', $data);
     }
 
     /**
@@ -133,7 +133,7 @@ class UserStatusController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/admin/master/status')->with($flashData);
+        return redirect('/admin/management/status')->with($flashData);
     }
 
     /**
@@ -157,6 +157,6 @@ class UserStatusController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/admin/master/status')->with($flashData);
+        return redirect('/admin/management/status')->with($flashData);
     }
 }

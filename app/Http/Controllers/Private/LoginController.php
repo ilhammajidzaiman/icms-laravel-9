@@ -36,17 +36,30 @@ class LoginController extends Controller
             'password'      => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) :
             $request->session()->regenerate();
-            $levelId = auth()->user()->level_id;
-            if ($levelId == 1) :
-                return redirect()->intended('superadmin/dashboard');
-            elseif ($levelId == 2) :
-                return redirect()->intended('admin/dashboard');
-            elseif ($levelId == 3) :
-                return redirect()->intended('user/dashboard');
+            $statusId       = auth()->user()->status_id;
+            $levelId        = auth()->user()->level_id;
+
+            if ($statusId == 1) :
+                if ($levelId == 1) :
+                    return redirect()->intended('superadmin/dashboard');
+                elseif ($levelId == 2) :
+                    return redirect()->intended('admin/dashboard');
+                elseif ($levelId == 3) :
+                    return redirect()->intended('user/dashboard');
+                endif;
+            else :
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                $flashData = [
+                    'message'       => 'Akun anda tidak aktif, Silahkan hubungi Admin!',
+                    'alert'         => 'danger',
+                ];
+                return back()->with($flashData);
             endif;
-        }
+        endif;
 
         $flashData = [
             'message'       => 'Email atau password salah!',

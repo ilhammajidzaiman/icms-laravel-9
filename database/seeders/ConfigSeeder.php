@@ -18,9 +18,9 @@ class ConfigSeeder extends Seeder
     {
         Config::create([
             'uuid'          => Str::uuid(),
-            'app'           => 'application',
-            'detail'        => 'details application',
-            'copyright'     => 'copyright',
+            'app'           => 'Aplikasi',
+            'detail'        => 'Starter Kits Aplikasi Content Management System dibangun menggunakan Laravel 9',
+            'copyright'     => 'Copyright',
             'file'          => 'logo.svg',
         ]);
     }

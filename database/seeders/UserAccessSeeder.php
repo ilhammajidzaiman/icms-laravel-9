@@ -16,7 +16,7 @@ class UserAccessSeeder extends Seeder
      */
     public function run()
     {
-        // super admin access
+        // super admin parent access
         UserAccessParent::create([
             'level_id'  => '1',
             'parent_id' => '1',
@@ -35,7 +35,7 @@ class UserAccessSeeder extends Seeder
             'order'     => '3',
         ]);
 
-        // admin access
+        // admin parent access
         UserAccessParent::create([
             'level_id'  => '2',
             'parent_id' => '2',
@@ -48,14 +48,14 @@ class UserAccessSeeder extends Seeder
             'order'     => '3',
         ]);
 
-        // user access
+        // user parent access
         UserAccessParent::create([
             'level_id'  => '3',
             'parent_id' => '3',
             'order'     => '3',
         ]);
 
-        //
+        // child access level super admin
         UserAccessChild::create([
             'level_id'  => '1',
             'parent_id' => '2',
@@ -85,6 +85,14 @@ class UserAccessSeeder extends Seeder
         ]);
 
         UserAccessChild::create([
+            'level_id'  => '1',
+            'parent_id' => '2',
+            'child_id'  => '8',
+            'order'     => '5',
+        ]);
+
+        // child access level admin
+        UserAccessChild::create([
             'level_id'  => '2',
             'parent_id' => '2',
             'child_id'  => '4',
@@ -109,6 +117,13 @@ class UserAccessSeeder extends Seeder
             'level_id'  => '2',
             'parent_id' => '2',
             'child_id'  => '7',
+            'order'     => '4',
+        ]);
+
+        UserAccessChild::create([
+            'level_id'  => '2',
+            'parent_id' => '2',
+            'child_id'  => '8',
             'order'     => '4',
         ]);
     }
