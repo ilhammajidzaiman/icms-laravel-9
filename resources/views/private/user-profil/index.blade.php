@@ -23,7 +23,7 @@
                 <p><span class="font-weight-bold">level</span>: {{ $profil->level->name }}</p>
                 <p><span class="font-weight-bold">dibuat</span>: {{ $profil->created_at }}</p>
                 <p><span class="font-weight-bold">diubah</span>: {{ $profil->updated_at }}</p>
-                <x-private.button.link-edit :href="'/'.$segment1.'/'.$segment2.'/'.$segment3" />
+                <x-private.button.link-edit :href="'/'.$segment1.'/'.$segment2.'/'.$segment3.'/'" />
             </div>
         </div>
     </div>

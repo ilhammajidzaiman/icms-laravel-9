@@ -1,6 +1,6 @@
 @extends('private.templates.main')
 @section('container')
-<x-private.button.link-edit :href="$segmentHref" />
+<x-private.button.link-edit :href="$segmentForm" />
 <x-private.alert.dismissing />
 
 <div class="row">
