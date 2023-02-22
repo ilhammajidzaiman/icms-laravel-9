@@ -18,6 +18,8 @@
                         <tr class="text-capitalize">
                             <th scope="col">#</th>
                             <th scope="col">nama</th>
+                            <th scope="col">status</th>
+                            <th scope="col">level</th>
                             <th scope="col">&nbsp;</th>
                             <th scope="col" width="250">&nbsp;</th>
                         </tr>
@@ -27,6 +29,17 @@
                         <tr>
                             <th>{{ $loop->iteration }}</th>
                             <td class="text-capitalize">{{ $user->name }}</td>
+                            <td class="text-capitalize">
+                                @if ($user->status_id==1)
+                                @php $badge = "success"; @endphp
+                                @else
+                                @php $badge = "danger"; @endphp
+                                @endif
+                                <span class="badge badge-pill badge-{{ $badge }}">
+                                    {{ $user->status->name }}
+                                </span>
+                            </td>
+                            <td class="text-capitalize">{{ $user->level->name }}</td>
                             <td class="text-right text-secondary">
                                 {{ $user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans() }}
                             </td>
