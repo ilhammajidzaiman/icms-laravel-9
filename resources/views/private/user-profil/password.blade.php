@@ -1,6 +1,7 @@
 @extends('private.templates.main')
 @section('container')
-<x-private.button.link-back href="./" />
+<x-button-link-pill :href="'../'.$profil->uuid.'/edit'" label="kembali" class="btn-sm btn-outline-secondary mb-3"
+    icon="fa-arrow-left" />
 
 <form action="{{ $segmentForm.'/'.$profil->uuid }}" method="post">
     @method('put')
@@ -10,14 +11,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-row">
-                        <x-private.form.input-password name="old" label="password lama" class="col-md-6" />
+                        <x-form-input-password name="old" label="password lama" class="col-md-6" />
                     </div>
                     <div class="form-row">
-                        <x-private.form.input-password name="password" label="password" class="col-md-6" />
-                        <x-private.form.input-password name="confirmation" label="konfirmasi password"
-                            class="col-md-6" />
+                        <x-form-input-password name="password" label="password" class="col-md-6" />
+                        <x-form-input-password name="confirmation" label="konfirmasi password" class="col-md-6" />
                     </div>
-                    <x-private.button.button-save />
+                    <x-button-submit label="simpan" class="btn-primary" icon="fa-save" />
                 </div>
             </div>
 

@@ -30,13 +30,13 @@
         <div class="card">
             <div class="card-body login-card-bodyy">
                 <p class="login-box-msg">Silahkan login</p>
-                <x-private.alert.dismissing />
+                <x-alert-dismissing />
                 <form action="{{ url('/login') }}" method="post">
                     @csrf
-                    <x-private.input.login type="text" name="email" label="Email" :value="old('email')"
+                    <x-form-input-login type="text" name="email" label="Email" :value="old('email')"
                         class="fa-envelope" />
-                    <x-private.input.login type="password" name="password" label="Password" value="" class="fa-key" />
-                    <x-private.button.login />
+                    <x-form-input-login type="password" name="password" label="Password" value="" class="fa-key" />
+                    <x-button-submit label="simpan" class="btn-primary btn-block" icon="fa-save" />
                 </form>
                 <footer class="text-xs pt-4">
                     <div>

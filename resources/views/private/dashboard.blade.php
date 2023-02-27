@@ -7,7 +7,7 @@
             $value = $config->file;
             $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
             @endphp
-            <img src="{{ $url }}" alt="{{ $url }}" class="mb-5" width="180">
+            <img src="{{ $url }}" alt="{{ $url }}" class="mb-5" width="160">
             <h3>Hai {{ auth()->user()->name }}!</h3>
             <h1>Selamat Datang di {{ $config->app }}</h1>
             <h5>{{ $config->detail }}</h5>
