@@ -1,1 +1,0 @@
-<span class="text-secondary">Belum ada data...</span>

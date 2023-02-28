@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Private\Button;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class LinkEdit extends Component
+class FormInputSelect extends Component
 {
     /**
      * Create a new component instance.
@@ -12,11 +12,15 @@ class LinkEdit extends Component
      * @return void
      */
 
-    public $href;
+    public $name;
+    public $label;
+    public $class;
 
-    public function __construct($href)
+    public function __construct($name, $label, $class)
     {
-        $this->href = $href;
+        $this->name = $name;
+        $this->label = $label;
+        $this->class = $class;
     }
 
     /**
@@ -26,6 +30,6 @@ class LinkEdit extends Component
      */
     public function render()
     {
-        return view('components.private.button.link-edit');
+        return view('components.form-input-select');
     }
 }

@@ -2,7 +2,7 @@
 @section('container')
 
 <div class="mb-5"></div>
-<x-private.alert.dismissing />
+<x-alert-dismissing />
 
 <div class="row">
     <div class="col-lg">
@@ -22,8 +22,10 @@
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $level->name }}</td>
                             <td class="text-right">
-                                <x-private.button.link-read :href="$segmentHref.'/'.$level->slug" />
-                                <x-private.button.link-update :href="$segmentHref.'/'.$level->slug" />
+                                <x-button-link-pill :href="$segmentHref.'/'.$level->slug" label="lihat"
+                                    class="btn-xs btn-outline-primary" icon="fa-eye" />
+                                <x-button-link-pill :href="$segmentHref.'/'.$level->slug.'/edit'" label="edit"
+                                    class="btn-xs btn-outline-success" icon="fa-edit" />
                             </td>
                         </tr>
                         @empty

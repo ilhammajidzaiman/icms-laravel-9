@@ -1,6 +1,7 @@
 @extends('private.templates.main')
 @section('container')
-<x-private.button.link-back href="./" />
+
+<x-button-link-pill :href="'./'" label="kembali" class="btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
 
 <div class="row">
     <div class="col-md-3">
@@ -14,22 +15,22 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="name" label="nama" :value="$user->name"
+                    <x-form-input-row-readonly type="text" name="name" label="nama" :value="$user->name"
                         class="col-md-4" />
                 </div>
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="username" label="username"
-                        :value="$user->username" class="col-md-4" />
+                    <x-form-input-row-readonly type="text" name="username" label="username" :value="$user->username"
+                        class="col-md-4" />
                 </div>
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="email" label="email" :value="$user->email"
+                    <x-form-input-row-readonly type="text" name="email" label="email" :value="$user->email"
                         class="col-md-6" />
                 </div>
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="created_at" label="dibuat pada"
+                    <x-form-input-row-readonly type="text" name="created_at" label="dibuat pada"
                         :value="$user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans()"
                         class="col" />
-                    <x-private.form.input-row-readonly type="text" name="updated_at" label="terakhir di edit"
+                    <x-form-input-row-readonly type="text" name="updated_at" label="terakhir di edit"
                         :value="$user->updated_at->format('d-m-Y, H:i:s').', '.$user->updated_at->diffForHumans()"
                         class="col" />
                 </div>
@@ -39,12 +40,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="status" label="status"
-                        :value="$user->status->name" class="col-md-4" />
+                    <x-form-input-row-readonly type="text" name="status" label="status" :value="$user->status->name"
+                        class="col-md-4" />
                 </div>
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="level" label="level"
-                        :value="$user->level->name" class="col-md-4" />
+                    <x-form-input-row-readonly type="text" name="level" label="level" :value="$user->level->name"
+                        class="col-md-4" />
                 </div>
             </div>
         </div>

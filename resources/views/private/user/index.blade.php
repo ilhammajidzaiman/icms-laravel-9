@@ -1,11 +1,13 @@
 @extends('private.templates.main')
 @section('container')
-<x-private.button.link-create :href="$segmentHref" />
-<x-private.alert.dismissing />
+
+<x-button-link-pill :href="$segmentHref.'/create'" label="baru" class="btn-sm btn-outline-secondary mb-3"
+    icon="fa-plus" />
+<x-alert-dismissing />
 
 <form action="{{ $segmentForm }}" method="get">
     <div class="row">
-        <x-private.search name="search" id="search" :value="request('search')" class="col-md-4" />
+        <x-search-input name="search" id="search" :value="request('search')" class="col-md-4" />
     </div>
 </form>
 
@@ -29,35 +31,32 @@
                         <tr>
                             <th>{{ $loop->iteration }}</th>
                             <td class="text-capitalize">{{ $user->name }}</td>
-                            <td class="text-capitalize">
-                                @if ($user->status_id==1)
-                                @php $badge = "success"; @endphp
-                                @else
-                                @php $badge = "danger"; @endphp
-                                @endif
-                                <span class="badge badge-pill badge-{{ $badge }}">
-                                    {{ $user->status->name }}
-                                </span>
+                            <td>
+                                <x-badge-pill :class="$user->status->color" :label="$user->status->name" />
                             </td>
-                            <td class="text-capitalize">{{ $user->level->name }}</td>
+                            <td>
+                                <x-badge-pill :class="$user->level->color" :label="$user->level->name" />
+                            </td>
                             <td class="text-right text-secondary">
                                 {{ $user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans() }}
                             </td>
                             <td class="text-right">
-                                <x-private.button.link-read :href="$segmentHref.'/'.$user->uuid" />
-                                <x-private.button.link-update :href="$segmentHref.'/'.$user->uuid" />
+
+                                <x-button-link-pill :href="$segmentHref.'/'.$user->uuid" label="lihat"
+                                    class="btn-xs btn-outline-primary" icon="fa-eye" />
+                                <x-button-link-pill :href="$segmentHref.'/'.$user->uuid.'/edit'" label="edit"
+                                    class="btn-xs btn-outline-success" icon="fa-edit" />
                                 @if (auth()->user()->id==$user->id)
-                                <x-private.button.button-delete-disabled />
+                                <x-button-delete-disable />
                                 @else
-                                <x-private.button.button-delete :href="$segmentHref.'/'.$user->uuid"
-                                    :confirm="$user->nama" />
+                                <x-button-delete :href="$segmentHref.'/'.$user->uuid" :confirm="$user->name" />
                                 @endif
                             </td>
                         </tr>
                         @empty
                         <tr>
                             <td colspan="4">
-                                <x-private.alert.alert-empty />
+                                <x-alert-empty />
                             </td>
                         </tr>
                         @endforelse
@@ -65,7 +64,7 @@
                 </table>
             </div>
         </div>
-        <x-private.pagination :pages="$users" side="1" />
+        <x-pagination :pages="$users" side="1" />
     </div>
 </div>
 

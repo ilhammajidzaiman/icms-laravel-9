@@ -1,19 +1,24 @@
 <?php
 
-namespace App\View\Components\Private\Alert;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class AlertEmpty extends Component
+class Pagination extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+
+    public $pages;
+    public $side;
+
+    public function __construct($pages, $side)
     {
-        //
+        $this->pages = $pages;
+        $this->side = $side;
     }
 
     /**
@@ -23,6 +28,6 @@ class AlertEmpty extends Component
      */
     public function render()
     {
-        return view('components.private.alert.alert-empty');
+        return view('components.pagination');
     }
 }

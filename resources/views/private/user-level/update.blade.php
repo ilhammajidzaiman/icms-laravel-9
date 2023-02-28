@@ -1,5 +1,6 @@
 @extends('private.templates.main')
 @section('container')
+
 <x-button-link-pill :href="'../'" label="kembali" class="btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
 
 <div class="row">

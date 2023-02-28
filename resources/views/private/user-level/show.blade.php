@@ -7,12 +7,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-row">
-                    <x-form-input-row-readonly type="text" name="name" label="nama" :value="old('name',$level->name)"
+                    <x-form-input-row-readonly type="text" name="name" label="nama" :value="$level->name"
                         class="col-md-4" />
                 </div>
                 <div class="form-row">
-                    <x-form-input-row-readonly type="text" name="color" label="warna"
-                        :value="old('color',$level->color)" class="col-md-4" />
+                    <x-form-input-row-readonly type="text" name="color" label="warna" :value="$level->color"
+                        class="col-md-4" />
                 </div>
                 <div class="form-row">
                     <x-form-input-row-readonly type="text" name="created_at" label="dibuat"

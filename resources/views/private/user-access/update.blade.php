@@ -1,14 +1,15 @@
 @extends('private.templates.main')
 @section('container')
-<x-private.button.link-back href="../" />
+
+<x-button-link-pill :href="'../'" label="kembali" class="btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
 
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
                 <div class="form-row">
-                    <x-private.form.input-row-readonly type="text" name="name" label="nama"
-                        :value="old('name',$level->name)" class="col-md-4" />
+                    <x-form-input-row-readonly type="text" name="name" label="level" :value="old('name',$level->name)"
+                        class="col-md-4" />
                 </div>
 
                 <div class="text-capitalize mb-3">

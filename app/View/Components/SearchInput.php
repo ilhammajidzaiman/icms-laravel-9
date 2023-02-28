@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Private\Form;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class InputSelect extends Component
+class SearchInput extends Component
 {
     /**
      * Create a new component instance.
@@ -13,13 +13,15 @@ class InputSelect extends Component
      */
 
     public $name;
-    public $label;
+    public $id;
+    public $value;
     public $class;
 
-    public function __construct($name, $label, $class)
+    public function __construct($name, $id, $value, $class)
     {
         $this->name = $name;
-        $this->label = $label;
+        $this->id = $id;
+        $this->value = $value;
         $this->class = $class;
     }
 
@@ -30,6 +32,6 @@ class InputSelect extends Component
      */
     public function render()
     {
-        return view('components.private.form.input-select');
+        return view('components.search-input');
     }
 }

@@ -1,8 +1,9 @@
 @extends('private.templates.main')
 @section('container')
 
-<x-private.button.link-create :href="$segmentHref" />
-<x-private.alert.dismissing />
+<x-button-link-pill :href="$segmentHref.'/create'" label="baru" class="btn-sm btn-outline-secondary mb-3"
+    icon="fa-plus" />
+<x-alert-dismissing />
 
 <div class="row">
     <div class="col-12">
@@ -25,15 +26,17 @@
                                 <i class="{{ $menu1->icon }} mr-2"></i>
                                 {{ $menu1->name }}
                                 <span class="float-right">
-                                    <x-private.button.link-create-sub :href="$segmentHref.'/'.$menu1->slug" />
-                                    <x-private.button.link-read :href="$segmentHref.'/'.$menu1->slug" />
-                                    <x-private.button.link-update :href="$segmentHref.'/'.$menu1->slug" />
+                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug.'/create_sub'"
+                                        label="sub baru" class="btn-xs btn-outline-secondary" icon="fa-plus" />
+                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug" label="lihat"
+                                        class="btn-xs btn-outline-primary" icon="fa-eye" />
+                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug.'/edit'" label="edit"
+                                        class="btn-xs btn-outline-success" icon="fa-edit" />
                                     @php
                                     $menu=App\Models\UserMenu::where('parent_id',$menu1->id)->first();
                                     @endphp
                                     @empty($menu)
-                                    <x-private.button.button-delete :href="$segmentHref.'/'.$menu1->slug"
-                                        :confirm="$menu1->name" />
+                                    <x-button-delete :href="$segmentHref.'/'.$menu1->slug" :confirm="$menu1->name" />
                                     @endempty
                                 </span>
                             </td>
@@ -54,12 +57,13 @@
                                                     <i class="{{ $menu2->icon }} mr-2"></i>
                                                     {{ $menu2->name }}
                                                     <span class="float-right">
-                                                        <x-private.button.link-read
-                                                            :href="$segmentHref.'/'.$menu2->slug" />
-                                                        <x-private.button.link-update
-                                                            :href="$segmentHref.'/'.$menu2->slug" />
-                                                        <x-private.button.button-delete
-                                                            :href="$segmentHref.'/'.$menu2->slug"
+                                                        <x-button-link-pill :href="$segmentHref.'/'.$menu2->slug"
+                                                            label="lihat" class="btn-xs btn-outline-primary"
+                                                            icon="fa-eye" />
+                                                        <x-button-link-pill
+                                                            :href="$segmentHref.'/'.$menu2->slug.'/edit'" label="edit"
+                                                            class="btn-xs btn-outline-success" icon="fa-edit" />
+                                                        <x-button-delete :href="$segmentHref.'/'.$menu2->slug"
                                                             :confirm="$menu2->name" />
                                                     </span>
                                                 </td>
@@ -67,7 +71,7 @@
                                             @empty
                                             <tr class="table-secondary">
                                                 <td>
-                                                    <x-private.alert.alert-empty />
+                                                    <x-alert-empty />
                                                 </td>
                                             </tr>
                                             @endforelse
@@ -85,10 +89,11 @@
                                 <i class="{{ $menu1->icon }} mr-2"></i>
                                 {{ $menu1->name }}
                                 <span class="float-right">
-                                    <x-private.button.link-read :href="$segmentHref.'/'.$menu1->slug" />
-                                    <x-private.button.link-update :href="$segmentHref.'/'.$menu1->slug" />
-                                    <x-private.button.button-delete :href="$segmentHref.'/'.$menu1->slug"
-                                        :confirm="$menu1->name" />
+                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug" label="lihat"
+                                        class="btn-xs btn-outline-primary" icon="fa-eye" />
+                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug.'/edit'" label="edit"
+                                        class="btn-xs btn-outline-success" icon="fa-edit" />
+                                    <x-button-delete :href="$segmentHref.'/'.$menu1->slug" :confirm="$menu1->name" />
                                 </span>
                             </td>
                         </tr>
@@ -98,7 +103,7 @@
                         {{-- jika data kosong --}}
                         <tr>
                             <td>
-                                <x-private.alert.alert-empty />
+                                <x-alert-empty />
                             </td>
                         </tr>
                         @endforelse
