@@ -3,7 +3,7 @@
 <x-button-link-pill :href="'../'.$profil->uuid.'/edit'" label="kembali" class="btn-sm btn-outline-secondary mb-3"
     icon="fa-arrow-left" />
 
-<form action="{{ $segmentForm.'/'.$profil->uuid }}" method="post">
+<form action="{{ $segmentForm }}" method="post">
     @method('put')
     @csrf
     <div class="row">

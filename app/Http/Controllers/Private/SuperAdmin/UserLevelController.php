@@ -41,24 +41,27 @@ class UserLevelController extends Controller
     public function store(Request $request)
     {
         $name               = $request->name;
+        $color              = $request->color;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
         $uuid               = Str::uuid();
 
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_levels']
+            'name'          => ['required', 'max:255', 'unique:user_levels'],
+            'color'         => ['required', 'max:255'],
         ]);
         $data = [
             'uuid'          => $uuid,
             'name'          => $name,
             'slug'          => $slug,
+            'color'         => $color,
         ];
         UserLevel::create($data);
         $flashData = [
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/master/level')->with($flashData);
+        return redirect('/superadmin/management/level')->with($flashData);
     }
 
     /**
@@ -104,6 +107,7 @@ class UserLevelController extends Controller
 
         // data input
         $name               = $request->name;
+        $color              = $request->color;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
 
@@ -112,13 +116,15 @@ class UserLevelController extends Controller
 
         // validation
         $validatedData      = $request->validate([
-            'name'         => ['required', 'max:255', $uName]
+            'name'         => ['required', 'max:255', $uName],
+            'color'        => ['required', 'max:255'],
         ]);
 
         // insert to table
         $data = [
             'name'          => $name,
             'slug'          => $slug,
+            'color'         => $color,
         ];
         UserLevel::where('slug', $oldSlug)->update($data);
 
@@ -127,7 +133,7 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/master/level')->with($flashData);
+        return redirect('/superadmin/management/level')->with($flashData);
     }
 
     /**
@@ -151,6 +157,6 @@ class UserLevelController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/master/level')->with($flashData);
+        return redirect('/superadmin/management/level')->with($flashData);
     }
 }

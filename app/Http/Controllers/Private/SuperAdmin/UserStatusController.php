@@ -41,13 +41,15 @@ class UserStatusController extends Controller
     public function store(Request $request)
     {
         $name               = $request->name;
+        $color              = $request->color;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
         $uuid               = Str::uuid();
 
         // validation
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_statuses']
+            'name'          => ['required', 'max:255', 'unique:user_statuses'],
+            'color'         => ['required', 'max:255'],
         ]);
 
         // insert to table 
@@ -55,6 +57,7 @@ class UserStatusController extends Controller
             'uuid'          => $uuid,
             'name'          => $name,
             'slug'          => $slug,
+            'color'         => $color,
         ];
         UserStatus::create($data);
 
@@ -109,6 +112,7 @@ class UserStatusController extends Controller
 
         // data input
         $name               = $request->name;
+        $color              = $request->color;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
 
@@ -117,13 +121,15 @@ class UserStatusController extends Controller
 
         // validation
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', $uName]
+            'name'          => ['required', 'max:255', $uName],
+            'color'          => ['required', 'max:255'],
         ]);
 
         // insert to table statuses
         $data = [
             'name'          => $name,
             'slug'          => $slug,
+            'color'         => $color,
         ];
         UserStatus::where('slug', $oldSlug)->update($data);
 

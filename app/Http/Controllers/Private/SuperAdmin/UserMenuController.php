@@ -76,7 +76,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/master/menu')->with($flashData);
+        return redirect('/superadmin/management/menu')->with($flashData);
     }
 
     /**
@@ -154,7 +154,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/master/menu')->with($flashData);
+        return redirect('/superadmin/management/menu')->with($flashData);
     }
 
     /**
@@ -172,7 +172,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/master/menu')->with($flashData);
+        return redirect('/superadmin/management/menu')->with($flashData);
     }
 
 
@@ -216,6 +216,6 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/master/menu')->with($flashData);
+        return redirect('/superadmin/management/menu')->with($flashData);
     }
 }
