@@ -7,10 +7,10 @@
 
 <footer class="main-footer text-xs">
     <strong>Copyright &copy;
-        <?= date('Y');?> <a href="{{ url('/') }}">{{ $config->app }}</a>.
+        <?= date('Y');?> <a href="{{ url('/') }}">{{ config('app.name') }}</a>.
     </strong>
     <div class="float-right d-none d-sm-inline-block">
-        {{ $config->copyright }}
+        {{ config('app.copyright') }}
     </div>
 </footer>
 </div>
@@ -31,7 +31,7 @@
             const order         = $(this).data('parent-order');
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentForm.'/parent') }}/"+level+"/"+parent+"/"+order,
+                url: "{{ url($segmentUrl.'/parent') }}/"+level+"/"+parent+"/"+order,
                 success: function(request){
                     alert("Akses menu diubah!");
                 }
@@ -45,7 +45,7 @@
             const order         = $(this).data('child-order');
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentForm.'/child') }}/"+level+"/"+parent+"/"+child+"/"+order,
+                url: "{{ url($segmentUrl.'/child') }}/"+level+"/"+parent+"/"+child+"/"+order,
                 success: function(request){
                     alert("Akses sub menu diubah!");
                 }

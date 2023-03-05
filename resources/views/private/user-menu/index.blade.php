@@ -1,7 +1,7 @@
 @extends('private.templates.main')
 @section('container')
 
-<x-button-link-pill :href="$segmentHref.'/create'" label="baru" class="btn-sm btn-outline-secondary mb-3"
+<x-button-link :href="$segmentUrl.'/create'" label="baru" class="rounded-pill btn-sm btn-outline-secondary mb-3"
     icon="fa-plus" />
 <x-alert-dismissing />
 
@@ -26,17 +26,17 @@
                                 <i class="{{ $menu1->icon }} mr-2"></i>
                                 {{ $menu1->name }}
                                 <span class="float-right">
-                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug.'/create_sub'"
-                                        label="sub baru" class="btn-xs btn-outline-secondary" icon="fa-plus" />
-                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug" label="lihat"
-                                        class="btn-xs btn-outline-primary" icon="fa-eye" />
-                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug.'/edit'" label="edit"
-                                        class="btn-xs btn-outline-success" icon="fa-edit" />
+                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid.'/create_sub'" label="sub baru"
+                                        class="rounded-pill btn-xs btn-outline-secondary" icon="fa-plus" />
+                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid" label="lihat"
+                                        class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid.'/edit'" label="edit"
+                                        class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
                                     @php
                                     $menu=App\Models\UserMenu::where('parent_id',$menu1->id)->first();
                                     @endphp
                                     @empty($menu)
-                                    <x-button-delete :href="$segmentHref.'/'.$menu1->slug" :confirm="$menu1->name" />
+                                    <x-button-delete :href="$segmentUrl.'/'.$menu1->uuid" :confirm="$menu1->name" />
                                     @endempty
                                 </span>
                             </td>
@@ -57,13 +57,14 @@
                                                     <i class="{{ $menu2->icon }} mr-2"></i>
                                                     {{ $menu2->name }}
                                                     <span class="float-right">
-                                                        <x-button-link-pill :href="$segmentHref.'/'.$menu2->slug"
-                                                            label="lihat" class="btn-xs btn-outline-primary"
+                                                        <x-button-link :href="$segmentUrl.'/'.$menu2->uuid"
+                                                            label="lihat"
+                                                            class="rounded-pill btn-xs btn-outline-primary"
                                                             icon="fa-eye" />
-                                                        <x-button-link-pill
-                                                            :href="$segmentHref.'/'.$menu2->slug.'/edit'" label="edit"
-                                                            class="btn-xs btn-outline-success" icon="fa-edit" />
-                                                        <x-button-delete :href="$segmentHref.'/'.$menu2->slug"
+                                                        <x-button-link :href="$segmentUrl.'/'.$menu2->uuid.'/edit'"
+                                                            label="edit" class="rounded-pill btn-xs btn-outline-success"
+                                                            icon="fa-edit" />
+                                                        <x-button-delete :href="$segmentUrl.'/'.$menu2->uuid"
                                                             :confirm="$menu2->name" />
                                                     </span>
                                                 </td>
@@ -89,11 +90,11 @@
                                 <i class="{{ $menu1->icon }} mr-2"></i>
                                 {{ $menu1->name }}
                                 <span class="float-right">
-                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug" label="lihat"
-                                        class="btn-xs btn-outline-primary" icon="fa-eye" />
-                                    <x-button-link-pill :href="$segmentHref.'/'.$menu1->slug.'/edit'" label="edit"
-                                        class="btn-xs btn-outline-success" icon="fa-edit" />
-                                    <x-button-delete :href="$segmentHref.'/'.$menu1->slug" :confirm="$menu1->name" />
+                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid" label="lihat"
+                                        class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid.'/edit'" label="edit"
+                                        class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
+                                    <x-button-delete :href="$segmentUrl.'/'.$menu1->uuid" :confirm="$menu1->name" />
                                 </span>
                             </td>
                         </tr>

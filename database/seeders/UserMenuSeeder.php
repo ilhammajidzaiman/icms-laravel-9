@@ -17,22 +17,11 @@ class UserMenuSeeder extends Seeder
     public function run()
     {
         // parent menu
-
         UserMenu::create([
+            'id'            => '1',
             'uuid'          => Str::uuid(),
             'parent_id'     => '0',
             'order'         => '1',
-            'name'          => 'Konfigurasi',
-            'slug'          => 'konfigurasi.html',
-            'icon'          => 'fa-fw fas fa-cog',
-            'prefix'        => 'config',
-            'url'           => '/config',
-        ]);
-
-        UserMenu::create([
-            'uuid'          => Str::uuid(),
-            'parent_id'     => '0',
-            'order'         => '2',
             'name'          => 'Manajemen User',
             'slug'          => 'manajemen-user.html',
             'icon'          => 'fa-fw fas fa-users-cog',
@@ -41,9 +30,10 @@ class UserMenuSeeder extends Seeder
         ]);
 
         UserMenu::create([
+            'id'            => '2',
             'uuid'          => Str::uuid(),
             'parent_id'     => '0',
-            'order'         => '3',
+            'order'         => '2',
             'name'          => 'Master',
             'slug'          => 'master.html',
             'icon'          => 'fa-fw fas fa-th',
@@ -54,7 +44,7 @@ class UserMenuSeeder extends Seeder
         // child menu
         UserMenu::create([
             'uuid'          => Str::uuid(),
-            'parent_id'     => '2',
+            'parent_id'     => '1',
             'order'         => '1',
             'name'          => 'Status',
             'slug'          => 'status.html',
@@ -65,7 +55,7 @@ class UserMenuSeeder extends Seeder
 
         UserMenu::create([
             'uuid'          => Str::uuid(),
-            'parent_id'     => '2',
+            'parent_id'     => '1',
             'order'         => '2',
             'name'          => 'Level',
             'slug'          => 'level.html',
@@ -76,7 +66,7 @@ class UserMenuSeeder extends Seeder
 
         UserMenu::create([
             'uuid'          => Str::uuid(),
-            'parent_id'     => '2',
+            'parent_id'     => '1',
             'order'         => '3',
             'name'          => 'Menu',
             'slug'          => 'menu.html',
@@ -87,7 +77,7 @@ class UserMenuSeeder extends Seeder
 
         UserMenu::create([
             'uuid'          => Str::uuid(),
-            'parent_id'     => '2',
+            'parent_id'     => '1',
             'order'         => '4',
             'name'          => 'Akses',
             'slug'          => 'access.html',
@@ -98,7 +88,7 @@ class UserMenuSeeder extends Seeder
 
         UserMenu::create([
             'uuid'          => Str::uuid(),
-            'parent_id'     => '2',
+            'parent_id'     => '1',
             'order'         => '5',
             'name'          => 'User',
             'slug'          => 'user.html',

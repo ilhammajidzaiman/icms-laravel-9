@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ButtonLinkPill extends Component
+class ButtonLink extends Component
 {
     /**
      * Create a new component instance.
@@ -32,6 +32,6 @@ class ButtonLinkPill extends Component
      */
     public function render()
     {
-        return view('components.button-link-pill');
+        return view('components.button-link');
     }
 }

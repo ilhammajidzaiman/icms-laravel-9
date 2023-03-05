@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\SuperAdmin;
+namespace App\Http\Controllers\Private\Developer;
 
 use App\Models\UserMenu;
 use App\Models\UserLevel;
@@ -31,7 +31,7 @@ class UserAccessController extends Controller
      */
     public function create()
     {
-        return redirect('/superadmin/master/access');
+        return redirect('/developer/master/access');
     }
 
     /**
@@ -42,7 +42,7 @@ class UserAccessController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/superadmin/master/access');
+        return redirect('/developer/master/access');
     }
 
     /**
@@ -83,7 +83,7 @@ class UserAccessController extends Controller
      */
     public function update(Request $request, UserLevel $access)
     {
-        return redirect('/superadmin/master/access');
+        return redirect('/developer/master/access');
     }
 
     /**
@@ -94,7 +94,7 @@ class UserAccessController extends Controller
      */
     public function destroy(UserAccessParent $access)
     {
-        return redirect('/superadmin/master/access');
+        return redirect('/developer/master/access');
     }
 
     public function updateParent($level, $parent, $order)

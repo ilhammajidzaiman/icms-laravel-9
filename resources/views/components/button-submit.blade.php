@@ -1,4 +1,4 @@
-<button type="submit" class="btn text-capitalize {{ $class }}">
+<button type="submit" class="text-capitalize btn {{ $class }}">
     <i class="fa-fw fas {{ $icon }}"></i>
     {{ $label }}
 </button>

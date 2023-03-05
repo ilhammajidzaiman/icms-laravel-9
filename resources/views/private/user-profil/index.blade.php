@@ -1,10 +1,11 @@
 @extends('private.templates.main')
 @section('container')
-<x-button-link-pill :href="$segmentForm.'/edit'" label="edit" class="btn-sm btn-outline-success mb-3" icon="fa-edit" />
+<x-button-link :href="$segmentUrl.'/edit'" label="edit" class="rounded-pill btn-sm btn-outline-success mb-3"
+    icon="fa-edit" />
 <x-alert-dismissing />
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 p-5">
         @php
         $value = $profil->file;
         $value == 'default-user.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);

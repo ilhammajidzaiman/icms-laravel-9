@@ -7,7 +7,7 @@
     <div class="col-md-9 col-lg">
         <div class="card">
             <div class="card-body">
-                <form action="{{ $segmentForm }}" method="post">
+                <form action="{{ $segmentUrl }}" method="post">
                     @csrf
                     <div class="form-row">
                         <x-form-input-row type="number" name="order" label="urutan" :value="old('order')"

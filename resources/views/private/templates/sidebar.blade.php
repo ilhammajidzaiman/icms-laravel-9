@@ -1,12 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ url($segment1.'/dashboard') }}" class="brand-link">
-        @php
-        $value = $config->file;
-        $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
-        @endphp
-        <img src="{{ $url }}" alt="{{ $url }}" class="brand-image img-circlee elevation-22"
-            style="width:30px;height:30px;">
-        <span class="brand-text font-weight-lightt">{{ $config->app }}</span>
+        <img src="{{ url('assets/images/'.config('app.logo')) }}" alt="{{ config('app.logo') }}"
+            class="brand-image img-circlee elevation-22" style="width:30px;height:30px;">
+        <span class="brand-text font-weight-lightt">{{ config('app.name') }}</span>
     </a>
 
     <div class="sidebar">

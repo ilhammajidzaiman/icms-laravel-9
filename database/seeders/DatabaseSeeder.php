@@ -22,12 +22,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            ConfigSeeder::class,
             UserStatusSeeder::class,
             UserLevelSeeder::class,
-            UserMenuSeeder::class,
-            UserAccessSeeder::class,
             UserSeeder::class,
+            UserMenuSeeder::class,
+            UserAccessParentSeeder::class,
+            UserAccessChildSeeder::class,
         ]);
     }
 }

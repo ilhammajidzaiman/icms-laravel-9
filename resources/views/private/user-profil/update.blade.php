@@ -1,13 +1,13 @@
 @extends('private.templates.main')
 @section('container')
-<x-button-link-pill :href="'../'.$profil->uuid" label="kembali" class="btn-sm btn-outline-secondary mb-3"
+<x-button-link :href="'../'.$profil->uuid" label="kembali" class="rounded-pill btn-sm btn-outline-secondary mb-3"
     icon="fa-arrow-left" />
 
-<form action="{{ $segmentForm.'/edit'}}" method="post" enctype="multipart/form-data">
+<form action="{{ $segmentUrl.'/edit'}}" method="post" enctype="multipart/form-data">
     @method('put')
     @csrf
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 p-5">
             @php
             $value=$profil->file;
             $value == 'default-user.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
@@ -32,10 +32,10 @@
                     <div class="form-row">
                         <div class="col mb-3">
                             Ganti password
-                            <a href="{{ $segmentForm.'/password' }}">disini</a>
+                            <a href="{{ $segmentUrl.'/password' }}">disini</a>
                         </div>
                     </div>
-                    <x-button-submit label="simpan" class="btn-primary" icon="fa-save" />
+                    <x-button-submit label="simpan" class="rounded-pill btn-primary" icon="fa-save" />
                 </div>
             </div>
         </div>

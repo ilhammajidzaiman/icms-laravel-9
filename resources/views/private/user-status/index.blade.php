@@ -1,6 +1,6 @@
 @extends('private.templates.main')
 @section('container')
-<x-button-link-pill :href="$segmentHref.'/create'" label="baru" class="btn-sm btn-outline-secondary mb-3"
+<x-button-link :href="$segmentUrl.'/create'" label="baru" class="rounded-pill btn-sm btn-outline-secondary mb-3"
     icon="fa-plus" />
 <x-alert-dismissing />
 
@@ -24,18 +24,18 @@
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $status->name }}</td>
                             <td>
-                                <x-badge-pill :class="$status->color" :label="$status->color" />
+                                <x-badge class="badge-pill badge-{{ $status->color }}" :label="$status->color" />
                             </td>
                             <td class="text-right text-secondary">
                                 {{ $status->created_at->format('d-m-Y, H:i:s').', '.$status->created_at->diffForHumans()
                                 }}
                             </td>
                             <td class="text-right">
-                                <x-button-link-pill :href="$segmentHref.'/'.$status->slug" label="lihat"
-                                    class="btn-xs btn-outline-primary" icon="fa-eye" />
-                                <x-button-link-pill :href="$segmentHref.'/'.$status->slug.'/edit'" label="edit"
-                                    class="btn-xs btn-outline-success" icon="fa-edit" />
-                                <x-button-delete :href="$segmentHref.'/'.$status->slug" :confirm="$status->name" />
+                                <x-button-link :href="$segmentUrl.'/'.$status->slug" label="lihat"
+                                    class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                <x-button-link :href="$segmentUrl.'/'.$status->slug.'/edit'" label="edit"
+                                    class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
+                                <x-button-delete :href="$segmentUrl.'/'.$status->slug" :confirm="$status->name" />
                             </td>
                         </tr>
                         @empty

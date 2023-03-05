@@ -1,11 +1,11 @@
 @extends('private.templates.main')
 @section('container')
 
-<x-button-link-pill :href="$segmentHref.'/create'" label="baru" class="btn-sm btn-outline-secondary mb-3"
+<x-button-link :href="$segmentUrl.'/create'" label="baru" class="rounded-pill btn-sm btn-outline-secondary mb-3"
     icon="fa-plus" />
 <x-alert-dismissing />
 
-<form action="{{ $segmentForm }}" method="get">
+<form action="{{ $segmentUrl }}" method="get">
     <div class="row">
         <x-search-input name="search" id="search" :value="request('search')" class="col-md-4" />
     </div>
@@ -32,24 +32,27 @@
                             <th>{{ $loop->iteration }}</th>
                             <td class="text-capitalize">{{ $user->name }}</td>
                             <td>
-                                <x-badge-pill :class="$user->status->color" :label="$user->status->name" />
+                                <x-badge class="badge-pill badge-{{ $user->status->color }}"
+                                    :label="$user->status->name" />
                             </td>
                             <td>
-                                <x-badge-pill :class="$user->level->color" :label="$user->level->name" />
+                                <x-badge class="badge-pill badge-{{ $user->level->color }}"
+                                    :label="$user->level->name" />
                             </td>
                             <td class="text-right text-secondary">
                                 {{ $user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans() }}
                             </td>
                             <td class="text-right">
+                                <x-button-link :href="$segmentUrl.'/'.$user->uuid" label="lihat"
+                                    class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                <x-button-link :href="$segmentUrl.'/'.$user->uuid.'/edit'" label="edit"
+                                    class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
 
-                                <x-button-link-pill :href="$segmentHref.'/'.$user->uuid" label="lihat"
-                                    class="btn-xs btn-outline-primary" icon="fa-eye" />
-                                <x-button-link-pill :href="$segmentHref.'/'.$user->uuid.'/edit'" label="edit"
-                                    class="btn-xs btn-outline-success" icon="fa-edit" />
                                 @if (auth()->user()->id==$user->id)
-                                <x-button-delete-disable />
+                                <x-button-disable label="hapus" class="rounded-pill btn-xs btn-outline-danger"
+                                    icon="fa-trash" confirm="Maaf, Anda tidak punya akses!" />
                                 @else
-                                <x-button-delete :href="$segmentHref.'/'.$user->uuid" :confirm="$user->name" />
+                                <x-button-delete :href="$segmentUrl.'/'.$user->uuid" :confirm="$user->name" />
                                 @endif
                             </td>
                         </tr>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\SuperAdmin;
+namespace App\Http\Controllers\Private\Developer;
 
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -99,7 +99,7 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/management/user')->with($flashData);
+        return redirect('/developer/management/user')->with($flashData);
     }
 
     /**
@@ -202,7 +202,7 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" diubah',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/management/user')->with($flashData);
+        return redirect('/developer/management/user')->with($flashData);
     }
 
     /**
@@ -233,6 +233,6 @@ class UserController extends Controller
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/management/user')->with($flashData);
+        return redirect('/developer/management/user')->with($flashData);
     }
 }

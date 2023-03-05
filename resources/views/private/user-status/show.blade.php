@@ -1,6 +1,7 @@
 @extends('private.templates.main')
 @section('container')
-<x-button-link-pill :href="'./'" label="kembali" class="btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
+<x-button-link :href="'./'" label="kembali" class="rounded-pill btn-sm btn-outline-secondary mb-3"
+    icon="fa-arrow-left" />
 
 <div class="row">
     <div class="col-md-9 col-lg">

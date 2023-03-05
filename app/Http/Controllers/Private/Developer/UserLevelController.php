@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Private\SuperAdmin;
+namespace App\Http\Controllers\Private\Developer;
 
-use App\Models\UserStatus;
+use App\Models\UserLevel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserStatusController extends Controller
+class UserLevelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class UserStatusController extends Controller
     public function index()
     {
         $data = [
-            'statuses'    => UserStatus::orderByDesc('id')->get(),
+            'levels'        => UserLevel::orderByDesc('id')->get(),
         ];
-        return view('private.user-status.index', $data);
+        return view('private.user-level.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserStatusController extends Controller
      */
     public function create()
     {
-        return view('private.user-status.create');
+        return view('private.user-level.create');
     }
 
     /**
@@ -46,69 +46,64 @@ class UserStatusController extends Controller
         $slug               = Str::slug($name, '-') . '.html';
         $uuid               = Str::uuid();
 
-        // validation
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_statuses'],
+            'name'          => ['required', 'max:255', 'unique:user_levels'],
             'color'         => ['required', 'max:255'],
         ]);
-
-        // insert to table 
         $data = [
             'uuid'          => $uuid,
             'name'          => $name,
             'slug'          => $slug,
             'color'         => $color,
         ];
-        UserStatus::create($data);
-
-        // flashdata
+        UserLevel::create($data);
         $flashData = [
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/management/status')->with($flashData);
+        return redirect('/developer/management/level')->with($flashData);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserStatus  $userrStatus
+     * @param  \App\Models\UserLevel  $userLevel
      * @return \Illuminate\Http\Response
      */
-    public function show(UserStatus $status)
+    public function show(UserLevel $level)
     {
         $data = [
-            'status'        => $status,
+            'level'         => $level,
         ];
-        return view('private.user-status.show', $data);
+        return view('private.user-level.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserStatus  $userrStatus
+     * @param  \App\Models\UserLevel  $userLevel
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserStatus $status)
+    public function edit(UserLevel $level)
     {
         $data = [
-            'status'        => $status,
+            'level'         => $level,
         ];
-        return view('private.user-status.update', $data);
+        return view('private.user-level.update', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserStatus  $userrStatus
+     * @param  \App\Models\UserLevel  $userLevel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserStatus $status)
+    public function update(Request $request, UserLevel $level)
     {
         // data detail
-        $oldSlug            = $status->slug;
-        $oldName            = $status->name;
+        $oldSlug            = $level->slug;
+        $oldName            = $level->name;
 
         // data input
         $name               = $request->name;
@@ -121,47 +116,47 @@ class UserStatusController extends Controller
 
         // validation
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', $uName],
-            'color'          => ['required', 'max:255'],
+            'name'         => ['required', 'max:255', $uName],
+            'color'        => ['required', 'max:255'],
         ]);
 
-        // insert to table statuses
+        // insert to table
         $data = [
             'name'          => $name,
             'slug'          => $slug,
             'color'         => $color,
         ];
-        UserStatus::where('slug', $oldSlug)->update($data);
+        UserLevel::where('slug', $oldSlug)->update($data);
 
         // flashdata
         $flashData = [
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/management/status')->with($flashData);
+        return redirect('/developer/management/level')->with($flashData);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserStatus  $userrStatus
+     * @param  \App\Models\UserLevel  $userLevel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserStatus $status)
+    public function destroy(UserLevel $level)
     {
         // data detail
-        $oldId              = $status->id;
-        $oldName            = $status->name;
+        $oldId              = $level->id;
+        $oldName            = $level->name;
         $message            = $oldName;
 
         // delete data on table
-        UserStatus::destroy($oldId);
+        UserLevel::destroy($oldId);
 
         // flashdata
         $flashData = [
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/management/status')->with($flashData);
+        return redirect('/developer/management/level')->with($flashData);
     }
 }

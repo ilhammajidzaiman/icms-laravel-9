@@ -1,8 +1,9 @@
 @extends('private.templates.main')
 @section('container')
-<x-button-link-pill :href="'./'" label="kembali" class="btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
+<x-button-link :href="'./'" label="kembali" class="rounded-pill btn-sm btn-outline-secondary mb-3"
+    icon="fa-arrow-left" />
 
-<form action="{{ $segmentForm }}" method="post" enctype="multipart/form-data">
+<form action="{{ $segmentUrl }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
         <div class="col-md-3">

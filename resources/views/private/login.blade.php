@@ -4,12 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $config->app }}</title>
-    @php
-    $value = $config->file;
-    $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
-    @endphp
-    <link rel="shortcut icon" href="{{ $url }}" type="image/x-icon">
+    <title>{{ config('app.name') }}</title>
+    <link rel="shortcut icon" href="{{ url('assets/images/'.config('app.logo')) }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/admin-lte-3.2.0/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/admin-lte-3.2.0/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/plugins/summernote-0.8.18-dist/summernote-bs4.min.css">
@@ -18,12 +14,12 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/') }}">
+            <a href="{{ url('/login') }}">
                 <div>
-                    <img src="{{ $url }}" alt="{{ $url }}" class="brand-image img-circlee elevation-22" width="86"
-                        height="86">
+                    <img src="{{ url('assets/images/'.config('app.logo')) }}" alt="{{ config('app.logo') }}"
+                        class="brand-image img-circlee elevation-22" width="64" height="64">
                 </div>
-                {{ $config->app }}
+                {{ config('app.name') }}
             </a>
         </div>
 
@@ -36,16 +32,16 @@
                     <x-form-input-login type="text" name="email" label="Email" :value="old('email')"
                         class="fa-envelope" />
                     <x-form-input-login type="password" name="password" label="Password" value="" class="fa-key" />
-                    <x-button-submit label="simpan" class="btn-primary btn-block" icon="fa-save" />
+                    <x-button-submit label="login" class="btn-primary btn-block" icon="fa-sign-in-alt" />
                 </form>
                 <footer class="text-xs pt-4">
                     <div>
                         Copyright &copy;
                         <?= date('Y');?>
-                        <a href="{{ url('/') }}">{{ $config->app }}</a>.
+                        <a href="{{ url('/') }}">{{ config('app.name') }}</a>.
                     </div>
                     <div>
-                        {{ $config->copyright }}
+                        {{ config('app.copyright') }}
                     </div>
                 </footer>
             </div>

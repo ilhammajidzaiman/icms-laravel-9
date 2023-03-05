@@ -22,16 +22,16 @@
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $level->name }}</td>
                             <td class="text-right">
-                                <x-button-link-pill :href="$segmentHref.'/'.$level->slug" label="lihat"
-                                    class="btn-xs btn-outline-primary" icon="fa-eye" />
-                                <x-button-link-pill :href="$segmentHref.'/'.$level->slug.'/edit'" label="edit"
-                                    class="btn-xs btn-outline-success" icon="fa-edit" />
+                                <x-button-link :href="$segmentUrl.'/'.$level->slug" label="lihat"
+                                    class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                <x-button-link :href="$segmentUrl.'/'.$level->slug.'/edit'" label="edit"
+                                    class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
                             </td>
                         </tr>
                         @empty
                         <tr>
                             <td colspan="4">
-                                <x-private.alert.alert-empty />
+                                <x-alert-empty />
                             </td>
                         </tr>
                         @endforelse

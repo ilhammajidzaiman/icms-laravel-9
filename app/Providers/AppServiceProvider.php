@@ -46,21 +46,26 @@ class AppServiceProvider extends ServiceProvider
         $segment3 = Request::segment(3);
         $segment4 = Request::segment(4);
         $segment5 = Request::segment(5);
-        $segmentUrl = $segment1 . '/' . $segment2 . '/' . $segment3 . '/' . $segment4 . '/' . $segment5;
-        $segment2 === 'management' || 'master' ? $segmentHref = $segment3 : $segmentHref = $segment2;
-        $segment2 === 'management' || 'master' ? $segmentForm = '/' . $segment1 . '/' . $segment2 . '/' . $segment3 : $segmentForm = '/' . $segment1 . '/' . $segment2;
+
+        // segmentLink
+        $segmentLink = $segment1 . '/' . $segment2 . '/' . $segment3 . '/' . $segment4 . '/' . $segment5;
+
+        // segmentPrefix
+        $segment2 === 'management' || 'master' ? $segmentPrefix = $segment3 : $segmentPrefix = $segment2;
+
+        // segmentUrl
+        $segment2 === 'management' || 'master' ? $segmentUrl = '/' . $segment1 . '/' . $segment2 . '/' . $segment3 : $segmentUrl = '/' . $segment1 . '/' . $segment2;
 
         View::share(
             [
-                'config'        => Config::where('id', 1)->first(),
                 'segment1'      => $segment1,
                 'segment2'      => $segment2,
                 'segment3'      => $segment3,
                 'segment4'      => $segment4,
                 'segment5'      => $segment5,
+                'segmentLink'   => $segmentLink,
+                'segmentPrefix' => $segmentPrefix,
                 'segmentUrl'    => $segmentUrl,
-                'segmentHref'   => $segmentHref,
-                'segmentForm'   => $segmentForm,
             ]
         );
     }

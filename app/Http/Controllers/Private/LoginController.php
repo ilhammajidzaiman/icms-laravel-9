@@ -43,7 +43,7 @@ class LoginController extends Controller
 
             if ($statusId == 1) :
                 if ($levelId == 1) :
-                    return redirect()->intended('superadmin/dashboard');
+                    return redirect()->intended('developer/dashboard');
                 elseif ($levelId == 2) :
                     return redirect()->intended('admin/dashboard');
                 elseif ($levelId == 3) :

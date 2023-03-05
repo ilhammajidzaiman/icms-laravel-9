@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\SuperAdmin;
+namespace App\Http\Controllers\Private\Developer;
 
 use App\Models\UserMenu;
 use Illuminate\Support\Str;
@@ -53,9 +53,10 @@ class UserMenuController extends Controller
 
         // validation
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_menus'],
-            'icon'          => ['required', 'max:255'],
             'order'         => ['required', 'max:255'],
+            'name'          => ['required', 'max:255'],
+            'icon'          => ['required', 'max:255'],
+            'prefix'        => ['required', 'max:255'],
         ]);
 
         // masukkan ke table
@@ -76,7 +77,7 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/management/menu')->with($flashData);
+        return redirect('/developer/management/menu')->with($flashData);
     }
 
     /**
@@ -116,9 +117,10 @@ class UserMenuController extends Controller
      */
     public function update(Request $request, UserMenu $menu)
     {
-        $id                 = $menu->slug;
-        $oldSlug            = $menu->slug;
+        // data detail 
+        $id                 = $menu->uuid;
 
+        // data input
         $order              = $request->order;
         $name               = $request->name;
         $icon               = $request->icon;
@@ -127,18 +129,15 @@ class UserMenuController extends Controller
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
 
-        if ($slug != $oldSlug) :
-            $uniqueSlug     = 'unique:user_menus';
-        else :
-            $uniqueSlug     = '';
-        endif;
-
+        // validation
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', $uniqueSlug],
-            'icon'          => ['required', 'max:255'],
             'order'         => ['required', 'max:255'],
+            'name'          => ['required', 'max:255'],
+            'icon'          => ['required', 'max:255'],
+            'prefix'        => ['required', 'max:255'],
         ]);
 
+        // input to table
         $data = [
             'order'         => $order,
             'name'          => $name,
@@ -147,14 +146,14 @@ class UserMenuController extends Controller
             'prefix'        => $prefix,
             'url'           => $url,
         ];
+        UserMenu::where('uuid', $id)->update($data);
 
-        UserMenu::where('slug', $id)->update($data);
         // flashdata
         $flashData = [
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/superadmin/management/menu')->with($flashData);
+        return redirect('/developer/management/menu')->with($flashData);
     }
 
     /**
@@ -168,11 +167,13 @@ class UserMenuController extends Controller
         $id                 = $menu->id;
         $message            = $menu->name;
         UserMenu::destroy($id);
+
+        // flashdata
         $flashData = [
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/superadmin/management/menu')->with($flashData);
+        return redirect('/developer/management/menu')->with($flashData);
     }
 
 
@@ -197,7 +198,10 @@ class UserMenuController extends Controller
         $uuid               = Str::uuid();
 
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_menus'],
+            'order'         => ['required', 'max:255'],
+            'name'          => ['required', 'max:255'],
+            'icon'          => ['required', 'max:255'],
+            'prefix'        => ['required', 'max:255'],
         ]);
 
         $data = [
@@ -216,6 +220,6 @@ class UserMenuController extends Controller
             'message'       => 'Data "' . $message . '" ditambahkan',
             'alert'         => 'primary',
         ];
-        return redirect('/superadmin/management/menu')->with($flashData);
+        return redirect('/developer/management/menu')->with($flashData);
     }
 }

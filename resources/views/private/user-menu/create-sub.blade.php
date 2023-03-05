@@ -7,7 +7,7 @@
     <div class="col-md-9 col-lg">
         <div class="card">
             <div class="card-body">
-                <form action="{{ $segmentForm.'/'.$menu->slug.'/create_sub' }}" method="post">
+                <form action="{{ $segmentUrl.'/'.$menu->uuid.'/create_sub' }}" method="post">
                     @csrf
                     <div class="form-row">
                         <x-form-input-row-readonly type="text" name="main" label="menu utama"

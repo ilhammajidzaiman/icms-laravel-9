@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a class="text-dark" href="{{ url($segmentUrl) }}">
+                    <a class="text-dark" href="{{ url($segmentLink) }}">
                         <h1 class="text-capitalize">{{ $segment2=='master'?$segment3:$segment2 }}</h1>
                     </a>
                 </div>

@@ -1,7 +1,7 @@
 @extends('private.templates.main')
 @section('container')
 
-<x-button-link-pill :href="$segmentHref.'/create'" label="baru" class="btn-sm btn-outline-secondary mb-3"
+<x-button-link :href="$segmentUrl.'/create'" label="baru" class="rounded-pill btn-sm btn-outline-secondary mb-3"
     icon="fa-plus" />
 <x-alert-dismissing />
 
@@ -25,18 +25,18 @@
                             <th>{{ $loop->iteration }}</th>
                             <td>{{ $level->name }}</td>
                             <td>
-                                <x-badge-pill :class="$level->color" :label="$level->color" />
+                                <x-badge class="badge-pill badge-{{ $level->color }}" :label="$level->color" />
                             </td>
                             <td class="text-right text-secondary">
                                 {{ $level->created_at->format('d-m-Y, H:i:s').', '.$level->created_at->diffForHumans()
                                 }}
                             </td>
                             <td class="text-right">
-                                <x-button-link-pill :href="$segmentHref.'/'.$level->slug" label="lihat"
-                                    class="btn-xs btn-outline-primary" icon="fa-eye" />
-                                <x-button-link-pill :href="$segmentHref.'/'.$level->slug.'/edit'" label="edit"
-                                    class="btn-xs btn-outline-success" icon="fa-edit" />
-                                <x-button-delete :href="$segmentHref.'/'.$level->slug" :confirm="$level->name" />
+                                <x-button-link :href="$segmentUrl.'/'.$level->slug" label="lihat"
+                                    class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                <x-button-link :href="$segmentUrl.'/'.$level->slug.'/edit'" label="edit"
+                                    class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
+                                <x-button-delete :href="$segmentUrl.'/'.$level->slug" :confirm="$level->name" />
                             </td>
                         </tr>
                         @empty

@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class BadgePill extends Component
+class ButtonDisable extends Component
 {
     /**
      * Create a new component instance.
@@ -12,13 +12,17 @@ class BadgePill extends Component
      * @return void
      */
 
-    public $class;
     public $label;
+    public $class;
+    public $icon;
+    public $confirm;
 
-    public function __construct($class, $label)
+    public function __construct($label, $class, $icon, $confirm)
     {
-        $this->class = $class;
-        $this->label = $label;
+        $this->label    = $label;
+        $this->class    = $class;
+        $this->icon     = $icon;
+        $this->confirm  = $confirm;
     }
 
     /**
@@ -28,6 +32,6 @@ class BadgePill extends Component
      */
     public function render()
     {
-        return view('components.badge-pill');
+        return view('components.button-disable');
     }
 }

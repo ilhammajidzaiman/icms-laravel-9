@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $config->app }}</title>
+    <title>{{ config('app.name') }}</title>
     @php
-    $value = $config->file;
+    $value = config('app.logo');
     $value == 'logo.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
     @endphp
     <link rel="shortcut icon" href="{{ $url }}" type="image/x-icon">

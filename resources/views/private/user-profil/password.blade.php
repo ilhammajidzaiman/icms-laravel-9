@@ -1,9 +1,9 @@
 @extends('private.templates.main')
 @section('container')
-<x-button-link-pill :href="'../'.$profil->uuid.'/edit'" label="kembali" class="btn-sm btn-outline-secondary mb-3"
-    icon="fa-arrow-left" />
+<x-button-link :href="'../'.$profil->uuid.'/edit'" label="kembali"
+    class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
 
-<form action="{{ $segmentForm }}" method="post">
+<form action="{{ $segmentUrl }}" method="post">
     @method('put')
     @csrf
     <div class="row">
@@ -17,7 +17,7 @@
                         <x-form-input-password name="password" label="password" class="col-md-6" />
                         <x-form-input-password name="confirmation" label="konfirmasi password" class="col-md-6" />
                     </div>
-                    <x-button-submit label="simpan" class="btn-primary" icon="fa-save" />
+                    <x-button-submit label="simpan" class="rounded-pill btn-primary" icon="fa-save" />
                 </div>
             </div>
 

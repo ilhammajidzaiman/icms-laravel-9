@@ -16,6 +16,9 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'description' => env('APP_DESCRIPTION', 'Starter Kits Aplikasi Content Management System Menggunakan Laravel 9'),
+    'copyright' => env('APP_COPYRIGHT', 'ilhammajidzaiman.github.io'),
+    'logo' => env('APP_LOGO', 'logo.svg'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,7 +72,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Jakarta'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +86,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',
+    'locale' => env('APP_LOCALE', 'id'),
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +113,8 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',
+    'faker_locale' => env('APP_FAKERLOCALE', 'id_ID'),
 
     /*
     |--------------------------------------------------------------------------
