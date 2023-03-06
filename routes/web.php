@@ -22,7 +22,6 @@ Route::get('/welcome', function () {
 Route::get('/', [App\Http\Controllers\Public\PublicController::class, 'index'])->name('/');
 
 Route::get('/redirect', function () {
-    // $prefix = strtolower(auth()->user()->level->name);
     $prefix = Str::replace(' ', '', Str::lower(auth()->user()->level->name));
     return redirect()->intended($prefix . '/dashboard');
 });

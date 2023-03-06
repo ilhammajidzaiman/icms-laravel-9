@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Private;
 
 use App\Models\Login;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -40,14 +41,15 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $statusId       = auth()->user()->status_id;
             $levelId        = auth()->user()->level_id;
+            $level          = Str::replace(' ', '', Str::lower(auth()->user()->level->name));
 
             if ($statusId == 1) :
                 if ($levelId == 1) :
-                    return redirect()->intended('developer/dashboard');
+                    return redirect()->intended($level . '/dashboard');
                 elseif ($levelId == 2) :
-                    return redirect()->intended('admin/dashboard');
+                    return redirect()->intended($level . '/dashboard');
                 elseif ($levelId == 3) :
-                    return redirect()->intended('user/dashboard');
+                    return redirect()->intended($level . '/dashboard');
                 endif;
             else :
                 Auth::logout();
@@ -76,12 +78,13 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        $name               = auth()->user()->name;
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         $flashData = [
-            'message'       => 'Anda telah keluar!',
-            'alert'         => 'warning',
+            'message'       => $name . ', Anda telah logout!',
+            'alert'         => 'primary',
         ];
         return redirect('/login')->with($flashData);
     }

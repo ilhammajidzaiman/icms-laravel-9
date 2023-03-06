@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             UserStatusSeeder::class,
             UserLevelSeeder::class,
             UserSeeder::class,
-            UserMenuSeeder::class,
+            UserMenuParentSeeder::class,
+            UserMenuChildSeeder::class,
             UserAccessParentSeeder::class,
             UserAccessChildSeeder::class,
         ]);
