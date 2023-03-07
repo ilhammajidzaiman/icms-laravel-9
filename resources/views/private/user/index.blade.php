@@ -39,8 +39,9 @@
                                 <x-badge class="badge-pill badge-{{ $user->level->color }}"
                                     :label="$user->level->name" />
                             </td>
-                            <td class="text-right text-secondary">
-                                {{ $user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans() }}
+                            <td class="text-right">
+                                <x-field-date :create="$user->created_at" :update="$user->updated_at"
+                                    class="text-xs text-secondary" />
                             </td>
                             <td class="text-right">
                                 <x-button-link :href="$segmentUrl.'/'.$user->uuid" label="lihat"

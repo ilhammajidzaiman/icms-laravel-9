@@ -27,9 +27,9 @@
                             <td>
                                 <x-badge class="badge-pill badge-{{ $level->color }}" :label="$level->color" />
                             </td>
-                            <td class="text-right text-secondary">
-                                {{ $level->created_at->format('d-m-Y, H:i:s').', '.$level->created_at->diffForHumans()
-                                }}
+                            <td class="text-right">
+                                <x-field-date :create="$level->created_at" :update="$level->updated_at"
+                                    class="text-xs text-secondary" />
                             </td>
                             <td class="text-right">
                                 <x-button-link :href="$segmentUrl.'/'.$level->slug" label="lihat"

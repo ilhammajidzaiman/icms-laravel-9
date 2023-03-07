@@ -26,9 +26,9 @@
                             <td>
                                 <x-badge class="badge-pill badge-{{ $status->color }}" :label="$status->color" />
                             </td>
-                            <td class="text-right text-secondary">
-                                {{ $status->created_at->format('d-m-Y, H:i:s').', '.$status->created_at->diffForHumans()
-                                }}
+                            <td class="text-right">
+                                <x-field-date :create="$status->created_at" :update="$status->updated_at"
+                                    class="text-xs text-secondary" />
                             </td>
                             <td class="text-right">
                                 <x-button-link :href="$segmentUrl.'/'.$status->slug" label="lihat"
