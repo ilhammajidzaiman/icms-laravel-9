@@ -8,7 +8,7 @@
     @method('put')
     @csrf
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 p-5">
             @php
             $value=$user->file;
             $value == 'default-user.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);

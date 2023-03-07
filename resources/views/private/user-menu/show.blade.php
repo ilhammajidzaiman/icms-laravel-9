@@ -30,10 +30,10 @@
 
                 <div class="form-row">
                     <x-form-input-row-readonly type="text" name="created_at" label="dibuat"
-                        :value="$menu->created_at->format('d-m-Y, H:i:s').', '.$menu->created_at->diffForHumans()"
+                        :value="$menu->created_at->diffForHumans().', '.$menu->created_at->format('d-m-Y, H:i:s')"
                         class="col" />
-                    <x-form-input-row-readonly type="text" name="updated_at" label="diedit"
-                        :value="$menu->updated_at->format('d-m-Y, H:i:s').', '.$menu->updated_at->diffForHumans()"
+                    <x-form-input-row-readonly type="text" name="updated_at" label="diubah"
+                        :value="$menu->updated_at->diffForHumans().', '.$menu->updated_at->format('d-m-Y, H:i:s')"
                         class="col" />
                 </div>
             </div>

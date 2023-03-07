@@ -3,9 +3,9 @@
     $created=$create;
     $updated=$update;
     @endphp
-    @if ($created===$updated)
-    {{ $created->diffForHumans().', '.$created->format('d-m-Y, H:i:s') }}
+    @if ($created==$updated)
+    {{ 'dibuat '.$created->diffForHumans().', '.$created->format('d-m-Y, H:i:s') }}
     @else
-    {{ $updated->diffForHumans().', '.$updated->format('d-m-Y, H:i:s') }}
+    {{ 'diubah '.$updated->diffForHumans().', '.$updated->format('d-m-Y, H:i:s') }}
     @endif
 </div>

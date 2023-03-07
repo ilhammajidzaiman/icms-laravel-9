@@ -17,10 +17,10 @@
                 </div>
                 <div class="form-row">
                     <x-form-input-row-readonly type="text" name="created_at" label="dibuat"
-                        :value="$level->created_at->format('d-m-Y, H:i:s').', '.$level->created_at->diffForHumans()"
+                        :value="$level->created_at->diffForHumans().', '.$level->created_at->format('d-m-Y, H:i:s')"
                         class="col" />
-                    <x-form-input-row-readonly type="text" name="updated_at" label="diedit"
-                        :value="$level->updated_at->format('d-m-Y, H:i:s').', '.$level->updated_at->diffForHumans()"
+                    <x-form-input-row-readonly type="text" name="updated_at" label="diubah"
+                        :value="$level->updated_at->diffForHumans().', '.$level->updated_at->format('d-m-Y, H:i:s')"
                         class="col" />
                 </div>
             </div>

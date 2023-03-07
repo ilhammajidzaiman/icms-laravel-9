@@ -5,7 +5,7 @@
     icon="fa-arrow-left" />
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 p-5">
         @php
         $value = $user->file;
         $value == 'default-user.svg' ? $url=url('assets/images/'.$value) : $url=asset('storage/'.$value);
@@ -28,11 +28,11 @@
                         class="col-md-6" />
                 </div>
                 <div class="form-row">
-                    <x-form-input-row-readonly type="text" name="created_at" label="dibuat pada"
-                        :value="$user->created_at->format('d-m-Y, H:i:s').', '.$user->created_at->diffForHumans()"
+                    <x-form-input-row-readonly type="text" name="created_at" label="dibuat"
+                        :value="$user->created_at->diffForHumans().', '.$user->created_at->format('d-m-Y, H:i:s')"
                         class="col" />
-                    <x-form-input-row-readonly type="text" name="updated_at" label="terakhir di edit"
-                        :value="$user->updated_at->format('d-m-Y, H:i:s').', '.$user->updated_at->diffForHumans()"
+                    <x-form-input-row-readonly type="text" name="updated_at" label="diubah"
+                        :value="$user->updated_at->diffForHumans().', '.$user->updated_at->format('d-m-Y, H:i:s')"
                         class="col" />
                 </div>
             </div>
