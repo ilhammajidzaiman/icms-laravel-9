@@ -15,12 +15,12 @@
 </footer>
 </div>
 
-<script src="{{ url('/') }}/plugins/admin-lte-3.2.0/plugins/jquery/jquery.min.js"></script>
-<script src="{{ url('/') }}/plugins/admin-lte-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="{{ url('/') }}/plugins/admin-lte-3.2.0/dist/js/adminlte.min.js"></script>
-<script src="{{ url('/') }}/plugins/summernote-0.8.18-dist/summernote-bs4.min.js"></script>
-<script src="{{ url('/') }}/assets/js/image-preview.js"></script>
-<script src="{{ url('/') }}/assets/js/summernote-config.js"></script>
+<script src="{{ asset('plugins/admin-lte-3.2.0/plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/admin-lte-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('plugins/admin-lte-3.2.0/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('plugins/summernote-0.8.18-dist/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('assets/js/image-preview.js') }}"></script>
+<script src="{{ asset('assets/js/summernote-config.js') }}"></script>
 
 
 <script>

@@ -14,7 +14,7 @@
                     <div class="media">
                         @php
                         $value=auth()->user()->file;
-                        $value == 'default-user.svg' ? $url=url('assets/images/'.$value) :
+                        $value == 'default-user.svg' ? $url=asset('assets/images/'.$value) :
                         $url=asset('storage/'.$value);
                         @endphp
                         <img src="{{ $url }}" alt="{{ $url }}" class="img-size-50 mr-3 img-circle"

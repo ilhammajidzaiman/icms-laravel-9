@@ -5,9 +5,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ config('app.name') }}</title>
-	<link rel="shortcut icon" href="{{ url('assets/images/'.config('app.logo')) }}" type="image/x-icon">
-	<link rel="stylesheet" href="{{ url('/') }}/plugins/fontawesome5/css/all.css">
-	<link href="{{ url('/') }}/plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ asset('assets/images/'.config('app.logo')) }}" type="image/x-icon">
+	<link rel="stylesheet" href="{{ asset('plugins/fontawesome5/css/all.css') }}">
+	<link href="{{ url('plugins/bootstrap-5.0.2-dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
 	<style>
 		.hero {
@@ -62,7 +62,7 @@
 		</div>
 	</footer>
 
-	<script src="{{ url('/') }}/plugins/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+	<script src="{{ url('plugins/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>
