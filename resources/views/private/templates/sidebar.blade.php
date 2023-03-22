@@ -32,7 +32,7 @@
 
                 @php
                 $parents=
-                App\Models\UserAccessParent::where('level_id',auth()->user()->level_id)->orderBy('order')->with(['menu'])->get();
+                App\Models\UserAccessParent::where('user_level_id',auth()->user()->user_level_id)->orderBy('order')->with(['menu'])->get();
                 @endphp
 
                 @forelse ($parents as $parent)
@@ -53,7 +53,7 @@
 
                         @php
 
-                        $children=App\Models\UserAccessChild::where('level_id',auth()->user()->level_id)->where('parent_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
+                        $children=App\Models\UserAccessChild::where('user_level_id',auth()->user()->user_level_id)->where('user_menu_parent_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
                         @endphp
                         @forelse ($children as $child)
                         <li class="nav-item">

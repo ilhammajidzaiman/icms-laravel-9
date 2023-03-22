@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('uuid');
-            $table->foreignId('level_id')->comment('id tabel levels');
-            $table->foreignId('status_id')->comment('id tabel status');
+            $table->foreignId('user_level_id')->comment('id tabel user_levels');
+            $table->foreignId('user_status_id')->comment('id tabel user_status');
             $table->string('name');
             $table->string('username');
             $table->string('email')->unique();

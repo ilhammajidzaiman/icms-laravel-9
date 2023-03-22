@@ -55,8 +55,8 @@ Route::prefix('developer')->middleware(['auth', 'isDeveloper'])->controller()->g
 
                 Route::resource('/level', App\Http\Controllers\Private\Developer\UserLevelController::class)->scoped(['level' => 'slug']);
 
-                Route::controller(App\Http\Controllers\Private\Developer\UserMenuController::class)->group(function () {
-                    Route::resource('/menu', App\Http\Controllers\Private\Developer\UserMenuController::class)->scoped(['menu' => 'uuid']);
+                Route::resource('/menu', App\Http\Controllers\Private\Developer\UserMenuParentController::class)->scoped(['menu' => 'uuid']);
+                Route::controller(App\Http\Controllers\Private\Developer\UserMenuParentController::class)->group(function () {
                     Route::get('menu/{menu:uuid}/create_sub', 'create_sub')->name('menu.create_sub');
                     Route::post('menu/{menu:uuid}/create_sub', 'store_sub')->name('menu.create_sub');
                 });

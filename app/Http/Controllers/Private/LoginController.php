@@ -39,8 +39,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) :
             $request->session()->regenerate();
-            $statusId       = auth()->user()->status_id;
-            $levelId        = auth()->user()->level_id;
+            $statusId       = auth()->user()->user_status_id;
+            $levelId        = auth()->user()->user_level_id;
             $level          = Str::replace(' ', '', Str::lower(auth()->user()->level->name));
 
             if ($statusId == 1) :

@@ -56,11 +56,11 @@ class User extends Authenticatable
 
     public function level()
     {
-        return $this->hasOne(UserLevel::class, 'id', 'level_id');
+        return $this->hasOne(UserLevel::class, 'id', 'user_level_id');
     }
 
     public function status()
     {
-        return $this->hasOne(UserStatus::class, 'id', 'status_id');
+        return $this->hasOne(UserStatus::class, 'id', 'user_status_id');
     }
 }

@@ -9,7 +9,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body table-responsive">
-                <table class="table table-hover table-borderless">
+                <table class="table table-hover table-borderless text-nowrap">
                     <thead>
                         <tr class="text-capitalize">
                             <th scope="col">menu</th>
@@ -25,15 +25,15 @@
                                 <span class="badge badge-secondary mr-2">{{ $menu1->order }}</span>
                                 <i class="{{ $menu1->icon }} mr-2"></i>
                                 {{ $menu1->name }}
-                                <span class="float-right">
-                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid.'/create_sub'" label="sub baru"
-                                        class="rounded-pill btn-xs btn-outline-secondary" icon="fa-plus" />
-                                    <x-button-link :href="$segmentUrl.'/'.$menu1->uuid" label="lihat"
+                        <span class="float-right">
+                            <x-button-link :href="$segmentUrl.'/'.$menu1->uuid.'/create'" label="sub baru"
+                                class="rounded-pill btn-xs btn-outline-secondary" icon="fa-plus" />
+                        <x-button-link :href="$segmentUrl.'/'.$menu1->uuid" label="lihat"
                                         class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
                                     <x-button-link :href="$segmentUrl.'/'.$menu1->uuid.'/edit'" label="edit"
                                         class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
                                     @php
-                                    $menu=App\Models\UserMenu::where('parent_id',$menu1->id)->first();
+                                    $menu=App\Models\UserMenuChild::where('user_menu_parent_id',$menu1->id)->first();
                                     @endphp
                                     @empty($menu)
                                     <x-button-delete :href="$segmentUrl.'/'.$menu1->uuid" :confirm="$menu1->name" />
@@ -47,7 +47,7 @@
                                     <table class="table table-hover">
                                         <tbody>
                                             @php
-                                            $menus2=App\Models\UserMenu::where('parent_id',$menu1->id)->orderBy('order')->get();
+                                            $menus2=App\Models\UserMenuChild::where('user_menu_parent_id',$menu1->id)->orderBy('order')->get();
                                             @endphp
                                             @forelse ($menus2 as $menu2)
                                             <tr class="table-secondary">

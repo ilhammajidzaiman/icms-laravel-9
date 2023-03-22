@@ -12,6 +12,6 @@ class UserAccessParent extends Model
 
     public function menu()
     {
-        return $this->belongsTo(UserMenu::class, 'parent_id', 'id');
+        return $this->belongsTo(UserMenuParent::class, 'user_menu_parent_id', 'id');
     }
 }

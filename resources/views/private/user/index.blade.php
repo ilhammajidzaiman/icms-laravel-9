@@ -14,8 +14,8 @@
 <div class="row">
     <div class="col-lg">
         <div class="card">
-            <div class="card-body">
-                <table class="table table-hover">
+            <div class="card-body table-responsive">
+                <table class="table table-hover text-nowrap">
                     <thead>
                         <tr class="text-capitalize">
                             <th scope="col">#</th>

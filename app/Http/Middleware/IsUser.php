@@ -16,7 +16,7 @@ class IsUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || auth()->user()->level_id !== 3) :
+        if (!auth()->check() || auth()->user()->user_level_id !== 3) :
             abort(403);
         else :
             return $next($request);

@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_menus', function (Blueprint $table) {
+        Schema::create('user_menu_parents', function (Blueprint $table) {
             $table->id();
             $table->string('uuid');
-            $table->integer('parent_id')->comment('id parent berdasarkan id table user_menus');
             $table->integer('order')->nullable()->comment('nomor urut menu');
             $table->string('name')->comment('nama menu yang ditampilkan');
             $table->string('slug')->comment('slug menu');
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_menus');
+        Schema::dropIfExists('user_menu_parents');
     }
 };

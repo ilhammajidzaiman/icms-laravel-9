@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Private\Developer;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use App\Models\UserMenuParent;
+use App\Http\Controllers\Controller;
 
-class UserMenuController extends Controller
+class UserMenuParentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -81,7 +81,7 @@ class UserMenuController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserMenuParent $userMenuParent
+     * @param  \App\Models\UserMenuParent  $userMenuParent
      * @return \Illuminate\Http\Response
      */
     public function show(UserMenuParent $menu)
@@ -95,7 +95,7 @@ class UserMenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserMenuParent $userMenuParent
+     * @param  \App\Models\UserMenuParent  $userMenuParent
      * @return \Illuminate\Http\Response
      */
     public function edit(UserMenuParent $menu)
@@ -110,7 +110,7 @@ class UserMenuController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserMenuParent $userMenuParent
+     * @param  \App\Models\UserMenuParent  $userMenuParent
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserMenuParent $menu)
@@ -157,7 +157,7 @@ class UserMenuController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserMenuParent $userMenuParent
+     * @param  \App\Models\UserMenuParent  $userMenuParent
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserMenuParent $menu)
@@ -170,53 +170,6 @@ class UserMenuController extends Controller
         $flashData = [
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
-        ];
-        return redirect('/developer/management/menu')->with($flashData);
-    }
-
-
-    public function create_sub(UserMenuParent $menu)
-    {
-        $data = [
-            'menu'          => $menu,
-        ];
-        return view('private.user-menu.create-sub', $data);
-    }
-
-    public function store_sub(Request $request, UserMenuParent $menu)
-    {
-        $parent_id          = $menu->id;
-        $order              = $request->order;
-        $name               = $request->name;
-        $icon               = $request->icon;
-        $prefix             = strtolower($request->prefix);
-        $url                = $request->url;
-        $message            = $name;
-        $slug               = Str::slug($name, '-') . '.html';
-        $uuid               = Str::uuid();
-
-        $validatedData      = $request->validate([
-            'order'         => ['required', 'max:255'],
-            'name'          => ['required', 'max:255'],
-            'icon'          => ['required', 'max:255'],
-            'prefix'        => ['required', 'max:255'],
-        ]);
-
-        $data = [
-            'uuid'          => $uuid,
-            'parent_id'     => $parent_id,
-            'order'         => $order,
-            'name'          => $name,
-            'slug'          => $slug,
-            'icon'          => $icon,
-            'prefix'        => $prefix,
-            'url'           => $url,
-        ];
-
-        UserMenuParent::create($data);
-        $flashData = [
-            'message'       => 'Data "' . $message . '" ditambahkan',
-            'alert'         => 'primary',
         ];
         return redirect('/developer/management/menu')->with($flashData);
     }

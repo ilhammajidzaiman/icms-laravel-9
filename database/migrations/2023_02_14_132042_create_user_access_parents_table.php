@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_access_parents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('level_id')->comment('id table user_levels');
-            $table->foreignId('parent_id')->comment('id table user_menus');
+            $table->foreignId('user_level_id')->comment('id table user_levels');
+            $table->foreignId('user_menu_parent_id')->comment('id table user_menu_parents');
             $table->integer('order')->nullable()->comment('nomor urut menu');
             $table->timestamps();
         });
