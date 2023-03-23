@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\UserAccessChild;
 use App\Models\UserAccessParent;
 use App\Http\Controllers\Controller;
+use App\Models\UserMenuParent;
 
 class UserAccessController extends Controller
 {
@@ -69,7 +70,7 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
+            'menus'         => UserMenuParent::where('parent_id', 0)->orderBy('order')->get(),
         ];
         return view('private.user-access.update', $data);
     }

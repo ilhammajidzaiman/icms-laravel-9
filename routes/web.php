@@ -3,6 +3,14 @@
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Private\LoginController;
+use App\Http\Controllers\Private\ProfilController as DeveloperProfilController;
+use App\Http\Controllers\Private\DashboardController as DeveloperDashboardController;
+use App\Http\Controllers\Private\Developer\UserController as DeveloperUserController;
+use App\Http\Controllers\Private\Developer\UserLevelController as DeveloperUserLevelController;
+use App\Http\Controllers\Private\Developer\UserAccessController as DeveloperUserAccessController;
+use App\Http\Controllers\Private\Developer\UserStatusController as DeveloperUserStatusController;
+use App\Http\Controllers\Private\Developer\UserMenuParentController as DeveloperUserMenuParentController;
+use App\Http\Controllers\Private\Developer\UserMenuChildController as DeveloperUserMenuChildController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,9 +47,9 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::prefix('developer')->middleware(['auth', 'isDeveloper'])->controller()->group(
     function () {
-        Route::get('/dashboard', [App\Http\Controllers\Private\DashboardController::class, 'index'])->name('developer.dashboard');
+        Route::get('/dashboard', [DeveloperDashboardController::class, 'index'])->name('developer.dashboard');
 
-        Route::prefix('profil')->controller(App\Http\Controllers\Private\ProfilController::class)->group(function () {
+        Route::prefix('profil')->controller(DeveloperProfilController::class)->group(function () {
             Route::get('/{uuid}', 'index')->name('developer.profil');
             Route::get('/{uuid}/edit', 'edit')->name('developer.profil.edit');
             Route::put('/{uuid}/edit', 'update')->name('developer.profil.update');
@@ -51,23 +59,23 @@ Route::prefix('developer')->middleware(['auth', 'isDeveloper'])->controller()->g
 
         Route::prefix('management')->group(
             function () {
-                Route::resource('/status', App\Http\Controllers\Private\Developer\UserStatusController::class)->scoped(['status' => 'slug']);
-
-                Route::resource('/level', App\Http\Controllers\Private\Developer\UserLevelController::class)->scoped(['level' => 'slug']);
-
-                Route::resource('/menu', App\Http\Controllers\Private\Developer\UserMenuParentController::class)->scoped(['menu' => 'uuid']);
-                Route::controller(App\Http\Controllers\Private\Developer\UserMenuParentController::class)->group(function () {
-                    Route::get('menu/{menu:uuid}/create_sub', 'create_sub')->name('menu.create_sub');
-                    Route::post('menu/{menu:uuid}/create_sub', 'store_sub')->name('menu.create_sub');
+                Route::resource('/status', DeveloperUserStatusController::class)->scoped(['status' => 'slug']);
+                Route::resource('/level', DeveloperUserLevelController::class)->scoped(['level' => 'slug']);
+                Route::resource('/menu', DeveloperUserMenuParentController::class)->scoped(['menu' => 'uuid']);
+                Route::controller(DeveloperUserMenuChildController::class)->group(function () {
+                    Route::get('menu/{menu:uuid}/show-sub', 'show')->name('show.sub');
+                    Route::get('menu/{menu:uuid}/create-sub', 'create')->name('create.sub');
+                    Route::post('menu/{menu:uuid}/create-sub', 'store')->name('create.sub');
+                    Route::get('menu/{menu:uuid}/edit-sub', 'edit')->name('edit.sub');
+                    Route::put('menu/{menu:uuid}/edit-sub', 'update')->name('edit.sub');
+                    Route::delete('menu/{menu:uuid}/delete-sub', 'destroy')->name('delete.sub');
                 });
-
-                Route::controller(App\Http\Controllers\Private\Developer\UserAccessController::class)->group(function () {
-                    Route::resource('/access', App\Http\Controllers\Private\Developer\UserAccessController::class)->scoped(['access' => 'slug']);
-                    Route::get('access/parent/{level}/{parent}/{order}', 'updateParent')->name('access.parent');
-                    Route::get('access/child/{level}/{parent}/{child}/{order}', 'updateChild')->name('access.child');
+                Route::controller(DeveloperUserAccessController::class)->group(function () {
+                    Route::resource('/access', DeveloperUserAccessController::class)->scoped(['access' => 'slug']);
+                    Route::get('access/parent/{level}/{parent}/{order}', 'updateParent')->name('developer.access.parent');
+                    Route::get('access/child/{level}/{parent}/{child}/{order}', 'updateChild')->name('developer.access.child');
                 });
-
-                Route::resource('/user', App\Http\Controllers\Private\Developer\UserController::class)->scoped(['user' => 'uuid']);
+                Route::resource('/user', DeveloperUserController::class)->scoped(['user' => 'uuid']);
             }
         );
 

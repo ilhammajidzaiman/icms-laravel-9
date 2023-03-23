@@ -19,7 +19,7 @@ class UserMenuParentController extends Controller
         $data = [
             'menus' => UserMenuParent::orderBy('order')->get(),
         ];
-        return view('private.user-menu.index', $data);
+        return view('private.user-menu-parent.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserMenuParentController extends Controller
      */
     public function create()
     {
-        return view('private.user-menu.create');
+        return view('private.user-menu-parent.create');
     }
 
     /**
@@ -89,7 +89,7 @@ class UserMenuParentController extends Controller
         $data = [
             'menu'          => $menu,
         ];
-        return view('private.user-menu.show', $data);
+        return view('private.user-menu-parent.show', $data);
     }
 
     /**
@@ -103,7 +103,7 @@ class UserMenuParentController extends Controller
         $data = [
             'menu'          => $menu,
         ];
-        return view('private.user-menu.update', $data);
+        return view('private.user-menu-parent.update', $data);
     }
 
     /**
