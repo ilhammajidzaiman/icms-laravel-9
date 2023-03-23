@@ -7,7 +7,7 @@
 
 <footer class="main-footer text-xs">
     <strong>Copyright &copy;
-        <?= date('Y');?> <a href="{{ url('/') }}">{{ config('app.name') }}</a>.
+        <?= date('Y') ?> <a href="{{ url('/') }}">{{ config('app.name') }}</a>.
     </strong>
     <div class="float-right d-none d-sm-inline-block">
         {{ config('app.copyright') }}
@@ -25,28 +25,30 @@
 
 <script>
     $(document).ready(function() {
-        $('.check-parent').on('click',function(){
-            const level         = $(this).data('parent-level');
-            const parent        = $(this).data('parent');
-            const order         = $(this).data('parent-order');
+        $('.check-parent').on('click', function() {
+            const level = $(this).data('parent-level');
+            const parent = $(this).data('parent');
+            const order = $(this).data('parent-order');
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentUrl.'/parent') }}/"+level+"/"+parent+"/"+order,
-                success: function(request){
+                url: "{{ url($segmentUrl . '/parent') }}/" + level + "/" + parent + "/" + order,
+                success: function(request) {
                     alert("Akses menu diubah!");
                 }
             });
         });
 
-        $('.check-child').on('click',function(){
-            const level         = $(this).data('child-level');
-            const parent        = $(this).data('child-parent');
-            const child         = $(this).data('child');
-            const order         = $(this).data('child-order');
+        $('.check-child').on('click', function() {
+            const level = $(this).data('child-level');
+            const parent = $(this).data('child-parent');
+            const child = $(this).data('child');
+            const order = $(this).data('child-order');
             $.ajax({
                 type: 'get',
-                url: "{{ url($segmentUrl.'/child') }}/"+level+"/"+parent+"/"+child+"/"+order,
-                success: function(request){
+                url: "{{ url($segmentUrl . '/child') }}/" + level + "/" + parent + "/" +
+                    child +
+                    "/" + order,
+                success: function(request) {
                     alert("Akses sub menu diubah!");
                 }
             });

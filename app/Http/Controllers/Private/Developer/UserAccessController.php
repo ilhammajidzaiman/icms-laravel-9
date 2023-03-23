@@ -70,7 +70,7 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            'menus'         => UserMenuParent::where('parent_id', 0)->orderBy('order')->get(),
+            'menus'         => UserMenuParent::orderBy('order')->get(),
         ];
         return view('private.user-access.update', $data);
     }
@@ -100,14 +100,14 @@ class UserAccessController extends Controller
 
     public function updateParent($level, $parent, $order)
     {
-        $userAccess = UserAccessParent::where('level_id', $level)->where('parent_id', $parent)->where('order', $order)->first();
+        $userAccess = UserAccessParent::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('order', $order)->first();
         if ($userAccess) :
-            UserAccessParent::where('level_id', $level)->where('parent_id', $parent)->where('order', $order)->delete();
+            UserAccessParent::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('order', $order)->delete();
         else :
             $data =
                 [
-                    'level_id'      => $level,
-                    'parent_id'     => $parent,
+                    'user_level_id'      => $level,
+                    'user_menu_parent_id'     => $parent,
                     'order'         => $order,
                 ];
             UserAccessParent::create($data);
@@ -116,15 +116,15 @@ class UserAccessController extends Controller
 
     public function updateChild($level, $parent, $child, $order)
     {
-        $userChild = UserAccessChild::where('level_id', $level)->where('parent_id', $parent)->where('child_id', $child)->first();
+        $userChild = UserAccessChild::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('user_menu_child_id', $child)->first();
         if ($userChild) :
-            UserAccessChild::where('level_id', $level)->where('parent_id', $parent)->where('child_id', $child)->delete();
+            UserAccessChild::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('user_menu_child_id', $child)->delete();
         else :
             $data =
                 [
-                    'level_id'      => $level,
-                    'parent_id'     => $parent,
-                    'child_id'      => $child,
+                    'user_level_id'      => $level,
+                    'user_menu_parent_id'     => $parent,
+                    'user_menu_child_id'      => $child,
                     'order'         => $order,
                 ];
             UserAccessChild::create($data);
