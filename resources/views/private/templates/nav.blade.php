@@ -10,12 +10,12 @@
                 <i class="fas fa-user"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="{{ url('/'.$segment1.'/profil/'.auth()->user()->uuid) }}" class="dropdown-item">
+                <a href="{{ url('/' . $segment1 . '/profil/' . auth()->user()->uuid) }}" class="dropdown-item">
                     <div class="media">
                         @php
-                        $value=auth()->user()->file;
-                        $value == 'default-user.svg' ? $url=asset('assets/images/'.$value) :
-                        $url=asset('storage/'.$value);
+                            $path = auth()->user()->path;
+                            $file = auth()->user()->file;
+                            $file == 'default-user.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                         @endphp
                         <img src="{{ $url }}" alt="{{ $url }}" class="img-size-50 mr-3 img-circle"
                             style="width:50px;height:50px; overflow:hidden;">
@@ -41,7 +41,7 @@
             </div>
         </li>
 
-        <li class="nav-item dropdown">
+        {{-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fas fa-cog"></i>
             </a>
@@ -56,6 +56,6 @@
                     customize
                 </a>
             </div>
-        </li>
+        </li> --}}
     </ul>
 </nav>

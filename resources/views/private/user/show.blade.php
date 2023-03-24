@@ -6,9 +6,9 @@
     <div class="row">
         <div class="col-md-3 p-5">
             @php
-                $value = $user->file;
+                $file = $user->file;
                 $path = $user->path;
-                $value == 'default-user.svg' ? ($url = asset('assets/images/' . $value)) : ($url = asset('storage/' . $path . $value));
+                $file == 'default-user.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
             @endphp
             <img src="{{ $url }}" alt="{{ $url }}" class="img-fluid rounded w-100 mb-3 mb-4">
         </div>

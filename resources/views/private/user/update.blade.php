@@ -10,8 +10,8 @@
             <div class="col-md-3 p-5">
                 @php
                     $path = $user->path;
-                    $value = $user->file;
-                    $value == 'default-user.svg' ? ($url = asset('assets/images/' . $value)) : ($url = asset('storage/' . $path . $value));
+                    $file = $user->file;
+                    $file == 'default-user.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                 @endphp
                 <x-form-file-preview name="file" label="thumbnail" :value="$url" accept=".jpg,.jpeg,.png" />
             </div>

@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="{{ url($segment1.'/dashboard') }}" class="brand-link">
-        <img src="{{ asset('assets/images/'.config('app.logo')) }}" alt="{{ config('app.logo') }}"
+    <a href="{{ url($segment1 . '/dashboard') }}" class="brand-link">
+        <img src="{{ asset('assets/images/' . config('app.logo')) }}" alt="{{ config('app.logo') }}"
             class="brand-image img-circlee elevation-22" style="width:30px;height:30px;">
         <span class="brand-text font-weight-lightt">{{ config('app.name') }}</span>
     </a>
@@ -9,93 +9,101 @@
         <div class="user-panel my-3 pb-3 d-flex">
             <div class="image">
                 @php
-                $value=auth()->user()->file;
-                $value == 'default-user.svg' ? $url=asset('assets/images/'.$value) : $url=asset('storage/'.$value);
+                    $path = auth()->user()->path;
+                    $file = auth()->user()->file;
+                    $file == 'default-user.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                 @endphp
-                <img src="{{ $url }}" class="img-circle elevation-22" alt="{{ $url }}" style="width:30px;height:30px;">
+                <img src="{{ $url }}" class="img-circle elevation-22" alt="{{ $url }}"
+                    style="width:30px;height:30px;">
             </div>
             <div class="info">
-                <a href="{{ url('/'.$segment1.'/profil/'.auth()->user()->uuid) }}" class="d-block">{{
-                    auth()->user()->name }}</a>
+                <a href="{{ url('/' . $segment1 . '/profil/' . auth()->user()->uuid) }}"
+                    class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
         <nav class="mt-2 text-capitalize">
             <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ url('/'.$segment1.'/dashboard') }}"
-                        class="nav-link {{ Request::is($segment1.'/dashboard*')?'active':'' }}">
+                    <a href="{{ url('/' . $segment1 . '/dashboard') }}"
+                        class="nav-link {{ Request::is($segment1 . '/dashboard*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p class="text">Dashboard</p>
                     </a>
                 </li>
 
                 @php
-                $parents=
-                App\Models\UserAccessParent::where('user_level_id',auth()->user()->user_level_id)->orderBy('order')->with(['menu'])->get();
+                    $parents = App\Models\UserAccessParent::where('user_level_id', auth()->user()->user_level_id)
+                        ->orderBy('order')
+                        ->with(['menu'])
+                        ->get();
                 @endphp
 
                 @forelse ($parents as $parent)
-                {{-- ada data parents --}}
+                    {{-- ada data parents --}}
 
-                @if ((empty($parent->menu->url)) || ($parent->menu->url==='#'))
-                {{-- url kosong atau pagar --}}
-                <li class="nav-item {{ $segment2 == $parent->menu->prefix ? 'menu-open' : ''}}">
-                    <a href="{{ '/'.$segment1.'/'.$parent->menu->prefix }}"
-                        class="nav-link {{ $segment2 == $parent->menu->prefix ? 'active' : '' }}">
-                        <i class="nav-icon {{ $parent->menu->icon }}"></i>
-                        <p class="text">
-                            {{ $parent->menu->name }}
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                    @if (empty($parent->menu->url) || $parent->menu->url === '#')
+                        {{-- url kosong atau pagar --}}
+                        <li class="nav-item {{ $segment2 == $parent->menu->prefix ? 'menu-open' : '' }}">
+                            <a href="{{ '/' . $segment1 . '/' . $parent->menu->prefix }}"
+                                class="nav-link {{ $segment2 == $parent->menu->prefix ? 'active' : '' }}">
+                                <i class="nav-icon {{ $parent->menu->icon }}"></i>
+                                <p class="text">
+                                    {{ $parent->menu->name }}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
 
-                        @php
+                                @php
+                                    
+                                    $children = App\Models\UserAccessChild::where('user_level_id', auth()->user()->user_level_id)
+                                        ->where('user_menu_parent_id', $parent->menu->id)
+                                        ->with(['menu'])
+                                        ->orderBy('order')
+                                        ->get();
+                                @endphp
+                                @forelse ($children as $child)
+                                    <li class="nav-item">
+                                        <a href="{{ url('/' . $segment1 . $child->menu->url) }}"
+                                            class="nav-link {{ Request::is($segment1 . $child->menu->url . '*') ? 'active' : '' }}">
+                                            <i class="nav-icon {{ $child->menu->icon }}"></i>
+                                            <p class="text">{{ $child->menu->name }}</p>
+                                        </a>
+                                    </li>
+                                @empty
+                                    <li class="nav-item">
+                                        <a href="{{ url('/' . $segment1 . '/dashboard') }}" class="nav-link">
+                                            <i class="nav-icon fa-fw fas fa-info-circle"></i>
+                                            <p class="text">anda tidak punya akses!</p>
+                                        </a>
+                                    </li>
+                                @endforelse
 
-                        $children=App\Models\UserAccessChild::where('user_level_id',auth()->user()->user_level_id)->where('user_menu_parent_id',$parent->menu->id)->with(['menu'])->orderBy('order')->get();
-                        @endphp
-                        @forelse ($children as $child)
+                            </ul>
+                        </li>
+                        {{-- end url kosong atau pagar --}}
+                    @else
+                        {{-- url ada --}}
                         <li class="nav-item">
-                            <a href="{{ url('/'.$segment1.$child->menu->url) }}"
-                                class="nav-link {{ Request::is($segment1.$child->menu->url.'*')?'active':'' }}">
-                                <i class="nav-icon {{ $child->menu->icon }}"></i>
-                                <p class="text">{{ $child->menu->name }}</p>
+                            <a href="{{ url('/' . $segment1 . $parent->menu->url) }}"
+                                class="nav-link {{ Request::is($segment1 . $parent->menu->url . '*') ? 'active' : '' }}">
+                                <i class="nav-icon {{ $parent->menu->icon }}"></i>
+                                <p class="text">{{ $parent->menu->name }}</p>
                             </a>
                         </li>
-                        @empty
-                        <li class="nav-item">
-                            <a href="{{ url('/'.$segment1.'/dashboard') }}" class="nav-link">
-                                <i class="nav-icon fa-fw fas fa-info-circle"></i>
-                                <p class="text">anda tidak punya akses!</p>
-                            </a>
-                        </li>
-                        @endforelse
-
-                    </ul>
-                </li>
-                {{-- end url kosong atau pagar --}}
-                @else
-                {{-- url ada --}}
-                <li class="nav-item">
-                    <a href="{{ url('/'.$segment1.$parent->menu->url) }}"
-                        class="nav-link {{ Request::is($segment1.$parent->menu->url.'*')?'active':'' }}">
-                        <i class="nav-icon {{ $parent->menu->icon }}"></i>
-                        <p class="text">{{ $parent->menu->name }}</p>
-                    </a>
-                </li>
-                {{-- end url ada --}}
-                @endif
+                        {{-- end url ada --}}
+                    @endif
 
                 @empty
-                {{-- tidak ada data parents --}}
-                <li class="nav-item">
-                    <a href="{{ url('/'.$segment1.'/dashboard') }}" class="nav-link">
-                        <i class="nav-icon fa-fw fas fa-info-circle"></i>
-                        <p class="text">anda tidak punya akses!</p>
-                    </a>
-                </li>
-                {{-- end tidak ada data parents --}}
+                    {{-- tidak ada data parents --}}
+                    <li class="nav-item">
+                        <a href="{{ url('/' . $segment1 . '/dashboard') }}" class="nav-link">
+                            <i class="nav-icon fa-fw fas fa-info-circle"></i>
+                            <p class="text">anda tidak punya akses!</p>
+                        </a>
+                    </li>
+                    {{-- end tidak ada data parents --}}
                 @endforelse
                 <li class="nav-header mx-2 mb-3" style="border-bottom: 1px solid #4f5962"></li>
                 <li class="nav-item">
