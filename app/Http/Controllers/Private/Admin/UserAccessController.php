@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Private\Admin;
 
 use App\Models\UserMenu;
 use App\Models\UserLevel;
-use App\Models\UserAccess;
 use Illuminate\Http\Request;
 use App\Models\UserAccessChild;
 use App\Models\UserAccessParent;
 use App\Http\Controllers\Controller;
+use App\Models\UserMenuParent;
 
 class UserAccessController extends Controller
 {
@@ -32,7 +32,7 @@ class UserAccessController extends Controller
      */
     public function create()
     {
-        return redirect('/admin/management/access');
+        return redirect('/admin/master/access');
     }
 
     /**
@@ -43,7 +43,7 @@ class UserAccessController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/admin/management/access');
+        return redirect('/admin/master/access');
     }
 
     /**
@@ -70,7 +70,7 @@ class UserAccessController extends Controller
     {
         $data = [
             'level'         => $access,
-            'menus'         => UserMenu::where('parent_id', 0)->orderBy('order')->get(),
+            'menus'         => UserMenuParent::orderBy('order')->get(),
         ];
         return view('private.user-access.update', $data);
     }
@@ -84,7 +84,7 @@ class UserAccessController extends Controller
      */
     public function update(Request $request, UserLevel $access)
     {
-        return redirect('/admin/management/access');
+        return redirect('/admin/master/access');
     }
 
     /**
@@ -95,19 +95,19 @@ class UserAccessController extends Controller
      */
     public function destroy(UserAccessParent $access)
     {
-        return redirect('/admin/management/access');
+        return redirect('/admin/master/access');
     }
 
     public function updateParent($level, $parent, $order)
     {
-        $userAccess = UserAccessParent::where('level_id', $level)->where('parent_id', $parent)->where('order', $order)->first();
+        $userAccess = UserAccessParent::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('order', $order)->first();
         if ($userAccess) :
-            UserAccessParent::where('level_id', $level)->where('parent_id', $parent)->where('order', $order)->delete();
+            UserAccessParent::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('order', $order)->delete();
         else :
             $data =
                 [
-                    'level_id'      => $level,
-                    'parent_id'     => $parent,
+                    'user_level_id'      => $level,
+                    'user_menu_parent_id'     => $parent,
                     'order'         => $order,
                 ];
             UserAccessParent::create($data);
@@ -116,15 +116,15 @@ class UserAccessController extends Controller
 
     public function updateChild($level, $parent, $child, $order)
     {
-        $userChild = UserAccessChild::where('level_id', $level)->where('parent_id', $parent)->where('child_id', $child)->first();
+        $userChild = UserAccessChild::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('user_menu_child_id', $child)->first();
         if ($userChild) :
-            UserAccessChild::where('level_id', $level)->where('parent_id', $parent)->where('child_id', $child)->delete();
+            UserAccessChild::where('user_level_id', $level)->where('user_menu_parent_id', $parent)->where('user_menu_child_id', $child)->delete();
         else :
             $data =
                 [
-                    'level_id'      => $level,
-                    'parent_id'     => $parent,
-                    'child_id'      => $child,
+                    'user_level_id'      => $level,
+                    'user_menu_parent_id'     => $parent,
+                    'user_menu_child_id'      => $child,
                     'order'         => $order,
                 ];
             UserAccessChild::create($data);

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Private\Admin;
 
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Models\UserLevel;
 use App\Models\UserStatus;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,9 +21,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $search             = request(['search']);
+
+        $search                 = request(['search']);
         $data = [
-            'users'         => User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString(),
+            'users'             => User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString(),
         ];
         return view('private.user.index', $data);
     }
@@ -35,8 +37,8 @@ class UserController extends Controller
     public function create()
     {
         $data = [
-            'statuses'      => UserStatus::orderBy('id')->get(),
-            'levels'        => UserLevel::orderByDesc('id')->get(),
+            'statuses'          => UserStatus::orderBy('id')->get(),
+            'levels'            => UserLevel::orderByDesc('id')->get(),
         ];
         return view('private.user.create', $data);
     }
@@ -49,54 +51,66 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // data input
-        $name               = $request->name;
-        $username           = $request->username;
-        $email              = $request->email;
-        $status             = $request->status;
-        $level              = $request->level;
-        $file               = $request->file('file');
-        $message            = $name;
-        $uuid               = Str::uuid();
-        $password           = Hash::make($request->password);
-        $folder             = 'user';
-        $default            = 'default-user.svg';
+        // data input...
+        $name                   = $request->name;
+        $username               = $request->username;
+        $email                  = $request->email;
+        $status                 = $request->status;
+        $level                  = $request->level;
+        $file                   = $request->file('file');
+        $message                = $name;
+        $uuid                   = Str::uuid();
+        $password               = Hash::make($request->password);
+        $path                   = 'user/' . date('Y/m/');
+        $default                = 'default-user.svg';
 
-        // validation input
-        $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255'],
-            'username'      => ['required', 'max:255', 'unique:users'],
-            'email'         => ['required', 'max:255', 'unique:users'],
-            'password'      => ['required', 'min:6', 'same:confirmation'],
-            'confirmation'  => ['required', 'min:6', 'same:password'],
-            'status'        => ['required'],
-            'level'         => ['required'],
+        // validation input...
+        $validatedData          = $request->validate([
+            'name'              => ['required', 'max:255'],
+            'username'          => ['required', 'max:255', 'unique:users'],
+            'email'             => ['required', 'max:255', 'unique:users'],
+            'password'          => ['required', 'min:6', 'same:confirmation'],
+            'confirmation'      => ['required', 'min:6', 'same:password'],
+            'status'            => ['required'],
+            'level'             => ['required'],
         ]);
 
-        // upload file to storage
+        // upload file to storage...
         if ($file) :
-            $file = $file->store($folder);
+            $dateTime           = date('dmYhis');
+            $nameHash           = $file->hashName();
+            $fileName           = $dateTime . '-' . $nameHash;
+
+            // automatically store file...
+            // $file               = $file->store($path);
+
+            // automatically generate a unique ID for filename...
+            // Storage::putFile($path, new File($file));
+
+            // manually specify a filename...
+            Storage::putFileAs($path, new File($file), $fileName);
         else :
-            $file           = $default;
+            $fileName           = $default;
         endif;
 
-        // insert data input to table Users
+        // insert data to table..
         $data = [
-            'level_id'      => $level,
-            'status_id'     => $status,
-            'uuid'          => $uuid,
-            'password'      => $password,
-            'username'      => $username,
-            'email'         => $email,
-            'name'          => $name,
-            'file'          => $file,
+            'user_level_id'     => $level,
+            'user_status_id'    => $status,
+            'uuid'              => $uuid,
+            'password'          => $password,
+            'username'          => $username,
+            'email'             => $email,
+            'name'              => $name,
+            'path'              => $path,
+            'file'              => $fileName,
         ];
         User::create($data);
 
-        // flashdata
+        // flashdata...
         $flashData = [
-            'message'       => 'Data "' . $message . '" ditambahkan',
-            'alert'         => 'primary',
+            'message'           => 'Data "' . $message . '" ditambahkan',
+            'alert'             => 'primary',
         ];
         return redirect('/admin/management/user')->with($flashData);
     }
@@ -110,7 +124,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $data = [
-            'user'          => $user,
+            'user'              => $user,
         ];
         return view('private.user.show', $data);
     }
@@ -124,9 +138,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $data = [
-            'statuses'      => UserStatus::orderBy('id')->get(),
-            'levels'        => UserLevel::orderByDesc('id')->get(),
-            'user'          => $user,
+            'statuses'          => UserStatus::orderBy('id')->get(),
+            'levels'            => UserLevel::orderByDesc('id')->get(),
+            'user'              => $user,
         ];
         return view('private.user.update', $data);
     }
@@ -140,66 +154,73 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // data detail
-        $uuid               = $user->uuid;
-        $oldUsername        = $user->username;
-        $oldEmail           = $user->email;
-        $oldFile            = $user->file;
+        // data detail...
+        $uuid                   = $user->uuid;
+        $oldUsername            = $user->username;
+        $oldEmail               = $user->email;
+        $oldPath                = $user->path;
+        $oldFile                = $user->file;
 
-        // data input
-        $name               = $request->name;
-        $username           = $request->username;
-        $email              = $request->email;
-        $status             = $request->status;
-        $level              = $request->level;
-        $file               = $request->file('file');
-        $message            = $name;
-        $password           = Hash::make($request->password);
-        $folder             = 'user';
-        $default            = 'default-user.svg';
+        // data input...
+        $name                   = $request->name;
+        $username               = $request->username;
+        $email                  = $request->email;
+        $status                 = $request->status;
+        $level                  = $request->level;
+        $file                   = $request->file('file');
+        $message                = $name;
+        $password               = Hash::make($request->password);
+        $path                 = 'user/' . date('Y/m/');
+        $default                = 'default-user.svg';
 
-        // validation logic
-        $oldUsername        !== $username ? $uUsername = "unique:users" : $uUsername = "";
-        $oldEmail           !== $email ? $uEmail = "unique:users" : $uEmail = "";
+        // validation logic...
+        $oldUsername            !== $username ? $uUsername = "unique:users" : $uUsername = "";
+        $oldEmail               !== $email ? $uEmail = "unique:users" : $uEmail = "";
 
-        // validation input
-        $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255'],
-            'username'      => ['required', 'max:255', $uUsername],
-            'email'         => ['required', 'max:255', $uEmail],
-            'password'      => ['required', 'min:6', 'same:confirmation'],
-            'confirmation'  => ['required', 'min:6', 'same:password'],
-            'status'        => ['required'],
-            'level'         => ['required'],
+        // validation input...
+        $validatedData          = $request->validate([
+            'name'              => ['required', 'max:255'],
+            'username'          => ['required', 'max:255', $uUsername],
+            'email'             => ['required', 'max:255', $uEmail],
+            'password'          => ['required', 'min:6', 'same:confirmation'],
+            'confirmation'      => ['required', 'min:6', 'same:password'],
+            'status'            => ['required'],
+            'level'             => ['required'],
         ]);
 
-        // upload file to storage
+        // upload file to storage...
         if ($file) :
-            // delete old file on storage before upload file
+            // delete old file on storage before upload new file...
             if ($oldFile !== $default) :
-                Storage::delete($oldFile);
+                Storage::delete($path . $oldFile);
             endif;
-            $file = $file->store($folder);
+
+            // manually specify a filename...
+            $dateTime           = date('dmYhis');
+            $nameHash           = $file->hashName();
+            $fileName           = $dateTime . '-' . $nameHash;
+            Storage::putFileAs($path, new File($file), $fileName);
         else :
-            $file           = $oldFile;
+            $fileName           = $default;
         endif;
 
-        // insert data input to table Admins
+        // insert data to table...
         $data = [
-            'level_id'      => $level,
-            'status_id'     => $status,
-            'password'      => $password,
-            'username'      => $username,
-            'email'         => $email,
-            'name'          => $name,
-            'file'          => $file,
+            'user_level_id'     => $level,
+            'user_status_id'    => $status,
+            'password'          => $password,
+            'username'          => $username,
+            'email'             => $email,
+            'name'              => $name,
+            'path'              => $oldPath ? $oldPath : $path,
+            'file'              => $fileName,
         ];
         User::where('uuid', $uuid)->update($data);
 
-        // flashdata
+        // flashdata...
         $flashData = [
-            'message'       => 'Data "' . $message . '" diubah',
-            'alert'         => 'success',
+            'message'           => 'Data "' . $message . '" diubah',
+            'alert'             => 'success',
         ];
         return redirect('/admin/management/user')->with($flashData);
     }
@@ -212,25 +233,25 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // data detail
-        $id                 = $user->id;
-        $file               = $user->file;
-        $message            = $user->name;
-        $folder             = 'user';
-        $default            = 'default-user.svg';
+        // data detail...
+        $id                     = $user->id;
+        $file                   = $user->file;
+        $message                = $user->name;
+        $folder                 = 'user/' . date('Y/m/');
+        $default                = 'default-user.svg';
 
-        // delete file on storage
+        // delete file on storage...
         if ($file !== $default) :
-            Storage::delete($file);
+            Storage::delete($folder . $file);
         endif;
 
-        // delete data on table Admin
+        // delete data on table...
         User::destroy($id);
 
-        // flashdata
+        // flashdata...
         $flashData = [
-            'message'       => 'Data "' . $message . '" dihapus!',
-            'alert'         => 'danger',
+            'message'           => 'Data "' . $message . '" dihapus!',
+            'alert'             => 'danger',
         ];
         return redirect('/admin/management/user')->with($flashData);
     }
