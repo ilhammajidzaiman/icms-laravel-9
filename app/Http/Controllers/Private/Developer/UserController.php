@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Private\Developer;
 
 use App\Models\User;
 use App\Models\UserLevel;
-use Illuminate\Http\File;
 use App\Models\UserStatus;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -61,7 +61,7 @@ class UserController extends Controller
         $message                = $name;
         $uuid                   = Str::uuid();
         $password               = Hash::make($request->password);
-        $folder                 = 'user/' . date('Y/m/');
+        $path                   = 'user/' . date('Y/m/');
         $default                = 'default-user.svg';
 
         // validation input...
@@ -82,13 +82,13 @@ class UserController extends Controller
             $fileName           = $dateTime . '-' . $nameHash;
 
             // automatically store file...
-            // $file               = $file->store($folder);
+            // $file               = $file->store($path);
 
             // automatically generate a unique ID for filename...
-            // Storage::putFile($folder, new File($file));
+            // Storage::putFile($path, new File($file));
 
             // manually specify a filename...
-            Storage::putFileAs($folder, new File($file), $fileName);
+            Storage::putFileAs($path, new File($file), $fileName);
         else :
             $fileName           = $default;
         endif;
@@ -102,7 +102,7 @@ class UserController extends Controller
             'username'          => $username,
             'email'             => $email,
             'name'              => $name,
-            'path'              => $folder,
+            'path'              => $path,
             'file'              => $fileName,
         ];
         User::create($data);
@@ -158,6 +158,7 @@ class UserController extends Controller
         $uuid                   = $user->uuid;
         $oldUsername            = $user->username;
         $oldEmail               = $user->email;
+        $oldPath                = $user->path;
         $oldFile                = $user->file;
 
         // data input...
@@ -169,7 +170,7 @@ class UserController extends Controller
         $file                   = $request->file('file');
         $message                = $name;
         $password               = Hash::make($request->password);
-        $folder                 = 'user/' . date('Y/m/');
+        $path                 = 'user/' . date('Y/m/');
         $default                = 'default-user.svg';
 
         // validation logic...
@@ -189,17 +190,16 @@ class UserController extends Controller
 
         // upload file to storage...
         if ($file) :
-
             // delete old file on storage before upload new file...
             if ($oldFile !== $default) :
-                Storage::delete($folder . $oldFile);
+                Storage::delete($path . $oldFile);
             endif;
 
             // manually specify a filename...
             $dateTime           = date('dmYhis');
             $nameHash           = $file->hashName();
             $fileName           = $dateTime . '-' . $nameHash;
-            Storage::putFileAs($folder, new File($file), $fileName);
+            Storage::putFileAs($path, new File($file), $fileName);
         else :
             $fileName           = $default;
         endif;
@@ -212,6 +212,7 @@ class UserController extends Controller
             'username'          => $username,
             'email'             => $email,
             'name'              => $name,
+            'path'              => $oldPath ? $oldPath : $path,
             'file'              => $fileName,
         ];
         User::where('uuid', $uuid)->update($data);
