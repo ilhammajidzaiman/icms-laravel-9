@@ -16,7 +16,6 @@ class UserMenuChildSeeder extends Seeder
      */
     public function run()
     {
-        // child menu
         UserMenuChild::create([
             'uuid'                  => Str::uuid(),
             'user_menu_parent_id'   => '1',

@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Models\Config;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -31,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        Gate::define('superAdmin', function (User $user) {
+        Gate::define('developer', function (User $user) {
             return $user->level_id == 1;
         });
         Gate::define('admin', function (User $user) {
