@@ -39,12 +39,12 @@ class UserMenuParentSeeder extends Seeder
 
         UserMenuParent::create([
             'uuid'          => Str::uuid(),
-            'order'         => '2',
+            'order'         => '3',
             'name'          => 'Blog',
             'slug'          => 'blog.html',
             'icon'          => 'fa-fw fas fa-file',
             'prefix'        => 'blog',
-            'url'           => '/blog',
+            'url'           => '#',
         ]);
     }
 }

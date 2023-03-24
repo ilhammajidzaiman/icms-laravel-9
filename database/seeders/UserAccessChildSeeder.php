@@ -15,7 +15,8 @@ class UserAccessChildSeeder extends Seeder
      */
     public function run()
     {
-        // super admin
+        // level developer
+        // sub menu management
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
@@ -49,6 +50,21 @@ class UserAccessChildSeeder extends Seeder
             'user_menu_parent_id'   => '1',
             'user_menu_child_id'    => '5',
             'order'                 => '5',
+        ]);
+
+        // sub menu blog
+        UserAccessChild::create([
+            'user_level_id'         => '1',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '6',
+            'order'                 => '1',
+        ]);
+
+        UserAccessChild::create([
+            'user_level_id'         => '1',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '7',
+            'order'                 => '7',
         ]);
 
         // admin

@@ -18,17 +18,20 @@ return new class extends Migration
             $table->string('uuid');
             $table->foreignId('user_level_id')->comment('id tabel user_levels');
             $table->foreignId('user_status_id')->comment('id tabel user_status');
-            $table->string('name');
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('file');
+            $table->string('name')->comment('nama pengguna');
+            $table->string('username')->comment('username pengguna');
+            $table->string('email')->unique()->comment('email pengguna');
+            $table->timestamp('email_verified_at')->nullable()->comment('verifikasi email');
+            $table->string('password')->comment('password pengguna');
+            $table->string('path')->nullable()->comment('folder file gambar pengguna');
+            $table->string('file')->nullable()->comment('file foto pengguna');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
     }
+
+
 
     /**
      * Reverse the migrations.

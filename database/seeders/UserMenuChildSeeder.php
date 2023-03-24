@@ -23,7 +23,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '1',
             'name'                  => 'Status',
             'slug'                  => 'status.html',
-            'icon'                  => 'fa-fw fas fa-check',
+            'icon'                  => 'fa-fw fas fa-toggle-on',
             'prefix'                => 'management',
             'url'                   => '/management/status',
         ]);
@@ -70,6 +70,28 @@ class UserMenuChildSeeder extends Seeder
             'icon'                  => 'fa-fw fas fa-users',
             'prefix'                => 'management',
             'url'                   => '/management/user',
+        ]);
+
+        UserMenuChild::create([
+            'uuid'                  => Str::uuid(),
+            'user_menu_parent_id'   => '3',
+            'order'                 => '1',
+            'name'                  => 'kategori',
+            'slug'                  => 'kategori.html',
+            'icon'                  => 'fa-fw fas fa-tags',
+            'prefix'                => 'blog',
+            'url'                   => '/blog/category',
+        ]);
+
+        UserMenuChild::create([
+            'uuid'                  => Str::uuid(),
+            'user_menu_parent_id'   => '3',
+            'order'                 => '2',
+            'name'                  => 'post',
+            'slug'                  => 'post.html',
+            'icon'                  => 'fa-fw fas fa-file',
+            'prefix'                => 'blog',
+            'url'                   => '/blog/post',
         ]);
     }
 }

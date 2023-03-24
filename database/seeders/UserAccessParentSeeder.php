@@ -29,6 +29,12 @@ class UserAccessParentSeeder extends Seeder
             'order'                 => '2',
         ]);
 
+        UserAccessParent::create([
+            'user_level_id'         => '1',
+            'user_menu_parent_id'   => '3',
+            'order'                 => '3',
+        ]);
+
         // admin
         UserAccessParent::create([
             'user_level_id'         => '2',
