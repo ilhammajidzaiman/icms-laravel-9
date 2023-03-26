@@ -201,7 +201,7 @@ class UserController extends Controller
             $fileName           = $dateTime . '-' . $nameHash;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
-            $fileName           = $default;
+            $fileName           = $oldFile;
         endif;
 
         // insert data to table...

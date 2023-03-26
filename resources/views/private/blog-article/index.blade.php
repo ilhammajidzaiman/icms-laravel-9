@@ -35,7 +35,7 @@
                                             class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
                                         <x-button-link :href="$segmentUrl . '/' . $article->slug . '/edit'" label="edit"
                                             class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
-                                        <x-button-delete :href="$segmentUrl . '/' . $article->slug" :confirm="$article->name" />
+                                        <x-button-delete :href="$segmentUrl . '/' . $article->slug" :confirm="$article->title" />
                                     </td>
                                 </tr>
                             @empty

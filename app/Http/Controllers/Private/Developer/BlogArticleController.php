@@ -73,9 +73,6 @@ class BlogArticleController extends Controller
 
         // upload file to storage...
         if ($file) :
-            $dateTime           = date('dmYhis');
-            $nameHash           = $file->hashName();
-            $fileName           = $dateTime . '-' . $nameHash;
 
             // automatically store file...
             // $file               = $file->store($path);
@@ -84,6 +81,9 @@ class BlogArticleController extends Controller
             // Storage::putFile($path, new File($file));
 
             // manually specify a filename...
+            $dateTime           = date('dmYhis');
+            $nameHash           = $file->hashName();
+            $fileName           = $dateTime . '-' . $nameHash;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $fileName           = $default;
@@ -93,7 +93,7 @@ class BlogArticleController extends Controller
         $data = [
             'uuid'              => $uuid,
             'user_id'           => $userId,
-            'blog_status_id'    => $userId,
+            'blog_status_id'    => $status,
             'title'             => $title,
             'slug'              => $slug,
             'content'           => $content,
@@ -148,9 +148,15 @@ class BlogArticleController extends Controller
      * @param  \App\Models\BlogArticle  $blogArticle
      * @return \Illuminate\Http\Response
      */
-    public function edit(BlogArticle $blogArticle)
+    public function edit(BlogArticle $post)
     {
-        //
+        $data = [
+            'article'           => $post,
+            'statuses'          => BlogStatus::orderBy('id')->get(),
+            'categories'        => BlogCategory::orderBy('name')->get(),
+            'blogPosts'         => BlogPost::where('blog_article_id', $post->id)->orderBy('id')->with(['category'])->get(),
+        ];
+        return view('private.blog-article.update', $data);
     }
 
     /**
@@ -160,9 +166,90 @@ class BlogArticleController extends Controller
      * @param  \App\Models\BlogArticle  $blogArticle
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BlogArticle $blogArticle)
+    public function update(Request $request, BlogArticle $post)
     {
-        //
+        // detail data
+        $oldId                  = $post->id;
+        $oldslug                = $post->slug;
+        $oldUuid                = $post->uuid;
+        $oldTitle               = $post->title;
+        $oldFile                = $post->file;
+
+        // data input...
+        $userId                 = auth()->user()->id;
+        $title                  = $request->title;
+        $content                = $request->content;
+        $file                   = $request->file('file');
+        $category               = $request->category;
+        $status                 = $request->status;
+        $message                = $title;
+        $slug                   = Str::slug($title, '-') . '.html';
+        $truncated              = Str::limit(strip_tags($content), 200, '...');
+        $path                   = 'article/' . date('Y/m/');
+        $default                = 'default-img.svg';
+
+        // validation logic
+        $oldTitle               !== $title ? $uTitle = "unique:blog_articles" : $uTitle = "";
+
+        // validation
+        $validatedData = $request->validate([
+            'title'             => ['required', 'max:250', $uTitle],
+            'content'           => ['required'],
+            'status'            => ['required'],
+            'file'              => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+        ]);
+
+        // upload file to storage...
+        if ($file) :
+            // delete old file on storage before upload new file...
+            if ($oldFile !== $default) :
+                Storage::delete($path . $oldFile);
+            endif;
+
+            // manually specify a filename...
+            $dateTime           = date('dmYhis');
+            $nameHash           = $file->hashName();
+            $fileName           = $dateTime . '-' . $nameHash;
+            Storage::putFileAs($path, new File($file), $fileName);
+        else :
+            $fileName           = $oldFile;
+        endif;
+
+        // insert to table...
+        $data = [
+            'user_id'           => $userId,
+            'blog_status_id'    => $status,
+            'title'             => $title,
+            'slug'              => $slug,
+            'content'           => $content,
+            'truncated'         => $truncated,
+            'path'              => $path,
+            'file'              => $fileName,
+        ];
+        BlogArticle::where('uuid', $oldUuid)->update($data);
+
+        // delete to posts
+        BlogPost::where('blog_article_id', $oldId)->delete();
+
+        // insert to table pivot...
+        if ($category) :
+            $data2              = [];
+            foreach ($category as $key) :
+                $data2[] =
+                    [
+                        'blog_article_id'   => $oldId,
+                        'blog_category_id'  => $key,
+                    ];
+            endforeach;
+            BlogPost::insert($data2);
+        endif;
+
+        // flashdata...
+        $flashData = [
+            'message'           => 'Data "' . $message . '" diubah',
+            'alert'             => 'success',
+        ];
+        return redirect('/developer/blog/post')->with($flashData);
     }
 
     /**
@@ -171,8 +258,29 @@ class BlogArticleController extends Controller
      * @param  \App\Models\BlogArticle  $blogArticle
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BlogArticle $blogArticle)
+    public function destroy(BlogArticle $post)
     {
-        //
+        // data detail...
+        $id                     = $post->id;
+        $file                   = $post->file;
+        $message                = $post->title;
+        $folder                 = 'article/' . date('Y/m/');
+        $default                = 'default-img.svg';
+
+        // delete file on storage...
+        if ($file !== $default) :
+            Storage::delete($folder . $file);
+        endif;
+
+        // delete data on table...
+        BlogPost::where('blog_article_id', $id)->delete();
+        BlogArticle::destroy($id);
+
+        // flashdata...
+        $flashData = [
+            'message'           => 'Data "' . $message . '" dihapus!',
+            'alert'             => 'danger',
+        ];
+        return redirect('/developer/blog/post')->with($flashData);
     }
 }
