@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Private\Developer;
 
-use App\Models\UserLevel;
 use Illuminate\Support\Str;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserLevelController extends Controller
+class BlogCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class UserLevelController extends Controller
     public function index()
     {
         $data = [
-            'levels'        => UserLevel::orderByDesc('id')->get(),
+            'categories'        => BlogCategory::orderBy('name')->get(),
         ];
-        return view('private.user-level.index', $data);
+        return view('private.blog-category.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        return view('private.user-level.create');
+        return view('private.blog-category.create');
     }
 
     /**
@@ -40,123 +40,123 @@ class UserLevelController extends Controller
      */
     public function store(Request $request)
     {
+        // data input...
         $name               = $request->name;
-        $color              = $request->color;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
         $uuid               = Str::uuid();
 
+        // validation...
         $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_levels'],
-            'color'         => ['required', 'max:255'],
+            'name'          => ['required', 'max:255', 'unique:blog_categories'],
         ]);
+
+        // insert to table...
         $data = [
             'uuid'          => $uuid,
             'name'          => $name,
             'slug'          => $slug,
-            'color'         => $color,
         ];
-        UserLevel::create($data);
+        BlogCategory::create($data);
+
+        // flashdata...
         $flashData = [
             'message'       => 'Data "' . $message . '" ditambahkan!',
             'alert'         => 'primary',
         ];
-        return redirect('/developer/management/level')->with($flashData);
+        return redirect('/developer/blog/category')->with($flashData);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserLevel  $userLevel
+     * @param  \App\Models\BlogCategory  $blogCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(UserLevel $level)
+    public function show(BlogCategory $category)
     {
         $data = [
-            'level'         => $level,
+            'category'          => $category,
         ];
-        return view('private.user-level.show', $data);
+        return view('private.blog-category.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserLevel  $userLevel
+     * @param  \App\Models\BlogCategory  $blogCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserLevel $level)
+    public function edit(BlogCategory $category)
     {
         $data = [
-            'level'         => $level,
+            'category'         => $category,
         ];
-        return view('private.user-level.update', $data);
+        return view('private.blog-category.update', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserLevel  $userLevel
+     * @param  \App\Models\BlogCategory  $blogCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserLevel $level)
+    public function update(Request $request, BlogCategory $category)
     {
-        // data detail
-        $oldSlug            = $level->slug;
-        $oldName            = $level->name;
+        // data detail...
+        $oldSlug            = $category->slug;
+        $oldName            = $category->name;
 
-        // data input
+        // data input...
         $name               = $request->name;
-        $color              = $request->color;
         $message            = $name;
         $slug               = Str::slug($name, '-') . '.html';
 
-        // validation logic
-        $oldName            !== $name ? $uName = "unique:user_statuses" : $uName = "";
+        // validation logic...
+        $oldName            !== $name ? $uName = "unique:blog_categories" : $uName = "";
 
-        // validation
+        // validation...
         $validatedData      = $request->validate([
             'name'         => ['required', 'max:255', $uName],
-            'color'        => ['required', 'max:255'],
         ]);
 
-        // insert to table
+        // insert to table...
         $data = [
             'name'          => $name,
             'slug'          => $slug,
-            'color'         => $color,
         ];
-        UserLevel::where('slug', $oldSlug)->update($data);
+        BlogCategory::where('slug', $oldSlug)->update($data);
 
-        // flashdata
+        // flashdata...
         $flashData = [
             'message'       => 'Data "' . $message . '" diubah!',
             'alert'         => 'success',
         ];
-        return redirect('/developer/management/level')->with($flashData);
+        return redirect('/developer/blog/category')->with($flashData);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserLevel  $userLevel
+     * @param  \App\Models\BlogCategory  $blogCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserLevel $level)
+    public function destroy(BlogCategory $category)
     {
         // data detail...
-        $oldId              = $level->id;
-        $oldName            = $level->name;
+        $oldId              = $category->id;
+        $oldName            = $category->name;
         $message            = $oldName;
 
-        // delete data on table...
-        UserLevel::destroy($oldId);
+        // delete data on table..
+        BlogCategory::destroy($oldId);
 
         // flashdata...
         $flashData = [
             'message'       => 'Data "' . $message . '" dihapus!',
             'alert'         => 'danger',
         ];
-        return redirect('/developer/management/level')->with($flashData);
+        return redirect('/developer/blog/category')->with($flashData);
     }
 }
