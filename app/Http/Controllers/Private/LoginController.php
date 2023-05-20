@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Models\Login;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -17,11 +16,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        $data = [
-            'controller'    => 'login',
-            'title'         => 'login',
-        ];
-        return view('private.login', $data);
+        return view('private.login');
     }
 
     /**
@@ -32,6 +27,7 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request)
     {
+        // validation credential...
         $credentials = $request->validate([
             'email'         => ['required', 'email'],
             'password'      => ['required'],
@@ -42,14 +38,13 @@ class LoginController extends Controller
             $statusId       = auth()->user()->user_status_id;
             $levelId        = auth()->user()->user_level_id;
             $level          = Str::replace(' ', '', Str::lower(auth()->user()->level->name));
-
             if ($statusId == 1) :
                 if ($levelId == 1) :
-                    return redirect()->intended($level . '/dashboard');
+                    return redirect()->intended(route($level . '.dashboard'));
                 elseif ($levelId == 2) :
-                    return redirect()->intended($level . '/dashboard');
+                    return redirect()->intended(route($level . '.dashboard'));
                 elseif ($levelId == 3) :
-                    return redirect()->intended($level . '/dashboard');
+                    return redirect()->intended(route($level . '.dashboard'));
                 endif;
             else :
                 Auth::logout();
@@ -66,6 +61,7 @@ class LoginController extends Controller
         $flashData = [
             'message'       => 'Email atau password salah!',
             'alert'         => 'danger',
+            'icon'          => 'times',
         ];
         return back()->with($flashData);
     }
@@ -85,7 +81,8 @@ class LoginController extends Controller
         $flashData = [
             'message'       => $name . ', Anda telah logout!',
             'alert'         => 'primary',
+            'icon'          => 'sign-out-alt',
         ];
-        return redirect('/login')->with($flashData);
+        return redirect(route('auth.login'))->with($flashData);
     }
 }

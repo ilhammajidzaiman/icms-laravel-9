@@ -19,21 +19,21 @@ class UserLevelSeeder extends Seeder
         UserLevel::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Developer',
-            'slug'          => 'developer.html',
+            'slug'          => 'developer',
             'color'         => 'danger',
         ]);
 
         UserLevel::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Admin',
-            'slug'          => 'admin.html',
+            'slug'          => 'admin',
             'color'         => 'warning',
         ]);
 
         UserLevel::create([
             'uuid'          => Str::uuid(),
             'name'          => 'User',
-            'slug'          => 'user.html',
+            'slug'          => 'user',
             'color'         => 'success',
         ]);
     }

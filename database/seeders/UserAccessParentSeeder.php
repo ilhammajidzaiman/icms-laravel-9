@@ -20,19 +20,16 @@ class UserAccessParentSeeder extends Seeder
         UserAccessParent::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
-            'order'                 => '1',
         ]);
 
         UserAccessParent::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '2',
-            'order'                 => '2',
         ]);
 
         UserAccessParent::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '3',
-            'order'                 => '3',
         ]);
 
 
@@ -43,19 +40,16 @@ class UserAccessParentSeeder extends Seeder
         UserAccessParent::create([
             'user_level_id'         => '2',
             'user_menu_parent_id'   => '1',
-            'order'                 => '2',
         ]);
 
         UserAccessParent::create([
             'user_level_id'         => '2',
             'user_menu_parent_id'   => '2',
-            'order'                 => '3',
         ]);
 
         UserAccessParent::create([
             'user_level_id'         => '2',
             'user_menu_parent_id'   => '3',
-            'order'                 => '4',
         ]);
 
 
@@ -66,7 +60,6 @@ class UserAccessParentSeeder extends Seeder
         UserAccessParent::create([
             'user_level_id'         => '3',
             'user_menu_parent_id'   => '3',
-            'order'                 => '3',
         ]);
     }
 }

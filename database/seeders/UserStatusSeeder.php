@@ -19,14 +19,14 @@ class UserStatusSeeder extends Seeder
         UserStatus::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Aktif',
-            'slug'          => 'aktif.html',
+            'slug'          => 'aktif',
             'color'         => 'success',
         ]);
 
         UserStatus::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Tidak Aktif',
-            'slug'          => 'tidak-aktif.html',
+            'slug'          => 'tidak-aktif',
             'color'         => 'secondary',
         ]);
     }

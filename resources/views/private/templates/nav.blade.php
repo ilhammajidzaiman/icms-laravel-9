@@ -10,7 +10,7 @@
                 <i class="fas fa-user"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="{{ url('/' . $segment1 . '/profil/' . auth()->user()->uuid) }}" class="dropdown-item">
+                <a href="{{ route($segment1 . '.profil.index', auth()->user()->uuid) }}" class="dropdown-item">
                     <div class="media">
                         @php
                             $path = auth()->user()->path;
@@ -31,7 +31,7 @@
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <form action="{{ url('/logout') }}" method="post" class="na">
+                <form action="{{ route('auth.signout') }}" method="post" class="na">
                     @csrf
                     <button type="submit" class="dropdown-item dropdown-footer">
                         <i class="nav-icon fas fa-sign-out-alt "></i>

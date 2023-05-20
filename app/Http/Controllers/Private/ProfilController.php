@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Private;
 
 use App\Models\User;
-use Illuminate\Http\File;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -18,13 +18,10 @@ class ProfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($uuid)
+    public function index($id)
     {
-        $id = auth()->user()->id;
-        $data = [
-            'profil' => User::where('uuid', $uuid)->where('id', $id)->first(),
-        ];
-        return view('private.user-profil.index', $data);
+        $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
+        return view('private.profil.index', $data);
     }
 
     /**
@@ -33,13 +30,10 @@ class ProfilController extends Controller
      * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function edit($uuid)
+    public function edit($id)
     {
-        $id = auth()->user()->id;
-        $data = [
-            'profil' => User::where('uuid', $uuid)->where('id', $id)->first(),
-        ];
-        return view('private.user-profil.update', $data);
+        $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
+        return view('private.profil.update', $data);
     }
 
     /**
@@ -49,34 +43,36 @@ class ProfilController extends Controller
      * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(Request $request, $id)
     {
-        // data detail
-        $id                     = auth()->user()->id;
-        $profil                 = User::where('uuid', $uuid)->where('id', $id)->first();
-        $oldUsername            = $profil->username;
-        $oldEmail               = $profil->email;
-        $oldPath                = $profil->path;
-        $oldFile                = $profil->file;
-        $level                  = Str::lower($profil->level->name);
+        // data detail...
 
-        // data input
-        $name                   = $request->name;
-        $username               = $request->username;
-        $email                  = $request->email;
-        $file                   = $request->file('file');
-        $path                   = 'user/' . date('Y/m/');
-        $default                = 'default-user.svg';
+        $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
+        $oldUsername                = $data['profil']->username;
+        $oldEmail                   = $data['profil']->email;
+        $oldPath                    = $data['profil']->path;
+        $oldFile                    = $data['profil']->file;
+        $level                      = Str::lower($data['profil']->level->name);
 
-        // validation logic
-        $oldUsername            !== $username ? $uUsername = "unique:users" : $uUsername = "";
-        $oldEmail               !== $email ? $uEmail = "unique:users" : $uEmail = "";
 
-        // validation input
-        $validatedData          = $request->validate([
-            'name'              => ['required', 'max:255'],
-            'username'          => ['required', 'max:255', $uUsername],
-            'email'             => ['required', 'max:255', $uEmail],
+        // data input...
+        $name                       = $request->name;
+        $slug                       = Str::slug($name, '-');
+        $username                   = $request->username;
+        $email                      = $request->email;
+        $file                       = $request->file('file');
+        $path                       = 'user/' . date('Y/m/');
+        $default                    = 'default-user.svg';
+
+        // validation logic...
+        $oldUsername                !== $username ? $uUsername = "unique:users" : $uUsername = "";
+        $oldEmail                   !== $email ? $uEmail = "unique:users" : $uEmail = "";
+
+        // validation input...
+        $validatedData              = $request->validate([
+            'name'                  => ['required', 'max:255'],
+            'username'              => ['required', 'max:255', $uUsername],
+            'email'                 => ['required', 'max:255', $uEmail],
         ]);
 
         // upload file to storage...
@@ -87,39 +83,38 @@ class ProfilController extends Controller
             endif;
 
             // manually specify a filename...
-            $dateTime           = date('dmYhis');
-            $nameHash           = $file->hashName();
-            $fileName           = $dateTime . '-' . $nameHash;
+            $dateTime               = date('dmYhis');
+            $nameHash               = $file->hashName();
+            $fileName               = $dateTime . '-' . $nameHash;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
-            $fileName           = $default;
+            $fileName               = $oldFile;
         endif;
 
-        // insert data input to table Admins
+        // insert to table...
         $data = [
-            'username'          => $username,
-            'email'             => $email,
-            'name'              => $name,
-            'path'              => $oldPath ? $oldPath : $path,
-            'file'              => $fileName,
+            'username'              => $username,
+            'email'                 => $email,
+            'name'                  => $name,
+            'slug'                  => $slug,
+            'path'                  => $oldPath ? $oldPath : $path,
+            'file'                  => $fileName,
         ];
-        User::where('uuid', $uuid)->update($data);
+        User::where('uuid', $id)->update($data);
 
-        // flashdata
+        // flashdata...
         $flashData = [
-            'message'           => 'Profil berhasil diubah!',
-            'alert'             => 'success',
+            'message'               => 'Profil berhasil diubah!',
+            'alert'                 => 'success',
+            'icon'                  => 'edit',
         ];
-        return redirect('/' . $level . '/profil/' . $uuid)->with($flashData);
+        return redirect(route($request->segment(1) . '.profil.index', $id))->with($flashData);
     }
 
-    public function password($uuid)
+    public function passwordEdit($id)
     {
-        $id = auth()->user()->id;
-        $data = [
-            'profil' => User::where('uuid', $uuid)->where('id', $id)->first(),
-        ];
-        return view('private.user-profil.password', $data);
+        $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
+        return view('private.profil.password', $data);
     }
 
     /**
@@ -129,53 +124,29 @@ class ProfilController extends Controller
      * @param  \App\Models\Profil  $profil
      * @return \Illuminate\Http\Response
      */
-    public function update2(Request $request, $uuid)
+    public function passwordUpdate(Request $request, $id)
     {
-        // data detail
-        $id                 = auth()->user()->id;
-        $profil             = User::where('uuid', $uuid)->where('id', $id)->first();
+        // data input...
+        $password                   = Hash::make($request->password);
 
-        $oldUsername        = $profil->username;
-        $level              = strtolower($profil->level->name);
-
-        // data input
-        $username           = $request->username;
-        $password           = Hash::make($request->password);
-
-
-
-        $credentials = $request->validate([
-            'old'         => ['required', 'old'],
+        // validation input...
+        $validatedData              = $request->validate([
+            'password'              => ['required', 'min:6', 'same:confirmation'],
+            'confirmation'          => ['required', 'min:6', 'same:password'],
         ]);
-        if (Auth::attempt($credentials)) :
-            return "okeeee";
-        else :
-            return "gagal";
-        endif;
 
+        // insert data to table...
+        $data = [
+            'password'              => $password,
+        ];
+        User::where('uuid', $id)->where('id', auth()->user()->id)->update($data);
 
-        // // validation logic
-        // $oldUsername        !== $username ? $uUsername = "unique:users" : $uUsername = "";
-
-        // // validation input
-        // $validatedData      = $request->validate([
-        //     'username'      => ['required', 'max:255', $uUsername],
-
-        //     'password'      => ['required', 'min:6', 'same:confirmation'],
-        //     'confirmation'  => ['required', 'min:6', 'same:password'],
-        // ]);
-
-        // // insert data input to table Admins
-        // $data = [
-        //     'password'      => $password,
-        // ];
-        // User::where('uuid', $uuid)->update($data);
-
-        // // flashdata
-        // $flashData = [
-        //     'message'       => 'Password diubah!',
-        //     'alert'         => 'success',
-        // ];
-        // return redirect('/' . $level . '/profil/' . $uuid)->with($flashData);
+        // flashdata...
+        $flashData = [
+            'message'               => 'Password berhasil diubah!',
+            'alert'                 => 'success',
+            'icon'                  => 'key',
+        ];
+        return redirect(route($request->segment(1) . '.profil.index', $id))->with($flashData);
     }
 }

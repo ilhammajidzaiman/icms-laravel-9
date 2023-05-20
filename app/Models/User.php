@@ -25,6 +25,7 @@ class User extends Authenticatable
         'username',
         'email',
         'name',
+        'slug',
         'path',
         'file',
     ];

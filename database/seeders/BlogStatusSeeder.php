@@ -19,14 +19,14 @@ class BlogStatusSeeder extends Seeder
         BlogStatus::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Diterbitkan',
-            'slug'          => 'diterbitkan.html',
+            'slug'          => 'diterbitkan',
             'color'         => 'success',
         ]);
 
         BlogStatus::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Draft',
-            'slug'          => 'draft.html',
+            'slug'          => 'draft',
             'color'         => 'secondary',
         ]);
     }

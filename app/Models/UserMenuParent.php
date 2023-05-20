@@ -9,4 +9,9 @@ class UserMenuParent extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function access()
+    {
+        return $this->hasMany(UserAccessParent::class, 'user_menu_parent_id', 'id');
+    }
 }

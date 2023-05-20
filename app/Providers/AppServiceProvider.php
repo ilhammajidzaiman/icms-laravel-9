@@ -30,24 +30,30 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        Gate::define('developer', function (User $user) {
-            return $user->level_id == 1;
-        });
-        Gate::define('admin', function (User $user) {
-            return $user->level_id == 2;
-        });
-        Gate::define('user', function (User $user) {
-            return $user->level_id == 3;
-        });
+        // Gate::define('developer', function (User $user) {
+        //     return $user->user_level_id == 1;
+        // });
+        // Gate::define('admin', function (User $user) {
+        //     return $user->user_level_id == 2;
+        // });
+        // Gate::define('user', function (User $user) {
+        //     return $user->user_level_id == 3;
+        // });
+        // Gate::define('wartawan', function (User $user) {
+        //     return $user->user_level_id == 4;
+        // });
 
         $segment1 = Request::segment(1);
         $segment2 = Request::segment(2);
         $segment3 = Request::segment(3);
         $segment4 = Request::segment(4);
         $segment5 = Request::segment(5);
+        $segment6 = Request::segment(6);
+        $segment7 = Request::segment(7);
+        $segment8 = Request::segment(8);
 
         // segmentLink
-        $segmentLink = $segment1 . '/' . $segment2 . '/' . $segment3 . '/' . $segment4 . '/' . $segment5;
+        $segmentLink = $segment1 . '/' . $segment2 . '/' . $segment3 . '/' . $segment4 . '/' . $segment5 . '/' . $segment6 . '/' . $segment7 . '/' . $segment8;
 
         // segmentPrefix
         $segment2 === 'management' || 'master' ? $segmentPrefix = $segment3 : $segmentPrefix = $segment2;
@@ -62,6 +68,9 @@ class AppServiceProvider extends ServiceProvider
                 'segment3'      => $segment3,
                 'segment4'      => $segment4,
                 'segment5'      => $segment5,
+                'segment6'      => $segment6,
+                'segment7'      => $segment7,
+                'segment8'      => $segment8,
                 'segmentLink'   => $segmentLink,
                 'segmentPrefix' => $segmentPrefix,
                 'segmentUrl'    => $segmentUrl,

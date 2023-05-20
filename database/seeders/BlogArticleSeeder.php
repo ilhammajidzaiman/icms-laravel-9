@@ -21,7 +21,7 @@ class BlogArticleSeeder extends Seeder
             'user_id'           => '1',
             'blog_status_id'    => '1',
             'title'             => 'Hello world',
-            'slug'              => 'hello-world.html',
+            'slug'              => 'hello-world',
             'content'           => 'Selamat datang, ini halaman tampilan awal website dibuat',
             'truncated'         => 'Selamat datang, ini halaman tampilan awal website dibuat...',
             'file'              => 'default-img.svg',

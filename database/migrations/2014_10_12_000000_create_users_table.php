@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_level_id')->comment('id tabel user_levels');
             $table->foreignId('user_status_id')->comment('id tabel user_status');
             $table->string('name')->comment('nama pengguna');
+            $table->string('slug')->comment('slug nama');
             $table->string('username')->comment('username pengguna');
             $table->string('email')->unique()->comment('email pengguna');
             $table->timestamp('email_verified_at')->nullable()->comment('verifikasi email');

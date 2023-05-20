@@ -19,19 +19,19 @@ class BlogCategorySeeder extends Seeder
         BlogCategory::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Berita',
-            'slug'          => 'berita.html',
+            'slug'          => 'berita',
         ]);
 
         BlogCategory::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Informasi',
-            'slug'          => 'informasi.html',
+            'slug'          => 'informasi',
         ]);
 
         BlogCategory::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Tutorial',
-            'slug'          => 'tutorial.html',
+            'slug'          => 'tutorial',
         ]);
     }
 }
