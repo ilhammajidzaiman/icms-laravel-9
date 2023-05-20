@@ -10,7 +10,7 @@
     <x-alert-dismissing />
 
     <div class="row">
-        <div class="col-md-3 p-5">
+        <div class="col-md-3 px-5">
             @php
                 $path = $profil->path;
                 $file = $profil->file;
