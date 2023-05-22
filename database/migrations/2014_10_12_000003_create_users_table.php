@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
-            $table->foreignId('user_level_id')->comment('id tabel user_levels');
-            $table->foreignId('user_status_id')->comment('id tabel user_status');
+            $table->string('uuid')->unique();
+            $table->foreignId('user_level_id')->constrained('user_levels')->cascadeOnUpdate()->restrictOnDelete()->comment('id tabel user_levels');
+            $table->foreignId('user_status_id')->constrained('user_statuses')->cascadeOnUpdate()->restrictOnDelete()->comment('id tabel user_statuses');
             $table->string('name')->comment('nama pengguna');
             $table->string('slug')->comment('slug nama');
-            $table->string('username')->comment('username pengguna');
+            $table->string('username')->unique()->comment('username pengguna');
             $table->string('email')->unique()->comment('email pengguna');
             $table->timestamp('email_verified_at')->nullable()->comment('verifikasi email');
             $table->string('password')->comment('password pengguna');

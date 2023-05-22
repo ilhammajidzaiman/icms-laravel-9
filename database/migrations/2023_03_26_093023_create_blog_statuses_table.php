@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('blog_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
-            $table->string('name');
-            $table->string('slug');
+            $table->string('uuid')->unique();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->string('color');
             $table->timestamps();
         });

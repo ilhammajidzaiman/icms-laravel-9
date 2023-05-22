@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_menu_parents', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->string('uuid')->unique();
             $table->integer('order')->nullable()->comment('nomor urut menu');
             $table->string('name')->comment('nama menu yang ditampilkan');
             $table->string('slug')->comment('slug menu');

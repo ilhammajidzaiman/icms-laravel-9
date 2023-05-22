@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'user_level_id'     => '2',
             'user_status_id'    => '1',
             'name'              => 'Account Admin',
-            'slug'              => 'account-developer',
+            'slug'              => 'account-admin',
             'username'          => 'admin',
             'password'          => Hash::make('*#admin'),
             'email'             => 'admin@gmail.com',

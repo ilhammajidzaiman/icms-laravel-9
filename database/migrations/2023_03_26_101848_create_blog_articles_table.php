@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('blog_articles', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
-            $table->foreignId('user_id')->comment('id table users'); //->constrained('users')->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('blog_status_id')->comment('id table blog_statuses');
-            $table->string('title')->comment('judul artikel');
-            $table->string('slug')->comment('slug dari judul');
+            $table->string('uuid')->unique();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->restrictOnDelete()->comment('id table users');
+            $table->foreignId('blog_status_id')->constrained('blog_statuses')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_statuses');
+            $table->string('title')->unique()->comment('judul artikel');
+            $table->string('slug')->unique()->comment('slug dari judul');
             $table->binary('content')->comment('bagian isi artikel');
             $table->string('truncated')->comment('review artikel');
             $table->string('path')->nullable()->comment('folder file gambar artikel');

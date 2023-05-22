@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_menu_children', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
-            $table->integer('user_menu_parent_id')->comment('id parent berdasarkan id table user_menus');
+            $table->string('uuid')->unique();
+            $table->foreignId('user_menu_parent_id')->constrained('user_menu_parents')->cascadeOnUpdate()->restrictOnDelete()->comment('id table user_menu_parents');
             $table->integer('order')->nullable()->comment('nomor urut menu');
             $table->string('name')->comment('nama menu yang ditampilkan');
             $table->string('slug')->comment('slug menu');
