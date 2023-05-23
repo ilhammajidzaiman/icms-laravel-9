@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer;
+namespace App\Http\Controllers\Private\Developer\Blog;
 
 use Illuminate\Support\Str;
-use App\Models\BlogCategory;
+use App\Models\Blog\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,10 +16,8 @@ class BlogCategoryController extends Controller
      */
     public function index()
     {
-        $data = [
-            'categories'        => BlogCategory::orderBy('name')->get(),
-        ];
-        return view('private.blog-category.index', $data);
+        $data['categories']         = BlogCategory::orderByDesc('id')->get();
+        return view('private.developer.blog.category.index', $data);
     }
 
     /**
@@ -29,7 +27,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        return view('private.blog-category.create');
+        return view('private.developer.blog.category.create');
     }
 
     /**
@@ -41,122 +39,122 @@ class BlogCategoryController extends Controller
     public function store(Request $request)
     {
         // data input...
-        $name               = $request->name;
-        $message            = $name;
-        $slug               = Str::slug($name, '-') . '.html';
-        $uuid               = Str::uuid();
+        $name                       = $request->name;
+        $message                    = $name;
+        $slug                       = Str::slug($name, '-');
+        $uuid                       = Str::uuid();
 
         // validation...
-        $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:blog_categories'],
+        $validatedData              = $request->validate([
+            'name'                  => ['required', 'max:255', 'unique:blog_categories'],
         ]);
 
         // insert to table...
         $data = [
-            'uuid'          => $uuid,
-            'name'          => $name,
-            'slug'          => $slug,
+            'uuid'                  => $uuid,
+            'name'                  => $name,
+            'slug'                  => $slug,
         ];
         BlogCategory::create($data);
 
         // flashdata...
         $flashData = [
-            'message'       => 'Data "' . $message . '" ditambahkan!',
-            'alert'         => 'primary',
+            'message'               => 'Data "' . $message . '" ditambahkan!',
+            'alert'                 => 'primary',
+            'icon'                  => 'check',
         ];
-        return redirect('/developer/blog/category')->with($flashData);
+        return redirect(route('developer.blog.category.index'))->with($flashData);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BlogCategory  $blogCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(BlogCategory $category)
+    public function show($id)
     {
-        $data = [
-            'category'          => $category,
-        ];
-        return view('private.blog-category.show', $data);
+        $data['category']           = BlogCategory::where('slug', $id)->first();
+        return view('private.developer.blog.category.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\BlogCategory  $blogCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(BlogCategory $category)
+    public function edit($id)
     {
-        $data = [
-            'category'         => $category,
-        ];
-        return view('private.blog-category.update', $data);
+        $data['category']           = BlogCategory::where('slug', $id)->first();
+        return view('private.developer.blog.category.update', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BlogCategory  $blogCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BlogCategory $category)
+    public function update(Request $request, $id)
     {
         // data detail...
-        $oldSlug            = $category->slug;
-        $oldName            = $category->name;
+        $data['category']           = BlogCategory::where('slug', $id)->first();
+        $oldName                    = $data['category']->name;
 
         // data input...
-        $name               = $request->name;
-        $message            = $name;
-        $slug               = Str::slug($name, '-') . '.html';
+        $name                       = $request->name;
+        $message                    = $name;
+        $slug                       = Str::slug($name, '-');
 
         // validation logic...
-        $oldName            !== $name ? $uName = "unique:blog_categories" : $uName = "";
+        $oldName                    !== $name ? $uName = "unique:blog_categories" : $uName = "";
 
         // validation...
-        $validatedData      = $request->validate([
-            'name'         => ['required', 'max:255', $uName],
+        $validatedData              = $request->validate([
+            'name'                  => ['required', 'max:255', $uName],
         ]);
 
         // insert to table...
         $data = [
-            'name'          => $name,
-            'slug'          => $slug,
+            'name'                  => $name,
+            'slug'                  => $slug,
         ];
-        BlogCategory::where('slug', $oldSlug)->update($data);
+        BlogCategory::where('slug', $id)->update($data);
 
         // flashdata...
         $flashData = [
-            'message'       => 'Data "' . $message . '" diubah!',
-            'alert'         => 'success',
+            'message'               => 'Data "' . $message . '" diubah!',
+            'alert'                 => 'success',
+            'icon'                  => 'edit',
         ];
-        return redirect('/developer/blog/category')->with($flashData);
+        return redirect(route('developer.blog.category.index'))->with($flashData);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\BlogCategory  $blogCategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BlogCategory $category)
+    public function destroy($id)
     {
         // data detail...
-        $oldId              = $category->id;
-        $oldName            = $category->name;
-        $message            = $oldName;
+        $data['category']           = BlogCategory::where('slug', $id)->first();
+        $oldId                      = $data['category']->id;
+        $oldName                    = $data['category']->name;
+        $message                    = $oldName;
 
         // delete data on table..
         BlogCategory::destroy($oldId);
 
         // flashdata...
         $flashData = [
-            'message'       => 'Data "' . $message . '" dihapus!',
-            'alert'         => 'danger',
+            'message'               => 'Data "' . $message . '" dihapus!',
+            'alert'                 => 'danger',
+            'icon'                  => 'trash',
         ];
-        return redirect('/developer/blog/category')->with($flashData);
+        return redirect(route('developer.blog.category.index'))->with($flashData);
     }
 }

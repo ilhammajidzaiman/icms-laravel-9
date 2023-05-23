@@ -1,22 +1,29 @@
 @extends('private.templates.main')
-@section('container')
-    <x-button-link :href="'./'" label="kembali" class="rounded-pill btn-sm btn-outline-secondary mb-3"
-        icon="fa-arrow-left" />
 
-    <form action="{{ $segmentUrl }}" method="post" enctype="multipart/form-data">
+@section('header')
+    posting baru
+@endsection
+
+@section('container')
+    <x-button-link href="{{ route('developer.blog.post.index') }}" label="kembali"
+        class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
+
+    <form action="{{ route('developer.blog.post.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-9">
                 <div class="form-row">
-                    <x-form-input-textarea rows="2" name="title" label="judul" :value="old('title')" class="col-12" />
+                    <x-form-input-textarea rows="2" name="title" label="judul" value="{{ old('title') }}"
+                        class="col-12" />
                 </div>
-                <x-form-input-summernote name="content" label="content" :value="old('content')" />
+                <x-form-input-summernote name="content" label="content" value="{{ old('content') }}" />
             </div>
             <div class="col-md-3">
                 @php
                     $url = url('assets/images/default-img.svg');
                 @endphp
-                <x-form-file-preview name="file" label="thumbnail" :value="$url" accept=".jpg,.jpeg,.png" />
+                <x-form-file-preview name="file" label="thumbnail" value="{{ $url }}"
+                    accept=".jpg,.jpeg,.png" />
                 <div class="card">
                     <div class="card-body">
                         <label>Kategori</label>

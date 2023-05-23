@@ -1,6 +1,13 @@
 @extends('private.templates.main')
+
+@section('header')
+    posting
+@endsection
+
 @section('container')
-    <x-button-link :href="$segmentUrl . '/create'" label="baru" class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-plus" />
+    <x-button-link href="{{ route('developer.blog.post.create') }}" label="baru"
+        class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-plus" />
+
     <x-alert-dismissing />
 
     <div class="row">
@@ -25,22 +32,24 @@
                                     <td>{{ $article->title }}</td>
                                     <td>{{ $article->user->name }}</td>
                                     <td>
-                                        <x-badge class="badge-pill badge-{{ $article->status->color }}" :label="$article->status->name" />
+                                        <x-badge class="badge-pill badge-{{ $article->status->color }}"
+                                            label="{{ $article->status->name }}" />
                                     </td>
                                     <td class="text-right">
                                         <x-field-date :create="$article->created_at" :update="$article->updated_at" class="text-xs text-secondary" />
                                     </td>
                                     <td class="text-right">
-                                        <x-button-link :href="$segmentUrl . '/' . $article->slug" label="lihat"
-                                            class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
-                                        <x-button-link :href="$segmentUrl . '/' . $article->slug . '/edit'" label="edit"
-                                            class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
-                                        <x-button-delete :href="$segmentUrl . '/' . $article->slug" :confirm="$article->title" />
+                                        <x-button-link href="{{ route('developer.blog.post.show', $article->slug) }}"
+                                            label="lihat" class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                        <x-button-link href="{{ route('developer.blog.post.edit', $article->slug) }}"
+                                            label="edit" class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
+                                        <x-button-delete href="{{ route('developer.blog.post.delete', $article->slug) }}"
+                                            confirm="{{ $article->title }}" />
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="6">
                                         <x-alert-empty />
                                     </td>
                                 </tr>

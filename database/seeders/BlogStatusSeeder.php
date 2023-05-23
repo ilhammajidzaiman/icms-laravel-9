@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\BlogStatus;
+use App\Models\Blog\BlogStatus;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;

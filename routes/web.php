@@ -19,8 +19,9 @@ use App\Http\Controllers\Private\Developer\Management\UserAccessController as De
 use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
 
 // blog
-use App\Http\Controllers\Private\Developer\Blog\BlogArticleController as DeveloperBlogArticleController;
+use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,8 +130,40 @@ Route::middleware('auth')->group(
                         });
                     }
                 );
+                Route::prefix('blog')->group(
+                    function () {
+                        Route::prefix('status')->controller(DeveloperBlogStatusController::class)->group(function () {
+                            Route::get('/', 'index')->name('developer.blog.status.index');
+                            Route::get('/create', 'create')->name('developer.blog.status.create');
+                            Route::post('/store', 'store')->name('developer.blog.status.store');
+                            Route::get('/{id}/show', 'show')->name('developer.blog.status.show');
+                            Route::get('/{id}/edit', 'edit')->name('developer.blog.status.edit');
+                            Route::put('/{id}/update', 'update')->name('developer.blog.status.update');
+                            Route::delete('/{id}/delete', 'destroy')->name('developer.blog.status.delete');
+                        });
+                        // 
+                        Route::prefix('category')->controller(DeveloperBlogCategoryController::class)->group(function () {
+                            Route::get('/', 'index')->name('developer.blog.category.index');
+                            Route::get('/create', 'create')->name('developer.blog.category.create');
+                            Route::post('/store', 'store')->name('developer.blog.category.store');
+                            Route::get('/{id}/show', 'show')->name('developer.blog.category.show');
+                            Route::get('/{id}/edit', 'edit')->name('developer.blog.category.edit');
+                            Route::put('/{id}/update', 'update')->name('developer.blog.category.update');
+                            Route::delete('/{id}/delete', 'destroy')->name('developer.blog.category.delete');
+                        });
+                        // 
+                        Route::prefix('post')->controller(DeveloperBlogPostController::class)->group(function () {
+                            Route::get('/', 'index')->name('developer.blog.post.index');
+                            Route::get('/create', 'create')->name('developer.blog.post.create');
+                            Route::post('/store', 'store')->name('developer.blog.post.store');
+                            Route::get('/{id}/show', 'show')->name('developer.blog.post.show');
+                            Route::get('/{id}/edit', 'edit')->name('developer.blog.post.edit');
+                            Route::put('/{id}/update', 'update')->name('developer.blog.post.update');
+                            Route::delete('/{id}/delete', 'destroy')->name('developer.blog.post.delete');
+                        });
+                    }
+                );
                 // 
-
             }
         );
     }

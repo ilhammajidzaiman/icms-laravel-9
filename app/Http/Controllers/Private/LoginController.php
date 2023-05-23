@@ -74,12 +74,11 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        $name               = auth()->user()->name;
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         $flashData = [
-            'message'       => $name . ', Anda telah logout!',
+            'message'       => 'Anda telah logout!',
             'alert'         => 'primary',
             'icon'          => 'sign-out-alt',
         ];

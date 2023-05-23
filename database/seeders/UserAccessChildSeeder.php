@@ -54,11 +54,15 @@ class UserAccessChildSeeder extends Seeder
             'user_menu_parent_id'   => '3',
             'user_menu_child_id'    => '6',
         ]);
-
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '3',
             'user_menu_child_id'    => '7',
+        ]);
+        UserAccessChild::create([
+            'user_level_id'         => '1',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '8',
         ]);
 
 

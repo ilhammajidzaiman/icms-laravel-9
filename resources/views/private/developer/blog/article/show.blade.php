@@ -1,7 +1,13 @@
 @extends('private.templates.main')
+
+@section('header')
+    posting baru
+@endsection
+
 @section('container')
-    <x-button-link :href="'./'" label="kembali" class="rounded-pill btn-sm btn-outline-secondary mb-3"
-        icon="fa-arrow-left" />
+    <x-button-link href="{{ route('developer.blog.post.index') }}" label="kembali"
+        class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
+
     <div class="row justify-content-center">
         <div class="col-md-6 mb-5">
             <h3>{{ $article->title }}</h3>

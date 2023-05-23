@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Support\Str;
-use App\Models\BlogCategory;
 use Illuminate\Database\Seeder;
+use App\Models\Blog\BlogCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class BlogCategorySeeder extends Seeder

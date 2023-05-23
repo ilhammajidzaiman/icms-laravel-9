@@ -75,6 +75,17 @@ class UserMenuChildSeeder extends Seeder
             'uuid'                  => Str::uuid(),
             'user_menu_parent_id'   => '3',
             'order'                 => '1',
+            'name'                  => 'Status',
+            'slug'                  => 'status',
+            'icon'                  => 'fa-fw fas fa-toggle-on',
+            'prefix'                => 'blog',
+            'url'                   => '/blog/status',
+        ]);
+
+        UserMenuChild::create([
+            'uuid'                  => Str::uuid(),
+            'user_menu_parent_id'   => '3',
+            'order'                 => '2',
             'name'                  => 'kategori',
             'slug'                  => 'kategori',
             'icon'                  => 'fa-fw fas fa-tags',
@@ -85,7 +96,7 @@ class UserMenuChildSeeder extends Seeder
         UserMenuChild::create([
             'uuid'                  => Str::uuid(),
             'user_menu_parent_id'   => '3',
-            'order'                 => '2',
+            'order'                 => '3',
             'name'                  => 'post',
             'slug'                  => 'post',
             'icon'                  => 'fa-fw fas fa-file',

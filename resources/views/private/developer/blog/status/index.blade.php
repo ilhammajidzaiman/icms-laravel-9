@@ -1,6 +1,13 @@
 @extends('private.templates.main')
+
+@section('header')
+    kategori
+@endsection
+
 @section('container')
-    <x-button-link :href="$segmentUrl . '/create'" label="baru" class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-plus" />
+    <x-button-link href="{{ route('developer.blog.status.create') }}" label="baru"
+        class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-plus" />
+
     <x-alert-dismissing />
 
     <div class="row">
@@ -12,24 +19,30 @@
                             <tr class="text-capitalize">
                                 <th scope="col">#</th>
                                 <th scope="col">nama</th>
+                                <th scope="col">warna</th>
                                 <th scope="col">&nbsp;</th>
                                 <th scope="col" width="250">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($categories as $category)
+                            @forelse ($statuses as $status)
                                 <tr>
                                     <th>{{ $loop->iteration }}</th>
-                                    <td>{{ $category->name }}</td>
-                                    <td class="text-right">
-                                        <x-field-date :create="$category->created_at" :update="$category->updated_at" class="text-xs text-secondary" />
+                                    <td>{{ $status->name }}</td>
+                                    <td>
+                                        <x-badge class="badge-pill badge-{{ $status->color }}"
+                                            label="{{ $status->color }}" />
                                     </td>
                                     <td class="text-right">
-                                        <x-button-link :href="$segmentUrl . '/' . $category->slug" label="lihat"
-                                            class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
-                                        <x-button-link :href="$segmentUrl . '/' . $category->slug . '/edit'" label="edit"
-                                            class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
-                                        <x-button-delete :href="$segmentUrl . '/' . $category->slug" :confirm="$category->name" />
+                                        <x-field-date :create="$status->created_at" :update="$status->updated_at" class="text-xs text-secondary" />
+                                    </td>
+                                    <td class="text-right">
+                                        <x-button-link href="{{ route('developer.blog.status.show', $status->slug) }}"
+                                            label="lihat" class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
+                                        <x-button-link href="{{ route('developer.blog.status.edit', $status->slug) }}"
+                                            label="edit" class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
+                                        <x-button-delete href="{{ route('developer.blog.status.delete', $status->slug) }}"
+                                            confirm="{{ $status->name }}" />
                                     </td>
                                 </tr>
                             @empty

@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Blog;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Blog\BlogStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BlogArticle extends Model
 {
