@@ -17,7 +17,7 @@ class BlogCategoryController extends Controller
     public function index()
     {
         $data['categories']         = BlogCategory::orderByDesc('id')->get();
-        return view('private.developer.blog.category.index', $data);
+        return view('admin-lte.private.developer.blog.category.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        return view('private.developer.blog.category.create');
+        return view('admin-lte.private.developer.blog.category.create');
     }
 
     /**
@@ -75,7 +75,7 @@ class BlogCategoryController extends Controller
     public function show($id)
     {
         $data['category']           = BlogCategory::where('slug', $id)->first();
-        return view('private.developer.blog.category.show', $data);
+        return view('admin-lte.private.developer.blog.category.show', $data);
     }
 
     /**
@@ -87,7 +87,7 @@ class BlogCategoryController extends Controller
     public function edit($id)
     {
         $data['category']           = BlogCategory::where('slug', $id)->first();
-        return view('private.developer.blog.category.update', $data);
+        return view('admin-lte.private.developer.blog.category.update', $data);
     }
 
     /**

@@ -17,7 +17,7 @@ class UserStatusController extends Controller
     public function index()
     {
         $data['statuses']           = UserStatus::orderByDesc('id')->get();
-        return view('private.developer.management.user-status.index', $data);
+        return view('admin-lte.private.developer.management.user-status.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserStatusController extends Controller
      */
     public function create()
     {
-        return view('private.developer.management.user-status.create');
+        return view('admin-lte.private.developer.management.user-status.create');
     }
 
     /**
@@ -78,7 +78,7 @@ class UserStatusController extends Controller
     public function show($id)
     {
         $data['status']             = UserStatus::where('slug', $id)->first();
-        return view('private.developer.management.user-status.show', $data);
+        return view('admin-lte.private.developer.management.user-status.show', $data);
     }
 
     /**
@@ -90,7 +90,7 @@ class UserStatusController extends Controller
     public function edit($id)
     {
         $data['status']             = UserStatus::where('slug', $id)->first();
-        return view('private.developer.management.user-status.update', $data);
+        return view('admin-lte.private.developer.management.user-status.update', $data);
     }
 
     /**

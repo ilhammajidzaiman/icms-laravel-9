@@ -17,7 +17,7 @@ class BlogStatusController extends Controller
     public function index()
     {
         $data['statuses']         = BlogStatus::orderByDesc('id')->get();
-        return view('private.developer.blog.status.index', $data);
+        return view('admin-lte.private.developer.blog.status.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class BlogStatusController extends Controller
      */
     public function create()
     {
-        return view('private.developer.blog.status.create');
+        return view('admin-lte.private.developer.blog.status.create');
     }
 
     /**
@@ -77,7 +77,7 @@ class BlogStatusController extends Controller
     public function show($id)
     {
         $data['status']           = BlogStatus::where('slug', $id)->first();
-        return view('private.developer.blog.status.show', $data);
+        return view('admin-lte.private.developer.blog.status.show', $data);
     }
 
     /**
@@ -89,7 +89,7 @@ class BlogStatusController extends Controller
     public function edit($id)
     {
         $data['status']           = BlogStatus::where('slug', $id)->first();
-        return view('private.developer.blog.status.update', $data);
+        return view('admin-lte.private.developer.blog.status.update', $data);
     }
 
     /**

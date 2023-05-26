@@ -19,7 +19,7 @@ class UserAccessController extends Controller
     public function index()
     {
         $data['levels']             = UserLevel::orderBy('id')->get();
-        return view('private.developer.management.user-access.index', $data);
+        return view('admin-lte.private.developer.management.user-access.index', $data);
     }
 
     /**
@@ -31,7 +31,7 @@ class UserAccessController extends Controller
     public function show($id)
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
-        return view('private.developer.management.user-access.show', $data);
+        return view('admin-lte.private.developer.management.user-access.show', $data);
     }
 
     /**
@@ -44,7 +44,7 @@ class UserAccessController extends Controller
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
         $data['menus']              = UserMenuParent::orderBy('order')->get();
-        return view('private.developer.management.user-access.update', $data);
+        return view('admin-lte.private.developer.management.user-access.update', $data);
     }
 
     public function updateParent($level, $parent)

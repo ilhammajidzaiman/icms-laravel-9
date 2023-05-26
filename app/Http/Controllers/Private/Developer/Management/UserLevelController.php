@@ -17,7 +17,7 @@ class UserLevelController extends Controller
     public function index()
     {
         $data['levels']             = UserLevel::orderByDesc('id')->get();
-        return view('private.developer.management.user-level.index', $data);
+        return view('admin-lte.private.developer.management.user-level.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        return view('private.developer.management.user-level.create');
+        return view('admin-lte.private.developer.management.user-level.create');
     }
 
     /**
@@ -78,7 +78,7 @@ class UserLevelController extends Controller
     public function show($id)
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
-        return view('private.developer.management.user-level.show', $data);
+        return view('admin-lte.private.developer.management.user-level.show', $data);
     }
 
     /**
@@ -90,7 +90,7 @@ class UserLevelController extends Controller
     public function edit($id)
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
-        return view('private.developer.management.user-level.update', $data);
+        return view('admin-lte.private.developer.management.user-level.update', $data);
     }
 
     /**

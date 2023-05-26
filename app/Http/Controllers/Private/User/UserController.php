@@ -24,7 +24,7 @@ class UserController extends Controller
         $data = [
             'users'         => User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString(),
         ];
-        return view('private.user.index', $data);
+        return view('admin-lte.private.user.index', $data);
     }
 
     /**
@@ -38,7 +38,7 @@ class UserController extends Controller
             'statuses'      => UserStatus::orderBy('id')->get(),
             'levels'        => UserLevel::orderByDesc('id')->get(),
         ];
-        return view('private.user.create', $data);
+        return view('admin-lte.private.user.create', $data);
     }
 
     /**
@@ -112,7 +112,7 @@ class UserController extends Controller
         $data = [
             'user'          => $user,
         ];
-        return view('private.user.show', $data);
+        return view('admin-lte.private.user.show', $data);
     }
 
     /**
@@ -128,7 +128,7 @@ class UserController extends Controller
             'levels'        => UserLevel::orderByDesc('id')->get(),
             'user'          => $user,
         ];
-        return view('private.user.update', $data);
+        return view('admin-lte.private.user.update', $data);
     }
 
     /**
