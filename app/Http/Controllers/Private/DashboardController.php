@@ -15,6 +15,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin-lte.private.dashboard');
+        return view('private.dashboard');
     }
 }

@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $search                     = request(['search']);
         $data['users']              = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('admin-lte.private.developer.management.user.index', $data);
+        return view('private.developer.management.user.index', $data);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $data['statuses']           = UserStatus::orderBy('id')->get();
         $data['levels']             = UserLevel::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.management.user.create', $data);
+        return view('private.developer.management.user.create', $data);
     }
 
     /**
@@ -109,7 +109,7 @@ class UserController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" ditambahkan',
             'alert'                 => 'primary',
-            'icon'                  => 'check',
+            'icon'                  => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.management.user.index'))->with($flashData);
     }
@@ -123,7 +123,7 @@ class UserController extends Controller
     public function show($id)
     {
         $data['user']               = User::where('uuid', $id)->first();
-        return view('admin-lte.private.developer.management.user.show', $data);
+        return view('private.developer.management.user.show', $data);
     }
 
     /**
@@ -137,7 +137,7 @@ class UserController extends Controller
         $data['user']               = User::where('uuid', $id)->first();
         $data['statuses']           = UserStatus::orderBy('id')->get();
         $data['levels']             = UserLevel::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.management.user.update', $data);
+        return view('private.developer.management.user.update', $data);
     }
 
     /**
@@ -218,7 +218,7 @@ class UserController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" diubah',
             'alert'                 => 'success',
-            'icon'                  => 'edit',
+            'icon'                  => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.management.user.index'))->with($flashData);
     }
@@ -251,7 +251,7 @@ class UserController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" dihapus!',
             'alert'                 => 'danger',
-            'icon'                  => 'trash',
+            'icon'                  => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.management.user.index'))->with($flashData);
     }

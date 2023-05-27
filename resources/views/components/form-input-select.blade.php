@@ -1,6 +1,6 @@
 <div class="form-group text-capitalize {{ $class }}">
-    <label for="{{ $name }}">{{ $label }}</label>
-    <select name="{{ $name }}" id="{{ $name }}" class="custom-select @error($name)is-invalid @enderror">
+    <label for="{{ $name }}" class="form-label">{{ $label }}</label>
+    <select name="{{ $name }}" id="{{ $name }}" class="form-select @error($name)is-invalid @enderror">
         {{-- <option value="">Pilih {{ $label }}...</option> --}}
         {{ $slot }}
     </select>

@@ -1,4 +1,4 @@
-<a href="{{ $href }}" class="text-capitalize btn {{ $class }}">
-    <i class="fa-fw fas {{ $icon }}"></i>
+<a href="{{ $href }}" class="text-capitalize {{ $class }}">
+    <i class="{{ $icon }}"></i>
     {{ $label }}
 </a>

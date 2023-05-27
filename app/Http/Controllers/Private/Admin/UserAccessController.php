@@ -22,7 +22,7 @@ class UserAccessController extends Controller
         $data = [
             'levels'        => UserLevel::orderBy('id')->get(),
         ];
-        return view('admin-lte.private.user-access.index', $data);
+        return view('private.access.index', $data);
     }
 
     /**
@@ -57,7 +57,7 @@ class UserAccessController extends Controller
         $data = [
             'level'         => $access,
         ];
-        return view('admin-lte.private.user-access.show', $data);
+        return view('private.access.show', $data);
     }
 
     /**
@@ -72,7 +72,7 @@ class UserAccessController extends Controller
             'level'         => $access,
             'menus'         => UserMenuParent::orderBy('order')->get(),
         ];
-        return view('admin-lte.private.user-access.update', $data);
+        return view('private.user-access.update', $data);
     }
 
     /**

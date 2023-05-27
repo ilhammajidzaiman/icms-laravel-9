@@ -1,10 +1,10 @@
 function previewImg() {
-    const sampul = document.querySelector('#file');
-    const img_preview = document.querySelector('.img-preview');
-    const file_sampul = new FileReader();
-    file_sampul.readAsDataURL(sampul.files[0]);
-    file_sampul.onload = function (e) {
-        img_preview.src = e.target.result;
+    const cover = document.querySelector('#file');
+    const imgPreview = document.querySelector('.img-preview');
+    const fileCover = new FileReader();
+    fileCover.readAsDataURL(cover.files[0]);
+    fileCover.onload = function(e) {
+        imgPreview.src = e.target.result;
     }
 }
 

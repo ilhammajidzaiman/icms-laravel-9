@@ -21,7 +21,7 @@ class ProfilController extends Controller
     public function index($id)
     {
         $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
-        return view('admin-lte.private.profil.index', $data);
+        return view('private.profil.index', $data);
     }
 
     /**
@@ -33,7 +33,7 @@ class ProfilController extends Controller
     public function edit($id)
     {
         $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
-        return view('admin-lte.private.profil.update', $data);
+        return view('private.profil.update', $data);
     }
 
     /**
@@ -106,7 +106,7 @@ class ProfilController extends Controller
         $flashData = [
             'message'               => 'Profil berhasil diubah!',
             'alert'                 => 'success',
-            'icon'                  => 'edit',
+            'icon'                  => 'fa-fw fas fa-edit',
         ];
         return redirect(route($request->segment(1) . '.profil.index', $id))->with($flashData);
     }
@@ -114,7 +114,7 @@ class ProfilController extends Controller
     public function passwordEdit($id)
     {
         $data['profil']             = User::where('uuid', $id)->where('id', auth()->user()->id)->first();
-        return view('admin-lte.private.profil.password', $data);
+        return view('private.profil.password', $data);
     }
 
     /**

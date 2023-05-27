@@ -17,7 +17,7 @@ class UserLevelController extends Controller
     public function index()
     {
         $data['levels']             = UserLevel::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.management.user-level.index', $data);
+        return view('private.developer.management.level.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        return view('admin-lte.private.developer.management.user-level.create');
+        return view('private.developer.management.level.create');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserLevelController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" ditambahkan!',
             'alert'                 => 'primary',
-            'icon'                  => 'check',
+            'icon'                  => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.management.user.level.index'))->with($flashData);
     }
@@ -78,7 +78,7 @@ class UserLevelController extends Controller
     public function show($id)
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
-        return view('admin-lte.private.developer.management.user-level.show', $data);
+        return view('private.developer.management.level.show', $data);
     }
 
     /**
@@ -90,7 +90,7 @@ class UserLevelController extends Controller
     public function edit($id)
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
-        return view('admin-lte.private.developer.management.user-level.update', $data);
+        return view('private.developer.management.level.update', $data);
     }
 
     /**
@@ -133,7 +133,7 @@ class UserLevelController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" diubah!',
             'alert'                 => 'success',
-            'icon'                  => 'edit',
+            'icon'                  => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.management.user.level.index'))->with($flashData);
     }
@@ -159,6 +159,7 @@ class UserLevelController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" dihapus!',
             'alert'                 => 'danger',
+            'icon'                  => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.management.user.level.index'))->with($flashData);
     }

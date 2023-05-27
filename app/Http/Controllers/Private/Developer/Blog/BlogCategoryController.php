@@ -17,7 +17,7 @@ class BlogCategoryController extends Controller
     public function index()
     {
         $data['categories']         = BlogCategory::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.blog.category.index', $data);
+        return view('private.developer.blog.category.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin-lte.private.developer.blog.category.create');
+        return view('private.developer.blog.category.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class BlogCategoryController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" ditambahkan!',
             'alert'                 => 'primary',
-            'icon'                  => 'check',
+            'icon'                  => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.blog.category.index'))->with($flashData);
     }
@@ -75,7 +75,7 @@ class BlogCategoryController extends Controller
     public function show($id)
     {
         $data['category']           = BlogCategory::where('slug', $id)->first();
-        return view('admin-lte.private.developer.blog.category.show', $data);
+        return view('private.developer.blog.category.show', $data);
     }
 
     /**
@@ -87,7 +87,7 @@ class BlogCategoryController extends Controller
     public function edit($id)
     {
         $data['category']           = BlogCategory::where('slug', $id)->first();
-        return view('admin-lte.private.developer.blog.category.update', $data);
+        return view('private.developer.blog.category.update', $data);
     }
 
     /**
@@ -127,7 +127,7 @@ class BlogCategoryController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" diubah!',
             'alert'                 => 'success',
-            'icon'                  => 'edit',
+            'icon'                  => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.blog.category.index'))->with($flashData);
     }
@@ -153,7 +153,7 @@ class BlogCategoryController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" dihapus!',
             'alert'                 => 'danger',
-            'icon'                  => 'trash',
+            'icon'                  => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.blog.category.index'))->with($flashData);
     }

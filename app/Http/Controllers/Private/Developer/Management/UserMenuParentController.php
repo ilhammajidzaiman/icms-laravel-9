@@ -17,7 +17,7 @@ class UserMenuParentController extends Controller
     public function index()
     {
         $data['menuParents']            = UserMenuParent::orderBy('order')->get();
-        return view('admin-lte.private.developer.management.user-menu-parent.index', $data);
+        return view('private.developer.management.menu-parent.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserMenuParentController extends Controller
      */
     public function create()
     {
-        return view('admin-lte.private.developer.management.user-menu-parent.create');
+        return view('private.developer.management.menu-parent.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class UserMenuParentController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" ditambahkan',
             'alert'                     => 'primary',
-            'icon'                      => 'check',
+            'icon'                      => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
     }
@@ -86,7 +86,7 @@ class UserMenuParentController extends Controller
     public function show($id)
     {
         $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('admin-lte.private.developer.management.user-menu-parent.show', $data);
+        return view('private.developer.management.menu-parent.show', $data);
     }
 
     /**
@@ -98,7 +98,7 @@ class UserMenuParentController extends Controller
     public function edit($id)
     {
         $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('admin-lte.private.developer.management.user-menu-parent.update', $data);
+        return view('private.developer.management.menu-parent.update', $data);
     }
 
     /**
@@ -142,7 +142,7 @@ class UserMenuParentController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" diubah!',
             'alert'                     => 'success',
-            'icon'                      => 'edit',
+            'icon'                      => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
     }
@@ -165,7 +165,7 @@ class UserMenuParentController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" dihapus!',
             'alert'                     => 'danger',
-            'icon'                      => 'trash',
+            'icon'                      => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
     }

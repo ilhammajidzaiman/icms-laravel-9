@@ -22,7 +22,7 @@ class BlogPostController extends Controller
     public function index()
     {
         $data['articles']               = BlogArticle::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.blog.article.index', $data);
+        return view('private.developer.blog.article.index', $data);
     }
 
     /**
@@ -34,7 +34,7 @@ class BlogPostController extends Controller
     {
         $data['statuses']               = BlogStatus::orderBy('id')->get();
         $data['categories']             = BlogCategory::orderBy('name')->get();
-        return view('admin-lte.private.developer.blog.article.create', $data);
+        return view('private.developer.blog.article.create', $data);
     }
 
     /**
@@ -118,7 +118,7 @@ class BlogPostController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" ditambahkan',
             'alert'                     => 'primary',
-            'icon'                      => 'check',
+            'icon'                      => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.blog.post.index'))->with($flashData);
     }
@@ -133,7 +133,7 @@ class BlogPostController extends Controller
     {
         $data['article']                = BlogArticle::where('slug', $id)->first();
         $data['blogPosts']              = BlogPost::where('blog_article_id', $data['article']->id)->orderBy('id')->with(['category'])->get();
-        return view('admin-lte.private.developer.blog.article.show', $data);
+        return view('private.developer.blog.article.show', $data);
     }
 
     /**
@@ -149,7 +149,7 @@ class BlogPostController extends Controller
         $data['categories']             = BlogCategory::orderBy('name')->get();
         $data['article']                = BlogArticle::where('slug', $id)->first();
         $data['blogPosts']              = BlogPost::where('blog_article_id', $data['article']->id)->orderBy('id')->with(['category'])->get();
-        return view('admin-lte.private.developer.blog.article.update', $data);
+        return view('private.developer.blog.article.update', $data);
     }
 
     /**
@@ -242,7 +242,7 @@ class BlogPostController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" diubah',
             'alert'                     => 'success',
-            'icon'                      => 'edit',
+            'icon'                      => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.blog.post.index'))->with($flashData);
     }
@@ -276,7 +276,7 @@ class BlogPostController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" dihapus!',
             'alert'                     => 'danger',
-            'icon'                      => 'trash',
+            'icon'                      => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.blog.post.index'))->with($flashData);
     }

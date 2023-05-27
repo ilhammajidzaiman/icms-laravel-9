@@ -17,7 +17,7 @@ class BlogStatusController extends Controller
     public function index()
     {
         $data['statuses']         = BlogStatus::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.blog.status.index', $data);
+        return view('private.developer.blog.status.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class BlogStatusController extends Controller
      */
     public function create()
     {
-        return view('admin-lte.private.developer.blog.status.create');
+        return view('private.developer.blog.status.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class BlogStatusController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" ditambahkan!',
             'alert'                 => 'primary',
-            'icon'                  => 'check',
+            'icon'                  => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.blog.status.index'))->with($flashData);
     }
@@ -77,7 +77,7 @@ class BlogStatusController extends Controller
     public function show($id)
     {
         $data['status']           = BlogStatus::where('slug', $id)->first();
-        return view('admin-lte.private.developer.blog.status.show', $data);
+        return view('private.developer.blog.status.show', $data);
     }
 
     /**
@@ -89,7 +89,7 @@ class BlogStatusController extends Controller
     public function edit($id)
     {
         $data['status']           = BlogStatus::where('slug', $id)->first();
-        return view('admin-lte.private.developer.blog.status.update', $data);
+        return view('private.developer.blog.status.update', $data);
     }
 
     /**
@@ -131,7 +131,7 @@ class BlogStatusController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" diubah!',
             'alert'                 => 'success',
-            'icon'                  => 'edit',
+            'icon'                  => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.blog.status.index'))->with($flashData);
     }
@@ -157,7 +157,7 @@ class BlogStatusController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" dihapus!',
             'alert'                 => 'danger',
-            'icon'                  => 'trash',
+            'icon'                  => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.blog.status.index'))->with($flashData);
     }

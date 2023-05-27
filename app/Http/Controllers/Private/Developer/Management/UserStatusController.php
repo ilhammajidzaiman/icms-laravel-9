@@ -17,7 +17,7 @@ class UserStatusController extends Controller
     public function index()
     {
         $data['statuses']           = UserStatus::orderByDesc('id')->get();
-        return view('admin-lte.private.developer.management.user-status.index', $data);
+        return view('private.developer.management.status.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserStatusController extends Controller
      */
     public function create()
     {
-        return view('admin-lte.private.developer.management.user-status.create');
+        return view('private.developer.management.status.create');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserStatusController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" ditambahkan!',
             'alert'                 => 'primary',
-            'icon'                  => 'check',
+            'icon'                  => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.management.user.status.index'))->with($flashData);
     }
@@ -78,7 +78,7 @@ class UserStatusController extends Controller
     public function show($id)
     {
         $data['status']             = UserStatus::where('slug', $id)->first();
-        return view('admin-lte.private.developer.management.user-status.show', $data);
+        return view('private.developer.management.status.show', $data);
     }
 
     /**
@@ -90,7 +90,7 @@ class UserStatusController extends Controller
     public function edit($id)
     {
         $data['status']             = UserStatus::where('slug', $id)->first();
-        return view('admin-lte.private.developer.management.user-status.update', $data);
+        return view('private.developer.management.status.update', $data);
     }
 
     /**
@@ -133,7 +133,7 @@ class UserStatusController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" diubah!',
             'alert'                 => 'success',
-            'icon'                  => 'edit',
+            'icon'                  => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.management.user.status.index'))->with($flashData);
     }
@@ -158,7 +158,7 @@ class UserStatusController extends Controller
         $flashData = [
             'message'               => 'Data "' . $message . '" dihapus!',
             'alert'                 => 'danger',
-            'icon'                  => 'trash',
+            'icon'                  => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.management.user.status.index'))->with($flashData);
     }

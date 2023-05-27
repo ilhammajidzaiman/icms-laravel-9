@@ -18,7 +18,7 @@ class UserMenuChildController extends Controller
     public function create($id)
     {
         $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('admin-lte.private.developer.management.user-menu-child.create', $data);
+        return view('private.developer.management.menu-child.create', $data);
     }
 
     /**
@@ -68,7 +68,7 @@ class UserMenuChildController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" ditambahkan',
             'alert'                     => 'primary',
-            'icon'                      => 'check',
+            'icon'                      => 'fa-fw fas fa-check',
         ];
         return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
     }
@@ -82,7 +82,7 @@ class UserMenuChildController extends Controller
     public function show($id)
     {
         $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
-        return view('admin-lte.private.developer.management.user-menu-child.show', $data);
+        return view('private.developer.management.menu-child.show', $data);
     }
 
     /**
@@ -94,7 +94,7 @@ class UserMenuChildController extends Controller
     public function edit($id)
     {
         $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
-        return view('admin-lte.private.developer.management.user-menu-child.update', $data);
+        return view('private.developer.management.menu-child.update', $data);
     }
 
     /**
@@ -139,7 +139,7 @@ class UserMenuChildController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" diubah!',
             'alert'                     => 'success',
-            'icon'                      => 'edit',
+            'icon'                      => 'fa-fw fas fa-edit',
         ];
         return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
     }
@@ -164,7 +164,7 @@ class UserMenuChildController extends Controller
         $flashData = [
             'message'                   => 'Data "' . $message . '" dihapus!',
             'alert'                     => 'danger',
-            'icon'                      => 'trash',
+            'icon'                      => 'fa-fw fas fa-trash',
         ];
         return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
     }

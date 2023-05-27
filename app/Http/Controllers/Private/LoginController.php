@@ -16,7 +16,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('admin-lte.private.login');
+        return view('private.login');
     }
 
     /**
