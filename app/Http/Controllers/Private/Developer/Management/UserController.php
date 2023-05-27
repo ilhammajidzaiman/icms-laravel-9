@@ -165,7 +165,6 @@ class UserController extends Controller
         $level                      = $request->level;
         $file                       = $request->file('file');
         $message                    = $name;
-        $password                   = Hash::make($request->password);
         $path                       = 'user/' . date('Y/m/');
         $default                    = 'default-user.svg';
 
@@ -178,8 +177,6 @@ class UserController extends Controller
             'name'                  => ['required', 'max:255'],
             'username'              => ['required', 'max:255', $uUsername],
             'email'                 => ['required', 'max:255', $uEmail],
-            'password'              => ['required', 'min:6', 'same:confirmation'],
-            'confirmation'          => ['required', 'min:6', 'same:password'],
             'status'                => ['required'],
             'level'                 => ['required'],
         ]);
@@ -204,7 +201,6 @@ class UserController extends Controller
         $data = [
             'user_level_id'         => $level,
             'user_status_id'        => $status,
-            'password'              => $password,
             'username'              => $username,
             'email'                 => $email,
             'name'                  => $name,

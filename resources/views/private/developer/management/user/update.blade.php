@@ -6,64 +6,85 @@
 
 @section('container')
     <x-button-link href="{{ route('developer.management.user.index') }}" label="kembali"
-        class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-arrow-left" />
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
-    <form action="{{ route('developer.management.user.update', $user->uuid) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('developer.management.user.update', $user->uuid) }}" method="post">
         @method('put')
         @csrf
         <div class="row">
-            <div class="col-md-3 p-5">
-                @php
-                    $path = $user->path;
-                    $file = $user->file;
-                    $file == 'default-user.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
-                @endphp
-                <x-form-file-preview name="file" label="thumbnail" value="{{ $url }}" accept=".jpg,.jpeg,.png" />
+            <div class="col-12 col-md-3">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="form-group text-capitalize">
+                                @php
+                                    $path = $user->path;
+                                    $file = $user->file;
+                                    $file == 'default-user.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
+                                @endphp
+                                <img src="{{ $url }}" alt="{{ $url }}"
+                                    class="img-fluid rounded w-100 mb-3 img-preview">
+                                <label for="file" class="form-label">thumbnail</label>
+                                <input type="file" name="file" id="file" class="form-control"
+                                    accept=".jpg,.jpeg,.png" onchange="previewImg()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-12 col-md-9">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="form-row">
-                            <x-form-input-row type="text" name="name" label="nama"
-                                value="{{ old('name', $user->name) }}" class="col-md-4" />
-                        </div>
-                        <div class="form-row">
-                            <x-form-input-row type="text" name="username" label="username"
-                                value="{{ old('username', $user->username) }}" class="col-md-4" />
-                        </div>
-                        <div class="form-row">
-                            <x-form-input-row type="text" name="email" label="email"
-                                value="{{ old('email', $user->email) }}" class="col-md-6" />
-                        </div>
-                        <div class="form-row">
-                            <x-form-input-password name="password" label="password" class="col-md-6" />
-                            <x-form-input-password name="confirmation" label="konfirmasi password" class="col-md-6" />
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <x-form-input-row type="text" name="name" label="nama"
+                                    value="{{ old('name', $user->name) }}" class="col-md-6" />
+                            </div>
+                            <div class="row">
+                                <x-form-input-row type="text" name="username" label="username"
+                                    value="{{ old('username', $user->username) }}" class="col-md-6" />
+                            </div>
+                            <div class="row">
+                                <x-form-input-row type="text" name="email" label="email"
+                                    value="{{ old('email', $user->email) }}" class="col-md-6" />
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="password" class="form-label text-capitalize">password</label>
+                                    <div class="form-control-static" id="password">
+                                        Reset password user
+                                        <a href="" class="fw-bold">disini</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-body">
-                        <div class="form-row">
-                            <x-form-input-select name="status" label="status" class="col-md-4">
-                                @foreach ($statuses as $status)
-                                    <option value="{{ $status->id }}" @selected(old('status', $user->user_status_id) == $status->id)>
-                                        {{ $status->name }}
-                                    </option>
-                                @endforeach
-                            </x-form-input-select>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="row">
+                                <x-form-input-select name="level" label="level" class="col-md-4">
+                                    @foreach ($levels as $level)
+                                        <option value="{{ $level->id }}" @selected(old('level', $user->user_level_id) == $level->id)>
+                                            {{ $level->name }}
+                                        </option>
+                                    @endforeach
+                                </x-form-input-select>
+                            </div>
+                            <div class="row">
+                                <x-form-input-select name="status" label="status" class="col-md-4">
+                                    @foreach ($statuses as $status)
+                                        <option value="{{ $status->id }}" @selected(old('status', $user->user_status_id) == $status->id)>
+                                            {{ $status->name }}
+                                        </option>
+                                    @endforeach
+                                </x-form-input-select>
+                            </div>
                         </div>
-                        <div class="form-row">
-                            <x-form-input-select name="level" label="level" class="col-md-4">
-                                @foreach ($levels as $level)
-                                    <option value="{{ $level->id }}" @selected(old('level', $user->user_level_id) == $level->id)>
-                                        {{ $level->name }}
-                                    </option>
-                                @endforeach
-                            </x-form-input-select>
-                        </div>
-                        <x-button-submit label="simpan" class="btn-primary" icon="fa-save" />
                     </div>
                 </div>
+                <x-button-submit label="simpan" class="btn btn-primary" icon="fa-fw fas fa-save" />
             </div>
         </div>
     </form>

@@ -2,7 +2,7 @@
     <label for="{{ $name }}" class="form-label">
         {{ $label }}
     </label>
-    <input type="text" class="form-control @error($name)is-invalid @enderror" name="{{ $name }}"
+    <input type="{{ $type }}" class="form-control @error($name)is-invalid @enderror" name="{{ $name }}"
         id="{{ $name }}" value="{{ $value }}" placeholder="Masukkan {{ $label }}">
     @error($name)
         <div id="{{ $name }}" class="invalid-feedback">
