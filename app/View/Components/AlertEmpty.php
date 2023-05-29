@@ -11,9 +11,12 @@ class AlertEmpty extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $label;
+
+    public function __construct($label)
     {
-        //
+        $this->label = $label;
     }
 
     /**

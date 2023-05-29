@@ -1,1 +1,1 @@
-<span class="text-secondary">Belum ada data...</span>
+<span class="text-secondary">{{ $label }}</span>
