@@ -7,7 +7,7 @@
 @section('container')
     <x-alert-dismissing />
 
-    <x-button-link href="{{ route('developer.management.user.menu.parent.create') }}" label="baru"
+    <x-button-link href="{{ route(Request::segment(1) . '.management.user.menu.parent.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
     <div class="row">
@@ -36,15 +36,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.menu.child.create', $menuParent->uuid) }} "
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.child.create', $menuParent->uuid) }} "
                                                     label="sub baru" class="rounded-pill btn btn-sm btn-outline-secondary"
                                                     icon="fa-fw fas fa-plus" />
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.menu.parent.show', $menuParent->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.parent.show', $menuParent->uuid) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.menu.parent.edit', $menuParent->uuid) }} "
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.parent.edit', $menuParent->uuid) }} "
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 @php
@@ -52,7 +52,7 @@
                                                 @endphp
                                             @empty($menu)
                                                 <x-button-delete
-                                                    href="{{ route('developer.management.user.menu.parent.delete', $menuParent->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.parent.delete', $menuParent->uuid) }}"
                                                     confirm="{{ $menuParent->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             @endempty
@@ -76,15 +76,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.menu.child.show', $menuChild->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.child.show', $menuChild->uuid) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.menu.child.edit', $menuChild->uuid) }} "
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.child.edit', $menuChild->uuid) }} "
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route('developer.management.user.menu.child.delete', $menuChild->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.menu.child.delete', $menuChild->uuid) }}"
                                                     confirm="{{ $menuChild->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>

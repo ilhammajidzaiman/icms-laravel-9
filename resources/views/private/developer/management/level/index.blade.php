@@ -5,7 +5,7 @@
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route('developer.management.user.level.create') }}" label="baru"
+    <x-button-link href="{{ route(Request::segment(1).'developer.management.user.level.create') }}" label="baru"
         class="rounded-pill btn-sm btn-outline-secondary mb-3" icon="fa-plus" />
     <x-alert-dismissing />
 
@@ -36,13 +36,13 @@
                                     </td>
                                     <td class="text-right">
                                         <x-button-link
-                                            href="{{ route('developer.management.user.level.show', $level->slug) }}"
+                                            href="{{ route(Request::segment(1).'developer.management.user.level.show', $level->slug) }}"
                                             label="lihat" class="rounded-pill btn-xs btn-outline-primary" icon="fa-eye" />
                                         <x-button-link
-                                            href="{{ route('developer.management.user.level.edit', $level->slug) }}"
+                                            href="{{ route(Request::segment(1).'developer.management.user.level.edit', $level->slug) }}"
                                             label="edit" class="rounded-pill btn-xs btn-outline-success" icon="fa-edit" />
                                         <x-button-delete
-                                            href="{{ route('developer.management.user.level.delete', $level->slug) }}"
+                                            href="{{ route(Request::segment(1).'developer.management.user.level.delete', $level->slug) }}"
                                             :confirm="$level->name" />
                                     </td>
                                 </tr>
@@ -71,7 +71,7 @@
 @section('container')
     <x-alert-dismissing />
 
-    <x-button-link href="{{ route('developer.management.user.level.create') }}" label="baru"
+    <x-button-link href="{{ route(Request::segment(1) . '.management.user.level.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
     <div class="row">
@@ -104,15 +104,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.level.show', $level->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.level.show', $level->slug) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.level.edit', $level->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.level.edit', $level->slug) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route('developer.management.user.level.delete', $level->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.level.delete', $level->slug) }}"
                                                     confirm="{{ $level->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>

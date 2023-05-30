@@ -5,10 +5,11 @@
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route('developer.blog.post.index') }}" label="kembali"
+    <x-button-link href="{{ route(Request::segment(1) . '.blog.post.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
-    <form action="{{ route('developer.blog.post.update', $article->slug) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route(Request::segment(1) . '.blog.post.update', $article->slug) }}" method="post"
+        enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="row">

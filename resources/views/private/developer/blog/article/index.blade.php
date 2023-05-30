@@ -7,7 +7,7 @@
 @section('container')
     <x-alert-dismissing />
 
-    <x-button-link href="{{ route('developer.blog.post.create') }}" label="baru"
+    <x-button-link href="{{ route(Request::segment(1) . '.blog.post.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
     <div class="row">
@@ -42,15 +42,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.blog.post.show', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.show', $article->slug) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.blog.post.edit', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.edit', $article->slug) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route('developer.blog.post.delete', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.delete', $article->slug) }}"
                                                     confirm="{{ $article->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>

@@ -37,14 +37,15 @@
                                 <h6 class="dropdown-header">{{ auth()->user()->name }}</h6>
                             </li>
                             <li>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item text-capitalize"
                                     href="{{ route(Request::segment(1) . '.profil.index', auth()->user()->uuid) }}">
                                     <i class="icon-mid bi bi-person me-2"></i>
-                                    Profile
+                                    profile
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item text-capitalize"
+                                    href="{{ route(Request::segment(1) . '.profil.edit', auth()->user()->uuid) }}">
                                     <i class="icon-mid bi bi-gear me-2"></i>
                                     account
                                 </a>
@@ -52,11 +53,20 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li>
-                                <a class="dropdown-item" href="{{ route('auth.logout') }}">
+                            {{-- <li>
+                                <a class="dropdown-item text-capitalize" href="{{ route('auth.logout') }}">
                                     <i class="icon-mid bi bi-box-arrow-left me-2"></i>
-                                    Logout
+                                    logout
                                 </a>
+                            </li> --}}
+                            <li>
+                                <form action="{{ route('auth.signout') }}" method="post" class="na">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-capitalize">
+                                        <i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                                        logout
+                                    </button>
+                                </form>
                             </li>
                         </ul>
                     </div>

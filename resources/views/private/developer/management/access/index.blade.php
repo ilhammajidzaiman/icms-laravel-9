@@ -28,11 +28,11 @@
                                             <td>{{ $level->name }}</td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.management.access.show', $level->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.access.show', $level->slug) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.management.access.edit', $level->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.access.edit', $level->slug) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                             </td>

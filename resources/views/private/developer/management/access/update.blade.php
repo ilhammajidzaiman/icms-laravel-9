@@ -1,11 +1,11 @@
 @extends('private.templates.layout')
 
 @section('header')
-    rincian level akses
+    edit level akses
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route('developer.management.access.index') }}" label="kembali"
+    <x-button-link href="{{ route(Request::segment(1) . '.management.access.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <div class="row">

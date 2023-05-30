@@ -5,7 +5,7 @@
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route('developer.blog.category.index') }}" label="kembali"
+    <x-button-link href="{{ route(Request::segment(1) . '.blog.category.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <div class="row">

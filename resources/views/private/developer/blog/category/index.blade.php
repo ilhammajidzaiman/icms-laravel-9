@@ -7,7 +7,7 @@
 @section('container')
     <x-alert-dismissing />
 
-    <x-button-link href="{{ route('developer.blog.category.create') }}" label="baru"
+    <x-button-link href="{{ route(Request::segment(1) . '.blog.category.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
     <div class="row">
@@ -35,15 +35,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.blog.category.show', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.show', $category->slug) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.blog.category.edit', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.edit', $category->slug) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route('developer.blog.category.delete', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.delete', $category->slug) }}"
                                                     confirm="{{ $category->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>

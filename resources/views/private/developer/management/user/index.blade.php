@@ -7,7 +7,7 @@
 @section('container')
     <x-alert-dismissing />
 
-    <x-button-link href="{{ route('developer.management.user.create') }}" label="baru"
+    <x-button-link href="{{ route(Request::segment(1) . '.management.user.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
     <div class="row">
@@ -45,15 +45,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.show', $user->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.show', $user->uuid) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route('developer.management.user.edit', $user->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.edit', $user->uuid) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route('developer.management.user.delete', $user->uuid) }}"
+                                                    href="{{ route(Request::segment(1) . '.management.user.delete', $user->uuid) }}"
                                                     confirm="{{ $user->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>
