@@ -2,54 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/' . config('app.icon')) }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('/plugins/admin-lte-3.2.0/plugins/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/plugins/admin-lte-3.2.0/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/plugins/summernote-0.8.18-dist/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/css/main/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/css/pages/auth.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('/plugins/mazer/assets/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}">
 </head>
 
-<body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="{{ route('auth.login') }}">
-                <div>
-                    <img src="{{ asset('assets/images/' . config('app.logo')) }}" alt="{{ config('app.logo') }}"
-                        class="brand-image img-circlee elevation-22" width="64" height="64">
+<body>
+    <div id="auth">
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <a href="{{ route('auth.login') }}" class="text-reset">
+                            <img src="{{ asset('assets/images/' . config('app.logo')) }}" alt="Logo">
+                            <div class="fs-3">
+                                {{ config('app.name') }}
+                            </div>
+                        </a>
+                    </div>
+                    <h1 class="auth-title fs-1">Silahkan Login.</h1>
+                    <form action="{{ route('auth.login') }}" method="post">
+                        @csrf
+                        <div class="form-group position-relative has-icon-left">
+                            <input type="text" name="email" id="email" value="{{ old('email') }}"
+                                class="form-control form-control-lg @error('email')is-invalid @enderror"
+                                placeholder="Email">
+                            <div class="form-control-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group position-relative has-icon-left">
+                            <input type="password" name="password" id="password" value="{{ old('password') }}"
+                                class="form-control form-control-lg @error('email')is-invalid @enderror"
+                                placeholder="Password">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-4">Log in</button>
+                    </form>
+                    <div class="text-center mt-5 text-lg fs-44">
+                        <p class="text-gray-600">
+                            <?= date('Y') ?> &copy;
+                            {{ config('app.name') }}
+                        </p>
+                        <p>
+                            Copyright
+                            <a href="{{ route('/') }}" class="font-bold">
+                                {{ config('app.copyright') }}
+                            </a>
+                        </p>
+                    </div>
                 </div>
-                {{ config('app.name') }}
-            </a>
-        </div>
-        <div class="card">
-            <div class="card-body login-card-bodyy">
-                <p class="login-box-msg">Silahkan login</p>
-                <x-alert-dismissing />
-                <form action="{{ route('auth.login') }}" method="post">
-                    @csrf
-                    <x-form-input-login type="text" name="email" label="Email" :value="old('email')"
-                        class="fa-envelope" />
-                    <x-form-input-login type="password" name="password" label="Password" value=""
-                        class="fa-key" />
-                    <x-button-submit label="login" class="btn-primary btn-block" icon="fa-sign-in-alt" />
-                </form>
-                <footer class="text-xs pt-4">
-                    <div>
-                        Copyright &copy;
-                        <?= date('Y') ?>
-                        <a href="{{ route('/') }}">{{ config('app.name') }}</a>.
-                    </div>
-                    <div>
-                        {{ config('app.copyright') }}
-                    </div>
-                </footer>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
+                </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('/plugins/admin-lte-3.2.0/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('/plugins/admin-lte-3.2.0/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('/plugins/admin-lte-3.2.0/dist/js/adminlte.js') }}"></script>
 </body>
 
 </html>

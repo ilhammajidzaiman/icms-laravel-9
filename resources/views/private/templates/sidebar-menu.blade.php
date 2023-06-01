@@ -1,10 +1,15 @@
 <div class="sidebar-menu text-capitalize">
     <ul class="menu">
-        <li class="sidebar-title">Menu</li>
+
+        {{-- <li class="sidebar-title">Menu</li> --}}
+        <li class="divider divider-left">
+            <div class="divider-text">menu</div>
+        </li>
+
         <li class="sidebar-item">
             <a href="{{ route(Request::segment(1) . '.dashboard') }}" class='sidebar-link'>
                 <i class="bi bi-grid-fill"></i>
-                <span>Dashboard</span>
+                <span>dashboard</span>
             </a>
         </li>
 
@@ -57,12 +62,10 @@
                                 </a>
                             </li>
                         @endforelse
-
                     </ul>
                 </li>
             @else
                 {{-- url ada --}}
-
 
                 <li class="sidebar-item  ">
                     <a href="{{ route(Request::segment(1) . '.dashboard') }}" class='sidebar-link'>
@@ -70,23 +73,25 @@
                         <span>{{ $parent->name }}</span>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="{{ url('/' . Request::segment(1) . $parent->url) }}"
-                        class="nav-link {{ Request::is(Request::segment(1) . $parent->url . '*') ? 'active' : '' }}">
-                        <i class="nav-icon {{ $parent->icon }}"></i>
-                        <p class="text">{{ $parent->name }}</p>
-                    </a>
-                </li> --}}
-                {{-- end url ada --}}
             @endif
-
         @empty
-            <li class="sidebar-item  ">
+            <li class="sidebar-item">
                 <a href="{{ route(Request::segment(1) . '.dashboard') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
-                    <span>no access</span>
+                    <span>no access!</span>
                 </a>
             </li>
         @endforelse
+
+        {{-- <li class="divider divider-left">
+            <div class="divider-text">Menu</div>
+        </li> --}}
+
+        <li class="sidebar-item">
+            <a href="{{ route('auth.logout') }}" class='sidebar-link'>
+                <i class="bi bi-box-arrow-left"></i>
+                <span>logout</span>
+            </a>
+        </li>
     </ul>
 </div>
