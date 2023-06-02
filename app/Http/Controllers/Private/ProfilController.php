@@ -108,7 +108,7 @@ class ProfilController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.profil.index', $id))->with($flashData);
+        return redirect(route($request->segment(1) . '.profil.update', $id))->with($flashData);
     }
 
     public function passwordEdit($id)

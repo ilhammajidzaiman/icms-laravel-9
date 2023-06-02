@@ -26,7 +26,10 @@
                             </div>
                         </a>
                     </div>
-                    <h1 class="auth-title fs-1">Silahkan Login.</h1>
+                    <h1 class="auth-title fs-1">Log in.</h1>
+
+                    <x-alert-dismissing />
+
                     <form action="{{ route('auth.login') }}" method="post">
                         @csrf
                         <div class="form-group position-relative has-icon-left">
@@ -42,7 +45,7 @@
                         </div>
                         <div class="form-group position-relative has-icon-left">
                             <input type="password" name="password" id="password" value="{{ old('password') }}"
-                                class="form-control form-control-lg @error('email')is-invalid @enderror"
+                                class="form-control form-control-lg @error('password')is-invalid @enderror"
                                 placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
@@ -73,6 +76,9 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('/plugins/mazer/assets/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('/plugins/mazer/assets/js/app.js') }}"></script>
 </body>
 
 </html>

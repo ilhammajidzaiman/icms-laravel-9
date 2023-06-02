@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        // Paginator::useBootstrapFive();
 
         // Gate::define('developer', function (User $user) {
         //     return $user->user_level_id == 1;

@@ -1,19 +1,27 @@
 @extends('private.templates.layout')
 
 @section('header')
-    status
+    user
 @endsection
 
 @section('container')
-    <x-alert-dismissing />
-
     <x-button-link href="{{ route(Request::segment(1) . '.management.user.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
+
+    <x-alert-dismissing />
 
     <div class="row">
         <div class="col-12 col-md">
             <div class="card">
                 <div class="card-content">
+                    <div class="card-header">
+                        <form action="{{ route(Request::segment(1) . '.management.user.index') }}" method="get">
+                            <div class="row justify-content-end">
+                                <x-search-input name="search" id="search" value="{{ request('search') }}"
+                                    class="col-md-4" />
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover text-nowrap">
@@ -28,9 +36,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($users as $user)
+                                    @forelse ($users as $key=>$user)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $users->firstItem() + $key }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>
                                                 <x-badge class="badge rounded-pill bg-{{ $user->status->color }}"
@@ -61,7 +69,7 @@
                                     @empty
                                         <tr>
                                             <td colspan="6">
-                                                <x-alert-empty />
+                                                <x-alert-empty label="Data tidak ditemukan..." />
                                             </td>
                                         </tr>
                                     @endforelse
@@ -71,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            <x-pagination :pages="$users" side="1" />
         </div>
     </div>
 @endsection

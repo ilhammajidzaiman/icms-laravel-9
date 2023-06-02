@@ -5,10 +5,10 @@
 @endsection
 
 @section('container')
-    <x-alert-dismissing />
-
     <x-button-link href="{{ route(Request::segment(1) . '.management.user.menu.parent.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
+
+    <x-alert-dismissing />
 
     <div class="row">
         <div class="col-12 col-md">
@@ -93,7 +93,7 @@
                                 @empty
                                     <tr>
                                         <td colspan="2">
-                                            <x-alert-empty label="Belum ada data" />
+                                            <x-alert-empty label="Data tidak ditemukan..." />
                                         </td>
                                     </tr>
                                 @endforelse

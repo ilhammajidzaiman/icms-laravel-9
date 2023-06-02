@@ -21,7 +21,8 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        $data['articles']               = BlogArticle::orderByDesc('id')->get();
+        $search                         = request(['search']);
+        $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         return view('private.developer.blog.article.index', $data);
     }
 

@@ -21,7 +21,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $search                     = request(['search']);
         $data['users']              = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         return view('private.developer.management.user.index', $data);

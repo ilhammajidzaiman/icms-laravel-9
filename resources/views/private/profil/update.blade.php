@@ -8,6 +8,8 @@
     <x-button-link href="{{ route(Request::segment(1) . '.profil.index', $profil->uuid) }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-secondary mb-3" icon="fa-fw fas fa-arrow-left" />
 
+    <x-alert-dismissing />
+
     <form action="{{ route(Request::segment(1) . '.profil.update', $profil->uuid) }}" method="post"
         enctype="multipart/form-data">
         @method('put')

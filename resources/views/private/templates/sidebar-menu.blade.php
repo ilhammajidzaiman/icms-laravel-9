@@ -1,18 +1,14 @@
 <div class="sidebar-menu text-capitalize">
     <ul class="menu">
-
-        {{-- <li class="sidebar-title">Menu</li> --}}
         <li class="divider divider-left">
             <div class="divider-text">menu</div>
         </li>
-
-        <li class="sidebar-item">
+        <li class="sidebar-item {{ Request::is(Request::segment(1) . '/dashboard*') ? 'active' : '' }}">
             <a href="{{ route(Request::segment(1) . '.dashboard') }}" class='sidebar-link'>
-                <i class="bi bi-grid-fill"></i>
+                <i class="bi bi-grid"></i>
                 <span>dashboard</span>
             </a>
         </li>
-
         @php
             // $parents = App\Models\UserAccessParent::where('user_level_id', auth()->user()->user_level_id)
             //     ->with(['menu'])
@@ -29,7 +25,7 @@
             @if (empty($parent->url) || $parent->url === '#')
                 <li class="sidebar-item has-sub {{ $segment2 == $parent->prefix ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
+                        <i class="{{ $parent->icon }}"></i>
                         <span>{{ $parent->name }}</span>
                     </a>
                     <ul class="submenu {{ $segment2 == $parent->prefix ? 'active' : '' }}">
@@ -82,11 +78,6 @@
                 </a>
             </li>
         @endforelse
-
-        {{-- <li class="divider divider-left">
-            <div class="divider-text">Menu</div>
-        </li> --}}
-
         <li class="sidebar-item">
             <a href="{{ route('auth.logout') }}" class='sidebar-link'>
                 <i class="bi bi-box-arrow-left"></i>

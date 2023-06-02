@@ -8,6 +8,8 @@
     {{-- <x-button-link href="{{ route(Request::segment(1) . '.profil.edit', $profil->uuid) }}" label="edit"
         class="rounded-pill btn btn-md btn-outline-success mb-3" icon="fa-fw fas fa-edit" /> --}}
 
+    <x-alert-dismissing />
+
     <div class="row">
         <div class="col-12 col-md-3">
             <div class="card">

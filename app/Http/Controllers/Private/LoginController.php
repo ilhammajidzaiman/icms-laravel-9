@@ -53,6 +53,7 @@ class LoginController extends Controller
                 $flashData = [
                     'message'       => 'Akun anda tidak aktif, Silahkan hubungi Admin!',
                     'alert'         => 'danger',
+                    'icon'          => 'fa-fw fas fa-times',
                 ];
                 return back()->with($flashData);
             endif;
@@ -61,7 +62,7 @@ class LoginController extends Controller
         $flashData = [
             'message'       => 'Email atau password salah!',
             'alert'         => 'danger',
-            'icon'          => 'times',
+            'icon'          => 'fa-fw fas fa-times',
         ];
         return back()->with($flashData);
     }
@@ -80,7 +81,7 @@ class LoginController extends Controller
         $flashData = [
             'message'       => 'Anda telah logout!',
             'alert'         => 'primary',
-            'icon'          => 'sign-out-alt',
+            'icon'          => 'fa-fw fas fa-sign-out-alt',
         ];
         return redirect(route('auth.login'))->with($flashData);
     }

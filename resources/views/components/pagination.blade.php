@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="col-sm-12 col-md-6">
-        <div class="float-sm-right">
+        <div class="float-sm-end">
             {{ $pages->onEachSide($side)->links() }}
         </div>
     </div>
