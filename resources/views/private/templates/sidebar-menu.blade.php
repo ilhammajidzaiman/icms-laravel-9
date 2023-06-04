@@ -63,9 +63,9 @@
             @else
                 {{-- url ada --}}
 
-                <li class="sidebar-item  ">
-                    <a href="{{ route(Request::segment(1) . '.dashboard') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
+                <li class="sidebar-item {{ Request::is(Request::segment(1) . $parent->url . '*') ? 'active' : '' }}">
+                    <a href="{{ url('/' . Request::segment(1) . $parent->url) }}" class='sidebar-link'>
+                        <i class="{{ $parent->icon }}"></i>
                         <span>{{ $parent->name }}</span>
                     </a>
                 </li>

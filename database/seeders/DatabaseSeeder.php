@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            StatusSeeder::class,
+            // 
             UserStatusSeeder::class,
             UserLevelSeeder::class,
             UserSeeder::class,

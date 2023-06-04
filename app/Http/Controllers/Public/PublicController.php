@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Public;
 
+use App\Models\Slideshow;
 use Illuminate\Http\Request;
 use App\Models\Blog\BlogArticle;
 use App\Http\Controllers\Controller;
@@ -18,7 +19,8 @@ class PublicController extends Controller
         $search                         = request(['search']);
         $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
         $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        $data['slideshows']             = BlogArticle::orderByDesc('id')->take(5)->get();
+        $data['slideshows']             = Slideshow::where('status_id', 1)->orderByDesc('id')->take(3)->get();
+        $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
         return view('public.index', $data);
     }
 

@@ -56,7 +56,7 @@
                                     </x-form-input-checkbox>
                                 @endforeach
                             </div>
-                            <div class="row mb-3">
+                            <div class="row">
                                 <x-form-input-select name="status" label="status" class="col-12">
                                     @foreach ($statuses as $status)
                                         <option value="{{ $status->id }}" @selected(old('status') == $status->id)>

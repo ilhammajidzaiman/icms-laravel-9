@@ -13,11 +13,10 @@
     {{-- <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}"> --}}
     <style>
         .text-shadow {
+            color: #ffffff;
             text-shadow: 0 0 3px #000000;
         }
-    </style>
 
-    <style>
         .carousel-item-overlay {
             position: relative;
         }
@@ -29,9 +28,8 @@
             left: 0;
             right: 0;
             bottom: 0;
+            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
             /* background-color: rgba(0, 0, 0, 0.5); */
-            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
-
         }
 
         .carousel-item-overlay img {
@@ -49,7 +47,6 @@
         }
     </style>
     @yield('style')
-
 </head>
 
 <body>
@@ -294,31 +291,42 @@
 
 
 
-
             <div id="carouselControls1" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselControls1" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselControls1" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
+                    @php
+                        $no = 0;
+                    @endphp
+                    @foreach ($slideshows as $slideshow)
+                        @php
+                            $no == 0 ? ($class = 'active') : ($class = '');
+                        @endphp
+                        <button type="button" data-bs-target="#carouselControls1"
+                            data-bs-slide-to="{{ $no++ }}" class="{{ $class }}" aria-current="true"
+                            aria-label="slide {{ $loop->iteration }}"></button>
+                    @endforeach
                 </div>
                 <div class="carousel-inner rounded-0">
-                    <div class="carousel-item carousel-item-overlay active" data-bs-interval="6000">
-                        <img src="{{ asset('/assets/images/slideshow/snow.jpg') }}" class="d-block w-100"
-                            alt="...">
-                        <div class="carousel-caption carousel-caption-overlay d-none d-md-block text-shadow mt-5 pt-5">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
+                    @php
+                        $no = 0;
+                    @endphp
+                    @foreach ($slideshows as $slideshow)
+                        @php
+                            $no == 0 ? ($class = 'active') : ($class = '');
+                        @endphp
+                        <div class="carousel-item carousel-item-overlay <?= $class ?>" data-bs-interval="5000">
+                            @php
+                                $file = $slideshow->file;
+                                $path = $slideshow->path;
+                                $file == 'default-slideshow.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
+                            @endphp
+                            <img src="{{ $url }}" class="d-block w-100" alt="{{ $url }}"
+                                aria-label="slide {{ $no++ }}">
+                            <div class="carousel-caption carousel-caption-overlay d-none d-md-block mt-5 pt-5 ">
+                                <h3 class="text-reset">{{ $slideshow->title }}</h3>
+                                <p>{{ $slideshow->detail }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item carousel-item-overlay" data-bs-interval="6000">
-                        <img src="{{ asset('/assets/images/slideshow/mountains.jpg') }}" class="d-block w-100"
-                            alt="...">
-                        <div class="carousel-caption carousel-caption-overlay d-none d-md-block text-shadow mt-5 pt-5">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls1"
                     data-bs-slide="prev">
@@ -333,6 +341,7 @@
             </div>
 
 
+
             <div class="wrapper py-5">
                 <div class="container px-3">
                     <div class="row g-4">
@@ -342,7 +351,7 @@
                                     @php
                                         $no = 0;
                                     @endphp
-                                    @foreach ($slideshows as $slideshow)
+                                    @foreach ($slideArticles as $slideArticle)
                                         @php
                                             $no == 0 ? ($class = 'active') : ($class = '');
                                         @endphp
@@ -355,21 +364,25 @@
                                     @php
                                         $no = 0;
                                     @endphp
-                                    @foreach ($slideshows as $slideshow)
+                                    @foreach ($slideArticles as $slideArticle)
                                         @php
                                             $no == 0 ? ($class = 'active') : ($class = '');
                                         @endphp
-                                        <div class="carousel-item <?= $class ?>" data-bs-interval="4500">
+                                        <div class="carousel-item <?= $class ?>" data-bs-interval="3500">
                                             @php
-                                                $file = $slideshow->file;
-                                                $path = $slideshow->path;
+                                                $file = $slideArticle->file;
+                                                $path = $slideArticle->path;
                                                 $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                                             @endphp
                                             <img src="{{ $url }}" class="d-block w-100"
                                                 alt="{{ $url }}" aria-label="slide {{ $no++ }}">
                                             <div class="carousel-caption d-none d-md-block text-shadow">
-                                                <h5>{{ $slideshow->title }}</h5>
-                                                <p>{{ $slideshow->truncated }}</p>
+                                                {{-- <h5> --}}
+                                                <a href="{{ route('/') }}" class="h5 text-reset">
+                                                    {{ $slideArticle->title }}
+                                                </a>
+                                                {{-- </h5> --}}
+                                                <p>{{ $slideArticle->truncated }}</p>
                                             </div>
                                         </div>
                                     @endforeach
@@ -395,7 +408,7 @@
                                     <div class="card-body p-3">
                                         <div class="row g-4">
                                             <div class="col-8 col-md-8">
-                                                <a href="" class="card-text text-reset">
+                                                <a href="{{ route('/') }}" class="card-text text-reset">
                                                     {{ $newArticle->title }}
                                                 </a>
                                                 <div class="card-text">
@@ -411,7 +424,7 @@
                                                     $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                                                 @endphp
                                                 <img src="{{ $url }}" class="img-fluid rounded-3"
-                                                    alt="...">
+                                                    alt="{{ $url }}">
                                             </div>
                                         </div>
                                     </div>
@@ -422,11 +435,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
 
 
 
@@ -468,30 +476,30 @@
                                             {{ $article->truncated }}
                                         </p>
                                     </div>
-                                    <div class="card-footer border-0 py-0">
-
-                                        @php
-                                            $categories = App\Models\Blog\BlogPost::where('blog_article_id', $article->id)
-                                                ->orderBy('id')
-                                                ->with(['category'])
-                                                ->get();
-                                        @endphp
-                                        <div class="card-text">
+                                    <div class="card-footer border-0">
+                                        <p class="card-text">
                                             <span class="h6 text-capitalize">
                                                 kategori:
                                             </span>
+                                            @php
+                                                $categories = App\Models\Blog\BlogPost::where('blog_article_id', $article->id)
+                                                    ->orderBy('id')
+                                                    ->with(['category'])
+                                                    ->get();
+                                            @endphp
                                             @forelse ($categories as $category)
                                                 {{ $category->category->name }},
                                             @empty
                                                 tidak ada kategori
                                             @endforelse
+                                        </p>
+
+                                        <div class="text-end">
+                                            <a href="{{ route('/') }}"
+                                                class="btn btn-light-primary  float-end text-capitalize">
+                                                selengkapnya...
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="card-footer border-0 pt-00">
-                                        <a href="{{ route('/') }}"
-                                            class="btn btn-light-primary  float-end text-capitalize">
-                                            selengkapnya...
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -502,15 +510,19 @@
                 </div>
             </div>
 
-            <footer>
+
+
+            <footer class="wrapper py-5">
                 <div class="container">
                     <div class="footer clearfix mb-0 text-muted">
                         <div class="float-start">
-                            <p>2021 &copy; Mazer</p>
+                            <p><?= date('Y') ?> &copy; {{ config('app.name') }}</p>
                         </div>
                         <div class="float-end">
-                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span>
-                                by <a href="https://saugi.me">Saugi</a></p>
+                            <p>
+                                Copyright
+                                <a href="{{ route('/') }}">{{ config('app.copyright') }}</a>
+                            </p>
                         </div>
                     </div>
                 </div>

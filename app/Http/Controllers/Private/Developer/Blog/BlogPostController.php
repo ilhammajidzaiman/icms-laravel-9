@@ -62,7 +62,7 @@ class BlogPostController extends Controller
 
         // validation...
         $validatedData = $request->validate([
-            'title'                     => ['required', 'max:250', 'unique:blog_articles'],
+            'title'                     => ['required', 'max:255', 'unique:blog_articles'],
             'content'                   => ['required'],
             'status'                    => ['required'],
             'file'                      => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],

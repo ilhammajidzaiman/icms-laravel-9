@@ -18,6 +18,9 @@ use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as
 use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
 use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
 
+// slideshow
+use App\Http\Controllers\Private\Developer\SlideshowController as DeveloperSlideshowController;
+
 // blog
 use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
@@ -130,6 +133,17 @@ Route::middleware('auth')->group(
                         });
                     }
                 );
+                // 
+                Route::prefix('slideshow')->controller(DeveloperSlideshowController::class)->group(function () {
+                    Route::get('/', 'index')->name('developer.slideshow.index');
+                    Route::get('/create', 'create')->name('developer.slideshow.create');
+                    Route::post('/store', 'store')->name('developer.slideshow.store');
+                    Route::get('/{id}/show', 'show')->name('developer.slideshow.show');
+                    Route::get('/{id}/edit', 'edit')->name('developer.slideshow.edit');
+                    Route::put('/{id}/update', 'update')->name('developer.slideshow.update');
+                    Route::delete('/{id}/delete', 'destroy')->name('developer.slideshow.delete');
+                });
+                // 
                 Route::prefix('blog')->group(
                     function () {
                         Route::prefix('status')->controller(DeveloperBlogStatusController::class)->group(function () {

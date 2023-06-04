@@ -55,10 +55,10 @@ class UserController extends Controller
         $file                       = $request->file('file');
         $message                    = $name;
         $uuid                       = Str::uuid();
+        $slug                       = Str::slug($name, '-');
         $password                   = Hash::make($request->password);
         $path                       = 'user/' . date('Y/m/');
         $default                    = 'default-user.svg';
-        $slug                       = Str::slug($name, '-');
 
         // validation input...
         $validatedData              = $request->validate([
