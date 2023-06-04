@@ -56,7 +56,6 @@
                                     </x-form-input-checkbox>
                                 @endforeach
                             </div>
-
                             <div class="row mb-3">
                                 <x-form-input-select name="status" label="status" class="col-12">
                                     @foreach ($statuses as $status)

@@ -11,45 +11,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/css/main/app-dark.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/css/shared/iconly.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}"> --}}
-    <style>
-        .text-shadow {
-            text-shadow: 0 0 3px #000000;
-        }
-    </style>
-
-    <style>
-        .carousel-item-overlay {
-            position: relative;
-        }
-
-        .carousel-item-overlay::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            /* background-color: rgba(0, 0, 0, 0.5); */
-            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
-
-        }
-
-        .carousel-item-overlay img {
-            object-fit: cover;
-            height: 100%;
-            width: 100%;
-        }
-
-        .carousel-item-overlay .carousel-caption-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-        }
-    </style>
     @yield('style')
-
 </head>
 
 <body>
@@ -293,39 +255,54 @@
             </header>
 
 
-
-
-            <div id="carouselControls1" class="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselControls1" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselControls1" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
+
+                    <?php
+                $no = 0;
+                foreach( $slideshow as $s ):
+                    if ($no == 0):
+                        $class = 'active';
+                    else :
+                        $class= "";
+                    endif;
+                ?>
+
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="<?= $class ?>" aria-current="true" aria-label="Slide 1"></button>
+                    <?php endforeach;?>
+
+
                 </div>
                 <div class="carousel-inner rounded-0">
-                    <div class="carousel-item carousel-item-overlay active" data-bs-interval="6000">
+
+                    <?php
+                
+                $no = 0;
+                foreach( $slideshow as $s ):
+                    if ($no == 0):
+                        $class = "active";
+                    else :
+                        $class= "";
+                    endif;
+                ?>
+                    <div class="carousel-item active" data-bs-interval="6000">
                         <img src="{{ asset('/assets/images/slideshow/snow.jpg') }}" class="d-block w-100"
                             alt="...">
-                        <div class="carousel-caption carousel-caption-overlay d-none d-md-block text-shadow mt-5 pt-5">
+                        <div class="carousel-caption d-none d-md-block">
                             <h5>Third slide label</h5>
                             <p>Some representative placeholder content for the third slide.</p>
                         </div>
                     </div>
-                    <div class="carousel-item carousel-item-overlay" data-bs-interval="6000">
-                        <img src="{{ asset('/assets/images/slideshow/mountains.jpg') }}" class="d-block w-100"
-                            alt="...">
-                        <div class="carousel-caption carousel-caption-overlay d-none d-md-block text-shadow mt-5 pt-5">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div>
+                    <?php endforeach;?>
+
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls1"
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls1"
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -337,55 +314,46 @@
                 <div class="container px-3">
                     <div class="row g-4">
                         <div class="col-12 col-md-7">
-                            <div id="carouselControls2" class="carousel slide" data-bs-ride="carousel">
+                            <div id="carouselExampleControls2" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-indicators">
-                                    @php
-                                        $no = 0;
-                                    @endphp
-                                    @foreach ($slideshows as $slideshow)
-                                        @php
-                                            $no == 0 ? ($class = 'active') : ($class = '');
-                                        @endphp
-                                        <button type="button" data-bs-target="#carouselControls2"
-                                            data-bs-slide-to="{{ $no++ }}" class="{{ $class }}"
-                                            aria-current="true" aria-label="slide {{ $loop->iteration }}"></button>
-                                    @endforeach
+                                    <button type="button" data-bs-target="#carouselExampleIndicators2"
+                                        data-bs-slide-to="0" class="active" aria-current="true"
+                                        aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#carouselExampleIndicators2"
+                                        data-bs-slide-to="1" aria-label="Slide 2"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    @php
-                                        $no = 0;
-                                    @endphp
-                                    @foreach ($slideshows as $slideshow)
-                                        @php
-                                            $no == 0 ? ($class = 'active') : ($class = '');
-                                        @endphp
-                                        <div class="carousel-item <?= $class ?>" data-bs-interval="4500">
-                                            @php
-                                                $file = $slideshow->file;
-                                                $path = $slideshow->path;
-                                                $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
-                                            @endphp
-                                            <img src="{{ $url }}" class="d-block w-100"
-                                                alt="{{ $url }}" aria-label="slide {{ $no++ }}">
-                                            <div class="carousel-caption d-none d-md-block text-shadow">
-                                                <h5>{{ $slideshow->title }}</h5>
-                                                <p>{{ $slideshow->truncated }}</p>
-                                            </div>
+                                    <div class="carousel-item active" data-bs-interval="4500">
+                                        <img src="{{ asset('/plugins/mazer/assets/images/samples/architecture1.jpg') }}"
+                                            class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Third slide label</h5>
+                                            <p>Some representative placeholder content for the third slide.</p>
                                         </div>
-                                    @endforeach
+                                    </div>
+                                    <div class="carousel-item" data-bs-interval="4500">
+                                        <img src="{{ asset('/plugins/mazer/assets/images/samples/bg-mountain.jpg') }}"
+                                            class="d-block w-100" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>Third slide label</h5>
+                                            <p>Some representative placeholder content for the third slide.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselControls2" data-bs-slide="prev">
+                                    data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
                                 <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselControls2" data-bs-slide="next">
+                                    data-bs-target="#carouselExampleControls2" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
+
                         </div>
+
                         <div class="col-12 col-md-5">
                             <h3>
                                 New Article
@@ -489,7 +457,7 @@
                                     </div>
                                     <div class="card-footer border-0 pt-00">
                                         <a href="{{ route('/') }}"
-                                            class="btn btn-light-primary  float-end text-capitalize">
+                                            class="btn btn-primary float-end text-capitalize">
                                             selengkapnya...
                                         </a>
                                     </div>
@@ -519,8 +487,10 @@
     </div>
 
     <script src="{{ asset('/plugins/mazer/assets/js/bootstrap.js') }}"></script>
-    {{-- <script src="{{ asset('/plugins/mazer/assets/js/app.js') }}"></script> --}}
+    <script src="{{ asset('/plugins/mazer/assets/js/app.js') }}"></script>
     <script src="{{ asset('/plugins/mazer/assets/js/pages/horizontal-layout.js') }}"></script>
+    <script src="{{ asset('/plugins/mazer/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('/plugins/mazer/assets/js/pages/dashboard.js') }}"></script>
     @yield('script')
 </body>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use Illuminate\Http\Request;
+use App\Models\Blog\BlogArticle;
 use App\Http\Controllers\Controller;
 
 class PublicController extends Controller
@@ -14,7 +15,11 @@ class PublicController extends Controller
      */
     public function index()
     {
-        return view('public.index');
+        $search                         = request(['search']);
+        $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
+        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
+        $data['slideshows']             = BlogArticle::orderByDesc('id')->take(5)->get();
+        return view('public.index', $data);
     }
 
     /**

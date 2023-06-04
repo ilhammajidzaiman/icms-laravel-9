@@ -15,14 +15,12 @@ class FormInputCheckbox extends Component
     public $name;
     public $id;
     public $value;
-    public $checked;
 
-    public function __construct($name, $id, $value, $checked)
+    public function __construct($name, $id, $value)
     {
         $this->name         = $name;
         $this->id           = $id;
         $this->value        = $value;
-        $this->checked      = $checked;
     }
 
     /**
