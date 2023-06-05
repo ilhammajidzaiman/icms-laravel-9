@@ -22,7 +22,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '1',
             'name'                  => 'Status',
             'slug'                  => 'status',
-            'icon'                  => 'fa-fw fas fa-toggle-on',
+            'icon'                  => 'bi bi-toggles',
             'prefix'                => 'management',
             'url'                   => '/management/status',
         ]);
@@ -33,7 +33,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '2',
             'name'                  => 'Level',
             'slug'                  => 'level',
-            'icon'                  => 'fa-fw fas fa-star',
+            'icon'                  => 'bi bi-star',
             'prefix'                => 'management',
             'url'                   => '/management/level',
         ]);
@@ -44,7 +44,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '3',
             'name'                  => 'Menu',
             'slug'                  => 'menu',
-            'icon'                  => 'fa-fw fas fa-list',
+            'icon'                  => 'bi bi-list',
             'prefix'                => 'management',
             'url'                   => '/management/menu',
         ]);
@@ -55,7 +55,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '4',
             'name'                  => 'Akses',
             'slug'                  => 'access',
-            'icon'                  => 'fa-fw fas fa-shield-alt',
+            'icon'                  => 'bi bi-shield-lock',
             'prefix'                => 'management',
             'url'                   => '/management/access',
         ]);
@@ -66,7 +66,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '5',
             'name'                  => 'User',
             'slug'                  => 'user',
-            'icon'                  => 'fa-fw fas fa-users',
+            'icon'                  => 'bi bi-people',
             'prefix'                => 'management',
             'url'                   => '/management/user',
         ]);
@@ -77,7 +77,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '1',
             'name'                  => 'Status',
             'slug'                  => 'status',
-            'icon'                  => 'fa-fw fas fa-toggle-on',
+            'icon'                  => 'bi bi-toggles',
             'prefix'                => 'blog',
             'url'                   => '/blog/status',
         ]);
@@ -88,7 +88,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '2',
             'name'                  => 'kategori',
             'slug'                  => 'kategori',
-            'icon'                  => 'fa-fw fas fa-tags',
+            'icon'                  => 'bi bi-tags',
             'prefix'                => 'blog',
             'url'                   => '/blog/category',
         ]);
@@ -99,7 +99,7 @@ class UserMenuChildSeeder extends Seeder
             'order'                 => '3',
             'name'                  => 'post',
             'slug'                  => 'post',
-            'icon'                  => 'fa-fw fas fa-file',
+            'icon'                  => 'bi bi-files',
             'prefix'                => 'blog',
             'url'                   => '/blog/post',
         ]);
