@@ -18,7 +18,7 @@
                     @php
                         $file = $slideshow->file;
                         $path = $slideshow->path;
-                        $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
+                        $file == 'default-slideshow.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                     @endphp
                     <img src="{{ $url }}" alt="{{ $url }}" class="card-img-top w-100">
                     <div class="card-body pt-4 pb-0 mb-0">
@@ -46,7 +46,7 @@
                                 label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                 icon="fa-fw fas fa-edit" />
                             <x-button-delete href="{{ route(Request::segment(1) . '.slideshow.delete', $slideshow->uuid) }}"
-                                confirm="{{ $slideshow->name }}" class="rounded-pill btn btn-sm btn-outline-danger" />
+                                confirm="{{ $slideshow->title }}" class="rounded-pill btn btn-sm btn-outline-danger" />
                         </span>
                     </div>
                 </div>

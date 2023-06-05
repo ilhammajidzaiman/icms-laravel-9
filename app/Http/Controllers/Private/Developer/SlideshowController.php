@@ -43,8 +43,6 @@ class SlideshowController extends Controller
      */
     public function store(Request $request)
     {
-        //file title detail
-
         // data input...
         $file                           = $request->file('file');
         $title                          = $request->title;
@@ -53,7 +51,7 @@ class SlideshowController extends Controller
         $message                        = $title;
         $uuid                           = Str::uuid();
         $slug                           = Str::slug($title, '-');
-        $path                           = 'slideshow/' . date('Y/m/');
+        $folder                         = 'slideshow/' . date('Y/m/');
         $default                        = 'default-slideshow.svg';
 
         // validation...
@@ -62,7 +60,6 @@ class SlideshowController extends Controller
             'detail'                    => ['required', 'max:255',],
             'status'                    => ['required'],
             'file'                      => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
-
         ]);
 
         // upload file to storage...
@@ -71,8 +68,10 @@ class SlideshowController extends Controller
             $dateTime                   = date('dmYhis');
             $nameHash                   = $file->hashName();
             $fileName                   = $dateTime . '-' . $nameHash;
+            $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
+            $path                       = null;
             $fileName                   = $default;
         endif;
 
@@ -133,9 +132,6 @@ class SlideshowController extends Controller
     {
         // detail data
         $data['slideshow']              = Slideshow::where('uuid', $id)->first();
-        $oldId                          = $data['slideshow']->id;
-        $oldslug                        = $data['slideshow']->slug;
-        $oldUuid                        = $data['slideshow']->uuid;
         $oldTitle                       = $data['slideshow']->title;
         $oldPath                        = $data['slideshow']->path;
         $oldFile                        = $data['slideshow']->file;
@@ -147,7 +143,7 @@ class SlideshowController extends Controller
         $status                         = $request->status;
         $message                        = $title;
         $slug                           = Str::slug($title, '-');
-        $path                           = 'slideshow/' . date('Y/m/');
+        $folder                         = 'slideshow/' . date('Y/m/');
         $default                        = 'default-slideshow.svg';
 
         // validation logic
@@ -165,15 +161,17 @@ class SlideshowController extends Controller
         if ($file) :
             // delete old file on storage before upload new file...
             if ($oldFile !== $default) :
-                Storage::delete($path . $oldFile);
+                Storage::delete($oldPath . $oldFile);
             endif;
 
             // manually specify a filename...
             $dateTime                   = date('dmYhis');
             $nameHash                   = $file->hashName();
             $fileName                   = $dateTime . '-' . $nameHash;
+            $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
+            $path                       = $oldPath;
             $fileName                   = $oldFile;
         endif;
 
@@ -183,10 +181,10 @@ class SlideshowController extends Controller
             'title'                     => $title,
             'slug'                      => $slug,
             'detail'                    => $detail,
-            'path'                      => $oldPath,
+            'path'                      => $path,
             'file'                      => $fileName,
         ];
-        Slideshow::where('slug', $id)->update($data);
+        Slideshow::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
@@ -206,20 +204,20 @@ class SlideshowController extends Controller
     public function destroy($id)
     {
         // data detail...
-        $data['slideshow']              = Slideshow::where('slug', $id)->first();
-        $id                             = $data['slideshow']->id;
+        $data['slideshow']              = Slideshow::where('uuid', $id)->first();
+        $oldId                          = $data['slideshow']->id;
         $file                           = $data['slideshow']->file;
-        $folder                         = $data['slideshow']->path;
+        $path                           = $data['slideshow']->path;
         $message                        = $data['slideshow']->title;
-        $default                        = 'default-img.svg';
+        $default                        = 'default-slideshow.svg';
 
         // delete file on storage...
         if ($file !== $default) :
-            Storage::delete($folder . $file);
+            Storage::delete($path . $file);
         endif;
 
         // delete data on table...
-        Slideshow::destroy($id);
+        Slideshow::destroy($oldId);
 
         // flashdata...
         $flashData = [

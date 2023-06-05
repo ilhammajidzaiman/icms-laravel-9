@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             UserAccessParentSeeder::class,
             UserAccessChildSeeder::class,
             // 
+            SlideshowSeeder::class,
+            // 
             BlogStatusSeeder::class,
             BlogCategorySeeder::class,
             BlogArticleSeeder::class,

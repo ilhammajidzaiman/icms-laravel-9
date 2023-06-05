@@ -50,15 +50,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.post.show', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.show', $article->uuid) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.post.edit', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.edit', $article->uuid) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.blog.post.delete', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.delete', $article->uuid) }}"
                                                     confirm="{{ $article->name }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>

@@ -57,7 +57,7 @@ class BlogPostController extends Controller
         $uuid                           = Str::uuid();
         $slug                           = Str::slug($title, '-');
         $truncated                      = Str::limit(strip_tags($content), 200, '...');
-        $path                           = 'article/' . date('Y/m/');
+        $folder                         = 'article/' . date('Y/m/');
         $default                        = 'default-img.svg';
 
         // validation...
@@ -81,8 +81,10 @@ class BlogPostController extends Controller
             $dateTime                   = date('dmYhis');
             $nameHash                   = $file->hashName();
             $fileName                   = $dateTime . '-' . $nameHash;
+            $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
+            $path                       = null;
             $fileName                   = $default;
         endif;
 
@@ -102,7 +104,7 @@ class BlogPostController extends Controller
 
         // insert to table pivot...
         if ($category) :
-            $detail                     = BlogArticle::where('slug', $slug)->first();
+            $detail                     = BlogArticle::where('uuid', $uuid)->first();
             $oldId                      = $detail->id;
             $data2                      = [];
             foreach ($category as $key) :
@@ -132,7 +134,7 @@ class BlogPostController extends Controller
      */
     public function show($id)
     {
-        $data['article']                = BlogArticle::where('slug', $id)->first();
+        $data['article']                = BlogArticle::where('uuid', $id)->first();
         $data['blogPosts']              = BlogPost::where('blog_article_id', $data['article']->id)->orderBy('id')->with(['category'])->get();
         return view('private.developer.blog.post.show', $data);
     }
@@ -145,10 +147,9 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
-
         $data['statuses']               = BlogStatus::orderBy('id')->get();
         $data['categories']             = BlogCategory::orderBy('name')->get();
-        $data['article']                = BlogArticle::where('slug', $id)->first();
+        $data['article']                = BlogArticle::where('uuid', $id)->first();
         $data['blogPosts']              = BlogPost::where('blog_article_id', $data['article']->id)->orderBy('id')->with(['category'])->get();
         return view('private.developer.blog.post.update', $data);
     }
@@ -163,11 +164,10 @@ class BlogPostController extends Controller
     public function update(Request $request, $id)
     {
         // detail data
-        $data['article']                = BlogArticle::where('slug', $id)->first();
+        $data['article']                = BlogArticle::where('uuid', $id)->first();
         $oldId                          = $data['article']->id;
-        $oldslug                        = $data['article']->slug;
-        $oldUuid                        = $data['article']->uuid;
         $oldTitle                       = $data['article']->title;
+        $oldPath                        = $data['article']->path;
         $oldFile                        = $data['article']->file;
 
         // data input...
@@ -180,7 +180,7 @@ class BlogPostController extends Controller
         $message                        = $title;
         $slug                           = Str::slug($title, '-');
         $truncated                      = Str::limit(strip_tags($content), 200, '...');
-        $path                           = 'article/' . date('Y/m/');
+        $folder                         = 'article/' . date('Y/m/');
         $default                        = 'default-img.svg';
 
         // validation logic
@@ -198,15 +198,17 @@ class BlogPostController extends Controller
         if ($file) :
             // delete old file on storage before upload new file...
             if ($oldFile !== $default) :
-                Storage::delete($path . $oldFile);
+                Storage::delete($oldPath . $oldFile);
             endif;
 
             // manually specify a filename...
             $dateTime                   = date('dmYhis');
             $nameHash                   = $file->hashName();
             $fileName                   = $dateTime . '-' . $nameHash;
+            $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
+            $path                       = $oldPath;
             $fileName                   = $oldFile;
         endif;
 
@@ -221,7 +223,7 @@ class BlogPostController extends Controller
             'path'                      => $path,
             'file'                      => $fileName,
         ];
-        BlogArticle::where('slug', $id)->update($data);
+        BlogArticle::where('uuid', $id)->update($data);
 
         // delete to posts
         BlogPost::where('blog_article_id', $oldId)->delete();
@@ -258,20 +260,20 @@ class BlogPostController extends Controller
     {
         // data detail...
         $data['article']                = BlogArticle::where('slug', $id)->first();
-        $id                             = $data['article']->id;
+        $oldId                          = $data['article']->id;
+        $path                           = $data['article']->path;
         $file                           = $data['article']->file;
         $message                        = $data['article']->title;
-        $folder                         = 'article/' . date('Y/m/');
         $default                        = 'default-img.svg';
 
         // delete file on storage...
         if ($file !== $default) :
-            Storage::delete($folder . $file);
+            Storage::delete($path . $file);
         endif;
 
         // delete data on table...
-        BlogPost::where('blog_article_id', $id)->delete();
-        BlogArticle::destroy($id);
+        BlogPost::where('blog_article_id', $oldId)->delete();
+        BlogArticle::destroy($oldId);
 
         // flashdata...
         $flashData = [

@@ -14,7 +14,7 @@
                 @php
                     $file = $slideshow->file;
                     $path = $slideshow->path;
-                    $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
+                    $file == 'default-slideshow.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                 @endphp
                 <img src="{{ $url }}" alt="{{ $url }}" class="card-img-top w-100">
                 <div class="card-body pt-4 pb-0 mb-0">

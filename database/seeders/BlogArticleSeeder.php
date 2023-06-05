@@ -20,10 +20,11 @@ class BlogArticleSeeder extends Seeder
             'uuid'              => Str::uuid(),
             'user_id'           => '1',
             'blog_status_id'    => '1',
-            'title'             => 'Hello world',
-            'slug'              => 'hello-world',
-            'content'           => 'Selamat datang, ini halaman tampilan awal website dibuat',
-            'truncated'         => 'Selamat datang, ini halaman tampilan awal website dibuat...',
+            'title'             => 'Hello world. Selamat datang. Ini adalah post artikel pertama anda',
+            'slug'              => 'hello-world-selamat-datang-ini-adalah-post-artikel-pertama-anda',
+            'content'           => 'Selamat datang. Ini adalah post artikel pertama anda. Silahkan edit atau hapus post artikel ini.',
+            'truncated'         => 'Selamat datang. Ini adalah post artikel pertama anda. Silahkan edit atau hapus post artikel ini...',
+            'path'              => null,
             'file'              => 'default-img.svg',
         ]);
     }

@@ -21,7 +21,7 @@ class UserMenuParentSeeder extends Seeder
             'order'         => '1',
             'name'          => 'Manajemen User',
             'slug'          => 'manajemen-user',
-            'icon'          => 'fa-fw fas fa-users-cog',
+            'icon'          => 'bi bi-person-workspace',
             'prefix'        => 'management',
             'url'           => '#',
         ]);
@@ -29,11 +29,11 @@ class UserMenuParentSeeder extends Seeder
         UserMenuParent::create([
             'uuid'          => Str::uuid(),
             'order'         => '2',
-            'name'          => 'Master',
-            'slug'          => 'master',
-            'icon'          => 'fa-fw fas fa-th',
-            'prefix'        => 'master',
-            'url'           => '#',
+            'name'          => 'Slideshow',
+            'slug'          => 'slideshow',
+            'icon'          => 'bi bi-images',
+            'prefix'        => 'slideshow',
+            'url'           => '/slideshow',
         ]);
 
         UserMenuParent::create([
@@ -41,7 +41,7 @@ class UserMenuParentSeeder extends Seeder
             'order'         => '3',
             'name'          => 'Blog',
             'slug'          => 'blog',
-            'icon'          => 'fa-fw fas fa-file',
+            'icon'          => 'bi bi-files',
             'prefix'        => 'blog',
             'url'           => '#',
         ]);

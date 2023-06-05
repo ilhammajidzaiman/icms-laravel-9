@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use App\Models\Slideshow;
+use App\Models\Status;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class StatusSeeder extends Seeder
@@ -16,14 +16,14 @@ class StatusSeeder extends Seeder
      */
     public function run()
     {
-        Slideshow::create([
+        Status::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Aktif',
             'slug'          => 'aktif',
             'color'         => 'success',
         ]);
 
-        Slideshow::create([
+        Status::create([
             'uuid'          => Str::uuid(),
             'name'          => 'Tidak Aktif',
             'slug'          => 'tidak-aktif',

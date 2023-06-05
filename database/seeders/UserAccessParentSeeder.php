@@ -16,7 +16,7 @@ class UserAccessParentSeeder extends Seeder
      */
     public function run()
     {
-        // level developer...
+        // level developer 1...
         UserAccessParent::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
@@ -32,34 +32,8 @@ class UserAccessParentSeeder extends Seeder
             'user_menu_parent_id'   => '3',
         ]);
 
+        // level admin 2...
 
-
-
-
-        // level admin...
-        UserAccessParent::create([
-            'user_level_id'         => '2',
-            'user_menu_parent_id'   => '1',
-        ]);
-
-        UserAccessParent::create([
-            'user_level_id'         => '2',
-            'user_menu_parent_id'   => '2',
-        ]);
-
-        UserAccessParent::create([
-            'user_level_id'         => '2',
-            'user_menu_parent_id'   => '3',
-        ]);
-
-
-
-
-
-        // level user...
-        UserAccessParent::create([
-            'user_level_id'         => '3',
-            'user_menu_parent_id'   => '3',
-        ]);
+        // level user 3...
     }
 }
