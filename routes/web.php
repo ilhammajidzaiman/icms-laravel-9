@@ -2,29 +2,34 @@
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Private\LoginController;
-// 
 use App\Http\Controllers\Public\PublicController;
+// 
 use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\RegisterController;
 use App\Http\Controllers\Private\DashboardController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // management
-use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
-use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
-use App\Http\Controllers\Private\Developer\Management\UserMenuParentController as DeveloperUserMenuParentController;
-use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
-use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
-use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
-
-// slideshow
 use App\Http\Controllers\Private\Developer\SlideshowController as DeveloperSlideshowController;
-
-// blog
+use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
 use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
-use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
+
+// slideshow
+use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
+
+// blog
+use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
+use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
+use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
+use App\Http\Controllers\Private\Developer\Management\UserMenuParentController as DeveloperUserMenuParentController;
+
+// nav-menu
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController as DeveloperNavMenuParentController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -178,6 +183,26 @@ Route::middleware('auth')->group(
                     }
                 );
                 // 
+
+
+                Route::prefix('nav-menu')->controller(DeveloperNavMenuParentController::class)->group(function () {
+                    Route::get('/', 'index')->name('developer.nav-menu.parent.index');
+                    Route::get('/create', 'create')->name('developer.nav-menu.parent.create');
+                    Route::post('/store', 'store')->name('developer.nav-menu.parent.store');
+                    Route::get('/{id}/show', 'show')->name('developer.nav-menu.parent.show');
+                    Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.parent.edit');
+                    Route::put('/{id}/update', 'update')->name('developer.nav-menu.parent.update');
+                    Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.parent.delete');
+                });
+                // 
+                // Route::prefix('nav-menu/child')->controller(DeveloperUserMenuChildController::class)->group(function () {
+                //     Route::get('/create/{id}', 'create')->name('developer.management.user.menu.child.create');
+                //     Route::post('/store/{id}', 'store')->name('developer.management.user.menu.child.store');
+                //     Route::get('/{id}/show', 'show')->name('developer.management.user.menu.child.show');
+                //     Route::get('/{id}/edit', 'edit')->name('developer.management.user.menu.child.edit');
+                //     Route::put('/{id}/update', 'update')->name('developer.management.user.menu.child.update');
+                //     Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.child.delete');
+                // });
             }
         );
     }

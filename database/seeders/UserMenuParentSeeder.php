@@ -45,5 +45,25 @@ class UserMenuParentSeeder extends Seeder
             'prefix'        => 'blog',
             'url'           => '#',
         ]);
+
+        UserMenuParent::create([
+            'uuid'          => Str::uuid(),
+            'order'         => '4',
+            'name'          => 'Halaman',
+            'slug'          => 'halaman',
+            'icon'          => 'bi bi-files-alt',
+            'prefix'        => 'page',
+            'url'           => '/page',
+        ]);
+
+        UserMenuParent::create([
+            'uuid'          => Str::uuid(),
+            'order'         => '5',
+            'name'          => 'Nav Menu',
+            'slug'          => 'nav-menu',
+            'icon'          => 'bi bi-files-alt',
+            'prefix'        => 'nav-menu',
+            'url'           => '/nav-menu',
+        ]);
     }
 }
