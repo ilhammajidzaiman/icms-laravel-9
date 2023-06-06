@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <div class="row">
                             <x-form-input-row-readonly type="text" name="order" label="urutan"
-                                value="{{ $navMenuParent->order }}" class="col-md-4" />
+                                value="{{ $navMenuParent->order }}" class="col-md-2" />
                         </div>
                         <div class="row">
                             <x-form-input-row-readonly type="text" name="name" label="nama"

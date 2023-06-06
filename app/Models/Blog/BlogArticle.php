@@ -3,7 +3,6 @@
 namespace App\Models\Blog;
 
 use App\Models\User;
-use App\Models\Blog\BlogStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

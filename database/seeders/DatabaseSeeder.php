@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
             BlogStatusSeeder::class,
             BlogCategorySeeder::class,
             BlogArticleSeeder::class,
+            // 
+            NavMenuParentSeeder::class,
         ]);
     }
 }

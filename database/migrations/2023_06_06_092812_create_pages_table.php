@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->restrictOnDelete()->comment('id table users');
+            $table->string('title')->unique()->comment('judul halaman');
+            $table->string('slug')->unique()->comment('slug dari judul');
+            $table->binary('content')->comment('bagian isi halaman');
+            $table->string('truncated')->comment('review halaman');
             $table->timestamps();
         });
     }

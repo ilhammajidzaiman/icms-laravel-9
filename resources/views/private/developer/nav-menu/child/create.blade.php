@@ -5,7 +5,7 @@
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.management.user.menu.parent.index') }}" label="kembali"
+    <x-button-link href="{{ route(Request::segment(1) . '.nav-menu.parent.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <div class="row">
@@ -13,13 +13,12 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <form
-                            action="{{ route(Request::segment(1) . '.management.user.menu.child.store', $menuParent->uuid) }}"
+                        <form action="{{ route(Request::segment(1) . '.nav-menu.child.store', $navMenuParent->uuid) }}"
                             method="post">
                             @csrf
                             <div class="row">
-                                <x-form-input-row-readonly type="text" name="parent" label="parent"
-                                    value="{{ $menuParent->name }}" class="col" />
+                                <x-form-input-row-readonly type="text" name="parent" label="parent nav menu"
+                                    value="{{ $navMenuParent->name }}" class="col" />
                             </div>
                             <div class="row">
                                 <x-form-input-row type="number" name="order" label="urutan" value="{{ old('order') }}"
@@ -27,14 +26,6 @@
                             </div>
                             <div class="row">
                                 <x-form-input-row type="text" name="name" label="nama" value="{{ old('name') }}"
-                                    class="col-md-4" />
-                            </div>
-                            <div class="row">
-                                <x-form-input-row type="text" name="icon" label="icon" value="{{ old('icon') }}"
-                                    class="col-md-4" />
-                            </div>
-                            <div class="row">
-                                <x-form-input-row type="text" name="prefix" label="prefix" value="{{ old('prefix') }}"
                                     class="col-md-4" />
                             </div>
                             <div class="row">

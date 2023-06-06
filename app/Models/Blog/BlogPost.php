@@ -2,7 +2,6 @@
 
 namespace App\Models\Blog;
 
-use App\Models\Blog\BlogCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

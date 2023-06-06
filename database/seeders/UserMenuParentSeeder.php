@@ -61,7 +61,7 @@ class UserMenuParentSeeder extends Seeder
             'order'         => '5',
             'name'          => 'Nav Menu',
             'slug'          => 'nav-menu',
-            'icon'          => 'bi bi-files-alt',
+            'icon'          => 'bi bi-list-nested',
             'prefix'        => 'nav-menu',
             'url'           => '/nav-menu',
         ]);

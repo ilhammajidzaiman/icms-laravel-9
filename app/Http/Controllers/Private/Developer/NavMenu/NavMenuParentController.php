@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Private\Developer\NavMenu;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\NavMenuParent;
 use App\Http\Controllers\Controller;
+use App\Models\NavMenu\NavMenuParent;
 
 class NavMenuParentController extends Controller
 {
@@ -17,7 +17,7 @@ class NavMenuParentController extends Controller
     public function index()
     {
         $data['navMenuParents']         = NavMenuParent::orderBy('order')->get();
-        return view('private.developer.menu.parent.index', $data);
+        return view('private.developer.nav-menu.parent.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class NavMenuParentController extends Controller
      */
     public function create()
     {
-        return view('private.developer.menu.parent.create');
+        return view('private.developer.nav-menu.parent.create');
     }
 
     /**
@@ -41,7 +41,7 @@ class NavMenuParentController extends Controller
         // data input...
         $order                          = $request->order;
         $name                           = $request->name;
-        $url                            = $request->url;
+        $url                            = Str::replace(' ', '', $request->url);
         $message                        = $name;
         $slug                           = Str::slug($name, '-');
         $uuid                           = Str::uuid();
@@ -50,7 +50,6 @@ class NavMenuParentController extends Controller
         $validatedData                  = $request->validate([
             'order'                     => ['required', 'max:255'],
             'name'                      => ['required', 'max:255'],
-            'url'                       => ['required', 'max:255'],
         ]);
 
         // insert to table...
@@ -81,7 +80,7 @@ class NavMenuParentController extends Controller
     public function show($id)
     {
         $data['navMenuParent']         = NavMenuParent::where('uuid', $id)->first();
-        return view('private.developer.menu.parent.show', $data);
+        return view('private.developer.nav-menu.parent.show', $data);
     }
 
     /**
@@ -93,7 +92,7 @@ class NavMenuParentController extends Controller
     public function edit($id)
     {
         $data['navMenuParent']         = NavMenuParent::where('uuid', $id)->first();
-        return view('private.developer.menu.parent.update', $data);
+        return view('private.developer.nav-menu.parent.update', $data);
     }
 
     /**
@@ -108,7 +107,7 @@ class NavMenuParentController extends Controller
         // data input...
         $order                          = $request->order;
         $name                           = $request->name;
-        $url                            = $request->url;
+        $url                            = Str::replace(' ', '', $request->url);
         $message                        = $name;
         $slug                           = Str::slug($name, '-');
 
@@ -116,7 +115,6 @@ class NavMenuParentController extends Controller
         $validatedData                  = $request->validate([
             'order'                     => ['required', 'max:255'],
             'name'                      => ['required', 'max:255'],
-            'url'                       => ['required', 'max:255'],
         ]);
 
         // insert to table...

@@ -183,8 +183,6 @@ Route::middleware('auth')->group(
                     }
                 );
                 // 
-
-
                 Route::prefix('nav-menu')->controller(DeveloperNavMenuParentController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.nav-menu.parent.index');
                     Route::get('/create', 'create')->name('developer.nav-menu.parent.create');
@@ -195,14 +193,14 @@ Route::middleware('auth')->group(
                     Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.parent.delete');
                 });
                 // 
-                // Route::prefix('nav-menu/child')->controller(DeveloperUserMenuChildController::class)->group(function () {
-                //     Route::get('/create/{id}', 'create')->name('developer.management.user.menu.child.create');
-                //     Route::post('/store/{id}', 'store')->name('developer.management.user.menu.child.store');
-                //     Route::get('/{id}/show', 'show')->name('developer.management.user.menu.child.show');
-                //     Route::get('/{id}/edit', 'edit')->name('developer.management.user.menu.child.edit');
-                //     Route::put('/{id}/update', 'update')->name('developer.management.user.menu.child.update');
-                //     Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.child.delete');
-                // });
+                Route::prefix('nav-menu/child')->controller(DeveloperNavMenuChildController::class)->group(function () {
+                    Route::get('/create/{id}', 'create')->name('developer.nav-menu.child.create');
+                    Route::post('/store/{id}', 'store')->name('developer.nav-menu.child.store');
+                    Route::get('/{id}/show', 'show')->name('developer.nav-menu.child.show');
+                    Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.child.edit');
+                    Route::put('/{id}/update', 'update')->name('developer.nav-menu.child.update');
+                    Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.child.delete');
+                });
             }
         );
     }
