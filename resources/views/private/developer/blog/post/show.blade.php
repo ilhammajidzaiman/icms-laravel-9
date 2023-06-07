@@ -10,9 +10,14 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            {{-- <div class="card">
-                <div class="card-content">
-                    <div class="card-body"> --}}
+
+            <input type="hidden" name="myInput" id="myInput" value="{{ route('/') . '/post/' . $article->slug }}" hidden
+                readonly>
+            <button class="text-capitalize rounded-pill btn btn-sm btn-outline-primary mb-4" onclick="copyToClipboard(this)">
+                <i class="bi bi-clipboard"></i>
+                copy link
+            </button>
+
             <h3>{{ $article->title }}</h3>
             <div class="text-capitalize">kategori:
                 @forelse ($blogPosts as $blogPost)
@@ -30,9 +35,30 @@
             @endphp
             <img src="{{ $url }}" alt="{{ $url }}" class="img-fluid rounded w-100 mb-3 mb-4">
             <div>{!! $article->content !!}</div>
-            {{-- </div>
-                </div>
-            </div> --}}
+
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* with button */
+        function copyToClipboard(button) {
+            var copyText = document.getElementById("myInput").value;
+            var tempInput = document.createElement("input");
+            tempInput.setAttribute("value", copyText);
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            button.innerHTML = '<i class="bi bi-clipboard-check"></i> copied';
+            button.disabled = true;
+            setTimeout(function() {
+                button.innerHTML = '<i class="bi bi-clipboard"></i> copy';
+                button.disabled = false;
+            }, 3000);
+        }
+    </script>
 @endsection

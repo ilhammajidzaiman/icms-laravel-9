@@ -10,12 +10,22 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <input type="hidden" name="myInput" id="myInput" value="{{ route('/') . '/page/' . $page->slug }}" readonly>
-            <button class="text-capitalize rounded-pill btn btn-sm btn-outline-primary mb-4" onclick="copyToClipboard(this)"
-                data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to Clipboard">
+            <input type="hidden" name="myInput" id="myInput" value="{{ route('/') . '/page/' . $page->slug }}" hidden
+                readonly>
+
+            {{-- with button --}}
+            <button class="text-capitalize rounded-pill btn btn-sm btn-outline-primary mb-4" onclick="copyToClipboard(this)">
                 <i class="bi bi-clipboard"></i>
                 copy link
             </button>
+
+            {{-- with tooltip --}}
+            {{-- <button class="text-capitalize rounded-pill btn btn-sm btn-outline-primary mb-4" onclick="copyToClipboard(this)"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to Clipboard">
+                <i class="bi bi-clipboard"></i>
+                copy link
+            </button> --}}
+
             <h3>{{ $page->title }}</h3>
             <x-field-date :create="$page->created_at" :update="$page->updated_at" class="text-capitalize" />
             <div>{!! $page->content !!}</div>
@@ -24,7 +34,32 @@
 @endsection
 
 @section('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
+        /* with button */
+        function copyToClipboard(button) {
+            var copyText = document.getElementById("myInput").value;
+            var tempInput = document.createElement("input");
+            tempInput.setAttribute("value", copyText);
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            button.innerHTML = '<i class="bi bi-clipboard-check"></i> copied';
+            button.disabled = true;
+            setTimeout(function() {
+                button.innerHTML = '<i class="bi bi-clipboard"></i> copy';
+                button.disabled = false;
+            }, 3000);
+        }
+    </script>
+
+    {{-- <script>
+        /* with tooltips */
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         function copyToClipboard(button) {
             var copyText = document.getElementById("myInput");
             copyText.select();
@@ -36,11 +71,5 @@
             button.setAttribute("data-bs-original-title", "Copied!");
             bootstrap.Tooltip.getOrCreateInstance(button).show();
         }
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
+    </script> --}}
 @endsection
