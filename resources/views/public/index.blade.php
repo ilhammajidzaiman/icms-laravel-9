@@ -53,8 +53,11 @@
     <div id="app">
         <div id="main" class="layout-horizontal">
             <nav class="navbar navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('/') }}">
+                        <img src="{{ asset('assets/images/' . config('app.logo')) }}" alt="Logo">
+                        {{ config('app.name') }}
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -62,29 +65,44 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
+                            @forelse ($navMenuParents as $navMenuParent)
+                                @php
+                                    $hasParent = App\Models\NavMenu\navMenuParent::where('id', $navMenuParent->id)->first();
+                                    //
+                                    $hasChild = App\Models\NavMenu\NavMenuChild::where('nav_menu_parent_id', $navMenuParent->id)->first();
+                                    //
+                                    $navMenuChildren = App\Models\NavMenu\NavMenuChild::where('nav_menu_parent_id', $navMenuParent->id)
+                                        ->orderBy('order')
+                                        ->get();
+                                @endphp
+                                @if ($hasChild)
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href=" {{ $navMenuParent->url }}"
+                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ $navMenuParent->name }}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            @foreach ($navMenuChildren as $navMenuChild)
+                                                <li>
+                                                    <a class="dropdown-item" href="{{ $navMenuChild->url }}">
+                                                        {{ $navMenuChild->name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled">Disabled</a>
-                            </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="{{ $navMenuParent->url }}">
+                                            {{ $navMenuParent->name }}
+                                        </a>
+                                    </li>
+                                @endif
+                            @empty
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Menu</a>
+                                </li>
+                            @endforelse
                         </ul>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -93,49 +111,6 @@
                     </div>
                 </div>
             </nav>
-
-            {{-- <header class="">
-                <div class="header-top">
-                    <div class="container">
-                        <div class="logo">
-                            <a href="{{ route('/') }}"><img src="{{ asset('assets/images/' . config('app.logo')) }}"
-                                    alt="Logo">
-                                <span class="ps-2">
-                                    {{ config('app.name') }}
-                                </span>
-                            </a>
-                        </div>
-                        <div class="header-top-right">
-                            <!-- Burger button responsive -->
-                            <a href="#" class="burger-btn d-block d-xl-none">
-                                <i class="bi bi-justify fs-3"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <nav class="main-navbar">
-                    <div class="container">
-                        <ul>
-
-                            @forelse ($navMenuParents as $navMenuParent)
-                                <li class="menu-item">
-                                    <a href="{{ $navMenuParent->url }}" class='menu-link'>
-                                        <span>{{ $navMenuParent->name }}</span>
-                                    </a>
-                                </li>
-                            @empty
-                                <li class="menu-item">
-                                    <a href="{{ route('/') }}" class='menu-link'>
-                                        <span>Dashboard</span>
-                                    </a>
-                                </li>
-                            @endforelse
-                        </ul>
-                    </div>
-                </nav>
-            </header> --}}
-
-
 
             <div id="carouselControls1" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -185,8 +160,6 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-
-
 
             <div class="wrapper py-5">
                 <div class="container px-3">
@@ -276,13 +249,10 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
 
             <div class="wrapper py-5">
                 <div class="container px-3">
@@ -303,8 +273,6 @@
                                             </div>
                                         </small>
                                     </div>
-
-
                                     @php
                                         $file = $article->file;
                                         $path = $article->path;
@@ -339,7 +307,6 @@
                                                 tidak ada kategori
                                             @endforelse
                                         </p>
-
                                         <div class="text-end">
                                             <a href="{{ route('/') }}"
                                                 class="btn btn-light-primary  float-end text-capitalize">
@@ -351,13 +318,9 @@
                             </div>
                         @empty
                         @endforelse
-
                     </div>
                 </div>
             </div>
-
-
-
             <footer class="wrapper py-5">
                 <div class="container">
                     <div class="footer clearfix mb-0 text-muted">
