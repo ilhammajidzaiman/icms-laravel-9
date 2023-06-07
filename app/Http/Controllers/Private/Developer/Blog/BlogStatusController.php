@@ -65,7 +65,7 @@ class BlogStatusController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route('developer.blog.status.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.blog.status.index'))->with($flashData);
     }
 
     /**
@@ -133,7 +133,7 @@ class BlogStatusController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route('developer.blog.status.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.blog.status.index'))->with($flashData);
     }
 
     /**
@@ -142,7 +142,7 @@ class BlogStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // data detail...
         $data['category']           = BlogStatus::where('slug', $id)->first();
@@ -159,6 +159,6 @@ class BlogStatusController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route('developer.blog.status.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.blog.status.index'))->with($flashData);
     }
 }

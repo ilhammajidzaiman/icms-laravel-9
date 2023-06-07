@@ -66,7 +66,7 @@ class UserStatusController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route('developer.management.user.status.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.status.index'))->with($flashData);
     }
 
     /**
@@ -135,7 +135,7 @@ class UserStatusController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route('developer.management.user.status.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.status.index'))->with($flashData);
     }
 
     /**
@@ -144,7 +144,7 @@ class UserStatusController extends Controller
      * @param  \App\Models\UserStatus  $userrStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // data detail...
         $data['status']             = UserStatus::where('slug', $id)->first();
@@ -160,6 +160,6 @@ class UserStatusController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route('developer.management.user.status.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.status.index'))->with($flashData);
     }
 }

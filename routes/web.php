@@ -15,20 +15,23 @@ use App\Http\Controllers\Private\Developer\SlideshowController as DeveloperSlide
 use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
 use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
 use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
-use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
 
 // slideshow
-use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
+use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
+
+// page
+use App\Http\Controllers\Private\Developer\PageController as DeveloperPageController;
 
 // blog
+use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
 use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
-use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
-use App\Http\Controllers\Private\Developer\Management\UserMenuParentController as DeveloperUserMenuParentController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
 
 // nav-menu
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController as DeveloperNavMenuParentController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
+use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
+use App\Http\Controllers\Private\Developer\Management\UserMenuParentController as DeveloperUserMenuParentController;
 
 
 /*
@@ -182,6 +185,16 @@ Route::middleware('auth')->group(
                         });
                     }
                 );
+                // 
+                Route::prefix('page')->controller(DeveloperPageController::class)->group(function () {
+                    Route::get('/', 'index')->name('developer.page.index');
+                    Route::get('/create', 'create')->name('developer.page.create');
+                    Route::post('/store', 'store')->name('developer.page.store');
+                    Route::get('/{id}/show', 'show')->name('developer.page.show');
+                    Route::get('/{id}/edit', 'edit')->name('developer.page.edit');
+                    Route::put('/{id}/update', 'update')->name('developer.page.update');
+                    Route::delete('/{id}/delete', 'destroy')->name('developer.page.delete');
+                });
                 // 
                 Route::prefix('nav-menu')->controller(DeveloperNavMenuParentController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.nav-menu.parent.index');

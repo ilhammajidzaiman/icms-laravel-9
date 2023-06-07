@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Private\Developer;
 
-use App\Http\Controllers\Controller;
+use App\Models\Page;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
@@ -14,7 +16,9 @@ class PageController extends Controller
      */
     public function index()
     {
-        //
+        $search                         = request(['search']);
+        $data['pages']                  = Page::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        return view('private.developer.page.index', $data);
     }
 
     /**
@@ -24,7 +28,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        return view('private.developer.page.create');
     }
 
     /**
@@ -35,7 +39,35 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // data input...
+        $title                          = $request->title;
+        $content                        = $request->content;
+        $message                        = $title;
+        $uuid                           = Str::uuid();
+        $slug                           = Str::slug($title, '-');
+
+        // validation...
+        $validatedData = $request->validate([
+            'title'                     => ['required', 'max:255', 'unique:pages'],
+            'content'                   => ['required'],
+        ]);
+
+        // insert to table...
+        $data = [
+            'uuid'                      => $uuid,
+            'title'                     => $title,
+            'slug'                      => $slug,
+            'content'                   => $content,
+        ];
+        Page::create($data);
+
+        // flashdata...
+        $flashData = [
+            'message'                   => 'Data "' . $message . '" ditambahkan',
+            'alert'                     => 'primary',
+            'icon'                      => 'fa-fw fas fa-check',
+        ];
+        return redirect(route($request->segment(1) . '.page.index'))->with($flashData);
     }
 
     /**
@@ -46,7 +78,8 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['page']                   = Page::where('uuid', $id)->first();
+        return view('private.developer.page.show', $data);
     }
 
     /**
@@ -57,7 +90,8 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page']                   = Page::where('uuid', $id)->first();
+        return view('private.developer.page.update', $data);
     }
 
     /**
@@ -69,7 +103,40 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // detail data
+        $data['page']                   = Page::where('uuid', $id)->first();
+        $oldTitle                       = $data['page']->title;
+
+        // data input...
+        $title                          = $request->title;
+        $content                        = $request->content;
+        $message                        = $title;
+        $slug                           = Str::slug($title, '-');
+
+        // validation logic
+        $oldTitle                       !== $title ? $uTitle = "unique:pages" : $uTitle = "";
+
+        // validation
+        $validatedData = $request->validate([
+            'title'                     => ['required', 'max:250', $uTitle],
+            'content'                   => ['required'],
+        ]);
+
+        // insert to table...
+        $data = [
+            'title'                     => $title,
+            'slug'                      => $slug,
+            'content'                   => $content,
+        ];
+        Page::where('uuid', $id)->update($data);
+
+        // flashdata...
+        $flashData = [
+            'message'                   => 'Data "' . $message . '" diubah',
+            'alert'                     => 'success',
+            'icon'                      => 'fa-fw fas fa-edit',
+        ];
+        return redirect(route($request->segment(1) . '.page.index'))->with($flashData);
     }
 
     /**
@@ -78,8 +145,23 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        // data detail...
+        $data['page']                   = Page::where('uuid', $id)->first();
+        $oldId                          = $data['page']->id;
+        $message                        = $data['page']->title;
+
+        // delete data on table...
+        Page::where('uuid', $id)->delete();
+        // Page::destroy($oldId);
+
+        // flashdata...
+        $flashData = [
+            'message'                   => 'Data "' . $message . '" dihapus!',
+            'alert'                     => 'danger',
+            'icon'                      => 'fa-fw fas fa-trash',
+        ];
+        return redirect(route($request->segment(1) . '.page.index'))->with($flashData);
     }
 }

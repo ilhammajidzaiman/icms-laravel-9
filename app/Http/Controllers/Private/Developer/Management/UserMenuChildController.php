@@ -70,7 +70,7 @@ class UserMenuChildController extends Controller
             'alert'                     => 'primary',
             'icon'                      => 'fa-fw fas fa-check',
         ];
-        return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.menu.parent.index'))->with($flashData);
     }
 
     /**
@@ -141,7 +141,7 @@ class UserMenuChildController extends Controller
             'alert'                     => 'success',
             'icon'                      => 'fa-fw fas fa-edit',
         ];
-        return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.menu.parent.index'))->with($flashData);
     }
 
     /**
@@ -150,7 +150,7 @@ class UserMenuChildController extends Controller
      * @param  \App\Models\UserMenuChild  $userMenuChild
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // data detail...
         $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
@@ -166,6 +166,6 @@ class UserMenuChildController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect(route('developer.management.user.menu.parent.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.menu.parent.index'))->with($flashData);
     }
 }

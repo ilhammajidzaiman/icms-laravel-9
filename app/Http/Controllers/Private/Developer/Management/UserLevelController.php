@@ -66,7 +66,7 @@ class UserLevelController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route('developer.management.user.level.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.level.index'))->with($flashData);
     }
 
     /**
@@ -135,7 +135,7 @@ class UserLevelController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route('developer.management.user.level.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.level.index'))->with($flashData);
     }
 
     /**
@@ -144,7 +144,7 @@ class UserLevelController extends Controller
      * @param  \App\Models\UserLevel  $userLevel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // data detail...
         $data['level']              = UserLevel::where('slug', $id)->first();
@@ -161,6 +161,6 @@ class UserLevelController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route('developer.management.user.level.index'))->with($flashData);
+        return redirect(route($request->segment(1) . '.management.user.level.index'))->with($flashData);
     }
 }
