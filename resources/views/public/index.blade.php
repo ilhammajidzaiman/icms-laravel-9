@@ -52,7 +52,49 @@
 <body>
     <div id="app">
         <div id="main" class="layout-horizontal">
-            <header class="">
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled">Disabled</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+
+            {{-- <header class="">
                 <div class="header-top">
                     <div class="container">
                         <div class="logo">
@@ -74,220 +116,24 @@
                 <nav class="main-navbar">
                     <div class="container">
                         <ul>
-                            <li class="menu-item  ">
-                                <a href="index.html" class='menu-link'>
-                                    <i class="bi bi-grid-fill"></i>
-                                    <span>Dashboard</span>
-                                </a>
-                            </li>
 
-                            <li class="menu-item  has-sub">
-                                <a href="#" class='menu-link'>
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Forms</span>
-                                </a>
-                                <div class="submenu ">
-                                    <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-                                    <div class="submenu-group-wrapper">
-
-
-                                        <ul class="submenu-group">
-
-                                            <li class="submenu-item  has-sub">
-                                                <a href="#" class='submenu-link'>Form Elements</a>
-
-
-                                                <!-- 3 Level Submenu -->
-                                                <ul class="subsubmenu">
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-element-input.html"
-                                                            class="subsubmenu-link">Input</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-element-input-group.html"
-                                                            class="subsubmenu-link">Input Group</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-element-select.html"
-                                                            class="subsubmenu-link">Select</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-element-radio.html"
-                                                            class="subsubmenu-link">Radio</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-element-checkbox.html"
-                                                            class="subsubmenu-link">Checkbox</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-element-textarea.html"
-                                                            class="subsubmenu-link">Textarea</a>
-                                                    </li>
-
-                                                </ul>
-
-                                            </li>
-
-
-
-                                            <li class="submenu-item  ">
-                                                <a href="form-layout.html" class='submenu-link'>Form Layout</a>
-
-
-                                            </li>
-
-
-
-                                            <li class="submenu-item  has-sub">
-                                                <a href="#" class='submenu-link'>Form Validation</a>
-
-
-                                                <!-- 3 Level Submenu -->
-                                                <ul class="subsubmenu">
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-validation-parsley.html"
-                                                            class="subsubmenu-link">Parsley</a>
-                                                    </li>
-
-                                                </ul>
-
-                                            </li>
-
-
-
-                                            <li class="submenu-item  has-sub">
-                                                <a href="#" class='submenu-link'>Form Editor</a>
-
-
-                                                <!-- 3 Level Submenu -->
-                                                <ul class="subsubmenu">
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-editor-quill.html"
-                                                            class="subsubmenu-link">Quill</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-editor-ckeditor.html"
-                                                            class="subsubmenu-link">CKEditor</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-editor-summernote.html"
-                                                            class="subsubmenu-link">Summernote</a>
-                                                    </li>
-
-                                                    <li class="subsubmenu-item ">
-                                                        <a href="form-editor-tinymce.html"
-                                                            class="subsubmenu-link">TinyMCE</a>
-                                                    </li>
-
-                                                </ul>
-
-                                            </li>
-
-                                        </ul>
-
-
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="menu-item  has-sub">
-                                <a href="#" class='menu-link'>
-                                    <i class="bi bi-table"></i>
-                                    <span>Table</span>
-                                </a>
-                                <div class="submenu ">
-                                    <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-                                    <div class="submenu-group-wrapper">
-
-
-                                        <ul class="submenu-group">
-
-                                            <li class="submenu-item  ">
-                                                <a href="table.html" class='submenu-link'>Table</a>
-
-
-                                            </li>
-
-
-
-                                            <li class="submenu-item  ">
-                                                <a href="table-datatable.html" class='submenu-link'>Datatable</a>
-
-
-                                            </li>
-
-
-
-                                            <li class="submenu-item  ">
-                                                <a href="table-datatable-jquery.html" class='submenu-link'>Datatable
-                                                    (jQuery)</a>
-
-
-                                            </li>
-
-                                        </ul>
-
-
-                                    </div>
-                                </div>
-                            </li>
+                            @forelse ($navMenuParents as $navMenuParent)
+                                <li class="menu-item">
+                                    <a href="{{ $navMenuParent->url }}" class='menu-link'>
+                                        <span>{{ $navMenuParent->name }}</span>
+                                    </a>
+                                </li>
+                            @empty
+                                <li class="menu-item">
+                                    <a href="{{ route('/') }}" class='menu-link'>
+                                        <span>Dashboard</span>
+                                    </a>
+                                </li>
+                            @endforelse
                         </ul>
                     </div>
                 </nav>
-
-
-                {{-- <div class="">
-                    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                                aria-current="true">
-                            </li>
-                            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" class="">
-                            </li>
-                        </ol>
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item carousel-item-next carousel-item-start">
-                                <img src="{{ asset('/plugins/mazer/assets/images/samples/1.png') }}"
-                                    class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>First slide label</h5>
-                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item active carousel-item-start">
-                                <img src="{{ asset('/plugins/mazer/assets/images/samples/2.png') }}"
-                                    class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Second slide label</h5>
-                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </a>
-                    </div>
-                </div> --}}
-
-            </header>
+            </header> --}}
 
 
 
