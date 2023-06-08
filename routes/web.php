@@ -50,7 +50,14 @@ Route::get('/welcome', function () {
 });
 
 // 
-Route::get('/', [PublicController::class, 'index'])->name('/');
+// Route::get('/', [PublicController::class, 'index'])->name('/');
+// Route::get('/page/{id}', [PublicController::class, 'page'])->name('page');
+// Route::get('/post/{id}', [PublicController::class, 'post'])->name('post');
+Route::prefix('/')->controller(PublicController::class)->group(function () {
+    Route::get('', 'index')->name('/');
+    Route::get('/page/{id}', 'page')->name('page');
+    Route::get('/post/{id}', 'post')->name('post');
+});
 
 // 
 Route::get('/redirect', function () {
