@@ -7,8 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/' . config('app.icon')) }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/css/main/app.css') }}">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('/plugins/mazer/assets/css/main/app.css') }}"> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
     <style>
         .text-shadow {
             color: #ffffff;
@@ -107,7 +108,7 @@
     <div id="app">
         <div id="main" class="layout-horizontal">
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow">
+            <nav class="navbar navbar-expand-lg bg-prim fixed-top shadow">
                 <div class="container">
                     <a class="navbar-brand" href="{{ route('/') }}">
                         <img src="{{ asset('assets/images/' . config('app.icon')) }}"
@@ -157,7 +158,7 @@
                 </div>
             </nav>
 
-            <section class="wrapper mt-5 pt-4">
+            <section class="wrapper mt-5">
                 <div id="carouselControls1 mt-5" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         @php
@@ -208,7 +209,17 @@
                 </div>
             </section>
 
-
+            <nav class="main-navbar">
+                <div class="container">
+                    <ul>
+                        <li class="menu-item">
+                            <a href="index.html" class="menu-link">
+                                <span><i class="bi bi-grid-fill"></i> Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
