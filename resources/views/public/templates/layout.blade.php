@@ -109,13 +109,17 @@
             }
         }
     </style>
+    @yield('style')
 </head>
 
 <body id="home">
     <div id="main" class="layout-horizontal">
         @include('public.templates.navbar')
         @yield('container')
-        <footer class="wrapper pb-5" id="footer">
+
+
+
+        {{-- <footer class="wrapper pb-5" id="footer">
             <div class="container mt-5 p-3">
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
@@ -129,7 +133,38 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> --}}
+        <section id="contac" class="text-bg-primary">
+
+            <div class="container">
+                <div class="footer clearfix">
+                    <div class="float-start">
+                        <p><?= date('Y') ?> &copy; {{ config('app.name') }}</p>
+
+                        <div class="recent-message d-flex px-4 py-3">
+                            <div class="avatar avatar-lg">
+                                <i class="bi bi-people fs-1"></i>
+                            </div>
+                            <div class="name ms-4">
+                                <h5 class="mb-1">Hank Schrader</h5>
+                                <h6 class="text-muted mb-0">@johnducky</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-end">
+                        <p>
+                            Copyright
+                            <a href="{{ route('/') }}">{{ config('app.copyright') }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+
+
     </div>
     <script src="{{ asset('/plugins/mazer/assets/js/bootstrap.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

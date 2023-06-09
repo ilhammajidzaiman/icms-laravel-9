@@ -35,13 +35,13 @@
                                     @endphp
                                     <img src="{{ $url }}" class="d-block w-100" alt="{{ $url }}"
                                         aria-label="slide {{ $no++ }}">
-                                    <div class="carousel-caption d-none d-md-block text-shadow">
-                                        {{-- <h5> --}}
-                                        <a href="{{ route('/') }}" class="h5 text-reset">
-                                            {{ $slideArticle->title }}
-                                        </a>
-                                        {{-- </h5> --}}
-                                        <p>{{ $slideArticle->truncated }}</p>
+                                    <div class="carousel-caption carousel-caption-overlay text-shadow">
+                                        <h5 class="text-reset d-none d-md-block">
+                                            <a href="{{ route('post', $slideArticle->slug) }}" class="text-reset">
+                                                {{ $slideArticle->title }}
+                                            </a>
+                                        </h5>
+                                        <p class="d-none d-lg-block">{{ $slideArticle->detail }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -59,17 +59,19 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-5">
-                    <h3>
-                        New Article
+                    <h3 class="text-capitalize">
+                        terbaru
                     </h3>
                     @foreach ($newArticles as $newArticle)
                         <div class="card mb-3">
                             <div class="card-body p-3">
                                 <div class="row g-4">
                                     <div class="col-8 col-md-8">
-                                        <a href="{{ route('/') }}" class="card-text text-reset">
-                                            {{ $newArticle->title }}
-                                        </a>
+                                        <h6 class="card-text fw-normal">
+                                            <a href="{{ route('post', $newArticle->slug) }}" class="text-reset">
+                                                {{ $newArticle->title }}
+                                            </a>
+                                        </h6>
                                         <div class="card-text">
                                             <small class="text-muted">
                                                 {{ $newArticle->created_at->diffForHumans() }}
@@ -120,7 +122,7 @@
                             <img src="{{ $url }}" alt="{{ $url }}" class="card-img-top w-100 rounded-4">
                             <div class="card-body pt-4 pb-0 mb-0">
                                 <h5 class="card-title">
-                                    <a href="{{ route('/') }}" class="text-reset">
+                                    <a href="{{ route('post', $article->slug) }}" class="text-reset">
                                         {{ $article->title }}
                                     </a>
                                 </h5>

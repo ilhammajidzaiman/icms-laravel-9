@@ -20,6 +20,10 @@
              </div>
              <div class="offcanvas-body">
                  <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                     @php
+                         $navMenuParents = App\Models\NavMenu\NavMenuParent::orderBy('order')->get();
+                     @endphp
+                     {{-- $data['navMenuParents'] = NavMenuParent::orderBy('order')->get(); --}}
                      @forelse ($navMenuParents as $navMenuParent)
                          @php
                              $hasParent = App\Models\NavMenu\navMenuParent::where('id', $navMenuParent->id)->first();
