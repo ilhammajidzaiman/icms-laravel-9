@@ -134,37 +134,54 @@
                 </div>
             </div>
         </footer> --}}
+
         <section id="contac" class="text-bg-primary">
+            <div class="container p-3">
+                <div class="row py-5">
 
-            <div class="container">
-                <div class="footer clearfix">
-                    <div class="float-start">
-                        <p><?= date('Y') ?> &copy; {{ config('app.name') }}</p>
-
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <i class="bi bi-people fs-1"></i>
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-6">
+                        <nav class="nav justify-content-centerr fs-4">
+                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
+                                <i class="bi bi-tiktok"></i>
+                            </a>
+                        </nav>
                     </div>
-                    <div class="float-end">
-                        <p>
-                            Copyright
-                            <a href="{{ route('/') }}">{{ config('app.copyright') }}</a>
-                        </p>
+                    <div class="col-12 col-md-6">
+                        <div class="text-center text-sm-center text-md-start">
+                            <img src="{{ asset('assets/images/' . config('app.icon')) }}"
+                                alt="Logo {{ config('app.icon') }}" width="50" height="50"
+                                class="text-center text-sm-center text-md-start mb-3">
+
+                            <h4 class="text-center text-sm-center text-md-start text-light ">
+                                <a class="text-reset" href="{{ route('/') }}">
+                                    {{ config('app.name') }}
+                                </a>
+                            </h4>
+                            <p class="text-center text-sm-center text-md-start">
+                                Copyright &copy; <?= date('Y') ?>
+                                {{ config('app.copyright') }}
+                            </p>
+                        </div>
+                        <div class="">
+                            <i class="bi bi-envelope"></i>
+                            email@developer.dev
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </section>
-
-
-
     </div>
     <script src="{{ asset('/plugins/mazer/assets/js/bootstrap.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

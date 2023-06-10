@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('truncated')->comment('review artikel');
             $table->string('path')->nullable()->comment('folder file gambar artikel');
             $table->string('file')->nullable()->comment('file gambar artikel');
+            $table->bigInteger('counter')->nullable()->comment('jumlah pengunjung');
             $table->timestamps();
         });
     }

@@ -16,7 +16,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-5">
-                    @include('public.templates.new-article')
+                    @include('public.templates.article-new')
+                    @include('public.templates.article-popular')
                 </div>
             </div>
         </div>

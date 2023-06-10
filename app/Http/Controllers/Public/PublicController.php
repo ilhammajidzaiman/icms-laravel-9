@@ -16,34 +16,36 @@ class PublicController extends Controller
     {
         $search                         = request(['search']);
         $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
         $data['slideshows']             = Slideshow::where('status_id', 1)->orderByDesc('id')->take(3)->get();
         $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
-        $data['navMenuParents']         = NavMenuParent::orderBy('order')->get();
+        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(4)->get();
         return view('public.index', $data);
     }
 
     public function page($id)
     {
-        // $search                         = request(['search']);
-        // $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        // $data['slideshows']             = Slideshow::where('status_id', 1)->orderByDesc('id')->take(3)->get();
-        // $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
-        // $data['navMenuParents']         = NavMenuParent::orderBy('order')->get();
         $data['page']                   = Page::where('slug', $id)->first();
+        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(6)->get();
         return view('public.page', $data);
     }
 
     public function post($id)
     {
-        // $search                         = request(['search']);
-        // $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        // $data['slideshows']             = Slideshow::where('status_id', 1)->orderByDesc('id')->take(3)->get();
-        // $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
-        // $data['navMenuParents']         = NavMenuParent::orderBy('order')->get();
+        // counter
         $data['article']                = BlogArticle::where('slug', $id)->first();
+        $count                          = $data['article']->counter;
+        $counter                        = $count + 1;
+        $data = [
+            'counter'                   => $counter,
+        ];
+        BlogArticle::where('slug', $id)->update($data);
+
+        // 
+        $data['article']                = BlogArticle::where('slug', $id)->first();
+        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(6)->get();
         return view('public.post', $data);
     }
 }

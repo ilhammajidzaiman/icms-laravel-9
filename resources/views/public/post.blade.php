@@ -8,6 +8,9 @@
                         <div class="card-body">
                             <small class="text-capitalize">
                                 {{ $article->created_at->diffForHumans() . ', ' . $article->created_at->format('d-m-Y, H:i:s') }}
+                                <i class="bi bi-eye ms-2"></i>
+                                {{ $article->counter }}
+                                x
                             </small>
                             <h3>
                                 <a href="{{ route('post', $article->slug) }}" class="text-reset">
@@ -15,7 +18,8 @@
                                 </a>
                             </h3>
                             <p class="text-capitalize">
-                                oleh: {{ $article->user->name }}
+                                oleh:
+                                {{ $article->user->name }}
                             </p>
                             @php
                                 $file = $article->file;
@@ -51,7 +55,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-5">
-                    @include('public.templates.new-article')
+                    @include('public.templates.article-new')
+                    @include('public.templates.article-popular')
                 </div>
             </div>
         </div>

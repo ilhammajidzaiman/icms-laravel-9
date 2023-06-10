@@ -19,7 +19,7 @@
                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
              </div>
              <div class="offcanvas-body">
-                 <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                      @php
                          $navMenuParents = App\Models\NavMenu\NavMenuParent::orderBy('order')->get();
                      @endphp
