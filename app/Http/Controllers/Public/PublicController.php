@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Public;
 use App\Models\Page;
 use App\Models\Slideshow;
 use Illuminate\Http\Request;
-use App\Models\Blog\BlogPost;
 use App\Models\Blog\BlogArticle;
 use App\Http\Controllers\Controller;
-use App\Models\NavMenu\NavMenuParent;
 
 class PublicController extends Controller
 {
@@ -20,6 +18,7 @@ class PublicController extends Controller
         $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
         $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
         $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(4)->get();
+        $data['galeries']               = BlogArticle::orderByDesc('counter')->take(6)->get();
         return view('public.index', $data);
     }
 

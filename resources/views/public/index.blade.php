@@ -1,8 +1,9 @@
 @extends('public.templates.layout')
 @section('container')
     @include('public.templates.slideshow')
+
     <section class="wrapper pt-5">
-        <div class="container p-3">
+        <div class="container-fluid p-3">
             <div class="row g-4">
                 <div class="col-12 col-sm-12 col-md-7">
                     <div id="carouselControls2" class="carousel slide" data-bs-ride="carousel">
@@ -94,12 +95,12 @@
 
 
     <section class="wrapper pt-5" id="">
-        <div class="container mt-5 p-3">
-            <h3 class="text-capitalize">
+        <div class="container-fluid mt-5 p-3">
+            <h3 class="text-capitalize text-start text-sm-start text-md-center">
                 populer
             </h3>
             <div class="row match-height">
-                <div class="col-12">
+                <div class="col-12 col-sm-6 col-md-3">
                     <div class="card-group">
                         @foreach ($popularArticles as $popularArticle)
                             <div class="card">
@@ -132,8 +133,8 @@
 
 
     <section class="wrapper pt-5" id="article">
-        <div class="container mt-5 p-3">
-            <h3 class="text-capitalize">
+        <div class="container-fluid mt-5 p-3">
+            <h3 class="text-capitalize text-start text-sm-start text-md-center">
                 artikel
             </h3>
             <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
@@ -192,6 +193,41 @@
                                         selengkapnya...
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="wrapper pt-5" id="article">
+        <div class="container-fluid mt-5 p-3">
+            <h3 class="text-capitalize text-start text-sm-start text-md-center">
+                galeri
+            </h3>
+            <div class="row" data-masonry="{&quot;percentPosition&quot;: true }">
+                @forelse ($galeries as $galery)
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="card text-bg-dark">
+                            @php
+                                $file = $galery->file;
+                                $path = $galery->path;
+                                $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
+                            @endphp
+                            <img src="{{ $url }}" alt="{{ $url }}" class="card-img">
+                            <div class="card-img-overlay text-shadow">
+                                <small class="card-text fw-light d-none d-md-block">
+                                    {{ $galery->title }}
+                                </small>
+                                <small class="card-text fw-light d-none d-lg-block">
+                                    {{ $article->created_at->diffForHumans() }}
+                                    {{ $article->created_at->format('d-m-Y, H:i:s') }}
+                                </small>
                             </div>
                         </div>
                     </div>

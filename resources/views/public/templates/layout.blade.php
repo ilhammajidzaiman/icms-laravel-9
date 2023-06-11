@@ -116,9 +116,6 @@
     <div id="main" class="layout-horizontal">
         @include('public.templates.navbar')
         @yield('container')
-
-
-
         {{-- <footer class="wrapper pb-5" id="footer">
             <div class="container mt-5 p-3">
                 <div class="footer clearfix mb-0 text-muted">
@@ -134,11 +131,9 @@
                 </div>
             </div>
         </footer> --}}
-
         <section id="contac" class="text-bg-primary">
-            <div class="container p-3">
-                <div class="row py-5">
-
+            <div class="container-fluid p-3">
+                <div class="row align-items-center py-5">
                     <div class="col-12 col-md-6">
                         <nav class="nav justify-content-centerr fs-4">
                             <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
@@ -174,17 +169,32 @@
                                 {{ config('app.copyright') }}
                             </p>
                         </div>
-                        <div class="">
+                        <p class="text-capitalize">
+                            <i class="bi bi-building"></i>
+                            jalan, kecamatan, kabupaten, provinsi
+                        </p>
+                        <p class="text-capitalize">
+                            <i class="bi bi-geo-alt"></i>
+                            jalan, kecamatan, kabupaten, provinsi
+                        </p>
+                        <p class="text-capitalize">
+                            <i class="bi bi-telephone"></i>
+                            +62 801 2345 6789
+                        </p>
+                        <p class="text-lowercase">
                             <i class="bi bi-envelope"></i>
                             email@developer.dev
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
     </div>
     <script src="{{ asset('/plugins/mazer/assets/js/bootstrap.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/plugins/js/popper.min.js') }}"></script>
+    <script src="{{ asset('/plugins/bootstrap-5.2.3-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/plugins/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('/plugins/js/masonry.pkgd.min.js') }}"></script>
 </body>
 
 </html>

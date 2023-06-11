@@ -65,5 +65,15 @@ class UserMenuParentSeeder extends Seeder
             'prefix'        => 'nav-menu',
             'url'           => '/nav-menu',
         ]);
+
+        UserMenuParent::create([
+            'uuid'          => Str::uuid(),
+            'order'         => '5',
+            'name'          => 'Galeri',
+            'slug'          => 'galeri',
+            'icon'          => 'bi bi-image-fill',
+            'prefix'        => 'galery',
+            'url'           => '/galery',
+        ]);
     }
 }
