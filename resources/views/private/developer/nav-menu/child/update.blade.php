@@ -1,7 +1,7 @@
 @extends('private.templates.layout')
 
 @section('header')
-    edit child menu
+    edit child nav menu
 @endsection
 
 @section('container')

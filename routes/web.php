@@ -11,24 +11,25 @@ use App\Http\Controllers\Private\DashboardController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // management
+use App\Http\Controllers\Private\Developer\GaleryController as DeveloperGaleryController;
+use App\Http\Controllers\Private\Developer\PageController as DeveloperPageController;
 use App\Http\Controllers\Private\Developer\SlideshowController as DeveloperSlideshowController;
 use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
-use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
-use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
 
 // slideshow
-use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
 
 // page
-use App\Http\Controllers\Private\Developer\PageController as DeveloperPageController;
+use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
 
 // blog
+use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
 use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
 
 // nav-menu
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController as DeveloperNavMenuParentController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuParentController as DeveloperUserMenuParentController;
@@ -211,15 +212,25 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.parent.edit');
                     Route::put('/{id}/update', 'update')->name('developer.nav-menu.parent.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.parent.delete');
+                    // 
+                    Route::prefix('/child')->controller(DeveloperNavMenuChildController::class)->group(function () {
+                        Route::get('/create/{id}', 'create')->name('developer.nav-menu.child.create');
+                        Route::post('/store/{id}', 'store')->name('developer.nav-menu.child.store');
+                        Route::get('/{id}/show', 'show')->name('developer.nav-menu.child.show');
+                        Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.child.edit');
+                        Route::put('/{id}/update', 'update')->name('developer.nav-menu.child.update');
+                        Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.child.delete');
+                    });
                 });
                 // 
-                Route::prefix('nav-menu/child')->controller(DeveloperNavMenuChildController::class)->group(function () {
-                    Route::get('/create/{id}', 'create')->name('developer.nav-menu.child.create');
-                    Route::post('/store/{id}', 'store')->name('developer.nav-menu.child.store');
-                    Route::get('/{id}/show', 'show')->name('developer.nav-menu.child.show');
-                    Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.child.edit');
-                    Route::put('/{id}/update', 'update')->name('developer.nav-menu.child.update');
-                    Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.child.delete');
+                Route::prefix('galery')->controller(DeveloperGaleryController::class)->group(function () {
+                    Route::get('/', 'index')->name('developer.galery.index');
+                    Route::get('/create', 'create')->name('developer.galery.create');
+                    Route::post('/store', 'store')->name('developer.galery.store');
+                    Route::get('/{id}/show', 'show')->name('developer.galery.show');
+                    Route::get('/{id}/edit', 'edit')->name('developer.galery.edit');
+                    Route::put('/{id}/update', 'update')->name('developer.galery.update');
+                    Route::delete('/{id}/delete', 'destroy')->name('developer.galery.delete');
                 });
             }
         );

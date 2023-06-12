@@ -20,7 +20,7 @@ class SlideshowController extends Controller
     public function index()
     {
         $search                         = request(['search']);
-        $data['slideshows']             = Slideshow::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['slideshows']             = Slideshow::filter($search)->orderByDesc('id')->paginate(2)->withQueryString();
         return view('private.developer.slideshow.index', $data);
     }
 

@@ -29,15 +29,15 @@ class NavMenuParentSeeder extends Seeder
             'order'         => '2',
             'name'          => 'Berita',
             'slug'          => 'berita',
-            'url'           => '#news',
+            'url'           => '#post',
         ]);
 
         NavMenuParent::create([
             'uuid'          => Str::uuid(),
             'order'         => '3',
-            'name'          => 'Tentang',
-            'slug'          => 'tentang',
-            'url'           => '#about',
+            'name'          => 'Galery',
+            'slug'          => 'galery',
+            'url'           => '#galery',
         ]);
 
         NavMenuParent::create([

@@ -1,7 +1,7 @@
 @extends('private.templates.layout')
 
 @section('header')
-    rincian child menu
+    rincian child nav menu
 @endsection
 
 @section('container')

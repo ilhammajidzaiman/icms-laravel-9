@@ -1,7 +1,7 @@
 @extends('private.templates.layout')
 
 @section('header')
-    child menu baru
+    child nav menu baru
 @endsection
 
 @section('container')

@@ -7,6 +7,7 @@ use App\Models\Slideshow;
 use Illuminate\Http\Request;
 use App\Models\Blog\BlogArticle;
 use App\Http\Controllers\Controller;
+use App\Models\Galery;
 
 class PublicController extends Controller
 {
@@ -18,7 +19,7 @@ class PublicController extends Controller
         $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
         $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
         $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(4)->get();
-        $data['galeries']               = BlogArticle::orderByDesc('counter')->take(6)->get();
+        $data['galeries']               = Galery::where('status_id', 1)->orderByDesc('id')->take(8)->get();
         return view('public.index', $data);
     }
 

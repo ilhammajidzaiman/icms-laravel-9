@@ -2,7 +2,7 @@
 @section('container')
     @include('public.templates.slideshow')
 
-    <section class="wrapper pt-5">
+    <section class="wrapper pt-5" id="news">
         <div class="container-fluid p-3">
             <div class="row g-4">
                 <div class="col-12 col-sm-12 col-md-7">
@@ -34,8 +34,8 @@
                                         $path = $slideArticle->path;
                                         $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                                     @endphp
-                                    <img src="{{ $url }}" class="d-block w-100" alt="{{ $url }}"
-                                        aria-label="slide {{ $no++ }}">
+                                    <img src="{{ $url }}" class="d-block w-100 img-cover-slide"
+                                        alt="{{ $url }}" aria-label="slide {{ $no++ }}">
                                     <div class="carousel-caption carousel-caption-overlay text-shadow">
                                         <h5 class="text-reset d-none d-md-block">{{ $slideArticle->title }}</h5>
                                         <p class="d-none d-lg-block">{{ $slideArticle->truncated }}</p>
@@ -81,7 +81,7 @@
                                             $path = $newArticle->path;
                                             $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                                         @endphp
-                                        <img src="{{ $url }}" class="img-fluid rounded-3"
+                                        <img src="{{ $url }}" class="img-fluid rounded-3 img-cover-new"
                                             alt="{{ $url }}">
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
     </section>
 
 
-    <section class="wrapper pt-5" id="">
+    {{-- <section class="wrapper pt-5" id="popular">
         <div class="container-fluid mt-5 p-3">
             <h3 class="text-capitalize text-start text-sm-start text-md-center">
                 populer
@@ -129,13 +129,13 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
-    <section class="wrapper pt-5" id="article">
+    <section class="wrapper pt-5" id="post">
         <div class="container-fluid mt-5 p-3">
             <h3 class="text-capitalize text-start text-sm-start text-md-center">
-                artikel
+                post
             </h3>
             <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
                 @forelse ($articles as $article)
@@ -156,7 +156,8 @@
                                 $path = $article->path;
                                 $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
                             @endphp
-                            <img src="{{ $url }}" alt="{{ $url }}" class="card-img-top w-100 rounded-4">
+                            <img src="{{ $url }}" alt="{{ $url }}"
+                                class="card-img-top w-100 rounded-4 img-cover-post">
                             <div class="card-body pt-4 pb-0 mb-0">
                                 <h5 class="card-title">
                                     <a href="{{ route('post', $article->slug) }}" class="text-reset">
@@ -202,41 +203,5 @@
         </div>
     </section>
 
-
-
-
-    <section class="wrapper pt-5" id="article">
-        <div class="container-fluid mt-5 p-3">
-            <h3 class="text-capitalize text-start text-sm-start text-md-center">
-                galeri
-            </h3>
-            <div class="row" data-masonry="{&quot;percentPosition&quot;: true }">
-                @forelse ($galeries as $galery)
-                    <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                        <div class="card text-bg-dark">
-                            @php
-                                $file = $galery->file;
-                                $path = $galery->path;
-                                $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
-                            @endphp
-                            <img src="{{ $url }}" alt="{{ $url }}" class="card-img">
-                            <div class="card-img-overlay text-shadow">
-                                <small class="card-text fw-light d-none d-md-block">
-                                    {{ $galery->title }}
-                                </small>
-                                <small class="card-text fw-light d-none d-lg-block">
-                                    {{ $article->created_at->diffForHumans() }}
-                                    {{ $article->created_at->format('d-m-Y, H:i:s') }}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                @endforelse
-            </div>
-        </div>
-    </section>
-
-
-
+    @include('public.templates.galery')
 @endsection

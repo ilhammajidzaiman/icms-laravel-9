@@ -1,4 +1,4 @@
-<section class="wrapper pt-5">
+<section class="wrapper pt-5" id="slideshow">
     <div id="carouselControls1" class="carousel slide mt-4 pt-3" data-bs-ride="carousel">
         <div class="carousel-indicators">
             @php

@@ -44,6 +44,32 @@
             color: #fff;
         }
     </style>
+
+    <style>
+        .img-cover-10:hover {
+            /* transform: scale(1.2); */
+            filter: blur(5px);
+        }
+
+        .img-cover-post {
+            object-fit: cover;
+            background-position: center, top;
+            height: 320px;
+        }
+
+        .img-cover-slide {
+            object-fit: cover;
+            background-position: center, top;
+            height: 600px;
+        }
+
+        .img-cover-new {
+            object-fit: cover;
+            background-position: center, top;
+            height: 120px;
+        }
+    </style>
+
     <style>
         @media (min-width: 992px) {
 
@@ -109,6 +135,7 @@
             }
         }
     </style>
+
     @yield('style')
 </head>
 
@@ -132,27 +159,8 @@
             </div>
         </footer> --}}
         <section id="contac" class="text-bg-primary">
-            <div class="container-fluid p-3">
+            <div class="container p-3">
                 <div class="row align-items-center py-5">
-                    <div class="col-12 col-md-6">
-                        <nav class="nav justify-content-centerr fs-4">
-                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
-                                <i class="bi bi-facebook"></i>
-                            </a>
-                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
-                                <i class="bi bi-instagram"></i>
-                            </a>
-                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
-                                <i class="bi bi-twitter"></i>
-                            </a>
-                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
-                                <i class="bi bi-youtube"></i>
-                            </a>
-                            <a class="nav-link nav-item text-reset" href="{{ route('/') }}">
-                                <i class="bi bi-tiktok"></i>
-                            </a>
-                        </nav>
-                    </div>
                     <div class="col-12 col-md-6">
                         <div class="text-center text-sm-center text-md-start">
                             <img src="{{ asset('assets/images/' . config('app.icon')) }}"
@@ -174,10 +182,6 @@
                             jalan, kecamatan, kabupaten, provinsi
                         </p>
                         <p class="text-capitalize">
-                            <i class="bi bi-geo-alt"></i>
-                            jalan, kecamatan, kabupaten, provinsi
-                        </p>
-                        <p class="text-capitalize">
                             <i class="bi bi-telephone"></i>
                             +62 801 2345 6789
                         </p>
@@ -186,7 +190,41 @@
                             email@developer.dev
                         </p>
                     </div>
+                    <div class="col-12 col-md-6">
+                        <div class="text-capitalize">
+                            <h4 class="text-lightt">Social Media</h4>
+                            <ul class="list-inline">
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-github"></i>
+                                </a>
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-twitter"></i>
+                                </a>
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-youtube"></i>
+                                </a>
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-tiktok"></i>
+                                </a>
+                                <a href="{{ route('/') }}" class="list-inline-item text-reset fs-3">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="bg-secondary text-center py-2">
+                <small>
+                    &copy; {{ date('Y') }} {{ config('app.name') }}.
+                    All rights reserved.
+                </small>
             </div>
         </section>
     </div>

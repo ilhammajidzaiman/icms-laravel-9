@@ -52,6 +52,12 @@
                 </div>
             </div>
         @empty
+            <div class="col">
+                <x-alert-empty label="Data tidak ditemukan..." />
+            </div>
         @endforelse
+    </div>
+    <div class="pt-3">
+        <x-pagination :pages="$slideshows" side="1" />
     </div>
 @endsection
