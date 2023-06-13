@@ -16,11 +16,11 @@ class PublicController extends Controller
     public function index()
     {
         $search                         = request(['search']);
-        $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
+        $data['articles']               = BlogArticle::where('blog_status_id', 1)->filter($search)->orderByDesc('id')->paginate(8)->withQueryString();
         $data['slideshows']             = Slideshow::where('status_id', 1)->orderByDesc('id')->take(3)->get();
-        $data['slideArticles']          = BlogArticle::orderByDesc('id')->take(5)->get();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(4)->get();
+        $data['slideArticles']          = BlogArticle::where('blog_status_id', 1)->orderByDesc('id')->take(5)->get();
+        $data['newArticles']            = BlogArticle::where('blog_status_id', 1)->orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::where('blog_status_id', 1)->orderByDesc('counter')->take(4)->get();
         $data['galeries']               = Galery::where('status_id', 1)->orderByDesc('id')->take(8)->get();
         return view('public.index', $data);
     }
@@ -38,24 +38,24 @@ class PublicController extends Controller
 
         // 
         $data['article']                = BlogArticle::where('slug', $id)->first();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(6)->get();
+        $data['newArticles']            = BlogArticle::where('blog_status_id', 1)->orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::where('blog_status_id', 1)->orderByDesc('counter')->take(6)->get();
         return view('public.post', $data);
     }
 
     public function page($id)
     {
         $data['page']                   = Page::where('slug', $id)->first();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(6)->get();
+        $data['newArticles']            = BlogArticle::where('blog_status_id', 1)->orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::where('blog_status_id', 1)->orderByDesc('counter')->take(6)->get();
         return view('public.page', $data);
     }
 
     public function download()
     {
         $data['archives']               = Archive::orderByDesc('id')->get();
-        $data['newArticles']            = BlogArticle::orderByDesc('id')->take(3)->get();
-        $data['popularArticles']        = BlogArticle::orderByDesc('counter')->take(6)->get();
+        $data['newArticles']            = BlogArticle::where('blog_status_id', 1)->orderByDesc('id')->take(3)->get();
+        $data['popularArticles']        = BlogArticle::where('blog_status_id', 1)->orderByDesc('counter')->take(6)->get();
         return view('public.download', $data);
     }
 
