@@ -41,11 +41,11 @@
                                             <td>{{ $users->firstItem() + $key }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>
-                                                <x-badge class="badge rounded-pill bg-{{ $user->status->color }}"
+                                                <x-badge class="rounded-pill bg-{{ $user->status->color }}"
                                                     label="{{ $user->status->name }}" />
                                             </td>
                                             <td>
-                                                <x-badge class="badge rounded-pill bg-{{ $user->level->color }}"
+                                                <x-badge class="rounded-pill bg-{{ $user->level->color }}"
                                                     label="{{ $user->level->name }}" />
                                             </td>
                                             <td class="text-end">

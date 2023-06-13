@@ -30,7 +30,7 @@
                         <x-field-date :create="$slideshow->created_at" :update="$slideshow->updated_at" class="text-muted" />
                     </p>
                     <span class="float-start">
-                        <x-badge class="badge rounded-pill bg-{{ $slideshow->status->color }}"
+                        <x-badge class="rounded-pill bg-{{ $slideshow->status->color }}"
                             label="{{ $slideshow->status->name }}" />
                     </span>
                 </div>

@@ -11,24 +11,25 @@ use App\Http\Controllers\Private\DashboardController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // management
-use App\Http\Controllers\Private\Developer\GaleryController as DeveloperGaleryController;
+use App\Http\Controllers\Private\Developer\ArchiveController as DeveloperArchiveController;
 use App\Http\Controllers\Private\Developer\PageController as DeveloperPageController;
+use App\Http\Controllers\Private\Developer\GaleryController as DeveloperGaleryController;
 use App\Http\Controllers\Private\Developer\SlideshowController as DeveloperSlideshowController;
-use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
 
 // slideshow
-use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
+use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
 
 // page
-use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
 
 // blog
+use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
-use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
 
 // nav-menu
+use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController as DeveloperNavMenuParentController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
@@ -52,12 +53,12 @@ Route::get('/welcome', function () {
 
 // 
 // Route::get('/', [PublicController::class, 'index'])->name('/');
-// Route::get('/page/{id}', [PublicController::class, 'page'])->name('page');
-// Route::get('/post/{id}', [PublicController::class, 'post'])->name('post');
 Route::prefix('/')->controller(PublicController::class)->group(function () {
     Route::get('', 'index')->name('/');
     Route::get('/page/{id}', 'page')->name('page');
     Route::get('/post/{id}', 'post')->name('post');
+    Route::get('/download', 'download')->name('download');
+    Route::get('/download/{id}', 'downloadFile')->name('download.file');
 });
 
 // 
@@ -231,6 +232,15 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.galery.edit');
                     Route::put('/{id}/update', 'update')->name('developer.galery.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.galery.delete');
+                });
+                Route::prefix('archive')->controller(DeveloperArchiveController::class)->group(function () {
+                    Route::get('/', 'index')->name('developer.archive.index');
+                    Route::get('/create', 'create')->name('developer.archive.create');
+                    Route::post('/store', 'store')->name('developer.archive.store');
+                    Route::get('/{id}/show', 'show')->name('developer.archive.show');
+                    Route::get('/{id}/edit', 'edit')->name('developer.archive.edit');
+                    Route::put('/{id}/update', 'update')->name('developer.archive.update');
+                    Route::delete('/{id}/delete', 'destroy')->name('developer.archive.delete');
                 });
             }
         );

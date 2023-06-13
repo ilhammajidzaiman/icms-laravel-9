@@ -259,7 +259,7 @@ class BlogPostController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['article']                = BlogArticle::where('slug', $id)->first();
+        $data['article']                = BlogArticle::where('uuid', $id)->first();
         $oldId                          = $data['article']->id;
         $path                           = $data['article']->path;
         $file                           = $data['article']->file;

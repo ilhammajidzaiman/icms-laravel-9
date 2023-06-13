@@ -59,7 +59,7 @@
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.blog.post.delete', $article->uuid) }}"
-                                                    confirm="{{ $article->name }}"
+                                                    confirm="{{ $article->title }}"
                                                     class="rounded-pill btn btn-sm btn-outline-danger" />
                                             </td>
                                         </tr>

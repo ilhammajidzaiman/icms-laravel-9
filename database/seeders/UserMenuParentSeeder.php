@@ -75,5 +75,15 @@ class UserMenuParentSeeder extends Seeder
             'prefix'        => 'galery',
             'url'           => '/galery',
         ]);
+
+        UserMenuParent::create([
+            'uuid'          => Str::uuid(),
+            'order'         => '6',
+            'name'          => 'Berkas',
+            'slug'          => 'berkas',
+            'icon'          => 'bi bi-archive',
+            'prefix'        => 'archive',
+            'url'           => '/archive',
+        ]);
     }
 }

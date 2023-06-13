@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-7">
                     <div class="card shadow">
                         <div class="card-body">
-                            <h3>
+                            <h3 class="text-capitalize">
                                 <a href="{{ route('page', $page->slug) }}" class="text-reset">
                                     {{ $page->title }}
                                 </a>

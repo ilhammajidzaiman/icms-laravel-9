@@ -32,7 +32,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $status->name }}</td>
                                             <td>
-                                                <x-badge class="badge rounded-pill bg-{{ $status->color }}"
+                                                <x-badge class="rounded-pill bg-{{ $status->color }}"
                                                     label="{{ $status->color }}" />
                                             </td>
                                             <td class="text-end">

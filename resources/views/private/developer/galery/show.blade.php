@@ -27,8 +27,7 @@
                         <x-field-date :create="$galery->created_at" :update="$galery->updated_at" class="text-muted" />
                     </p>
                     <span class="float-start">
-                        <x-badge class="badge rounded-pill bg-{{ $galery->status->color }}"
-                            label="{{ $galery->status->name }}" />
+                        <x-badge class="rounded-pill bg-{{ $galery->status->color }}" label="{{ $galery->status->name }}" />
                     </span>
                 </div>
             </div>

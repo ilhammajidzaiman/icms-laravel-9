@@ -35,8 +35,8 @@ class NavMenuParentSeeder extends Seeder
         NavMenuParent::create([
             'uuid'          => Str::uuid(),
             'order'         => '3',
-            'name'          => 'Galery',
-            'slug'          => 'galery',
+            'name'          => 'Galeri',
+            'slug'          => 'galeri',
             'url'           => '#galery',
         ]);
 
@@ -46,6 +46,14 @@ class NavMenuParentSeeder extends Seeder
             'name'          => 'Kontak',
             'slug'          => 'kontak',
             'url'           => '#contac',
+        ]);
+
+        NavMenuParent::create([
+            'uuid'          => Str::uuid(),
+            'order'         => '4',
+            'name'          => 'Download',
+            'slug'          => 'download',
+            'url'           => '/download',
         ]);
     }
 }
