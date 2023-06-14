@@ -16,38 +16,31 @@ class UserAccessChildSeeder extends Seeder
     public function run()
     {
         // level developer 1...
-        // sub menu management...
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
             'user_menu_child_id'    => '1',
         ]);
-
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
             'user_menu_child_id'    => '2',
         ]);
-
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
             'user_menu_child_id'    => '3',
         ]);
-
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
             'user_menu_child_id'    => '4',
         ]);
-
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '1',
             'user_menu_child_id'    => '5',
         ]);
-
-        // sub menu blog...
         UserAccessChild::create([
             'user_level_id'         => '1',
             'user_menu_parent_id'   => '3',
@@ -65,6 +58,37 @@ class UserAccessChildSeeder extends Seeder
         ]);
 
         // level admin 2...
+        UserAccessChild::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '1',
+            'user_menu_child_id'    => '4',
+        ]);
+        UserAccessChild::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '1',
+            'user_menu_child_id'    => '5',
+        ]);
+        UserAccessChild::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '7',
+        ]);
+        UserAccessChild::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '8',
+        ]);
+
         // level user 3...
+        UserAccessChild::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '7',
+        ]);
+        UserAccessChild::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '3',
+            'user_menu_child_id'    => '8',
+        ]);
     }
 }

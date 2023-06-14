@@ -39,6 +39,9 @@
                                                 <label class="form-check-label fw-normal" for="parent{{ $menu->id }}">
                                                     <i class="{{ $menu->icon }}"></i>
                                                     {{ $menu->name }}
+                                                    <small>
+                                                        ({{ $menu->id }})
+                                                    </small>
                                                 </label>
                                             </div>
 
@@ -69,6 +72,9 @@
                                                                 for="child{{ $child->id }}">
                                                                 <i class="{{ $child->icon }}"></i>
                                                                 {{ $child->name }}
+                                                                <small>
+                                                                    ({{ $child->id }})
+                                                                </small>
                                                             </label>
                                                         </div>
                                                     </li>

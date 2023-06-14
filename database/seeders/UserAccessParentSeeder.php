@@ -47,7 +47,59 @@ class UserAccessParentSeeder extends Seeder
         ]);
 
         // level admin 2...
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '1',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '2',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '3',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '4',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '5',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '6',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '2',
+            'user_menu_parent_id'   => '7',
+        ]);
 
         // level user 3...
+        UserAccessParent::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '2',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '3',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '4',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '5',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '6',
+        ]);
+        UserAccessParent::create([
+            'user_level_id'         => '3',
+            'user_menu_parent_id'   => '7',
+        ]);
     }
 }
