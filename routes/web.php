@@ -20,7 +20,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-// 
 // Route::get('/', [PublicController::class, 'index'])->name('/');
 Route::prefix('/')->controller(PublicController::class)->group(function () {
     Route::get('', 'index')->name('/');
@@ -30,13 +29,11 @@ Route::prefix('/')->controller(PublicController::class)->group(function () {
     Route::get('/download/{id}', 'downloadFile')->name('download.file');
 });
 
-// 
 Route::get('/redirect', function () {
     $level = Str::replace(' ', '', Str::lower(auth()->user()->level->name));
     return redirect()->intended($level . '/dashboard');
 });
 
-// 
 Route::prefix('auth')->controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('auth.login')->middleware('guest');
     Route::post('/login', 'authenticate')->name('auth.authenticate')->middleware('guest');

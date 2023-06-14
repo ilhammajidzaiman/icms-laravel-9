@@ -1,34 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// 
+
 use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\DashboardController;
-
-// management
-use App\Http\Controllers\Private\Developer\ArchiveController as DeveloperArchiveController;
-use App\Http\Controllers\Private\Developer\PageController as DeveloperPageController;
-use App\Http\Controllers\Private\Developer\GaleryController as DeveloperGaleryController;
-use App\Http\Controllers\Private\Developer\SlideshowController as DeveloperSlideshowController;
-
-// slideshow
-use App\Http\Controllers\Private\Developer\Management\UserController as DeveloperUserController;
-
-// page
-use App\Http\Controllers\Private\Developer\Blog\BlogPostController as DeveloperBlogPostController;
-
-// blog
-use App\Http\Controllers\Private\Developer\Blog\BlogStatusController as DeveloperBlogStatusController;
-use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController as DeveloperBlogCategoryController;
-use App\Http\Controllers\Private\Developer\Management\UserLevelController as DeveloperUserLevelController;
-use App\Http\Controllers\Private\Developer\Management\UserAccessController as DeveloperUserAccessController;
-
-// nav-menu
-use App\Http\Controllers\Private\Developer\Management\UserStatusController as DeveloperUserStatusController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController as DeveloperNavMenuChildController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController as DeveloperNavMenuParentController;
-use App\Http\Controllers\Private\Developer\Management\UserMenuChildController as DeveloperUserMenuChildController;
-use App\Http\Controllers\Private\Developer\Management\UserMenuParentController as DeveloperUserMenuParentController;
+use App\Http\Controllers\Private\Developer\ArchiveController;
+use App\Http\Controllers\Private\Developer\GaleryController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
+use App\Http\Controllers\Private\Developer\PageController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
+use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
+use App\Http\Controllers\Private\Developer\Blog\BlogStatusController;
+use App\Http\Controllers\Private\Developer\SlideshowController;
+use App\Http\Controllers\Private\Developer\Management\UserController;
+use App\Http\Controllers\Private\Developer\Management\UserAccessController;
+use App\Http\Controllers\Private\Developer\Management\UserMenuChildController;
+use App\Http\Controllers\Private\Developer\Management\UserMenuParentController;
+use App\Http\Controllers\Private\Developer\Management\UserLevelController;
+use App\Http\Controllers\Private\Developer\Management\UserStatusController;
 
 
 /*
@@ -41,7 +31,7 @@ use App\Http\Controllers\Private\Developer\Management\UserMenuParentController a
 | contains the "web" middleware group. Now create something great!
 |
 */
-// 
+
 Route::middleware('auth')->group(
     function () {
         Route::prefix('developer')->middleware(['isDeveloper'])->controller()->group(
@@ -58,7 +48,7 @@ Route::middleware('auth')->group(
                 // 
                 Route::prefix('management')->group(
                     function () {
-                        Route::prefix('status')->controller(DeveloperUserStatusController::class)->group(function () {
+                        Route::prefix('status')->controller(UserStatusController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.status.index');
                             Route::get('/create', 'create')->name('developer.management.user.status.create');
                             Route::post('/store', 'store')->name('developer.management.user.status.store');
@@ -68,7 +58,7 @@ Route::middleware('auth')->group(
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.status.delete');
                         });
                         // 
-                        Route::prefix('level')->controller(DeveloperUserLevelController::class)->group(function () {
+                        Route::prefix('level')->controller(UserLevelController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.level.index');
                             Route::get('/create', 'create')->name('developer.management.user.level.create');
                             Route::post('/store', 'store')->name('developer.management.user.level.store');
@@ -78,7 +68,7 @@ Route::middleware('auth')->group(
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.level.delete');
                         });
                         // 
-                        Route::prefix('menu')->controller(DeveloperUserMenuParentController::class)->group(function () {
+                        Route::prefix('menu')->controller(UserMenuParentController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.menu.parent.index');
                             Route::get('/create', 'create')->name('developer.management.user.menu.parent.create');
                             Route::post('/store', 'store')->name('developer.management.user.menu.parent.store');
@@ -88,7 +78,7 @@ Route::middleware('auth')->group(
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.parent.delete');
                         });
                         // 
-                        Route::prefix('menu/child')->controller(DeveloperUserMenuChildController::class)->group(function () {
+                        Route::prefix('menu/child')->controller(UserMenuChildController::class)->group(function () {
                             Route::get('/create/{id}', 'create')->name('developer.management.user.menu.child.create');
                             Route::post('/store/{id}', 'store')->name('developer.management.user.menu.child.store');
                             Route::get('/{id}/show', 'show')->name('developer.management.user.menu.child.show');
@@ -97,7 +87,7 @@ Route::middleware('auth')->group(
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.child.delete');
                         });
                         // 
-                        Route::prefix('access')->controller(DeveloperUserAccessController::class)->group(function () {
+                        Route::prefix('access')->controller(UserAccessController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.access.index');
                             Route::get('/{id}/show', 'show')->name('developer.management.access.show');
                             Route::get('/{id}/edit', 'edit')->name('developer.management.access.edit');
@@ -105,7 +95,7 @@ Route::middleware('auth')->group(
                             Route::get('/child/{level}/{parent}/{child}', 'updateChild')->name('developer.management.access.child.update');
                         });
                         // 
-                        Route::prefix('user')->controller(DeveloperUserController::class)->group(function () {
+                        Route::prefix('user')->controller(UserController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.index');
                             Route::get('/create', 'create')->name('developer.management.user.create');
                             Route::post('/store', 'store')->name('developer.management.user.store');
@@ -117,7 +107,7 @@ Route::middleware('auth')->group(
                     }
                 );
                 // 
-                Route::prefix('slideshow')->controller(DeveloperSlideshowController::class)->group(function () {
+                Route::prefix('slideshow')->controller(SlideshowController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.slideshow.index');
                     Route::get('/create', 'create')->name('developer.slideshow.create');
                     Route::post('/store', 'store')->name('developer.slideshow.store');
@@ -129,7 +119,7 @@ Route::middleware('auth')->group(
                 // 
                 Route::prefix('blog')->group(
                     function () {
-                        Route::prefix('status')->controller(DeveloperBlogStatusController::class)->group(function () {
+                        Route::prefix('status')->controller(BlogStatusController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.blog.status.index');
                             Route::get('/create', 'create')->name('developer.blog.status.create');
                             Route::post('/store', 'store')->name('developer.blog.status.store');
@@ -139,7 +129,7 @@ Route::middleware('auth')->group(
                             Route::delete('/{id}/delete', 'destroy')->name('developer.blog.status.delete');
                         });
                         // 
-                        Route::prefix('category')->controller(DeveloperBlogCategoryController::class)->group(function () {
+                        Route::prefix('category')->controller(BlogCategoryController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.blog.category.index');
                             Route::get('/create', 'create')->name('developer.blog.category.create');
                             Route::post('/store', 'store')->name('developer.blog.category.store');
@@ -149,7 +139,7 @@ Route::middleware('auth')->group(
                             Route::delete('/{id}/delete', 'destroy')->name('developer.blog.category.delete');
                         });
                         // 
-                        Route::prefix('post')->controller(DeveloperBlogPostController::class)->group(function () {
+                        Route::prefix('post')->controller(BlogPostController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.blog.post.index');
                             Route::get('/create', 'create')->name('developer.blog.post.create');
                             Route::post('/store', 'store')->name('developer.blog.post.store');
@@ -161,7 +151,7 @@ Route::middleware('auth')->group(
                     }
                 );
                 // 
-                Route::prefix('page')->controller(DeveloperPageController::class)->group(function () {
+                Route::prefix('page')->controller(PageController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.page.index');
                     Route::get('/create', 'create')->name('developer.page.create');
                     Route::post('/store', 'store')->name('developer.page.store');
@@ -171,7 +161,7 @@ Route::middleware('auth')->group(
                     Route::delete('/{id}/delete', 'destroy')->name('developer.page.delete');
                 });
                 // 
-                Route::prefix('nav-menu')->controller(DeveloperNavMenuParentController::class)->group(function () {
+                Route::prefix('nav-menu')->controller(NavMenuParentController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.nav-menu.parent.index');
                     Route::get('/create', 'create')->name('developer.nav-menu.parent.create');
                     Route::post('/store', 'store')->name('developer.nav-menu.parent.store');
@@ -180,7 +170,7 @@ Route::middleware('auth')->group(
                     Route::put('/{id}/update', 'update')->name('developer.nav-menu.parent.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.parent.delete');
                     // 
-                    Route::prefix('/child')->controller(DeveloperNavMenuChildController::class)->group(function () {
+                    Route::prefix('/child')->controller(NavMenuChildController::class)->group(function () {
                         Route::get('/create/{id}', 'create')->name('developer.nav-menu.child.create');
                         Route::post('/store/{id}', 'store')->name('developer.nav-menu.child.store');
                         Route::get('/{id}/show', 'show')->name('developer.nav-menu.child.show');
@@ -190,7 +180,7 @@ Route::middleware('auth')->group(
                     });
                 });
                 // 
-                Route::prefix('galery')->controller(DeveloperGaleryController::class)->group(function () {
+                Route::prefix('galery')->controller(GaleryController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.galery.index');
                     Route::get('/create', 'create')->name('developer.galery.create');
                     Route::post('/store', 'store')->name('developer.galery.store');
@@ -199,7 +189,7 @@ Route::middleware('auth')->group(
                     Route::put('/{id}/update', 'update')->name('developer.galery.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.galery.delete');
                 });
-                Route::prefix('archive')->controller(DeveloperArchiveController::class)->group(function () {
+                Route::prefix('archive')->controller(ArchiveController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.archive.index');
                     Route::get('/create', 'create')->name('developer.archive.create');
                     Route::post('/store', 'store')->name('developer.archive.store');
