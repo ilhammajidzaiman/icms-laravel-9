@@ -16,7 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'iCMS'),
-    'description' => env('APP_DESCRIPTION', 'Starter Kits Aplikasi Content Management System Menggunakan Laravel 9'),
+    'description' => env('APP_DESCRIPTION', 'Starter Kits Aplikasi Content Management System Menggunakan Laravel'),
     'copyright' => env('APP_COPYRIGHT', 'ilhammajidzaiman.github.io'),
     'icon' => env('APP_ICON', 'laravel.svg'),
     'logo' => env('APP_LOGO', 'laravel.svg'),

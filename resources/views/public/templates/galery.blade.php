@@ -1,5 +1,5 @@
 <section class="wrapper pt-5" id="galery">
-    <div class="container-fluid mt-5 p-3">
+    <div class="container mt-5 p-3">
         <h3 class="text-capitalize text-start text-sm-start text-md-center">
             galeri
         </h3>

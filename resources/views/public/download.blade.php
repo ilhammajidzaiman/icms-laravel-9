@@ -1,7 +1,7 @@
 @extends('public.templates.layout')
 @section('container')
     <section class="wrapper pt-5">
-        <div class="container-fluid mt-5 p-3">
+        <div class="container mt-5 p-3">
             <div class="row g-4">
                 <div class="col-12 col-md-7">
                     <div class="card shadow">

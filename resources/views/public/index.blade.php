@@ -3,7 +3,7 @@
     @include('public.templates.slideshow')
 
     <section class="wrapper pt-5" id="news">
-        <div class="container-fluid p-3">
+        <div class="container p-3">
             <div class="row g-4">
                 <div class="col-12 col-sm-12 col-md-7">
                     <div id="carouselControls2" class="carousel slide" data-bs-ride="carousel">
@@ -95,7 +95,7 @@
 
 
     {{-- <section class="wrapper pt-5" id="popular">
-        <div class="container-fluid mt-5 p-3">
+        <div class="container mt-5 p-3">
             <h3 class="text-capitalize text-start text-sm-start text-md-center">
                 populer
             </h3>
@@ -133,7 +133,7 @@
 
 
     <section class="wrapper pt-5" id="post">
-        <div class="container-fluid mt-5 p-3">
+        <div class="container mt-5 p-3">
             <h3 class="text-capitalize text-start text-sm-start text-md-center">
                 post
             </h3>
