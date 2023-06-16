@@ -141,10 +141,6 @@ Route::middleware('auth')->group(
 
                             Route::prefix('trash')->controller(BlogCategoryTrashController::class)->group(function () {
                                 Route::get('', 'index')->name('developer.blog.category.trash.index');
-                                // Route::get('/create', 'create')->name('developer.blog.category.trash.create');
-                                // Route::post('/store', 'store')->name('developer.blog.category.trash.store');
-                                // Route::get('/{id}/show', 'show')->name('developer.blog.category.trash.show');
-                                // Route::get('/{id}/edit', 'edit')->name('developer.blog.category.trash.edit');
                                 Route::get('/{id}/restore', 'restore')->name('developer.blog.category.trash.restore');
                                 Route::delete('/{id}/delete', 'destroy')->name('developer.blog.category.trash.delete');
                             });

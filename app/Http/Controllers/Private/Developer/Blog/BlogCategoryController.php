@@ -17,6 +17,7 @@ class BlogCategoryController extends Controller
     public function index()
     {
         $data['categories']         = BlogCategory::orderByDesc('id')->get();
+        $data['countCategory']      = BlogCategory::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.blog.category.index', $data);
     }
 
@@ -63,7 +64,7 @@ class BlogCategoryController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
+        return redirect()->back()->with($flashData);
     }
 
     /**
@@ -129,7 +130,6 @@ class BlogCategoryController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        // return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
         return redirect()->back()->with($flashData);
     }
 
@@ -139,7 +139,7 @@ class BlogCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         // data detail...
         $data['category']           = BlogCategory::where('slug', $id)->first();
@@ -156,7 +156,6 @@ class BlogCategoryController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        // return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
         return redirect()->back()->with($flashData);
     }
 }
