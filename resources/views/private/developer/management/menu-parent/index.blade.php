@@ -53,8 +53,9 @@
                                             @empty($menu)
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.management.user.menu.parent.delete', $menuParent->uuid) }}"
-                                                    confirm="{{ $menuParent->name }}"
-                                                    class="rounded-pill btn btn-sm btn-outline-danger" />
+                                                    confirm="{{ $menuParent->name }}" label="hapus"
+                                                    class="rounded-pill btn btn-sm btn-outline-danger"
+                                                    icon="fa-fw fas fa-trash" />
                                             @endempty
                                         </td>
                                     </tr>
@@ -85,8 +86,9 @@
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.management.user.menu.child.delete', $menuChild->uuid) }}"
-                                                    confirm="{{ $menuChild->name }}"
-                                                    class="rounded-pill btn btn-sm btn-outline-danger" />
+                                                    confirm="{{ $menuChild->name }}" label="hapus"
+                                                    class="rounded-pill btn btn-sm btn-outline-danger"
+                                                    icon="fa-fw fas fa-trash" />
                                             </td>
                                         </tr>
                                     @endforeach

@@ -43,7 +43,8 @@
                                 label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                 icon="fa-fw fas fa-edit" />
                             <x-button-delete href="{{ route(Request::segment(1) . '.galery.delete', $galery->uuid) }}"
-                                confirm="{{ $galery->title }}" class="rounded-pill btn btn-sm btn-outline-danger" />
+                                confirm="{{ $galery->title }}" label="hapus"
+                                class="rounded-pill btn btn-sm btn-outline-danger" icon="fa-fw fas fa-trash" />
                         </span>
                     </div>
                 </div>

@@ -4,21 +4,22 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\DashboardController;
-use App\Http\Controllers\Private\Developer\ArchiveController;
-use App\Http\Controllers\Private\Developer\GaleryController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
 use App\Http\Controllers\Private\Developer\PageController;
-use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
-use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
-use App\Http\Controllers\Private\Developer\Blog\BlogStatusController;
+use App\Http\Controllers\Private\Developer\GaleryController;
+use App\Http\Controllers\Private\Developer\ArchiveController;
 use App\Http\Controllers\Private\Developer\SlideshowController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
+use App\Http\Controllers\Private\Developer\Blog\BlogStatusController;
 use App\Http\Controllers\Private\Developer\Management\UserController;
+use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
+use App\Http\Controllers\Private\Developer\Management\UserLevelController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController;
+use App\Http\Controllers\Private\Developer\Management\UserStatusController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
+use App\Http\Controllers\Private\Developer\Blog\BlogCategoryTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuParentController;
-use App\Http\Controllers\Private\Developer\Management\UserLevelController;
-use App\Http\Controllers\Private\Developer\Management\UserStatusController;
 
 
 /*
@@ -137,6 +138,16 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.blog.category.edit');
                             Route::put('/{id}/update', 'update')->name('developer.blog.category.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.blog.category.delete');
+
+                            Route::prefix('trash')->controller(BlogCategoryTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.blog.category.trash.index');
+                                // Route::get('/create', 'create')->name('developer.blog.category.trash.create');
+                                // Route::post('/store', 'store')->name('developer.blog.category.trash.store');
+                                // Route::get('/{id}/show', 'show')->name('developer.blog.category.trash.show');
+                                // Route::get('/{id}/edit', 'edit')->name('developer.blog.category.trash.edit');
+                                Route::get('/{id}/restore', 'restore')->name('developer.blog.category.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.blog.category.trash.delete');
+                            });
                         });
                         // 
                         Route::prefix('post')->controller(BlogPostController::class)->group(function () {

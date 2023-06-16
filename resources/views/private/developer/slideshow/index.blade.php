@@ -46,7 +46,8 @@
                                 label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                 icon="fa-fw fas fa-edit" />
                             <x-button-delete href="{{ route(Request::segment(1) . '.slideshow.delete', $slideshow->uuid) }}"
-                                confirm="{{ $slideshow->title }}" class="rounded-pill btn btn-sm btn-outline-danger" />
+                                confirm="{{ $slideshow->title }}" label="hapus"
+                                class="rounded-pill btn btn-sm btn-outline-danger" icon="fa-fw fas fa-trash" />
                         </span>
                     </div>
                 </div>

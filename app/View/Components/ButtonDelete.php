@@ -15,12 +15,16 @@ class ButtonDelete extends Component
     public $href;
     public $confirm;
     public $class;
+    public $label;
+    public $icon;
 
-    public function __construct($href, $confirm, $class)
+    public function __construct($href, $confirm, $class, $label, $icon)
     {
         $this->href = $href;
         $this->confirm = $confirm;
         $this->class = $class;
+        $this->label = $label;
+        $this->icon = $icon;
     }
 
     /**

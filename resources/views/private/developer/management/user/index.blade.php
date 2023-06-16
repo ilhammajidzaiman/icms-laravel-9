@@ -62,8 +62,9 @@
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.management.user.delete', $user->uuid) }}"
-                                                    confirm="{{ $user->name }}"
-                                                    class="rounded-pill btn btn-sm btn-outline-danger" />
+                                                    confirm="{{ $user->name }}" label="hapus"
+                                                    class="rounded-pill btn btn-sm btn-outline-danger"
+                                                    icon="fa-fw fas fa-trash" />
                                             </td>
                                         </tr>
                                     @empty

@@ -49,8 +49,9 @@
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.blog.status.delete', $status->slug) }}"
-                                                    confirm="{{ $status->name }}"
-                                                    class="rounded-pill btn btn-sm btn-outline-danger" />
+                                                    confirm="{{ $status->name }}" label="hapus"
+                                                    class="rounded-pill btn btn-sm btn-outline-danger"
+                                                    icon="fa-fw fas fa-trash" />
                                             </td>
                                         </tr>
                                     @empty

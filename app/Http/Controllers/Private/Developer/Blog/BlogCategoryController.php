@@ -129,7 +129,8 @@ class BlogCategoryController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
+        // return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
+        return redirect()->back()->with($flashData);
     }
 
     /**
@@ -155,6 +156,7 @@ class BlogCategoryController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
+        // return redirect(route($request->segment(1) . '.blog.category.index'))->with($flashData);
+        return redirect()->back()->with($flashData);
     }
 }

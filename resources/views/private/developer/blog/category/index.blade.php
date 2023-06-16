@@ -8,6 +8,9 @@
     <x-button-link href="{{ route(Request::segment(1) . '.blog.category.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
+    <x-button-link href="{{ route(Request::segment(1) . '.blog.category.trash.index') }}" label="" class="float-end"
+        icon="bi bi-trash" />
+
     <x-alert-dismissing />
 
     <div class="row">
@@ -44,8 +47,9 @@
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.blog.category.delete', $category->slug) }}"
-                                                    confirm="{{ $category->name }}"
-                                                    class="rounded-pill btn btn-sm btn-outline-danger" />
+                                                    confirm="{{ $category->name }}" label="hapus"
+                                                    class="rounded-pill btn btn-sm btn-outline-danger"
+                                                    icon="fa-fw fas fa-trash" />
                                             </td>
                                         </tr>
                                     @empty
