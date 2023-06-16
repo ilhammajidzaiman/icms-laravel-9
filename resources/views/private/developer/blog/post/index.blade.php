@@ -16,6 +16,7 @@
                 <div class="card-content">
                     <div class="card-header">
                         <form action="{{ route(Request::segment(1) . '.blog.post.index') }}" method="get">
+                            @csrf
                             <div class="row justify-content-end">
                                 <x-search-input name="search" id="search" value="{{ request('search') }}"
                                     class="col-md-4" />
