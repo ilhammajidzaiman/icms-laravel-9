@@ -10,6 +10,12 @@
 
     <x-alert-dismissing />
 
+    <form action="{{ route(Request::segment(1) . '.slideshow.index') }}" method="get">
+        @csrf
+        <div class="row justify-content-end mb-3">
+            <x-search-input name="search" id="search" value="{{ request('search') }}" class="col-md-4" />
+        </div>
+    </form>
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
         @forelse ($slideshows as $slideshow)
@@ -45,7 +51,8 @@
                             <x-button-link href="{{ route(Request::segment(1) . '.slideshow.edit', $slideshow->uuid) }}"
                                 label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                 icon="fa-fw fas fa-edit" />
-                            <x-button-delete href="{{ route(Request::segment(1) . '.slideshow.delete', $slideshow->uuid) }}"
+                            <x-button-delete
+                                href="{{ route(Request::segment(1) . '.slideshow.delete', $slideshow->uuid) }}"
                                 confirm="{{ $slideshow->title }}" label="hapus"
                                 class="rounded-pill btn btn-sm btn-outline-danger" icon="fa-fw fas fa-trash" />
                         </span>

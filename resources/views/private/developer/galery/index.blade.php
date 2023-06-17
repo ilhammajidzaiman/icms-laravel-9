@@ -10,6 +10,12 @@
 
     <x-alert-dismissing />
 
+    <form action="{{ route(Request::segment(1) . '.galery.index') }}" method="get">
+        @csrf
+        <div class="row justify-content-end mb-3">
+            <x-search-input name="search" id="search" value="{{ request('search') }}" class="col-md-4" />
+        </div>
+    </form>
 
     <div class="row row-cols-1 row-cols-md-2 g-4">
         @forelse ($galeries as $galery)
