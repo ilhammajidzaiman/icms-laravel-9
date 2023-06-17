@@ -10,11 +10,12 @@ class BlogCategoryTrashController extends Controller
 {
     public function index()
     {
-        $data['categories']         = BlogCategory::onlyTrashed()->orderByDesc('id')->get();
+        $search                     = request(['search']);
+        $data['categories']           = BlogCategory::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         return view('private.developer.blog.category.trash', $data);
     }
 
-    public function restore($id)
+    public function restore(Request $request, $id)
     {
         // data detail...
         $data['category']           = BlogCategory::where('slug', $id)->onlyTrashed()->first();
@@ -31,16 +32,15 @@ class BlogCategoryTrashController extends Controller
             'alert'                 => 'info',
             'icon'                  => 'fa-fw fas fa-recycle',
         ];
-        return redirect()->back()->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.category.trash.index')->with($flashData);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // data detail...
         $data['category']           = BlogCategory::where('slug', $id)->onlyTrashed()->first();
         $oldId                      = $data['category']->id;
-        $oldName                    = $data['category']->name;
-        $message                    = $oldName;
+        $message                    = $data['category']->name;
 
         // delete data on table..
         BlogCategory::withTrashed()->where('id', $oldId)->forceDelete();
@@ -51,6 +51,6 @@ class BlogCategoryTrashController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect()->back()->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.category.trash.index')->with($flashData);
     }
 }

@@ -12,6 +12,8 @@ use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
 use App\Http\Controllers\Private\Developer\Blog\BlogStatusController;
 use App\Http\Controllers\Private\Developer\Management\UserController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
+use App\Http\Controllers\Private\Developer\Blog\BlogPostTrashController;
+use App\Http\Controllers\Private\Developer\Blog\BlogStatusTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController;
@@ -128,6 +130,11 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.blog.status.edit');
                             Route::put('/{id}/update', 'update')->name('developer.blog.status.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.blog.status.delete');
+                            Route::prefix('trash')->controller(BlogStatusTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.blog.status.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.blog.status.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.blog.status.trash.delete');
+                            });
                         });
                         // 
                         Route::prefix('category')->controller(BlogCategoryController::class)->group(function () {
@@ -138,7 +145,6 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.blog.category.edit');
                             Route::put('/{id}/update', 'update')->name('developer.blog.category.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.blog.category.delete');
-
                             Route::prefix('trash')->controller(BlogCategoryTrashController::class)->group(function () {
                                 Route::get('', 'index')->name('developer.blog.category.trash.index');
                                 Route::get('/{id}/restore', 'restore')->name('developer.blog.category.trash.restore');
@@ -154,6 +160,11 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.blog.post.edit');
                             Route::put('/{id}/update', 'update')->name('developer.blog.post.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.blog.post.delete');
+                            Route::prefix('trash')->controller(BlogPostTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.blog.post.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.blog.post.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.blog.post.trash.delete');
+                            });
                         });
                     }
                 );

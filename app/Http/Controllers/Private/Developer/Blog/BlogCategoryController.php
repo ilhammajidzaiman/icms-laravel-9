@@ -18,7 +18,7 @@ class BlogCategoryController extends Controller
     {
         $search                     = request(['search']);
         $data['categories']         = BlogCategory::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['countCategory']      = BlogCategory::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']              = BlogCategory::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.blog.category.index', $data);
     }
 
@@ -65,7 +65,7 @@ class BlogCategoryController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect()->back()->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.category.index')->with($flashData);
     }
 
     /**
@@ -131,7 +131,7 @@ class BlogCategoryController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect()->back()->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.category.index')->with($flashData);
     }
 
     /**
@@ -140,7 +140,7 @@ class BlogCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         // data detail...
         $data['category']           = BlogCategory::where('slug', $id)->first();
@@ -157,6 +157,6 @@ class BlogCategoryController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect()->back()->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.category.index')->with($flashData);
     }
 }

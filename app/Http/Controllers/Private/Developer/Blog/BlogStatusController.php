@@ -18,6 +18,7 @@ class BlogStatusController extends Controller
     {
         $search                     = request(['search']);
         $data['statuses']           = BlogStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']              = BlogStatus::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.blog.status.index', $data);
     }
 
@@ -66,7 +67,7 @@ class BlogStatusController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.blog.status.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.status.index')->with($flashData);
     }
 
     /**
@@ -134,7 +135,7 @@ class BlogStatusController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.blog.status.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.status.index')->with($flashData);
     }
 
     /**
@@ -148,8 +149,7 @@ class BlogStatusController extends Controller
         // data detail...
         $data['category']           = BlogStatus::where('slug', $id)->first();
         $oldId                      = $data['category']->id;
-        $oldName                    = $data['category']->name;
-        $message                    = $oldName;
+        $message                    = $data['category']->name;
 
         // delete data on table..
         BlogStatus::destroy($oldId);
@@ -160,6 +160,6 @@ class BlogStatusController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.blog.status.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.status.index')->with($flashData);
     }
 }

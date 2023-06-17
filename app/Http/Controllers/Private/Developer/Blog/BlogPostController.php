@@ -23,6 +23,7 @@ class BlogPostController extends Controller
     {
         $search                         = request(['search']);
         $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']                  = BlogArticle::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.blog.post.index', $data);
     }
 
@@ -78,9 +79,10 @@ class BlogPostController extends Controller
             // Storage::putFile($path, new File($file));
 
             // manually specify a filename...
-            $dateTime                   = date('dmYhis');
+            $dateTime                   = date('Ymdhis');
             $nameHash                   = $file->hashName();
-            $fileName                   = $dateTime . '-' . $nameHash;
+            $nameExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
             $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
@@ -123,7 +125,7 @@ class BlogPostController extends Controller
             'alert'                     => 'primary',
             'icon'                      => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.blog.post.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.post.index')->with($flashData);
     }
 
     /**
@@ -202,9 +204,10 @@ class BlogPostController extends Controller
             endif;
 
             // manually specify a filename...
-            $dateTime                   = date('dmYhis');
+            $dateTime                   = date('Ymdhis');
             $nameHash                   = $file->hashName();
-            $fileName                   = $dateTime . '-' . $nameHash;
+            $nameExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
             $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
@@ -247,7 +250,7 @@ class BlogPostController extends Controller
             'alert'                     => 'success',
             'icon'                      => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.blog.post.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.post.index')->with($flashData);
     }
 
     /**
@@ -261,18 +264,9 @@ class BlogPostController extends Controller
         // data detail...
         $data['article']                = BlogArticle::where('uuid', $id)->first();
         $oldId                          = $data['article']->id;
-        $path                           = $data['article']->path;
-        $file                           = $data['article']->file;
         $message                        = $data['article']->title;
-        $default                        = 'default-img.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($path . $file);
-        endif;
 
         // delete data on table...
-        BlogPost::where('blog_article_id', $oldId)->delete();
         BlogArticle::destroy($oldId);
 
         // flashdata...
@@ -281,6 +275,6 @@ class BlogPostController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.blog.post.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.blog.post.index')->with($flashData);
     }
 }

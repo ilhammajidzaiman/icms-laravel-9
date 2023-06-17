@@ -10,7 +10,7 @@
 
     @can('developer')
         <x-button-link href="{{ route(Request::segment(1) . '.blog.category.trash.index') }}"
-            label="sampah ({{ $countCategory }})" class="float-end" icon="fa-fw fas fa-trash" />
+            label="sampah ({{ $count }})" class="float-end" icon="fa-fw fas fa-trash" />
     @endcan
 
     <x-alert-dismissing />
