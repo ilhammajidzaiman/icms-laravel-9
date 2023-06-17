@@ -8,8 +8,10 @@
     <x-button-link href="{{ route(Request::segment(1) . '.blog.category.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
-    <x-button-link href="{{ route(Request::segment(1) . '.blog.category.trash.index') }}"
-        label="sampah ({{ $countCategory }})" class="float-end" icon="fa-fw fas fa-trash" />
+    @can('developer')
+        <x-button-link href="{{ route(Request::segment(1) . '.blog.category.trash.index') }}"
+            label="sampah ({{ $countCategory }})" class="float-end" icon="fa-fw fas fa-trash" />
+    @endcan
 
     <x-alert-dismissing />
 
