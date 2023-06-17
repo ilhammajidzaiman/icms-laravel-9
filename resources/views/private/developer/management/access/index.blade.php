@@ -11,6 +11,15 @@
         <div class="col-12 col-md">
             <div class="card">
                 <div class="card-content">
+                    <div class="card-header">
+                        <form action="{{ route(Request::segment(1) . '.management.access.index') }}" method="get">
+                            @csrf
+                            <div class="row justify-content-end">
+                                <x-search-input name="search" id="search" value="{{ request('search') }}"
+                                    class="col-md-4" />
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover text-nowrap">
@@ -22,9 +31,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($levels as $level)
+                                    @forelse ($levels as $key=>$level)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $levels->firstItem() + $key }}</td>
                                             <td>{{ $level->name }}</td>
                                             <td class="text-end">
                                                 <x-button-link
@@ -50,6 +59,7 @@
                     </div>
                 </div>
             </div>
+            <x-pagination :pages="$levels" side="1" />
         </div>
     </div>
 @endsection
