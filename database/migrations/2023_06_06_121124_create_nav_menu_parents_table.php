@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('slug')->comment('slug menu');
             $table->string('url')->nullable()->comment('link url yang dituju atau akan di buka');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

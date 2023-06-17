@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('slug')->unique()->comment('slug dari judul');
             $table->binary('content')->comment('bagian isi halaman');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

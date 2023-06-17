@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('path')->nullable()->comment('folder file');
             $table->string('file')->nullable()->comment('file');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

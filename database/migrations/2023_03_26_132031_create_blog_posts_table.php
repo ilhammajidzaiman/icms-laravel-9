@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('blog_article_id')->constrained('blog_articles')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_articles');
             $table->foreignId('blog_category_id')->constrained('blog_categories')->cascadeOnUpdate()->restrictOnDelete()->comment('id table blog_categories');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

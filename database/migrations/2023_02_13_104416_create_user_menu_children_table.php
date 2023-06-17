@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('prefix')->nullable()->comment('link url yang dituju atau akan di buka');
             $table->string('url')->nullable()->comment('link url yang dituju atau akan di buka');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

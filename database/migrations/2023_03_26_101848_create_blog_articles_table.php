@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('file')->nullable()->comment('file gambar artikel');
             $table->bigInteger('counter')->nullable()->comment('jumlah pengunjung');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
