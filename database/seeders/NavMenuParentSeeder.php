@@ -50,7 +50,7 @@ class NavMenuParentSeeder extends Seeder
 
         NavMenuParent::create([
             'uuid'          => Str::uuid(),
-            'order'         => '4',
+            'order'         => '5',
             'name'          => 'Download',
             'slug'          => 'download',
             'url'           => '/download',
