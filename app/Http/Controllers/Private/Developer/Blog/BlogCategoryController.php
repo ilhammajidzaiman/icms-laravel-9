@@ -18,7 +18,6 @@ class BlogCategoryController extends Controller
     {
         $search                     = request(['search']);
         $data['categories']         = BlogCategory::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        // $data['categories']         = BlogCategory::orderByDesc('id')->get();
         $data['countCategory']      = BlogCategory::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.blog.category.index', $data);
     }

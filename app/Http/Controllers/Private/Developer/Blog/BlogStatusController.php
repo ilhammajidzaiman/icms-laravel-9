@@ -16,7 +16,8 @@ class BlogStatusController extends Controller
      */
     public function index()
     {
-        $data['statuses']         = BlogStatus::orderByDesc('id')->get();
+        $search                     = request(['search']);
+        $data['statuses']           = BlogStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         return view('private.developer.blog.status.index', $data);
     }
 

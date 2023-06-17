@@ -36,7 +36,7 @@
                                             <td class="text-end">
                                                 <x-button-link
                                                     href="{{ route(Request::segment(1) . '.blog.category.trash.restore', $category->slug) }}"
-                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-primary"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                                     icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
                                                     href="{{ route(Request::segment(1) . '.blog.category.trash.delete', $category->slug) }}"
@@ -48,7 +48,7 @@
                                     @empty
                                         <tr>
                                             <td colspan="4">
-                                                <x-alert-empty label="Data tidak ditemukan..." />
+                                                <x-alert-empty label="Tidak ada sampah ditemukan..." />
                                             </td>
                                         </tr>
                                     @endforelse
