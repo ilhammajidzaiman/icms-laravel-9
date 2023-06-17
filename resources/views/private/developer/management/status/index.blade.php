@@ -14,6 +14,15 @@
         <div class="col-12 col-md">
             <div class="card">
                 <div class="card-content">
+                    <div class="card-header">
+                        <form action="{{ route(Request::segment(1) . '.management.user.status.index') }}" method="get">
+                            @csrf
+                            <div class="row justify-content-end">
+                                <x-search-input name="search" id="search" value="{{ request('search') }}"
+                                    class="col-md-4" />
+                            </div>
+                        </form>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-hover text-nowrap">
@@ -27,9 +36,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($statuses as $status)
+                                    @forelse ($statuses as $key=>$status)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $statuses->firstItem() + $key }}</td>
                                             <td>{{ $status->name }}</td>
                                             <td>
                                                 <x-badge class="rounded-pill bg-{{ $status->color }}"
@@ -67,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            <x-pagination :pages="$statuses" side="1" />
         </div>
     </div>
 @endsection

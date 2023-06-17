@@ -16,7 +16,8 @@ class UserStatusController extends Controller
      */
     public function index()
     {
-        $data['statuses']           = UserStatus::orderByDesc('id')->get();
+        $search                     = request(['search']);
+        $data['statuses']           = UserStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         return view('private.developer.management.status.index', $data);
     }
 

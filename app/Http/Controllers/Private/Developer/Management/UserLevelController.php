@@ -16,7 +16,8 @@ class UserLevelController extends Controller
      */
     public function index()
     {
-        $data['levels']             = UserLevel::orderByDesc('id')->get();
+        $search                     = request(['search']);
+        $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         return view('private.developer.management.level.index', $data);
     }
 
