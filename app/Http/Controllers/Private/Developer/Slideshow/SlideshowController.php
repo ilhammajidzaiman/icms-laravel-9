@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer;
+namespace App\Http\Controllers\Private\Developer\Slideshow;
 
 use App\Models\Status;
 use App\Models\Slideshow;
@@ -21,6 +21,7 @@ class SlideshowController extends Controller
     {
         $search                         = request(['search']);
         $data['slideshows']             = Slideshow::filter($search)->orderByDesc('id')->paginate(4)->withQueryString();
+        $data['count']                  = Slideshow::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.slideshow.index', $data);
     }
 
@@ -206,15 +207,7 @@ class SlideshowController extends Controller
         // data detail...
         $data['slideshow']              = Slideshow::where('uuid', $id)->first();
         $oldId                          = $data['slideshow']->id;
-        $file                           = $data['slideshow']->file;
-        $path                           = $data['slideshow']->path;
         $message                        = $data['slideshow']->title;
-        $default                        = 'default-slideshow.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($path . $file);
-        endif;
 
         // delete data on table...
         Slideshow::destroy($oldId);

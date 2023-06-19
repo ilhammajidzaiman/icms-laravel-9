@@ -7,12 +7,12 @@ use App\Http\Controllers\Private\DashboardController;
 use App\Http\Controllers\Private\Developer\PageController;
 use App\Http\Controllers\Private\Developer\GaleryController;
 use App\Http\Controllers\Private\Developer\ArchiveController;
-use App\Http\Controllers\Private\Developer\SlideshowController;
 use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
 use App\Http\Controllers\Private\Developer\Blog\BlogStatusController;
 use App\Http\Controllers\Private\Developer\Management\UserController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
 use App\Http\Controllers\Private\Developer\Blog\BlogPostTrashController;
+use App\Http\Controllers\Private\Developer\Slideshow\SlideshowController;
 use App\Http\Controllers\Private\Developer\Blog\BlogStatusTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
@@ -21,6 +21,7 @@ use App\Http\Controllers\Private\Developer\Management\UserStatusController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuChildController;
+use App\Http\Controllers\Private\Developer\Slideshow\SlideshowTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuParentController;
 
 
@@ -118,6 +119,11 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.slideshow.edit');
                     Route::put('/{id}/update', 'update')->name('developer.slideshow.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.slideshow.delete');
+                    Route::prefix('trash')->controller(SlideshowTrashController::class)->group(function () {
+                        Route::get('', 'index')->name('developer.slideshow.trash.index');
+                        Route::get('/{id}/restore', 'restore')->name('developer.slideshow.trash.restore');
+                        Route::delete('/{id}/delete', 'destroy')->name('developer.slideshow.trash.delete');
+                    });
                 });
                 // 
                 Route::prefix('blog')->group(

@@ -1,21 +1,16 @@
 @extends('private.templates.layout')
 
 @section('header')
-    slideshow
+    sampah slideshow
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.slideshow.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.slideshow.trash.index') }}" label="sampah ({{ $count }})"
-            class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.slideshow.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
-    <form action="{{ route(Request::segment(1) . '.slideshow.index') }}" method="get">
+    <form action="{{ route(Request::segment(1) . '.slideshow.trash.index') }}" method="get">
         @csrf
         <div class="row justify-content-end mb-3">
             <x-search-input name="search" id="search" value="{{ request('search') }}" class="col-md-4" />
@@ -43,22 +38,20 @@
 
                     <div class="card-footer border-0">
                         <p class="card-text">
-                            <x-field-date :create="$slideshow->created_at" :update="$slideshow->updated_at" class="text-muted" />
+                            <x-field-date-delete :delete="$slideshow->deleted_at" class="text-secondary" />
                         </p>
                         <span class="float-start">
                             <x-badge class="rounded-pill bg-{{ $slideshow->status->color }}"
                                 label="{{ $slideshow->status->name }}" />
                         </span>
                         <span class="float-end">
-                            <x-button-link href="{{ route(Request::segment(1) . '.slideshow.show', $slideshow->uuid) }}"
-                                label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
-                                icon="fa-fw fas fa-eye" />
-                            <x-button-link href="{{ route(Request::segment(1) . '.slideshow.edit', $slideshow->uuid) }}"
-                                label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                icon="fa-fw fas fa-edit" />
+                            <x-button-link
+                                href="{{ route(Request::segment(1) . '.slideshow.trash.restore', $slideshow->slug) }}"
+                                label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                icon="fa-fw fas fa-recycle" />
                             <x-button-delete
-                                href="{{ route(Request::segment(1) . '.slideshow.delete', $slideshow->uuid) }}"
-                                confirm="{{ $slideshow->title }}" label="hapus"
+                                href="{{ route(Request::segment(1) . '.slideshow.trash.delete', $slideshow->slug) }}"
+                                confirm="permanen {{ $slideshow->title }}" label="hapus"
                                 class="rounded-pill btn btn-sm btn-outline-danger" icon="fa-fw fas fa-trash" />
                         </span>
                     </div>
@@ -66,7 +59,7 @@
             </div>
         @empty
             <div class="col">
-                <x-alert-empty label="Data tidak ditemukan..." />
+                <x-alert-empty label="Tidak ada sampah ditemukan..." />
             </div>
         @endforelse
     </div>
