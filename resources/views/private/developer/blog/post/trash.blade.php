@@ -1,7 +1,7 @@
 @extends('private.templates.layout')
 
 @section('header')
-    sampah posting
+    sampah
 @endsection
 
 @section('container')

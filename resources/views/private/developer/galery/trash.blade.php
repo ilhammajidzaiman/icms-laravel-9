@@ -1,7 +1,7 @@
 @extends('private.templates.layout')
 
 @section('header')
-    sampah galeri
+    sampah
 @endsection
 
 @section('container')

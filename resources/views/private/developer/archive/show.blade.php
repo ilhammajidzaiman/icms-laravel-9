@@ -1,7 +1,7 @@
 @extends('private.templates.layout')
 
 @section('header')
-    rincian berkas
+    rincian
 @endsection
 
 @section('container')
