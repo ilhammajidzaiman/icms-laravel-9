@@ -6,10 +6,11 @@ use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\DashboardController;
 use App\Http\Controllers\Private\Developer\PageController;
 use App\Http\Controllers\Private\Developer\GaleryController;
-use App\Http\Controllers\Private\Developer\ArchiveController;
+use App\Http\Controllers\Private\Developer\Archive\ArchiveController;
 use App\Http\Controllers\Private\Developer\Management\UserController;
 use App\Http\Controllers\Private\Developer\Blog\Post\BlogPostController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowController;
+use App\Http\Controllers\Private\Developer\Archive\ArchiveTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController;
@@ -40,7 +41,6 @@ Route::middleware('auth')->group(
         Route::prefix('developer')->middleware(['isDeveloper'])->controller()->group(
             function () {
                 Route::get('/dashboard', [DashboardController::class, 'index'])->name('developer.dashboard');
-                // 
                 Route::prefix('profil')->controller(ProfilController::class)->group(function () {
                     Route::get('/{id}', 'index')->name('developer.profil.index');
                     Route::get('/{id}/edit', 'edit')->name('developer.profil.edit');
@@ -48,7 +48,6 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/password-edit', 'passwordEdit')->name('developer.profil.password.edit');
                     Route::put('/{id}/password-update', 'passwordUpdate')->name('developer.profil.password.update');
                 });
-                // 
                 Route::prefix('management')->group(
                     function () {
                         Route::prefix('status')->controller(UserStatusController::class)->group(function () {
@@ -109,7 +108,6 @@ Route::middleware('auth')->group(
                         });
                     }
                 );
-                // 
                 Route::prefix('slideshow')->controller(SlideshowController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.slideshow.index');
                     Route::get('/create', 'create')->name('developer.slideshow.create');
@@ -124,7 +122,6 @@ Route::middleware('auth')->group(
                         Route::delete('/{id}/delete', 'destroy')->name('developer.slideshow.trash.delete');
                     });
                 });
-                // 
                 Route::prefix('blog')->group(
                     function () {
                         Route::prefix('status')->controller(BlogStatusController::class)->group(function () {
@@ -173,7 +170,6 @@ Route::middleware('auth')->group(
                         });
                     }
                 );
-                // 
                 Route::prefix('page')->controller(PageController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.page.index');
                     Route::get('/create', 'create')->name('developer.page.create');
@@ -183,7 +179,6 @@ Route::middleware('auth')->group(
                     Route::put('/{id}/update', 'update')->name('developer.page.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.page.delete');
                 });
-                // 
                 Route::prefix('nav-menu')->controller(NavMenuParentController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.nav-menu.parent.index');
                     Route::get('/create', 'create')->name('developer.nav-menu.parent.create');
@@ -202,7 +197,6 @@ Route::middleware('auth')->group(
                         Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.child.delete');
                     });
                 });
-                // 
                 Route::prefix('galery')->controller(GaleryController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.galery.index');
                     Route::get('/create', 'create')->name('developer.galery.create');
@@ -220,6 +214,11 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.archive.edit');
                     Route::put('/{id}/update', 'update')->name('developer.archive.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.archive.delete');
+                    Route::prefix('trash')->controller(ArchiveTrashController::class)->group(function () {
+                        Route::get('', 'index')->name('developer.archive.trash.index');
+                        Route::get('/{id}/restore', 'restore')->name('developer.archive.trash.restore');
+                        Route::delete('/{id}/delete', 'destroy')->name('developer.archive.trash.delete');
+                    });
                 });
             }
         );

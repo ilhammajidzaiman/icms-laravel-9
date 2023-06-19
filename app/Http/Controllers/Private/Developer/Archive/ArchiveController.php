@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer;
+namespace App\Http\Controllers\Private\Developer\Archive;
 
 use App\Models\Status;
 use App\Models\Archive;
@@ -21,6 +21,7 @@ class ArchiveController extends Controller
     {
         $search                         = request(['search']);
         $data['archives']               = Archive::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']                  = Archive::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.archive.index', $data);
     }
 
@@ -201,15 +202,7 @@ class ArchiveController extends Controller
         // data detail...
         $data['archive']                = Archive::where('uuid', $id)->first();
         $oldId                          = $data['archive']->id;
-        $file                           = $data['archive']->file;
-        $path                           = $data['archive']->path;
         $message                        = $data['archive']->title;
-        $default                        = 'default-img.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($path . $file);
-        endif;
 
         // delete data on table...
         Archive::destroy($oldId);

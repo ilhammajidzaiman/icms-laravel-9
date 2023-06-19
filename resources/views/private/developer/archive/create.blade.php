@@ -8,7 +8,6 @@
     <x-button-link href="{{ route(Request::segment(1) . '.archive.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
-
     <div class="row">
         <div class="col-12 col-md">
             <div class="card">

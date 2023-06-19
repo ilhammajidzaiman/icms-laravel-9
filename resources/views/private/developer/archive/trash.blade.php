@@ -1,17 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    berkas
+    sampah berkas
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.archive.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.archive.trash.index') }}" label="sampah ({{ $count }})"
-            class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.archive.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
@@ -20,7 +15,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-header">
-                        <form action="{{ route(Request::segment(1) . '.archive.index') }}" method="get">
+                        <form action="{{ route(Request::segment(1) . '.archive.trash.index') }}" method="get">
                             @csrf
                             <div class="row justify-content-end">
                                 <x-search-input name="search" id="search" value="{{ request('search') }}"
@@ -50,20 +45,16 @@
                                                     label="{{ $archive->status->name }}" />
                                             </td>
                                             <td class="text-end">
-                                                <x-field-date :create="$archive->created_at" :update="$archive->updated_at" class="text-secondary" />
+                                                <x-field-date-delete :delete="$archive->deleted_at" class="text-secondary" />
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.archive.show', $archive->uuid) }}"
-                                                    label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
-                                                    icon="fa-fw fas fa-eye" />
-                                                <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.archive.edit', $archive->uuid) }}"
-                                                    label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                                    icon="fa-fw fas fa-edit" />
+                                                    href="{{ route(Request::segment(1) . '.archive.trash.restore', $archive->slug) }}"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                                    icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.archive.delete', $archive->uuid) }}"
-                                                    confirm="{{ $archive->title }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.archive.trash.delete', $archive->slug) }}"
+                                                    confirm="permanen {{ $archive->title }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             </td>
