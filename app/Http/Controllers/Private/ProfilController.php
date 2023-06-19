@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Private;
 
-use App\Models\User;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Management\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;

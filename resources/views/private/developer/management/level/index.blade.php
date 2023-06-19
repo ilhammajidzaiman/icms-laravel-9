@@ -8,6 +8,11 @@
     <x-button-link href="{{ route(Request::segment(1) . '.management.user.level.create') }}" label="baru"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
 
+    @can('developer')
+        <x-button-link href="{{ route(Request::segment(1) . '.management.user.level.trash.index') }}"
+            label="sampah ({{ $count }})" class="float-end" icon="fa-fw fas fa-trash" />
+    @endcan
+
     <x-alert-dismissing />
 
     <div class="row">

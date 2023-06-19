@@ -10,11 +10,11 @@
             </a>
         </li>
         @php
-            // $parents = App\Models\UserAccessParent::where('user_level_id', auth()->user()->user_level_id)
+            // $parents = App\Models\Management\UserAccessParent::where('user_level_id', auth()->user()->user_level_id)
             //     ->with(['menu'])
             //     ->orderBy('order')
             //     ->get();
-            $parents = App\Models\UserMenuParent::whereHas('access', function ($q) {
+            $parents = App\Models\Management\UserMenuParent::whereHas('access', function ($q) {
                 $q->where('user_level_id', auth()->user()->user_level_id);
             })
                 ->orderBy('order')
@@ -30,13 +30,13 @@
                     </a>
                     <ul class="submenu {{ $segment2 == $parent->prefix ? 'active' : '' }}">
                         @php
-                            // $children = App\Models\UserAccessChild::where('user_level_id', auth()->user()->user_level_id)
+                            // $children = App\Models\Management\UserAccessChild::where('user_level_id', auth()->user()->user_level_id)
                             //     ->where('user_menu_parent_id', $parent->id)
                             //     ->with(['menu'])
                             //     ->orderBy('order')
                             //     ->get();
                             
-                            $children = App\Models\UserMenuChild::whereHas('access', function ($q) use ($parent) {
+                            $children = App\Models\Management\UserMenuChild::whereHas('access', function ($q) use ($parent) {
                                 $q->where('user_level_id', auth()->user()->user_level_id)->where('user_menu_parent_id', $parent->id);
                             })
                                 ->orderBy('order')

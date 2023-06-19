@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\DashboardController;
 use App\Http\Controllers\Private\Developer\Page\PageController;
@@ -18,14 +17,20 @@ use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
 use App\Http\Controllers\Private\Developer\Blog\Status\BlogStatusController;
 use App\Http\Controllers\Private\Developer\Blog\Post\BlogPostTrashController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowTrashController;
+use App\Http\Controllers\Private\Developer\Management\User\UserTrashController;
 use App\Http\Controllers\Private\Developer\Blog\Category\BlogCategoryController;
 use App\Http\Controllers\Private\Developer\Management\Level\UserLevelController;
 use App\Http\Controllers\Private\Developer\Blog\Status\BlogStatusTrashController;
 use App\Http\Controllers\Private\Developer\Management\Access\UserAccessController;
 use App\Http\Controllers\Private\Developer\Management\Status\UserStatusController;
-use App\Http\Controllers\Private\Developer\Management\Menu\UserMenuChildController;
-use App\Http\Controllers\Private\Developer\Management\Menu\UserMenuParentController;
 use App\Http\Controllers\Private\Developer\Blog\Category\BlogCategoryTrashController;
+use App\Http\Controllers\Private\Developer\Management\Level\UserLevelTrashController;
+use App\Http\Controllers\Private\Developer\Management\Access\UserAccessTrashController;
+use App\Http\Controllers\Private\Developer\Management\Status\UserStatusTrashController;
+use App\Http\Controllers\Private\Developer\Management\Menu\Child\UserMenuChildController;
+use App\Http\Controllers\Private\Developer\Management\Menu\Parent\UserMenuParentController;
+use App\Http\Controllers\Private\Developer\Management\Menu\Child\UserMenuChildTrashController;
+use App\Http\Controllers\Private\Developer\Management\Menu\Parent\UserMenuParentTrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +65,12 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.management.user.status.edit');
                             Route::put('/{id}/update', 'update')->name('developer.management.user.status.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.status.delete');
+                            Route::prefix('trash')->controller(UserStatusTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.management.user.status.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.management.user.status.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.status.trash.delete');
+                            });
                         });
-                        // 
                         Route::prefix('level')->controller(UserLevelController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.level.index');
                             Route::get('/create', 'create')->name('developer.management.user.level.create');
@@ -70,8 +79,12 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.management.user.level.edit');
                             Route::put('/{id}/update', 'update')->name('developer.management.user.level.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.level.delete');
+                            Route::prefix('trash')->controller(UserLevelTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.management.user.level.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.management.user.level.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.level.trash.delete');
+                            });
                         });
-                        // 
                         Route::prefix('menu')->controller(UserMenuParentController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.menu.parent.index');
                             Route::get('/create', 'create')->name('developer.management.user.menu.parent.create');
@@ -80,8 +93,12 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.management.user.menu.parent.edit');
                             Route::put('/{id}/update', 'update')->name('developer.management.user.menu.parent.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.parent.delete');
+                            Route::prefix('trash')->controller(UserMenuParentTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.management.user.menu.parent.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.management.user.menu.parent.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.parent.trash.delete');
+                            });
                         });
-                        // 
                         Route::prefix('menu/child')->controller(UserMenuChildController::class)->group(function () {
                             Route::get('/create/{id}', 'create')->name('developer.management.user.menu.child.create');
                             Route::post('/store/{id}', 'store')->name('developer.management.user.menu.child.store');
@@ -89,16 +106,24 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.management.user.menu.child.edit');
                             Route::put('/{id}/update', 'update')->name('developer.management.user.menu.child.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.child.delete');
+                            Route::prefix('trash')->controller(UserMenuChildTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.management.user.menu.child.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.management.user.menu.child.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.menu.child.trash.delete');
+                            });
                         });
-                        // 
                         Route::prefix('access')->controller(UserAccessController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.access.index');
                             Route::get('/{id}/show', 'show')->name('developer.management.access.show');
                             Route::get('/{id}/edit', 'edit')->name('developer.management.access.edit');
                             Route::get('/parent/{level}/{parent}', 'updateParent')->name('developer.management.access.parent.update');
                             Route::get('/child/{level}/{parent}/{child}', 'updateChild')->name('developer.management.access.child.update');
+                            Route::prefix('trash')->controller(UserAccessTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.management.access.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.management.access.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.management.access.trash.delete');
+                            });
                         });
-                        // 
                         Route::prefix('user')->controller(UserController::class)->group(function () {
                             Route::get('/', 'index')->name('developer.management.user.index');
                             Route::get('/create', 'create')->name('developer.management.user.create');
@@ -107,6 +132,11 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.management.user.edit');
                             Route::put('/{id}/update', 'update')->name('developer.management.user.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.delete');
+                            Route::prefix('trash')->controller(UserTrashController::class)->group(function () {
+                                Route::get('', 'index')->name('developer.management.user.trash.index');
+                                Route::get('/{id}/restore', 'restore')->name('developer.management.user.trash.restore');
+                                Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.trash.delete');
+                            });
                         });
                     }
                 );

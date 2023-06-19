@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Galery;
+namespace App\Http\Controllers\Private\Developer\Management\Level;
 
 use App\Models\Galery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-class TrashController extends Controller
+class UserLevelTrashController extends Controller
 {
     public function index()
     {

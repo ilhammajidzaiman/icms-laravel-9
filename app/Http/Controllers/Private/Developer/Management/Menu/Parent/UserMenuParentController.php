@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Management\Menu;
+namespace App\Http\Controllers\Private\Developer\Management\Menu\Parent;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\UserMenuParent;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Management\UserMenuParent;
 
 class UserMenuParentController extends Controller
 {

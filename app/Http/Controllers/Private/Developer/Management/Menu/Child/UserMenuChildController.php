@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Management\Menu;
+namespace App\Http\Controllers\Private\Developer\Management\Menu\Child;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\UserMenuChild;
-use App\Models\UserMenuParent;
 use App\Http\Controllers\Controller;
+use App\Models\Management\UserMenuChild;
+use App\Models\Management\UserMenuParent;
 
 class UserMenuChildController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Management;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class UserStatus extends Model
+class UserLevel extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -18,4 +18,9 @@ class UserStatus extends Model
             return $query->where('name', 'like', '%' . $search . '%');
         });
     }
+
+    // public function menus()
+    // {
+    //     return $this->belongsToMany(UserMenu::class, 'user_accesses', 'level_id', 'menu_id');
+    // }
 }

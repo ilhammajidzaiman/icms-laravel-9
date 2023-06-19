@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Management;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Management\UserMenuParent;
+use App\Models\Management\UserAccessChild;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

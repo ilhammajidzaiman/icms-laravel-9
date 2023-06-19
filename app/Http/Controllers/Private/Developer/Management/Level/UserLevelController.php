@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Private\Developer\Management\Level;
 
-use App\Models\UserLevel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Management\UserLevel;
 
 class UserLevelController extends Controller
 {
@@ -18,6 +18,7 @@ class UserLevelController extends Controller
     {
         $search                     = request(['search']);
         $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']              = UserLevel::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.management.level.index', $data);
     }
 

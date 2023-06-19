@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\UserAccessParent;
 use App\Models\UserAccessChild;
+use Illuminate\Database\Seeder;
+use App\Models\Management\UserAccessParent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserAccessParentSeeder extends Seeder

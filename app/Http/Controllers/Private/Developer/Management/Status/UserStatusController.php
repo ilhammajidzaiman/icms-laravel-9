@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Private\Developer\Management\Status;
 
-use App\Models\UserStatus;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Management\UserStatus;
 
 class UserStatusController extends Controller
 {
@@ -18,6 +18,7 @@ class UserStatusController extends Controller
     {
         $search                     = request(['search']);
         $data['statuses']           = UserStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']              = UserStatus::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.management.status.index', $data);
     }
 

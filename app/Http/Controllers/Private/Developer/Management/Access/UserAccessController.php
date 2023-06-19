@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Private\Developer\Management\Access;
 
-use App\Models\UserLevel;
-use App\Models\UserAccessChild;
-use App\Models\UserAccessParent;
-use App\Models\UserMenuParent;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Management\UserLevel;
+use App\Models\Management\UserMenuParent;
+use App\Models\Management\UserAccessChild;
+use App\Models\Management\UserAccessParent;
 
 class UserAccessController extends Controller
 {
@@ -20,6 +20,7 @@ class UserAccessController extends Controller
     {
         $search                     = request(['search']);
         $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']              = UserLevel::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.management.access.index', $data);
     }
 

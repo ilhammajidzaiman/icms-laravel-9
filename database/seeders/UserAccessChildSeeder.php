@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\UserAccessChild;
+use App\Models\Management\UserAccessChild;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserAccessChildSeeder extends Seeder

@@ -23,6 +23,7 @@ class UserController extends Controller
     {
         $search                     = request(['search']);
         $data['users']              = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']              = User::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.management.user.index', $data);
     }
 

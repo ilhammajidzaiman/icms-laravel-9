@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Support\Str;
-use App\Models\UserLevel;
 use Illuminate\Database\Seeder;
+use App\Models\Management\UserLevel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserLevelSeeder extends Seeder

@@ -48,7 +48,7 @@
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 @php
-                                                    $menu = App\Models\UserMenuChild::where('user_menu_parent_id', $menuParent->id)->first();
+                                                    $menu = App\Models\Management\UserMenuChild::where('user_menu_parent_id', $menuParent->id)->first();
                                                 @endphp
                                             @empty($menu)
                                                 <x-button-delete
@@ -61,7 +61,7 @@
                                     </tr>
 
                                     @php
-                                        $menuChilds = App\Models\UserMenuChild::where('user_menu_parent_id', $menuParent->id)
+                                        $menuChilds = App\Models\Management\UserMenuChild::where('user_menu_parent_id', $menuParent->id)
                                             ->orderBy('order')
                                             ->get();
                                     @endphp

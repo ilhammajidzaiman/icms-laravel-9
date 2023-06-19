@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Management;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class UserLevel extends Model
+class UserStatus extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -17,10 +17,5 @@ class UserLevel extends Model
         $query->when($filters['search'] ?? false, function ($query, $search) {
             return $query->where('name', 'like', '%' . $search . '%');
         });
-    }
-
-    public function menus()
-    {
-        return $this->belongsToMany(UserMenu::class, 'user_accesses', 'level_id', 'menu_id');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserMenuParent;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use App\Models\Management\UserMenuParent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserMenuParentSeeder extends Seeder
