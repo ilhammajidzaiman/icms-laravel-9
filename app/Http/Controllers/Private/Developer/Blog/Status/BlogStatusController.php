@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Blog;
+namespace App\Http\Controllers\Private\Developer\Blog\Status;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

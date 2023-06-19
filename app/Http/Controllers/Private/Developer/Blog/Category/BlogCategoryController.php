@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Blog;
+namespace App\Http\Controllers\Private\Developer\Blog\Category;
 
 use Illuminate\Support\Str;
 use App\Models\Blog\BlogCategory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Blog;
+namespace App\Http\Controllers\Private\Developer\Blog\Post;
 
 use Illuminate\Http\Request;
 use App\Models\Blog\BlogPost;

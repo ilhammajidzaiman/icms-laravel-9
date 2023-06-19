@@ -7,23 +7,22 @@ use App\Http\Controllers\Private\DashboardController;
 use App\Http\Controllers\Private\Developer\PageController;
 use App\Http\Controllers\Private\Developer\GaleryController;
 use App\Http\Controllers\Private\Developer\ArchiveController;
-use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
-use App\Http\Controllers\Private\Developer\Blog\BlogStatusController;
 use App\Http\Controllers\Private\Developer\Management\UserController;
-use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
-use App\Http\Controllers\Private\Developer\Blog\BlogPostTrashController;
+use App\Http\Controllers\Private\Developer\Blog\Post\BlogPostController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowController;
-use App\Http\Controllers\Private\Developer\Blog\BlogStatusTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\UserAccessController;
 use App\Http\Controllers\Private\Developer\Management\UserStatusController;
 use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
-use App\Http\Controllers\Private\Developer\Blog\BlogCategoryTrashController;
+use App\Http\Controllers\Private\Developer\Blog\Status\BlogStatusController;
+use App\Http\Controllers\Private\Developer\Blog\Post\BlogPostTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuChildController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserMenuParentController;
-
+use App\Http\Controllers\Private\Developer\Blog\Category\BlogCategoryController;
+use App\Http\Controllers\Private\Developer\Blog\Status\BlogStatusTrashController;
+use App\Http\Controllers\Private\Developer\Blog\Category\BlogCategoryTrashController;
 
 /*
 |--------------------------------------------------------------------------
