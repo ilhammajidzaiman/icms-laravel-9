@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Management;
+namespace App\Http\Controllers\Private\Developer\Management\Access;
 
 use App\Models\UserLevel;
 use App\Models\UserAccessChild;

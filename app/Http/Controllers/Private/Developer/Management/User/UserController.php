@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Management;
+namespace App\Http\Controllers\Private\Developer\Management\User;
 
 use App\Models\User;
 use App\Models\UserLevel;

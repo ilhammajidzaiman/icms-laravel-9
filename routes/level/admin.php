@@ -4,17 +4,16 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\DashboardController;
-use App\Http\Controllers\Private\Developer\ArchiveController;
-use App\Http\Controllers\Private\Developer\GaleryController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
 use App\Http\Controllers\Private\Developer\PageController;
+use App\Http\Controllers\Private\Developer\GaleryController;
+use App\Http\Controllers\Private\Developer\ArchiveController;
+use App\Http\Controllers\Private\Developer\SlideshowController;
 use App\Http\Controllers\Private\Developer\Blog\BlogPostController;
 use App\Http\Controllers\Private\Developer\Blog\BlogCategoryController;
-use App\Http\Controllers\Private\Developer\SlideshowController;
-use App\Http\Controllers\Private\Developer\Management\UserController;
-use App\Http\Controllers\Private\Developer\Management\UserAccessController;
-
+use App\Http\Controllers\Private\Developer\Management\User\UserController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
+use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
+use App\Http\Controllers\Private\Developer\Management\Access\UserAccessController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

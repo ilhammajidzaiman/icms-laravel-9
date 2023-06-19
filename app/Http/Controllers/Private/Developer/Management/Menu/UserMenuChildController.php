@@ -1,33 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\Management;
+namespace App\Http\Controllers\Private\Developer\Management\Menu;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\UserMenuChild;
 use App\Models\UserMenuParent;
 use App\Http\Controllers\Controller;
 
-class UserMenuParentController extends Controller
+class UserMenuChildController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $data['menuParents']            = UserMenuParent::orderBy('order')->get();
-        return view('private.developer.management.menu-parent.index', $data);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('private.developer.management.menu-parent.create');
+        $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
+        return view('private.developer.management.menu-child.create', $data);
     }
 
     /**
@@ -36,9 +27,13 @@ class UserMenuParentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        // data detail...
+        $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
+
         // data input...
+        $parent                         = $data['menuParent']->id;
         $order                          = $request->order;
         $name                           = $request->name;
         $icon                           = $request->icon;
@@ -59,6 +54,7 @@ class UserMenuParentController extends Controller
         // insert to table...
         $data = [
             'uuid'                      => $uuid,
+            'user_menu_parent_id'       => $parent,
             'order'                     => $order,
             'name'                      => $name,
             'slug'                      => $slug,
@@ -66,7 +62,7 @@ class UserMenuParentController extends Controller
             'prefix'                    => $prefix,
             'url'                       => $url,
         ];
-        UserMenuParent::create($data);
+        UserMenuChild::create($data);
 
         // flashdata...
         $flashData = [
@@ -80,32 +76,32 @@ class UserMenuParentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserMenuParent  $userMenuParent
+     * @param  \App\Models\UserMenuChild  $userMenuChild
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('private.developer.management.menu-parent.show', $data);
+        $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
+        return view('private.developer.management.menu-child.show', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\UserMenuParent  $userMenuParent
+     * @param  \App\Models\UserMenuChild  $userMenuChild
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('private.developer.management.menu-parent.update', $data);
+        $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
+        return view('private.developer.management.menu-child.update', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserMenuParent  $userMenuParent
+     * @param  \App\Models\UserMenuChild  $userMenuChild
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -118,6 +114,7 @@ class UserMenuParentController extends Controller
         $message                        = $name;
         $prefix                         = str::lower($request->prefix);
         $slug                           = Str::slug($name, '-');
+        $uuid                           = Str::uuid();
 
         // validation...
         $validatedData                  = $request->validate([
@@ -127,7 +124,7 @@ class UserMenuParentController extends Controller
             'prefix'                    => ['required', 'max:255'],
         ]);
 
-        // insert to table...
+        // input to table...
         $data = [
             'order'                     => $order,
             'name'                      => $name,
@@ -136,7 +133,7 @@ class UserMenuParentController extends Controller
             'prefix'                    => $prefix,
             'url'                       => $url,
         ];
-        UserMenuParent::where('uuid', $id)->update($data);
+        UserMenuChild::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
@@ -150,18 +147,20 @@ class UserMenuParentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UserMenuParent  $userMenuParent
+     * @param  \App\Models\UserMenuChild  $userMenuChild
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        $id                             = $data['menuParent']->id;
-        $message                        = $data['menuParent']->name;
-        UserMenuParent::destroy($id);
+        $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
+        $id                             = $data['menuChild']->id;
+        $message                        = $data['menuChild']->name;
 
-        // flashdata
+        // delete data on table...
+        UserMenuChild::destroy($id);
+
+        // flashdata...
         $flashData = [
             'message'                   => 'Data "' . $message . '" dihapus!',
             'alert'                     => 'danger',
