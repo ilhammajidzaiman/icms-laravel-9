@@ -1,17 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    halaman
+    sampah halaman
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.page.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.page.trash.index') }}" label="sampah ({{ $count }})"
-            class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.page.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
@@ -20,7 +15,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-header">
-                        <form action="{{ route(Request::segment(1) . '.page.index') }}" method="get">
+                        <form action="{{ route(Request::segment(1) . '.page.trash.index') }}" method="get">
                             <div class="row justify-content-end">
                                 <x-search-input name="search" id="search" value="{{ request('search') }}"
                                     class="col-md-4" />
@@ -44,20 +39,16 @@
                                             <td>{{ $pages->firstItem() + $key }}</td>
                                             <td>{{ $page->title }}</td>
                                             <td class="text-end">
-                                                <x-field-date :create="$page->created_at" :update="$page->updated_at" class="text-secondary" />
+                                                <x-field-date-delete :delete="$page->deleted_at" class="text-secondary" />
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.page.show', $page->uuid) }}"
-                                                    label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
-                                                    icon="fa-fw fas fa-eye" />
-                                                <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.page.edit', $page->uuid) }}"
-                                                    label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                                    icon="fa-fw fas fa-edit" />
+                                                    href="{{ route(Request::segment(1) . '.page.trash.restore', $page->slug) }}"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                                    icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.page.delete', $page->uuid) }}"
-                                                    confirm="{{ $page->title }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.page.trash.delete', $page->slug) }}"
+                                                    confirm="permanen {{ $page->title }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             </td>
@@ -65,7 +56,7 @@
                                     @empty
                                         <tr>
                                             <td colspan="6">
-                                                <x-alert-empty label="Data tidak ditemukan..." />
+                                                <x-alert-empty label="Tidak ada sampah ditemukan..." />
                                             </td>
                                         </tr>
                                     @endforelse

@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Private\ProfilController;
 use App\Http\Controllers\Private\DashboardController;
-use App\Http\Controllers\Private\Developer\PageController;
-use App\Http\Controllers\Private\Developer\GaleryController;
+use App\Http\Controllers\Private\Developer\Page\PageController;
+use App\Http\Controllers\Private\Developer\Galery\GaleryController;
+use App\Http\Controllers\Private\Developer\Page\PageTrashController;
 use App\Http\Controllers\Private\Developer\Archive\ArchiveController;
 use App\Http\Controllers\Private\Developer\Management\UserController;
 use App\Http\Controllers\Private\Developer\Blog\Post\BlogPostController;
+use App\Http\Controllers\Private\Developer\Galery\GaleryTrashController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowController;
 use App\Http\Controllers\Private\Developer\Archive\ArchiveTrashController;
 use App\Http\Controllers\Private\Developer\Management\UserLevelController;
@@ -178,6 +180,11 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.page.edit');
                     Route::put('/{id}/update', 'update')->name('developer.page.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.page.delete');
+                    Route::prefix('trash')->controller(PageTrashController::class)->group(function () {
+                        Route::get('', 'index')->name('developer.page.trash.index');
+                        Route::get('/{id}/restore', 'restore')->name('developer.page.trash.restore');
+                        Route::delete('/{id}/delete', 'destroy')->name('developer.page.trash.delete');
+                    });
                 });
                 Route::prefix('nav-menu')->controller(NavMenuParentController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.nav-menu.parent.index');
@@ -205,6 +212,11 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.galery.edit');
                     Route::put('/{id}/update', 'update')->name('developer.galery.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.galery.delete');
+                    Route::prefix('trash')->controller(GaleryTrashController::class)->group(function () {
+                        Route::get('', 'index')->name('developer.galery.trash.index');
+                        Route::get('/{id}/restore', 'restore')->name('developer.galery.trash.restore');
+                        Route::delete('/{id}/delete', 'destroy')->name('developer.galery.trash.delete');
+                    });
                 });
                 Route::prefix('archive')->controller(ArchiveController::class)->group(function () {
                     Route::get('/', 'index')->name('developer.archive.index');

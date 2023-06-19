@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer;
+namespace App\Http\Controllers\Private\Developer\Page;
 
 use App\Models\Page;
 use Illuminate\Support\Str;
@@ -18,6 +18,7 @@ class PageController extends Controller
     {
         $search                         = request(['search']);
         $data['pages']                  = Page::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']                  = Page::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.page.index', $data);
     }
 

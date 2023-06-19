@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer;
+namespace App\Http\Controllers\Private\Developer\Galery;
 
 use App\Models\Galery;
 use App\Models\Status;
@@ -21,6 +21,7 @@ class GaleryController extends Controller
     {
         $search                         = request(['search']);
         $data['galeries']               = Galery::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']                  = Galery::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.galery.index', $data);
     }
 
@@ -201,15 +202,7 @@ class GaleryController extends Controller
         // data detail...
         $data['galery']                 = Galery::where('uuid', $id)->first();
         $oldId                          = $data['galery']->id;
-        $file                           = $data['galery']->file;
-        $path                           = $data['galery']->path;
         $message                        = $data['galery']->title;
-        $default                        = 'default-img.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($path . $file);
-        endif;
 
         // delete data on table...
         Galery::destroy($oldId);

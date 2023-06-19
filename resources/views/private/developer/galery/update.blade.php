@@ -1,13 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    edit galery
+    edit galeri
 @endsection
 
 @section('container')
     <x-button-link href="{{ route(Request::segment(1) . '.galery.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
-
 
     <div class="row">
         <div class="col-12 col-md">

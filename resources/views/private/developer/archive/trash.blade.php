@@ -62,7 +62,7 @@
                                     @empty
                                         <tr>
                                             <td colspan="6">
-                                                <x-alert-empty label="Data tidak ditemukan..." />
+                                                <x-alert-empty label="Tidak ada sampah ditemukan..." />
                                             </td>
                                         </tr>
                                     @endforelse
