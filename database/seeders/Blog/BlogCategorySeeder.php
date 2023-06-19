@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Blog;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;

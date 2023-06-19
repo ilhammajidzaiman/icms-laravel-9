@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Blog;
 
 use App\Models\Blog\BlogArticle;
 use Illuminate\Support\Str;

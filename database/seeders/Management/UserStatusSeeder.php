@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Management;
 
-use App\Models\Blog\BlogStatus;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use App\Models\Management\UserStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class BlogStatusSeeder extends Seeder
+class UserStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,17 +16,17 @@ class BlogStatusSeeder extends Seeder
      */
     public function run()
     {
-        BlogStatus::create([
+        UserStatus::create([
             'uuid'          => Str::uuid(),
-            'name'          => 'Diterbitkan',
-            'slug'          => 'diterbitkan',
+            'name'          => 'Aktif',
+            'slug'          => 'aktif',
             'color'         => 'success',
         ]);
 
-        BlogStatus::create([
+        UserStatus::create([
             'uuid'          => Str::uuid(),
-            'name'          => 'Draft',
-            'slug'          => 'draft',
+            'name'          => 'Tidak Aktif',
+            'slug'          => 'tidak-aktif',
             'color'         => 'secondary',
         ]);
     }

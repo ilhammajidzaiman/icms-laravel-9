@@ -5,6 +5,16 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\Blog\BlogStatusSeeder;
+use Database\Seeders\Blog\BlogArticleSeeder;
+use Database\Seeders\Blog\BlogCategorySeeder;
+use Database\Seeders\Management\UserSeeder;
+use Database\Seeders\Management\UserLevelSeeder;
+use Database\Seeders\Management\UserStatusSeeder;
+use Database\Seeders\Management\UserMenuChildSeeder;
+use Database\Seeders\Management\UserMenuParentSeeder;
+use Database\Seeders\Management\UserAccessChildSeeder;
+use Database\Seeders\Management\UserAccessParentSeeder;
 
 class DatabaseSeeder extends Seeder
 {
