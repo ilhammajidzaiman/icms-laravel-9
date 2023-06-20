@@ -20,7 +20,6 @@ class UserAccessController extends Controller
     {
         $search                     = request(['search']);
         $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']              = UserLevel::onlyTrashed()->orderByDesc('id')->get()->count();
         return view('private.developer.management.access.index', $data);
     }
 

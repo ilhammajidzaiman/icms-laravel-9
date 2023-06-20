@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('user_level_id')->constrained('user_levels')->cascadeOnUpdate()->restrictOnDelete()->comment('id table user_levels');
             $table->foreignId('user_menu_parent_id')->constrained('user_menu_parents')->cascadeOnUpdate()->restrictOnDelete()->comment('id table user_menu_parents');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

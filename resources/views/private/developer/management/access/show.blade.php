@@ -22,10 +22,10 @@
                                 <label for="menu" class="form-label text-capitalize">akses menu</label>
                                 <ol class="list-unstyled">
                                     @php
-                                        // $parents = App\Models\UserAccessParent::where('user_level_id', $level->id)
+                                        // $parents = App\Models\Management\UserAccessParent::where('user_level_id', $level->id)
                                         //     ->with(['menu'])
                                         //     ->get();
-                                        $parents = App\Models\UserMenuParent::whereHas('access', function ($q) use ($level) {
+                                        $parents = App\Models\Management\UserMenuParent::whereHas('access', function ($q) use ($level) {
                                             $q->where('user_level_id', $level->id);
                                         })
                                             ->orderBy('order')
@@ -40,11 +40,11 @@
                                             {{-- data child menu --}}
                                             <ol class="list-unstyled ms-5 pb-2">
                                                 @php
-                                                    // $children = App\Models\UserAccessChild::where('user_level_id', $level->id)
+                                                    // $children = App\Models\Management\UserAccessChild::where('user_level_id', $level->id)
                                                     //     ->where('user_menu_parent_id', $parent->menu->id)
                                                     //     ->with(['menu'])
                                                     //     ->get();
-                                                    $children = App\Models\UserMenuChild::whereHas('access', function ($q) use ($parent, $level) {
+                                                    $children = App\Models\Management\UserMenuChild::whereHas('access', function ($q) use ($parent, $level) {
                                                         $q->where('user_level_id', $level->id)->where('user_menu_parent_id', $parent->id);
                                                     })
                                                         ->orderBy('order')
@@ -96,7 +96,7 @@
                                 <label for="menu" class="form-label text-capitalize">akses menu</label>
                                 <ol class="list-unstyled">
                                     @php
-                                        $parents = App\Models\UserAccessParent::where('user_level_id', $level->id)
+                                        $parents = App\Models\Management\UserAccessParent::where('user_level_id', $level->id)
                                             ->with(['menu'])
                                             ->get();
                                     @endphp
@@ -107,12 +107,12 @@
                                             {{ $parent->menu->name }}
                                             <ol class="list-unstyled ms-5 pb-2">
                                                 @php
-                                                    $children = App\Models\UserAccessChild::where('user_level_id', $level->id)
+                                                    $children = App\Models\Management\UserAccessChild::where('user_level_id', $level->id)
                                                         ->where('user_menu_parent_id', $parent->menu->id)
                                                         ->with(['menu'])
                                                         ->get();
                                                     
-                                                    $children = App\Models\UserMenuChild::whereHas('access', function ($q) use ($parent) {
+                                                    $children = App\Models\Management\UserMenuChild::whereHas('access', function ($q) use ($parent) {
                                                         $q->where('user_level_id', auth()->user()->user_level_id)->where('user_menu_parent_id', $parent->id);
                                                     })
                                                         ->orderBy('order')

@@ -25,7 +25,7 @@
                                 <ul class="list-unstyled ps-55">
                                     @foreach ($menus as $menu)
                                         @php
-                                            $checkedParents = App\Models\UserAccessParent::where('user_level_id', $level->id)
+                                            $checkedParents = App\Models\Management\UserAccessParent::where('user_level_id', $level->id)
                                                 ->where('user_menu_parent_id', $menu->id)
                                                 ->get();
                                         @endphp
@@ -48,13 +48,13 @@
                                             {{-- child menu --}}
                                             <ul class="list-unstyled ps-5">
                                                 @php
-                                                    $children = App\Models\UserMenuChild::where('user_menu_parent_id', $menu->id)
+                                                    $children = App\Models\Management\UserMenuChild::where('user_menu_parent_id', $menu->id)
                                                         ->orderBy('order')
                                                         ->get();
                                                 @endphp
                                                 @foreach ($children as $child)
                                                     @php
-                                                        $checkedChildren = App\Models\UserAccessChild::where('user_level_id', $level->id)
+                                                        $checkedChildren = App\Models\Management\UserAccessChild::where('user_level_id', $level->id)
                                                             ->where('user_menu_parent_id', $menu->id)
                                                             ->where('user_menu_child_id', $child->id)
                                                             ->get();

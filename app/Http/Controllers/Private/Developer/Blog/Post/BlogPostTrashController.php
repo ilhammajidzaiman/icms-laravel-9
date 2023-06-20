@@ -52,7 +52,7 @@ class BlogPostTrashController extends Controller
         endif;
 
         // delete data on table...
-        BlogPost::withTrashed()->where('blog_article_id', $oldId)->forceDelete();
+        BlogPost::where('blog_article_id', $oldId)->delete();
         BlogArticle::withTrashed()->where('id', $oldId)->forceDelete();
 
         // flashdata...
