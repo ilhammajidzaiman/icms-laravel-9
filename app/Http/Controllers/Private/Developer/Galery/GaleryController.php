@@ -64,9 +64,10 @@ class GaleryController extends Controller
         // upload file to storage...
         if ($file) :
             // manually specify a filename...
-            $dateTime                   = date('dmYhis');
-            $nameHash                   = $file->hashName();
-            $fileName                   = $dateTime . '-' . $nameHash;
+            $dateTime                   = date('YmdHis');
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
@@ -162,9 +163,10 @@ class GaleryController extends Controller
             endif;
 
             // manually specify a filename...
-            $dateTime                   = date('dmYhis');
-            $nameHash                   = $file->hashName();
-            $fileName                   = $dateTime . '-' . $nameHash;
+            $dateTime                   = date('YmdHis');
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :

@@ -79,7 +79,7 @@ class BlogPostController extends Controller
             // Storage::putFile($path, new File($file));
 
             // manually specify a filename...
-            $dateTime                   = date('Ymdhis');
+            $dateTime                   = date('YmdHis');
             $nameHash                   = $file->hashName();
             $nameExtension              = $file->extension();
             $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
@@ -202,7 +202,7 @@ class BlogPostController extends Controller
             endif;
 
             // manually specify a filename...
-            $dateTime                   = date('Ymdhis');
+            $dateTime                   = date('YmdHis');
             $nameHash                   = $file->hashName();
             $nameExtension              = $file->extension();
             $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;

@@ -64,9 +64,10 @@ class ArchiveController extends Controller
         // upload file to storage...
         if ($file) :
             // manually specify a filename...
-            $dateTime                   = date('Ymdhis');
-            $nameExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
+            $dateTime                   = date('YmdHis');
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
@@ -137,7 +138,6 @@ class ArchiveController extends Controller
         // data input...
         $file                           = $request->file('file');
         $title                          = $request->title;
-        $detail                         = $request->detail;
         $status                         = $request->status;
         $message                        = $title;
         $slug                           = Str::slug($title, '-');
@@ -162,9 +162,10 @@ class ArchiveController extends Controller
             endif;
 
             // manually specify a filename...
-            $dateTime                   = date('Ymdhis');
-            $nameExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
+            $dateTime                   = date('YmdHis');
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
             Storage::putFileAs($path, new File($file), $fileName);
         else :

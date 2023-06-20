@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Private\Developer\Management\User;
 
 use App\Models\User;
-use App\Models\UserLevel;
-use App\Models\UserStatus;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\File;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Management\UserLevel;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Management\UserStatus;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -74,9 +74,10 @@ class UserController extends Controller
 
         // upload file to storage...
         if ($file) :
-            $dateTime               = date('dmYhis');
-            $nameHash               = $file->hashName();
-            $fileName               = $dateTime . '-' . $nameHash;
+            $dateTime                   = date('YmdHis');
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
 
             // automatically store file...
             // $file               = $file->store($path);
@@ -189,9 +190,11 @@ class UserController extends Controller
             endif;
 
             // manually specify a filename...
-            $dateTime               = date('dmYhis');
-            $nameHash               = $file->hashName();
-            $fileName               = $dateTime . '-' . $nameHash;
+            $dateTime                   = date('YmdHis');
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
+
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $fileName               = $default;
