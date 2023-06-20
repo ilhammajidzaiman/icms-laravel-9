@@ -110,13 +110,11 @@ class BlogPostController extends Controller
             $oldId                      = $detail->id;
             $data2                      = [];
             foreach ($category as $key) :
-                $data2[] =
-                    [
-                        'blog_article_id'   => $oldId,
-                        'blog_category_id'  => $key,
-                    ];
+                $data2[] = BlogPost::create([
+                    'blog_article_id'   => $oldId,
+                    'blog_category_id'  => $key,
+                ]);
             endforeach;
-            BlogPost::insert($data2);
         endif;
 
         // flashdata...
@@ -235,13 +233,11 @@ class BlogPostController extends Controller
         if ($category) :
             $data2                      = [];
             foreach ($category as $key) :
-                $data2[] =
-                    [
-                        'blog_article_id'   => $oldId,
-                        'blog_category_id'  => $key,
-                    ];
+                $data2[] = BlogPost::create([
+                    'blog_article_id'   => $oldId,
+                    'blog_category_id'  => $key,
+                ]);
             endforeach;
-            BlogPost::insert($data2);
         endif;
 
         // flashdata...

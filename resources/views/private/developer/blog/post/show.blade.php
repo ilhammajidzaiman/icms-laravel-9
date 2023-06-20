@@ -19,13 +19,22 @@
             </button>
 
             <h3>{{ $article->title }}</h3>
-            <div class="text-capitalize">kategori:
-                @forelse ($blogPosts as $blogPost)
-                    {{ $blogPost->category->name }},
-                @empty
-                    tidak ada kategori
-                @endforelse
-            </div>
+            <nav style="--bs-breadcrumb-divider:',';" aria-label="breadcrumb">
+                <ol class="breadcrumb text-capitalize mb-0">
+                    <span class="pe-1">
+                        kategori:
+                    </span>
+                    @forelse ($blogPosts as $blogPost)
+                        <li class="breadcrumb-item">
+                            {{ $blogPost->category->name }}
+                        </li>
+                    @empty
+                        <li class="breadcrumb-item">
+                            tidak ada kategori
+                        </li>
+                    @endforelse
+                </ol>
+            </nav>
             <x-field-date :create="$article->created_at" :update="$article->updated_at" class="text-capitalize" />
             <div class="text-capitalize mb-3">oleh: {{ $article->user->name }}</div>
             @php
@@ -41,7 +50,7 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script>
         /* with button */
         function copyToClipboard(button) {
