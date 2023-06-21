@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Private;
 
+use App\Models\User;
 use Illuminate\Http\File;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\Management\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -52,8 +51,6 @@ class ProfilController extends Controller
         $oldEmail                   = $data['profil']->email;
         $oldPath                    = $data['profil']->path;
         $oldFile                    = $data['profil']->file;
-        $level                      = Str::lower($data['profil']->level->name);
-
 
         // data input...
         $name                       = $request->name;
@@ -61,7 +58,7 @@ class ProfilController extends Controller
         $username                   = $request->username;
         $email                      = $request->email;
         $file                       = $request->file('file');
-        $path                       = 'user/' . date('Y/m/');
+        $folder                     = 'user/' . date('Y/m/');
         $default                    = 'default-user.svg';
 
         // validation logic...
@@ -79,15 +76,18 @@ class ProfilController extends Controller
         if ($file) :
             // delete old file on storage before upload new file...
             if ($oldFile !== $default) :
-                Storage::delete($path . $oldFile);
+                Storage::delete($oldPath . $oldFile);
             endif;
 
             // manually specify a filename...
-            $dateTime               = date('dmYhis');
-            $nameHash               = $file->hashName();
-            $fileName               = $dateTime . '-' . $nameHash;
+            $dateTime               = date('YmdHis');
+            $uniqId                 = uniqid();
+            $fileExtension          = $file->extension();
+            $path                   = $folder;
+            $fileName               = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
+            $path                   = $oldPath;
             $fileName               = $oldFile;
         endif;
 
@@ -97,7 +97,7 @@ class ProfilController extends Controller
             'email'                 => $email,
             'name'                  => $name,
             'slug'                  => $slug,
-            'path'                  => $oldPath ? $oldPath : $path,
+            'path'                  => $path,
             'file'                  => $fileName,
         ];
         User::where('uuid', $id)->update($data);
@@ -108,7 +108,7 @@ class ProfilController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.profil.update', $id))->with($flashData);
+        return redirect()->route($request->segment(1) . '.profil.index', $id)->with($flashData);
     }
 
     public function passwordEdit($id)
@@ -145,8 +145,8 @@ class ProfilController extends Controller
         $flashData = [
             'message'               => 'Password berhasil diubah!',
             'alert'                 => 'success',
-            'icon'                  => 'key',
+            'icon'                  => 'fa-fw fas fa-key',
         ];
-        return redirect(route($request->segment(1) . '.profil.index', $id))->with($flashData);
+        return redirect()->route($request->segment(1) . '.profil.index', $id)->with($flashData);
     }
 }
