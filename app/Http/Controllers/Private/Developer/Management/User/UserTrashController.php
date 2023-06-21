@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers\Private\Developer\Management\User;
 
-use App\Models\Galery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
-class TrashController extends Controller
+class UserTrashController extends Controller
 {
     public function index()
     {
         $search                         = request(['search']);
-        $data['galeries']               = Galery::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.galery.trash', $data);
+        $data['users']                  = User::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        return view('private.developer.management.user.trash', $data);
     }
 
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['galery']                 = Galery::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['galery']->id;
-        $message                        = $data['galery']->title;
+        $data['user']                   = User::where('uuid', $id)->onlyTrashed()->first();
+        $oldId                          = $data['user']->id;
+        $message                        = $data['user']->name;
 
         // restore data...
-        Galery::withTrashed()->where('id', $oldId)->restore();
+        User::withTrashed()->where('id', $oldId)->restore();
 
         // flashdata...
         $flashData = [
@@ -32,18 +32,18 @@ class TrashController extends Controller
             'alert'                     => 'info',
             'icon'                      => 'fa-fw fas fa-recycle',
         ];
-        return redirect()->route($request->segment(1) . '.galery.trash.index')->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.trash.index')->with($flashData);
     }
 
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['galery']                 = Galery::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['galery']->id;
-        $file                           = $data['galery']->file;
-        $path                           = $data['galery']->path;
-        $message                        = $data['galery']->title;
-        $default                        = 'default-img.svg';
+        $data['user']                   = User::where('uuid', $id)->onlyTrashed()->first();
+        $oldId                          = $data['user']->id;
+        $file                           = $data['user']->file;
+        $path                           = $data['user']->path;
+        $message                        = $data['user']->name;
+        $default                        = 'default-user.svg';
 
         // delete file on storage...
         if ($file !== $default) :
@@ -51,7 +51,7 @@ class TrashController extends Controller
         endif;
 
         // delete data on table...
-        Galery::withTrashed()->where('id', $oldId)->forceDelete();
+        User::withTrashed()->where('id', $oldId)->forceDelete();
 
         // flashdata...
         $flashData = [
@@ -59,6 +59,6 @@ class TrashController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect()->route($request->segment(1) . '.galery.trash.index')->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.trash.index')->with($flashData);
     }
 }

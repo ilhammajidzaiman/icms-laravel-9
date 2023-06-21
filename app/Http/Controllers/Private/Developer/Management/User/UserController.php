@@ -54,11 +54,11 @@ class UserController extends Controller
         $status                     = $request->status;
         $level                      = $request->level;
         $file                       = $request->file('file');
-        $message                    = $name;
+        $message                    = $request->name;
         $uuid                       = Str::uuid();
         $slug                       = Str::slug($name, '-');
         $password                   = Hash::make($request->password);
-        $path                       = 'user/' . date('Y/m/');
+        $folder                     = 'user/' . date('Y/m/');
         $default                    = 'default-user.svg';
 
         // validation input...
@@ -71,24 +71,18 @@ class UserController extends Controller
             'status'                => ['required'],
             'level'                 => ['required'],
         ]);
-
         // upload file to storage...
         if ($file) :
+            // manually specify a filename...
             $dateTime                   = date('YmdHis');
             $uniqId                     = uniqid();
             $fileExtension              = $file->extension();
+            $path                       = $folder;
             $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
-
-            // automatically store file...
-            // $file               = $file->store($path);
-
-            // automatically generate a unique ID for filename...
-            // Storage::putFile($path, new File($file));
-
-            // manually specify a filename...
             Storage::putFileAs($path, new File($file), $fileName);
         else :
-            $fileName               = $default;
+            $path                       = null;
+            $fileName                   = $default;
         endif;
 
         // insert data to table..
@@ -112,7 +106,7 @@ class UserController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.management.user.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.index')->with($flashData);
     }
 
     /**
@@ -159,14 +153,14 @@ class UserController extends Controller
 
         // data input...
         $name                       = $request->name;
-        $slug                       = Str::slug($name, '-');
         $username                   = $request->username;
         $email                      = $request->email;
         $status                     = $request->status;
         $level                      = $request->level;
         $file                       = $request->file('file');
-        $message                    = $name;
-        $path                       = 'user/' . date('Y/m/');
+        $message                    = $request->name;
+        $slug                       = Str::slug($name, '-');
+        $folder                     = 'user/' . date('Y/m/');
         $default                    = 'default-user.svg';
 
         // validation logic...
@@ -186,18 +180,19 @@ class UserController extends Controller
         if ($file) :
             // delete old file on storage before upload new file...
             if ($oldFile !== $default) :
-                Storage::delete($path . $oldFile);
+                Storage::delete($oldPath . $oldFile);
             endif;
 
             // manually specify a filename...
             $dateTime                   = date('YmdHis');
             $uniqId                     = uniqid();
             $fileExtension              = $file->extension();
+            $path                       = $folder;
             $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
-
             Storage::putFileAs($path, new File($file), $fileName);
         else :
-            $fileName               = $default;
+            $path                       = $oldPath;
+            $fileName                   = $oldFile;
         endif;
 
         // insert data to table...
@@ -208,7 +203,7 @@ class UserController extends Controller
             'email'                 => $email,
             'name'                  => $name,
             'slug'                  => $slug,
-            'path'                  => $oldPath ? $oldPath : $path,
+            'path'                  => $path,
             'file'                  => $fileName,
         ];
         User::where('uuid', $id)->update($data);
@@ -219,7 +214,7 @@ class UserController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.management.user.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.index')->with($flashData);
     }
 
     /**
@@ -233,15 +228,7 @@ class UserController extends Controller
         // data detail...
         $data['user']               = User::where('uuid', $id)->first();
         $id                         = $data['user']->id;
-        $file                       = $data['user']->file;
         $message                    = $data['user']->name;
-        $folder                     = 'user/' . date('Y/m/');
-        $default                    = 'default-user.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($folder . $file);
-        endif;
 
         // delete data on table...
         User::destroy($id);
@@ -252,6 +239,6 @@ class UserController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.management.user.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.index')->with($flashData);
     }
 }

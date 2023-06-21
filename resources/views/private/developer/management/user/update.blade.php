@@ -8,7 +8,8 @@
     <x-button-link href="{{ route(Request::segment(1) . '.management.user.index') }}" label="kembali"
         class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
-    <form action="{{ route(Request::segment(1) . '.management.user.update', $user->uuid) }}" method="post">
+    <form action="{{ route(Request::segment(1) . '.management.user.update', $user->uuid) }}" method="post"
+        enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="row">

@@ -1,17 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    user
+    sampah
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.management.user.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.management.user.trash.index') }}"
-            label="sampah ({{ $count }})" class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.management.user.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
@@ -20,7 +15,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-header">
-                        <form action="{{ route(Request::segment(1) . '.management.user.index') }}" method="get">
+                        <form action="{{ route(Request::segment(1) . '.management.user.trash.index') }}" method="get">
                             @csrf
                             <div class="row justify-content-end">
                                 <x-search-input name="search" id="search" value="{{ request('search') }}"
@@ -55,20 +50,16 @@
                                                     label="{{ $user->level->name }}" />
                                             </td>
                                             <td class="text-end">
-                                                <x-field-date :create="$user->created_at" :update="$user->updated_at" class="text-secondary" />
+                                                <x-field-date-delete :delete="$user->deleted_at" class="text-secondary" />
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.management.user.show', $user->uuid) }}"
-                                                    label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
-                                                    icon="fa-fw fas fa-eye" />
-                                                <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.management.user.edit', $user->uuid) }}"
-                                                    label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                                    icon="fa-fw fas fa-edit" />
+                                                    href="{{ route(Request::segment(1) . '.management.user.trash.restore', $user->uuid) }}"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                                    icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.management.user.delete', $user->uuid) }}"
-                                                    confirm="{{ $user->name }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.management.user.trash.delete', $user->uuid) }}"
+                                                    confirm="permanen {{ $user->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             </td>

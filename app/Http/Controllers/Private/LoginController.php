@@ -40,11 +40,11 @@ class LoginController extends Controller
             $level          = Str::replace(' ', '', Str::lower(auth()->user()->level->name));
             if ($statusId == 1) :
                 if ($levelId == 1) :
-                    return redirect()->intended(route($level . '.dashboard'));
+                    return redirect()->intended()->route($level . '.dashboard');
                 elseif ($levelId == 2) :
-                    return redirect()->intended(route($level . '.dashboard'));
+                    return redirect()->intended()->route($level . '.dashboard');
                 elseif ($levelId == 3) :
-                    return redirect()->intended(route($level . '.dashboard'));
+                    return redirect()->intended()->route($level . '.dashboard');
                 endif;
             else :
                 Auth::logout();
@@ -83,6 +83,6 @@ class LoginController extends Controller
             'alert'         => 'primary',
             'icon'          => 'fa-fw fas fa-sign-out-alt',
         ];
-        return redirect(route('auth.login'))->with($flashData);
+        return redirect()->route('auth.login')->with($flashData);
     }
 }
