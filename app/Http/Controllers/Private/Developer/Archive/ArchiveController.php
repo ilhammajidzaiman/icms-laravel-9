@@ -92,7 +92,7 @@ class ArchiveController extends Controller
             'alert'                     => 'primary',
             'icon'                      => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.archive.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.archive.index')->with($flashData);
     }
 
     /**
@@ -151,7 +151,7 @@ class ArchiveController extends Controller
         $validatedData = $request->validate([
             'title'                     => ['required', 'max:250', $uTitle],
             'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'image', 'mimes:jpg,jpeg,png,svg,pdf,doc,ppt,xls,docx,pptx,xlsx', 'max:11024'],
+            'file'                      => ['required', 'file', 'mimes:jpg,jpeg,png,svg,pdf,doc,ppt,xls,docx,pptx,xlsx', 'max:11024'],
         ]);
 
         // upload file to storage...
@@ -189,7 +189,7 @@ class ArchiveController extends Controller
             'alert'                     => 'success',
             'icon'                      => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.archive.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.archive.index')->with($flashData);
     }
 
     /**
@@ -214,6 +214,6 @@ class ArchiveController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.archive.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.archive.index')->with($flashData);
     }
 }
