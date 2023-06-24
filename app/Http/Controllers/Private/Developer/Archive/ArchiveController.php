@@ -67,8 +67,8 @@ class ArchiveController extends Controller
             $dateTime                   = date('YmdHis');
             $uniqId                     = uniqid();
             $fileExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $path                       = null;
@@ -165,8 +165,8 @@ class ArchiveController extends Controller
             $dateTime                   = date('YmdHis');
             $uniqId                     = uniqid();
             $fileExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $path                       = $oldPath;

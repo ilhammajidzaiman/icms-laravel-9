@@ -40,8 +40,8 @@ class ArchiveTrashController extends Controller
         // data detail...
         $data['archive']                = Archive::where('slug', $id)->onlyTrashed()->first();
         $oldId                          = $data['archive']->id;
-        $file                           = $data['archive']->file;
         $path                           = $data['archive']->path;
+        $file                           = $data['archive']->file;
         $message                        = $data['archive']->title;
         $default                        = 'default-img.svg';
 
