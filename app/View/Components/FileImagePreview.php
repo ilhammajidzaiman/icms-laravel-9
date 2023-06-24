@@ -18,7 +18,6 @@ class FileImagePreview extends Component
     public $value;
     public $class;
 
-    // public function __construct($name, $label, $accept, $value)
     public function __construct($name, $label, $accept, $value, $class)
     {
         $this->name = $name;

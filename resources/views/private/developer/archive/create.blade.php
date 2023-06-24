@@ -17,18 +17,8 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
-                                <div class="form-group text-capitalize">
-
-                                    <label for="file" class="form-label">file</label>
-                                    <input type="file" name="file" id="file"
-                                        class="form-control @error('file')is-invalid @enderror"
-                                        accept=".jpg,.jpeg,.png,.svg,.pdf,.doc,.ppt,.xls,.docx,.pptx,.xlsx">
-                                    @error('file')
-                                        <div id="file" class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                                <x-file-upload name="file" label="file"
+                                    accept=".jpg,.jpeg,.png,.svg,.pdf,.doc,.ppt,.xls,.docx,.pptx,.xlsx" class="col" />
                             </div>
                             <div class="row">
                                 <x-form-input-row type="text" name="title" label="judul" value="{{ old('title') }}"

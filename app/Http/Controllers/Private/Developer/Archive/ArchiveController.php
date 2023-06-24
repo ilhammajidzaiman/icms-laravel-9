@@ -116,7 +116,7 @@ class ArchiveController extends Controller
     public function edit($id)
     {
         $data['statuses']               = Status::orderBy('id')->get();
-        $data['page']                   = Archive::where('uuid', $id)->first();
+        $data['archive']                = Archive::where('uuid', $id)->first();
         return view('private.developer.archive.update', $data);
     }
 

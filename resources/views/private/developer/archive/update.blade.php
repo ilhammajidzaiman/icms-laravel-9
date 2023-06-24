@@ -19,18 +19,8 @@
                             @method('put')
                             @csrf
                             <div class="row mb-3">
-                                <div class="form-group text-capitalize">
-                                    @php
-                                        $path = $archive->path;
-                                        $file = $archive->file;
-                                        $file == 'default-img.svg' ? ($url = asset('assets/images/' . $file)) : ($url = asset('storage/' . $path . $file));
-                                    @endphp
-                                    <img src="{{ $url }}" alt="{{ $url }}"
-                                        class="img-fluid rounded w-100 mb-3 img-preview">
-                                    <label for="file" class="form-label">thumbnail</label>
-                                    <input type="file" name="file" id="file" class="form-control"
-                                        accept=".jpg,.jpeg,.png" onchange="previewImg()">
-                                </div>
+                                <x-file-upload name="file" label="file sekarang: {{ $archive->file }}"
+                                    accept=".jpg,.jpeg,.png,.svg,.pdf,.doc,.ppt,.xls,.docx,.pptx,.xlsx" class="col" />
                             </div>
                             <div class="row">
                                 <x-form-input-row type="text" name="title" label="judul"

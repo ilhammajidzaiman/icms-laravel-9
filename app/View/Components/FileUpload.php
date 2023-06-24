@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class FormFilePreview extends Component
+class FileUpload extends Component
 {
     /**
      * Create a new component instance.
@@ -15,14 +15,14 @@ class FormFilePreview extends Component
     public $name;
     public $label;
     public $accept;
-    public $value;
+    public $class;
 
-    public function __construct($name, $label, $accept, $value)
+    public function __construct($name, $label, $accept, $class)
     {
         $this->name = $name;
         $this->label = $label;
         $this->accept = $accept;
-        $this->value = $value;
+        $this->class = $class;
     }
 
     /**
@@ -32,6 +32,6 @@ class FormFilePreview extends Component
      */
     public function render()
     {
-        return view('components.form-file-preview');
+        return view('components.file-upload');
     }
 }
