@@ -18,13 +18,12 @@ class BlogCategoryTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['category']           = BlogCategory::where('slug', $id)->onlyTrashed()->first();
-        $oldId                      = $data['category']->id;
+        $data['category']           = BlogCategory::where('uuid', $id)->onlyTrashed()->first();
         $oldName                    = $data['category']->name;
         $message                    = $oldName;
 
         // restore data...
-        BlogCategory::withTrashed()->where('id', $oldId)->restore();
+        BlogCategory::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -38,12 +37,12 @@ class BlogCategoryTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['category']           = BlogCategory::where('slug', $id)->onlyTrashed()->first();
+        $data['category']           = BlogCategory::where('uuid', $id)->onlyTrashed()->first();
         $oldId                      = $data['category']->id;
         $message                    = $data['category']->name;
 
         // delete data on table..
-        BlogCategory::withTrashed()->where('id', $oldId)->forceDelete();
+        BlogCategory::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [

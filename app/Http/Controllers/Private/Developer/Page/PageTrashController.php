@@ -19,12 +19,11 @@ class PageTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['page']               = Page::where('slug', $id)->onlyTrashed()->first();
-        $oldId                      = $data['page']->id;
+        $data['page']               = Page::where('uuid', $id)->onlyTrashed()->first();
         $message                    = $data['page']->title;
 
         // restore data...
-        Page::withTrashed()->where('id', $oldId)->restore();
+        Page::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -38,20 +37,11 @@ class PageTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['page']               = Page::where('slug', $id)->onlyTrashed()->first();
-        $oldId                      = $data['page']->id;
-        $path                       = $data['page']->path;
-        $file                       = $data['page']->file;
+        $data['page']               = Page::where('uuid', $id)->onlyTrashed()->first();
         $message                    = $data['page']->title;
-        $default                    = 'default-img.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($path . $file);
-        endif;
 
         // delete data on table...
-        Page::withTrashed()->where('id', $oldId)->forceDelete();
+        Page::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [

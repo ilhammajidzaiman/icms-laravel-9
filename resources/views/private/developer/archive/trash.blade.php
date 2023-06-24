@@ -49,11 +49,11 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.archive.trash.restore', $archive->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.archive.trash.restore', $archive->uuid) }}"
                                                     label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                                     icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.archive.trash.delete', $archive->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.archive.trash.delete', $archive->uuid) }}"
                                                     confirm="permanen {{ $archive->title }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />

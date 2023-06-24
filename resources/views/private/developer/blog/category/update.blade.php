@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <form action="{{ route(Request::segment(1) . '.blog.category.update', $category->slug) }}"
+                        <form action="{{ route(Request::segment(1) . '.blog.category.update', $category->uuid) }}"
                             method="post">
                             @method('put')
                             @csrf

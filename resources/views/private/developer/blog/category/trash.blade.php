@@ -44,11 +44,11 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.category.trash.restore', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.trash.restore', $category->uuid) }}"
                                                     label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                                     icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.blog.category.trash.delete', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.trash.delete', $category->uuid) }}"
                                                     confirm="permanen {{ $category->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />

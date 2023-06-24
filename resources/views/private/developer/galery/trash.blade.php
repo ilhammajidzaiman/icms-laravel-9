@@ -42,10 +42,10 @@
                                 label="{{ $galery->status->name }}" />
                         </span>
                         <span class="float-end">
-                            <x-button-link href="{{ route(Request::segment(1) . '.galery.trash.restore', $galery->slug) }}"
+                            <x-button-link href="{{ route(Request::segment(1) . '.galery.trash.restore', $galery->uuid) }}"
                                 label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                 icon="fa-fw fas fa-recycle" />
-                            <x-button-delete href="{{ route(Request::segment(1) . '.galery.trash.delete', $galery->slug) }}"
+                            <x-button-delete href="{{ route(Request::segment(1) . '.galery.trash.delete', $galery->uuid) }}"
                                 confirm="permanen {{ $galery->title }}" label="hapus"
                                 class="rounded-pill btn btn-sm btn-outline-danger" icon="fa-fw fas fa-trash" />
                         </span>

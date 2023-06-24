@@ -19,7 +19,7 @@ class SlideshowTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['slideshow']          = Slideshow::where('slug', $id)->onlyTrashed()->first();
+        $data['slideshow']          = Slideshow::where('uuid', $id)->onlyTrashed()->first();
         $oldId                      = $data['slideshow']->id;
         $message                    = $data['slideshow']->title;
 
@@ -38,12 +38,12 @@ class SlideshowTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['slideshow']          = Slideshow::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['slideshow']->id;
-        $file                           = $data['slideshow']->file;
-        $path                           = $data['slideshow']->path;
-        $message                        = $data['slideshow']->title;
-        $default                        = 'default-slideshow.svg';
+        $data['slideshow']          = Slideshow::where('uuid', $id)->onlyTrashed()->first();
+        $oldId                      = $data['slideshow']->id;
+        $file                       = $data['slideshow']->file;
+        $path                       = $data['slideshow']->path;
+        $message                    = $data['slideshow']->title;
+        $default                    = 'default-slideshow.svg';
 
         // delete file on storage...
         if ($file !== $default) :

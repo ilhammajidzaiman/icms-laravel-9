@@ -65,25 +65,18 @@ class BlogPostController extends Controller
         $validatedData = $request->validate([
             'title'                     => ['required', 'max:255', 'unique:blog_articles'],
             'content'                   => ['required'],
-            'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'status'                    => ['required', 'max:255'],
+            'file'                      => ['required', 'max:11024', 'file', 'image', 'mimes:jpeg,jpg,png,svg'],
         ]);
 
         // upload file to storage...
         if ($file) :
-
-            // automatically store file...
-            // $file               = $file->store($path);
-
-            // automatically generate a unique ID for filename...
-            // Storage::putFile($path, new File($file));
-
             // manually specify a filename...
             $dateTime                   = date('YmdHis');
-            $nameHash                   = $file->hashName();
-            $nameExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
             $path                       = $folder;
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $path                       = null;
@@ -188,10 +181,10 @@ class BlogPostController extends Controller
 
         // validation
         $validatedData = $request->validate([
-            'title'                     => ['required', 'max:250', $uTitle],
+            'title'                     => ['required', 'max:255', $uTitle],
             'content'                   => ['required'],
-            'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'status'                    => ['required', 'max:255'],
+            'file'                      => ['max:11024', 'file', 'image', 'mimes:jpeg,jpg,png,svg'],
         ]);
 
         // upload file to storage...
@@ -200,13 +193,12 @@ class BlogPostController extends Controller
             if ($oldFile !== $default) :
                 Storage::delete($oldPath . $oldFile);
             endif;
-
             // manually specify a filename...
             $dateTime                   = date('YmdHis');
-            $nameHash                   = $file->hashName();
-            $nameExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $slug . '.' . $nameExtension;
+            $uniqId                     = uniqid();
+            $fileExtension              = $file->extension();
             $path                       = $folder;
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $path                       = $oldPath;
@@ -259,11 +251,10 @@ class BlogPostController extends Controller
     {
         // data detail...
         $data['article']                = BlogArticle::where('uuid', $id)->first();
-        $oldId                          = $data['article']->id;
         $message                        = $data['article']->title;
 
         // delete data on table...
-        BlogArticle::destroy($oldId);
+        BlogArticle::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

@@ -78,7 +78,7 @@ class BlogStatusController extends Controller
      */
     public function show($id)
     {
-        $data['status']           = BlogStatus::where('slug', $id)->first();
+        $data['status']           = BlogStatus::where('uuid', $id)->first();
         return view('private.developer.blog.status.show', $data);
     }
 
@@ -90,7 +90,7 @@ class BlogStatusController extends Controller
      */
     public function edit($id)
     {
-        $data['status']           = BlogStatus::where('slug', $id)->first();
+        $data['status']           = BlogStatus::where('uuid', $id)->first();
         return view('private.developer.blog.status.update', $data);
     }
 
@@ -104,7 +104,7 @@ class BlogStatusController extends Controller
     public function update(Request $request, $id)
     {
         // data detail...
-        $data['status']             = BlogStatus::where('slug', $id)->first();
+        $data['status']             = BlogStatus::where('uuid', $id)->first();
         $oldName                    = $data['status']->name;
 
         // data input...
@@ -127,7 +127,7 @@ class BlogStatusController extends Controller
             'slug'                  => $slug,
             'color'                 => $color,
         ];
-        BlogStatus::where('slug', $id)->update($data);
+        BlogStatus::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
@@ -147,12 +147,12 @@ class BlogStatusController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['category']           = BlogStatus::where('slug', $id)->first();
+        $data['category']           = BlogStatus::where('uuid', $id)->first();
         $oldId                      = $data['category']->id;
         $message                    = $data['category']->name;
 
         // delete data on table..
-        BlogStatus::destroy($oldId);
+        BlogStatus::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

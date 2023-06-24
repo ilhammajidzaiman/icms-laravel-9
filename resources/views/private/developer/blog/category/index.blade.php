@@ -49,15 +49,15 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.category.show', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.show', $category->uuid) }}"
                                                     label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
                                                     icon="fa-fw fas fa-eye" />
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.category.edit', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.edit', $category->uuid) }}"
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
                                                     icon="fa-fw fas fa-edit" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.blog.category.delete', $category->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.category.delete', $category->uuid) }}"
                                                     confirm="{{ $category->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />

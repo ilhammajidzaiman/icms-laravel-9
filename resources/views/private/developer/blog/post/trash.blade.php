@@ -51,11 +51,11 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.post.trash.restore', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.trash.restore', $article->uuid) }}"
                                                     label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                                     icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.blog.post.trash.delete', $article->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.post.trash.delete', $article->uuid) }}"
                                                     confirm="permanen {{ $article->title }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />

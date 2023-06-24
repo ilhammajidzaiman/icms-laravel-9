@@ -20,12 +20,12 @@ class BlogPostTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['article']            = BlogArticle::where('slug', $id)->onlyTrashed()->first();
+        $data['article']            = BlogArticle::where('uuid', $id)->onlyTrashed()->first();
         $oldId                      = $data['article']->id;
         $message                    = $data['article']->title;
 
         // restore data...
-        BlogArticle::withTrashed()->where('id', $oldId)->restore();
+        BlogArticle::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -39,7 +39,7 @@ class BlogPostTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['article']                = BlogArticle::where('slug', $id)->onlyTrashed()->first();
+        $data['article']                = BlogArticle::where('uuid', $id)->onlyTrashed()->first();
         $oldId                          = $data['article']->id;
         $path                           = $data['article']->path;
         $file                           = $data['article']->file;
@@ -53,7 +53,7 @@ class BlogPostTrashController extends Controller
 
         // delete data on table...
         BlogPost::where('blog_article_id', $oldId)->delete();
-        BlogArticle::withTrashed()->where('id', $oldId)->forceDelete();
+        BlogArticle::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [

@@ -49,12 +49,12 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.blog.status.trash.restore', $status->slug) }}"
+                                                    href="{{ route(Request::segment(1) . '.blog.status.trash.restore', $status->uuid) }}"
                                                     label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                                     icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.blog.status.trash.delete', $status->slug) }}"
-                                                    confirm="permanen {{ $status->title }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.blog.status.trash.delete', $status->uuid) }}"
+                                                    confirm="permanen {{ $status->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             </td>

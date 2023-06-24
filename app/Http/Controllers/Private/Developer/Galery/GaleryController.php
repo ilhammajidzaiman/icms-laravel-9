@@ -56,9 +56,9 @@ class GaleryController extends Controller
 
         // validation...
         $validatedData = $request->validate([
-            'title'                     => ['required', 'max:100', 'unique:galeries'],
-            'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'title'                     => ['required', 'max:255', 'unique:galeries'],
+            'status'                    => ['required', 'max:255'],
+            'file'                      => ['required', 'max:11024', 'file', 'image', 'mimes:jpeg,jpg,png,svg'],
         ]);
 
         // upload file to storage...
@@ -150,9 +150,9 @@ class GaleryController extends Controller
 
         // validation
         $validatedData = $request->validate([
-            'title'                     => ['required', 'max:250', $uTitle],
-            'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'title'                     => ['required', 'max:255', $uTitle],
+            'status'                    => ['required', 'max:255'],
+            'file'                      => ['max:11024', 'file', 'image', 'mimes:jpeg,jpg,png,svg'],
         ]);
 
         // upload file to storage...
@@ -203,11 +203,10 @@ class GaleryController extends Controller
     {
         // data detail...
         $data['galery']                 = Galery::where('uuid', $id)->first();
-        $oldId                          = $data['galery']->id;
         $message                        = $data['galery']->title;
 
         // delete data on table...
-        Galery::destroy($oldId);
+        Galery::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

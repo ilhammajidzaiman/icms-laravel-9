@@ -57,8 +57,8 @@ class ArchiveController extends Controller
         // validation...
         $validatedData = $request->validate([
             'title'                     => ['required', 'max:100', 'unique:archives'],
-            'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'mimes:jpg,jpeg,png,svg,pdf,doc,ppt,xls,docx,pptx,xlsx', 'max:11024'],
+            'status'                    => ['required', 'max:255'],
+            'file'                      => ['required', 'max:11024', 'file', 'mimes:jpg,jpeg,png,svg,pdf,doc,ppt,xls,docx,pptx,xlsx'],
         ]);
 
         // upload file to storage...
@@ -149,9 +149,9 @@ class ArchiveController extends Controller
 
         // validation
         $validatedData = $request->validate([
-            'title'                     => ['required', 'max:250', $uTitle],
-            'status'                    => ['required'],
-            'file'                      => ['required', 'file', 'mimes:jpg,jpeg,png,svg,pdf,doc,ppt,xls,docx,pptx,xlsx', 'max:11024'],
+            'title'                     => ['required', 'max:255', $uTitle],
+            'status'                    => ['required', 'max:255'],
+            'file'                      => ['max:11024', 'file', 'mimes:jpg,jpeg,png,svg,pdf,doc,ppt,xls,docx,pptx,xlsx'],
         ]);
 
         // upload file to storage...
@@ -202,11 +202,10 @@ class ArchiveController extends Controller
     {
         // data detail...
         $data['archive']                = Archive::where('uuid', $id)->first();
-        $oldId                          = $data['archive']->id;
         $message                        = $data['archive']->title;
 
         // delete data on table...
-        Archive::destroy($oldId);
+        Archive::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

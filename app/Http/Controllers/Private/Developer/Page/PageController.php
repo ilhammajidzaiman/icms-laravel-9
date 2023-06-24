@@ -68,7 +68,7 @@ class PageController extends Controller
             'alert'                     => 'primary',
             'icon'                      => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.page.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.page.index')->with($flashData);
     }
 
     /**
@@ -119,7 +119,7 @@ class PageController extends Controller
 
         // validation
         $validatedData = $request->validate([
-            'title'                     => ['required', 'max:250', $uTitle],
+            'title'                     => ['required', 'max:255', $uTitle],
             'content'                   => ['required'],
         ]);
 
@@ -137,7 +137,7 @@ class PageController extends Controller
             'alert'                     => 'success',
             'icon'                      => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.page.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.page.index')->with($flashData);
     }
 
     /**
@@ -150,12 +150,10 @@ class PageController extends Controller
     {
         // data detail...
         $data['page']                   = Page::where('uuid', $id)->first();
-        $oldId                          = $data['page']->id;
         $message                        = $data['page']->title;
 
         // delete data on table...
         Page::where('uuid', $id)->delete();
-        // Page::destroy($oldId);
 
         // flashdata...
         $flashData = [
@@ -163,6 +161,6 @@ class PageController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.page.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.page.index')->with($flashData);
     }
 }

@@ -76,7 +76,7 @@ class BlogCategoryController extends Controller
      */
     public function show($id)
     {
-        $data['category']           = BlogCategory::where('slug', $id)->first();
+        $data['category']           = BlogCategory::where('uuid', $id)->first();
         return view('private.developer.blog.category.show', $data);
     }
 
@@ -88,7 +88,7 @@ class BlogCategoryController extends Controller
      */
     public function edit($id)
     {
-        $data['category']           = BlogCategory::where('slug', $id)->first();
+        $data['category']           = BlogCategory::where('uuid', $id)->first();
         return view('private.developer.blog.category.update', $data);
     }
 
@@ -102,7 +102,7 @@ class BlogCategoryController extends Controller
     public function update(Request $request, $id)
     {
         // data detail...
-        $data['category']           = BlogCategory::where('slug', $id)->first();
+        $data['category']           = BlogCategory::where('uuid', $id)->first();
         $oldName                    = $data['category']->name;
 
         // data input...
@@ -123,7 +123,7 @@ class BlogCategoryController extends Controller
             'name'                  => $name,
             'slug'                  => $slug,
         ];
-        BlogCategory::where('slug', $id)->update($data);
+        BlogCategory::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
@@ -143,13 +143,13 @@ class BlogCategoryController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['category']           = BlogCategory::where('slug', $id)->first();
+        $data['category']           = BlogCategory::where('uuid', $id)->first();
         $oldId                      = $data['category']->id;
         $oldName                    = $data['category']->name;
         $message                    = $oldName;
 
         // delete data on table..
-        BlogCategory::destroy($oldId);
+        BlogCategory::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

@@ -19,12 +19,11 @@ class ArchiveTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['archive']                = Archive::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['archive']->id;
+        $data['archive']                = Archive::where('uuid', $id)->onlyTrashed()->first();
         $message                        = $data['archive']->title;
 
         // restore data...
-        Archive::withTrashed()->where('id', $oldId)->restore();
+        Archive::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -38,8 +37,7 @@ class ArchiveTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['archive']                = Archive::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['archive']->id;
+        $data['archive']                = Archive::where('uuid', $id)->onlyTrashed()->first();
         $path                           = $data['archive']->path;
         $file                           = $data['archive']->file;
         $message                        = $data['archive']->title;
@@ -51,7 +49,7 @@ class ArchiveTrashController extends Controller
         endif;
 
         // delete data on table...
-        Archive::withTrashed()->where('id', $oldId)->forceDelete();
+        Archive::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [

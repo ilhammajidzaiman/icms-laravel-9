@@ -17,17 +17,12 @@
                         <form action="{{ route(Request::segment(1) . '.slideshow.store') }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
-                            <div class="row mb-3">
-                                <div class="form-group text-capitalize">
-                                    @php
-                                        $url = url('assets/images/default-slideshow.svg');
-                                    @endphp
-                                    <img src="{{ $url }}" alt="{{ $url }}"
-                                        class="img-fluid rounded w-100 mb-3 img-preview">
-                                    <label for="file" class="form-label">thumbnail</label>
-                                    <input type="file" name="file" id="file" class="form-control"
-                                        accept=".jpg,.jpeg,.png" onchange="previewImg()">
-                                </div>
+                            <div class="row">
+                                @php
+                                    $url = url('assets/images/default-slideshow.svg');
+                                @endphp
+                                <x-file-image-preview name="file" label="thumbnail" accept=".jpg,.jpeg,.png"
+                                    value="{{ $url }}" class="col" />
                             </div>
                             <div class="row">
                                 <x-form-input-row type="text" name="title" label="judul" value="{{ old('title') }}"

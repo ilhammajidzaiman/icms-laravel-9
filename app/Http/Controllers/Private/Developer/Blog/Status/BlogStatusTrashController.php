@@ -18,13 +18,12 @@ class BlogStatusTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['status']             = BlogStatus::where('slug', $id)->onlyTrashed()->first();
-        $oldId                      = $data['status']->id;
+        $data['status']             = BlogStatus::where('uuid', $id)->onlyTrashed()->first();
         $oldName                    = $data['status']->name;
         $message                    = $oldName;
 
         // restore data...
-        BlogStatus::withTrashed()->where('id', $oldId)->restore();
+        BlogStatus::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -38,12 +37,11 @@ class BlogStatusTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['status']             = BlogStatus::where('slug', $id)->onlyTrashed()->first();
-        $oldId                      = $data['status']->id;
+        $data['status']             = BlogStatus::where('uuid', $id)->onlyTrashed()->first();
         $message                    = $data['status']->name;
 
         // delete data on table..
-        BlogStatus::withTrashed()->where('id', $oldId)->forceDelete();
+        BlogStatus::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [

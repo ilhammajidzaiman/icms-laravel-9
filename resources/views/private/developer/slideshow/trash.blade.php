@@ -46,11 +46,11 @@
                         </span>
                         <span class="float-end">
                             <x-button-link
-                                href="{{ route(Request::segment(1) . '.slideshow.trash.restore', $slideshow->slug) }}"
+                                href="{{ route(Request::segment(1) . '.slideshow.trash.restore', $slideshow->uuid) }}"
                                 label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
                                 icon="fa-fw fas fa-recycle" />
                             <x-button-delete
-                                href="{{ route(Request::segment(1) . '.slideshow.trash.delete', $slideshow->slug) }}"
+                                href="{{ route(Request::segment(1) . '.slideshow.trash.delete', $slideshow->uuid) }}"
                                 confirm="permanen {{ $slideshow->title }}" label="hapus"
                                 class="rounded-pill btn btn-sm btn-outline-danger" icon="fa-fw fas fa-trash" />
                         </span>

@@ -19,12 +19,11 @@ class GaleryTrashController extends Controller
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['galery']                 = Galery::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['galery']->id;
+        $data['galery']                 = Galery::where('uuid', $id)->onlyTrashed()->first();
         $message                        = $data['galery']->title;
 
         // restore data...
-        Galery::withTrashed()->where('id', $oldId)->restore();
+        Galery::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -38,8 +37,7 @@ class GaleryTrashController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['galery']                 = Galery::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['galery']->id;
+        $data['galery']                 = Galery::where('uuid', $id)->onlyTrashed()->first();
         $file                           = $data['galery']->file;
         $path                           = $data['galery']->path;
         $message                        = $data['galery']->title;
@@ -51,7 +49,7 @@ class GaleryTrashController extends Controller
         endif;
 
         // delete data on table...
-        Galery::withTrashed()->where('id', $oldId)->forceDelete();
+        Galery::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [
