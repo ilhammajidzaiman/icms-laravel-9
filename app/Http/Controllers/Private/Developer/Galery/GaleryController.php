@@ -58,7 +58,7 @@ class GaleryController extends Controller
         $validatedData = $request->validate([
             'title'                     => ['required', 'max:100', 'unique:galeries'],
             'status'                    => ['required'],
-            'file'                      => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
         ]);
 
         // upload file to storage...
@@ -67,8 +67,8 @@ class GaleryController extends Controller
             $dateTime                   = date('YmdHis');
             $uniqId                     = uniqid();
             $fileExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $path                       = null;
@@ -92,7 +92,7 @@ class GaleryController extends Controller
             'alert'                     => 'primary',
             'icon'                      => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.galery.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.galery.index')->with($flashData);
     }
 
     /**
@@ -152,7 +152,7 @@ class GaleryController extends Controller
         $validatedData = $request->validate([
             'title'                     => ['required', 'max:250', $uTitle],
             'status'                    => ['required'],
-            'file'                      => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
         ]);
 
         // upload file to storage...
@@ -166,8 +166,8 @@ class GaleryController extends Controller
             $dateTime                   = date('YmdHis');
             $uniqId                     = uniqid();
             $fileExtension              = $file->extension();
-            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             $path                       = $folder;
+            $fileName                   = $dateTime . '-' . $uniqId . '.' . $fileExtension;
             Storage::putFileAs($path, new File($file), $fileName);
         else :
             $path                       = $oldPath;
@@ -190,7 +190,7 @@ class GaleryController extends Controller
             'alert'                     => 'success',
             'icon'                      => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.galery.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.galery.index')->with($flashData);
     }
 
     /**
@@ -215,6 +215,6 @@ class GaleryController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.galery.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.galery.index')->with($flashData);
     }
 }

@@ -24,8 +24,14 @@
                                     <img src="{{ $url }}" alt="{{ $url }}"
                                         class="img-fluid rounded w-100 mb-3 img-preview">
                                     <label for="file" class="form-label">thumbnail</label>
-                                    <input type="file" name="file" id="file" class="form-control"
-                                        accept=".jpg,.jpeg,.png" onchange="previewImg()">
+                                    <input type="file" name="file" id="file"
+                                        class="form-control @error('file')is-invalid @enderror" accept=".jpg,.jpeg,.png"
+                                        onchange="previewImg()">
+                                    @error('file')
+                                        <div id="file" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
