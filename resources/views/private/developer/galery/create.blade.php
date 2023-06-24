@@ -17,22 +17,11 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
-                                <div class="form-group text-capitalize">
-                                    @php
-                                        $url = url('assets/images/default-img.svg');
-                                    @endphp
-                                    <img src="{{ $url }}" alt="{{ $url }}"
-                                        class="img-fluid rounded w-100 mb-3 img-preview">
-                                    <label for="file" class="form-label">thumbnail</label>
-                                    <input type="file" name="file" id="file"
-                                        class="form-control @error('file')is-invalid @enderror" accept=".jpg,.jpeg,.png"
-                                        onchange="previewImg()">
-                                    @error('file')
-                                        <div id="file" class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
+                                @php
+                                    $url = url('assets/images/default-img.svg');
+                                @endphp
+                                <x-file-image-preview name="file" label="thumbnail" accept=".jpg,.jpeg,.png"
+                                    value="{{ $url }}" class="col-md-4" />
                             </div>
                             <div class="row">
                                 <x-form-input-row type="text" name="title" label="judul" value="{{ old('title') }}"

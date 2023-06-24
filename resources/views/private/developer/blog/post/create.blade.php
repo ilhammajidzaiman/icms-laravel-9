@@ -29,15 +29,12 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <div class="form-group text-capitalize">
+                            <div class="row">
                                 @php
                                     $url = url('assets/images/default-img.svg');
                                 @endphp
-                                <img src="{{ $url }}" alt="{{ $url }}"
-                                    class="img-fluid rounded w-100 mb-3 img-preview">
-                                <label for="file" class="form-label">thumbnail</label>
-                                <input type="file" name="file" id="file" class="form-control"
-                                    accept=".jpg,.jpeg,.png" onchange="previewImg()">
+                                <x-file-image-preview name="file" label="thumbnail" accept=".jpg,.jpeg,.png"
+                                    value="{{ $url }}" class="col" />
                             </div>
                         </div>
                     </div>

@@ -66,7 +66,7 @@ class BlogPostController extends Controller
             'title'                     => ['required', 'max:255', 'unique:blog_articles'],
             'content'                   => ['required'],
             'status'                    => ['required'],
-            'file'                      => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
         ]);
 
         // upload file to storage...
@@ -191,7 +191,7 @@ class BlogPostController extends Controller
             'title'                     => ['required', 'max:250', $uTitle],
             'content'                   => ['required'],
             'status'                    => ['required'],
-            'file'                      => ['file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
+            'file'                      => ['required', 'file', 'image', 'mimes:jpeg,jpg,png,svg', 'max:11024'],
         ]);
 
         // upload file to storage...
