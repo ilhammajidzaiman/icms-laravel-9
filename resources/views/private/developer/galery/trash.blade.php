@@ -54,7 +54,7 @@
             </div>
         @empty
             <div class="col">
-                <x-alert-empty label="Tidak ada sampah ditemukan..." />
+                <x-alert-empty-icon label="Tidak ada sampah ditemukan..." icon="fa-fw fas fa-trash-alt fs-1" />
             </div>
         @endforelse
     </div>

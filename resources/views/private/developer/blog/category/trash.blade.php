@@ -57,7 +57,8 @@
                                     @empty
                                         <tr>
                                             <td colspan="4">
-                                                <x-alert-empty label="Tidak ada sampah ditemukan..." />
+                                                <x-alert-empty-icon label="Tidak ada sampah ditemukan..."
+                                                    icon="fa-fw fas fa-trash-alt fs-1" />
                                             </td>
                                         </tr>
                                     @endforelse
