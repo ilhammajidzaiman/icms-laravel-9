@@ -1,8 +1,9 @@
-@import url("style-sm-576.css");
-@import url("style-md-768.css");
-@import url("style-lg-992.css");
-@import url("style-xl-1200.css");
-@import url("style-xxl-1400.css");
+@import "style-sm-576.css";
+@import "style-md-768.css";
+@import "style-lg-992.css";
+@import "style-xl-1200.css";
+@import "style-xxl-1400.css";
+/* @import "~@fontsource/nunito/600.css"; */
 
 /* X-Small devices (portrait phones, less than 576px) */
 /* No media query for `xs` since this is the default in Bootstrap */
