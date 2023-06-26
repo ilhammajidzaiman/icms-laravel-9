@@ -17,7 +17,7 @@ class UserMenuParentController extends Controller
     public function index()
     {
         $data['menuParents']            = UserMenuParent::orderBy('order')->get();
-        return view('private.developer.management.menu-parent.index', $data);
+        return view('private.developer.management.menu.parent.index', $data);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserMenuParentController extends Controller
      */
     public function create()
     {
-        return view('private.developer.management.menu-parent.create');
+        return view('private.developer.management.menu.parent.create');
     }
 
     /**
@@ -86,7 +86,7 @@ class UserMenuParentController extends Controller
     public function show($id)
     {
         $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('private.developer.management.menu-parent.show', $data);
+        return view('private.developer.management.menu.parent.show', $data);
     }
 
     /**
@@ -98,7 +98,7 @@ class UserMenuParentController extends Controller
     public function edit($id)
     {
         $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('private.developer.management.menu-parent.update', $data);
+        return view('private.developer.management.menu.parent.update', $data);
     }
 
     /**
