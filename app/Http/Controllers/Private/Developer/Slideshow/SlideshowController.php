@@ -208,11 +208,10 @@ class SlideshowController extends Controller
     {
         // data detail...
         $data['slideshow']              = Slideshow::where('uuid', $id)->first();
-        $oldId                          = $data['slideshow']->id;
         $message                        = $data['slideshow']->title;
 
         // delete data on table...
-        Slideshow::destroy($oldId);
+        Slideshow::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

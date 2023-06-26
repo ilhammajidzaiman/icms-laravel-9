@@ -41,24 +41,23 @@ class UserStatusController extends Controller
     public function store(Request $request)
     {
         // data input...
-        $name               = $request->name;
-        $color              = $request->color;
-        $message            = $name;
-        $slug               = Str::slug($name, '-');
-        $uuid               = Str::uuid();
+        $name                       = $request->name;
+        $color                      = $request->color;
+        $message                    = $name;
+        $slug                       = Str::slug($name, '-');
+        $uuid                       = Str::uuid();
 
         // validation...
-        $validatedData      = $request->validate([
-            'name'          => ['required', 'max:255', 'unique:user_statuses'],
-            'color'         => ['required', 'max:255'],
+        $validatedData              = $request->validate([
+            'name'                  => ['required', 'max:255', 'unique:user_statuses'],
         ]);
 
         // insert to table...
         $data = [
-            'uuid'          => $uuid,
-            'name'          => $name,
-            'slug'          => $slug,
-            'color'         => $color,
+            'uuid'                  => $uuid,
+            'name'                  => $name,
+            'slug'                  => $slug,
+            'color'                 => $color,
         ];
         UserStatus::create($data);
 
@@ -68,7 +67,7 @@ class UserStatusController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.management.user.status.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.status.index')->with($flashData);
     }
 
     /**
@@ -79,7 +78,7 @@ class UserStatusController extends Controller
      */
     public function show($id)
     {
-        $data['status']             = UserStatus::where('slug', $id)->first();
+        $data['status']             = UserStatus::where('uuid', $id)->first();
         return view('private.developer.management.status.show', $data);
     }
 
@@ -91,7 +90,7 @@ class UserStatusController extends Controller
      */
     public function edit($id)
     {
-        $data['status']             = UserStatus::where('slug', $id)->first();
+        $data['status']             = UserStatus::where('uuid', $id)->first();
         return view('private.developer.management.status.update', $data);
     }
 
@@ -105,7 +104,7 @@ class UserStatusController extends Controller
     public function update(Request $request, $id)
     {
         // data detail...
-        $data['status']             = UserStatus::where('slug', $id)->first();
+        $data['status']             = UserStatus::where('uuid', $id)->first();
         $oldName                    = $data['status']->name;
 
         // data input...
@@ -120,7 +119,6 @@ class UserStatusController extends Controller
         // validation
         $validatedData              = $request->validate([
             'name'                  => ['required', 'max:255', $uName],
-            'color'                 => ['required', 'max:255'],
         ]);
 
         // insert to table...
@@ -129,7 +127,7 @@ class UserStatusController extends Controller
             'slug'                  => $slug,
             'color'                 => $color,
         ];
-        UserStatus::where('slug', $id)->update($data);
+        UserStatus::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
@@ -137,7 +135,7 @@ class UserStatusController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.management.user.status.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.status.index')->with($flashData);
     }
 
     /**
@@ -149,12 +147,11 @@ class UserStatusController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['status']             = UserStatus::where('slug', $id)->first();
-        $oldId                      = $data['status']->id;
+        $data['status']             = UserStatus::where('uuid', $id)->first();
         $message                    = $data['status']->name;
 
         // delete data on table...
-        UserStatus::destroy($oldId);
+        UserStatus::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [
@@ -162,6 +159,6 @@ class UserStatusController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.management.user.status.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.status.index')->with($flashData);
     }
 }

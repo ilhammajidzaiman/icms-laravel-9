@@ -1,17 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    status
+    sampah
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.management.user.status.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.management.user.status.trash.index') }}"
-            label="sampah ({{ $count }})" class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.management.user.status.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
@@ -20,7 +15,8 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-header">
-                        <form action="{{ route(Request::segment(1) . '.management.user.status.index') }}" method="get">
+                        <form action="{{ route(Request::segment(1) . '.management.user.status.trash.index') }}"
+                            method="get">
                             @csrf
                             <div class="row justify-content-end">
                                 <x-search-input name="search" id="search" value="{{ request('search') }}"
@@ -54,16 +50,12 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.management.user.status.show', $status->uuid) }}"
-                                                    label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
-                                                    icon="fa-fw fas fa-eye" />
-                                                <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.management.user.status.edit', $status->uuid) }}"
-                                                    label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                                    icon="fa-fw fas fa-edit" />
+                                                    href="{{ route(Request::segment(1) . '.management.user.status.trash.restore', $status->uuid) }}"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                                    icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.management.user.status.delete', $status->uuid) }}"
-                                                    confirm="{{ $status->name }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.management.user.status.trash.delete', $status->uuid) }}"
+                                                    confirm="permanen {{ $status->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             </td>
