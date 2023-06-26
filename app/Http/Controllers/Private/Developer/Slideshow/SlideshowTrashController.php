@@ -39,7 +39,6 @@ class SlideshowTrashController extends Controller
     {
         // data detail...
         $data['slideshow']          = Slideshow::where('uuid', $id)->onlyTrashed()->first();
-        $oldId                      = $data['slideshow']->id;
         $file                       = $data['slideshow']->file;
         $path                       = $data['slideshow']->path;
         $message                    = $data['slideshow']->title;
@@ -51,7 +50,7 @@ class SlideshowTrashController extends Controller
         endif;
 
         // delete data on table..
-        Slideshow::withTrashed()->where('id', $oldId)->forceDelete();
+        Slideshow::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [
