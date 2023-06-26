@@ -18,7 +18,7 @@ class UserLevelController extends Controller
     {
         $search                     = request(['search']);
         $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']              = UserLevel::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']              = UserLevel::onlyTrashed()->get()->count();
         return view('private.developer.management.level.index', $data);
     }
 

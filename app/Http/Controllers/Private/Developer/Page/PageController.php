@@ -18,7 +18,7 @@ class PageController extends Controller
     {
         $search                         = request(['search']);
         $data['pages']                  = Page::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']                  = Page::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']                  = Page::onlyTrashed()->get()->count();
         return view('private.developer.page.index', $data);
     }
 

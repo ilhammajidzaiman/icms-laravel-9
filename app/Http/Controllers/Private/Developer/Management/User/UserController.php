@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         $search                     = request(['search']);
         $data['users']              = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']              = User::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']              = User::onlyTrashed()->get()->count();
         return view('private.developer.management.user.index', $data);
     }
 
@@ -68,8 +68,8 @@ class UserController extends Controller
             'email'                 => ['required', 'max:255', 'unique:users'],
             'password'              => ['required', 'min:6', 'same:confirmation'],
             'confirmation'          => ['required', 'min:6', 'same:password'],
-            'status'                => ['required'],
-            'level'                 => ['required'],
+            'status'                => ['required', 'max:255'],
+            'level'                 => ['required', 'max:255'],
         ]);
         // upload file to storage...
         if ($file) :
@@ -172,8 +172,8 @@ class UserController extends Controller
             'name'                  => ['required', 'max:255'],
             'username'              => ['required', 'max:255', $uUsername],
             'email'                 => ['required', 'max:255', $uEmail],
-            'status'                => ['required'],
-            'level'                 => ['required'],
+            'status'                => ['required', 'max:255'],
+            'level'                 => ['required', 'max:255'],
         ]);
 
         // upload file to storage...
@@ -227,11 +227,10 @@ class UserController extends Controller
     {
         // data detail...
         $data['user']               = User::where('uuid', $id)->first();
-        $id                         = $data['user']->id;
         $message                    = $data['user']->name;
 
         // delete data on table...
-        User::destroy($id);
+        User::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [

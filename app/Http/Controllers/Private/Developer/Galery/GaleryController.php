@@ -21,7 +21,7 @@ class GaleryController extends Controller
     {
         $search                         = request(['search']);
         $data['galeries']               = Galery::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']                  = Galery::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']                  = Galery::onlyTrashed()->get()->count();
         return view('private.developer.galery.index', $data);
     }
 

@@ -21,7 +21,7 @@ class SlideshowController extends Controller
     {
         $search                         = request(['search']);
         $data['slideshows']             = Slideshow::filter($search)->orderByDesc('id')->paginate(4)->withQueryString();
-        $data['count']                  = Slideshow::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']                  = Slideshow::onlyTrashed()->get()->count();
         return view('private.developer.slideshow.index', $data);
     }
 

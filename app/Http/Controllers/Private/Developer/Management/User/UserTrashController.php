@@ -20,11 +20,10 @@ class UserTrashController extends Controller
     {
         // data detail...
         $data['user']                   = User::where('uuid', $id)->onlyTrashed()->first();
-        $oldId                          = $data['user']->id;
         $message                        = $data['user']->name;
 
         // restore data...
-        User::withTrashed()->where('id', $oldId)->restore();
+        User::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -39,7 +38,6 @@ class UserTrashController extends Controller
     {
         // data detail...
         $data['user']                   = User::where('uuid', $id)->onlyTrashed()->first();
-        $oldId                          = $data['user']->id;
         $file                           = $data['user']->file;
         $path                           = $data['user']->path;
         $message                        = $data['user']->name;
@@ -51,7 +49,7 @@ class UserTrashController extends Controller
         endif;
 
         // delete data on table...
-        User::withTrashed()->where('id', $oldId)->forceDelete();
+        User::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [

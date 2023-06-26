@@ -18,7 +18,7 @@ class UserStatusController extends Controller
     {
         $search                     = request(['search']);
         $data['statuses']           = UserStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']              = UserStatus::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']              = UserStatus::onlyTrashed()->get()->count();
         return view('private.developer.management.status.index', $data);
     }
 

@@ -18,7 +18,7 @@ class BlogStatusController extends Controller
     {
         $search                     = request(['search']);
         $data['statuses']           = BlogStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']              = BlogStatus::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']              = BlogStatus::onlyTrashed()->get()->count();
         return view('private.developer.blog.status.index', $data);
     }
 

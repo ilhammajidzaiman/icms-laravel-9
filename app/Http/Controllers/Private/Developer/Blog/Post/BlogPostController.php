@@ -23,7 +23,7 @@ class BlogPostController extends Controller
     {
         $search                         = request(['search']);
         $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']                  = BlogArticle::onlyTrashed()->orderByDesc('id')->get()->count();
+        $data['count']                  = BlogArticle::onlyTrashed()->get()->count();
         return view('private.developer.blog.post.index', $data);
     }
 
