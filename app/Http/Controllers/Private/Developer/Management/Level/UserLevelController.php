@@ -50,7 +50,6 @@ class UserLevelController extends Controller
         // validation...
         $validatedData              = $request->validate([
             'name'                  => ['required', 'max:255', 'unique:user_levels'],
-            'color'                 => ['required', 'max:255'],
         ]);
 
         // insert to table...       
@@ -68,7 +67,7 @@ class UserLevelController extends Controller
             'alert'                 => 'primary',
             'icon'                  => 'fa-fw fas fa-check',
         ];
-        return redirect(route($request->segment(1) . '.management.user.level.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.level.index')->with($flashData);
     }
 
     /**
@@ -79,7 +78,7 @@ class UserLevelController extends Controller
      */
     public function show($id)
     {
-        $data['level']              = UserLevel::where('slug', $id)->first();
+        $data['level']              = UserLevel::where('uuid', $id)->first();
         return view('private.developer.management.level.show', $data);
     }
 
@@ -91,7 +90,7 @@ class UserLevelController extends Controller
      */
     public function edit($id)
     {
-        $data['level']              = UserLevel::where('slug', $id)->first();
+        $data['level']              = UserLevel::where('uuid', $id)->first();
         return view('private.developer.management.level.update', $data);
     }
 
@@ -105,7 +104,7 @@ class UserLevelController extends Controller
     public function update(Request $request, $id)
     {
         // data detail...
-        $data['level']              = UserLevel::where('slug', $id)->first();
+        $data['level']              = UserLevel::where('uuid', $id)->first();
         $oldName                    = $data['level']->name;
 
         // data input...
@@ -120,7 +119,6 @@ class UserLevelController extends Controller
         // validation...
         $validatedData              = $request->validate([
             'name'                  => ['required', 'max:255', $uName],
-            'color'                 => ['required', 'max:255'],
         ]);
 
         // insert to table...
@@ -129,7 +127,7 @@ class UserLevelController extends Controller
             'slug'                  => $slug,
             'color'                 => $color,
         ];
-        UserLevel::where('slug', $id)->update($data);
+        UserLevel::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
@@ -137,7 +135,7 @@ class UserLevelController extends Controller
             'alert'                 => 'success',
             'icon'                  => 'fa-fw fas fa-edit',
         ];
-        return redirect(route($request->segment(1) . '.management.user.level.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.level.index')->with($flashData);
     }
 
     /**
@@ -149,13 +147,11 @@ class UserLevelController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['level']              = UserLevel::where('slug', $id)->first();
-        $oldId                      = $data['level']->id;
-        $oldName                    = $data['level']->name;
-        $message                    = $oldName;
+        $data['level']              = UserLevel::where('uuid', $id)->first();
+        $message                    = $data['level']->name;
 
         // delete data on table...
-        UserLevel::destroy($oldId);
+        UserLevel::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [
@@ -163,6 +159,6 @@ class UserLevelController extends Controller
             'alert'                 => 'danger',
             'icon'                  => 'fa-fw fas fa-trash',
         ];
-        return redirect(route($request->segment(1) . '.management.user.level.index'))->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.level.index')->with($flashData);
     }
 }

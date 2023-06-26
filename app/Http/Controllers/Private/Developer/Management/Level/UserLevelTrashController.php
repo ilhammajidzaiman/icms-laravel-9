@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Private\Developer\Management\Level;
 
-use App\Models\Galery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Management\UserLevel;
 use Illuminate\Support\Facades\Storage;
 
 class UserLevelTrashController extends Controller
@@ -12,19 +12,18 @@ class UserLevelTrashController extends Controller
     public function index()
     {
         $search                         = request(['search']);
-        $data['galeries']               = Galery::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.galery.trash', $data);
+        $data['levels']                 = UserLevel::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        return view('private.developer.management.level.trash', $data);
     }
 
     public function restore(Request $request, $id)
     {
         // data detail...
-        $data['galery']                 = Galery::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['galery']->id;
-        $message                        = $data['galery']->title;
+        $data['level']                  = UserLevel::where('uuid', $id)->onlyTrashed()->first();
+        $message                        = $data['level']->name;
 
         // restore data...
-        Galery::withTrashed()->where('id', $oldId)->restore();
+        UserLevel::withTrashed()->where('uuid', $id)->restore();
 
         // flashdata...
         $flashData = [
@@ -32,26 +31,17 @@ class UserLevelTrashController extends Controller
             'alert'                     => 'info',
             'icon'                      => 'fa-fw fas fa-recycle',
         ];
-        return redirect()->route($request->segment(1) . '.galery.trash.index')->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.level.trash.index')->with($flashData);
     }
 
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['galery']                 = Galery::where('slug', $id)->onlyTrashed()->first();
-        $oldId                          = $data['galery']->id;
-        $file                           = $data['galery']->file;
-        $path                           = $data['galery']->path;
-        $message                        = $data['galery']->title;
-        $default                        = 'default-img.svg';
-
-        // delete file on storage...
-        if ($file !== $default) :
-            Storage::delete($path . $file);
-        endif;
+        $data['level']                  = UserLevel::where('uuid', $id)->onlyTrashed()->first();
+        $message                        = $data['level']->name;
 
         // delete data on table...
-        Galery::withTrashed()->where('id', $oldId)->forceDelete();
+        UserLevel::withTrashed()->where('uuid', $id)->forceDelete();
 
         // flashdata...
         $flashData = [
@@ -59,6 +49,6 @@ class UserLevelTrashController extends Controller
             'alert'                     => 'danger',
             'icon'                      => 'fa-fw fas fa-trash',
         ];
-        return redirect()->route($request->segment(1) . '.galery.trash.index')->with($flashData);
+        return redirect()->route($request->segment(1) . '.management.user.level.trash.index')->with($flashData);
     }
 }

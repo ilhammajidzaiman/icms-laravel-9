@@ -1,17 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    level
+    sampah
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.management.user.level.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.management.user.level.trash.index') }}"
-            label="sampah ({{ $count }})" class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.management.user.level.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
@@ -20,7 +15,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-header">
-                        <form action="{{ route(Request::segment(1) . '.management.user.level.index') }}" method="get">
+                        <form action="{{ route(Request::segment(1) . '.management.user.level.trash.index') }}" method="get">
                             @csrf
                             <div class="row justify-content-end">
                                 <x-search-input name="search" id="search" value="{{ request('search') }}"
@@ -54,16 +49,12 @@
                                             </td>
                                             <td class="text-end">
                                                 <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.management.user.level.show', $level->uuid) }}"
-                                                    label="lihat" class="rounded-pill btn btn-sm btn-outline-primary"
-                                                    icon="fa-fw fas fa-eye" />
-                                                <x-button-link
-                                                    href="{{ route(Request::segment(1) . '.management.user.level.edit', $level->uuid) }}"
-                                                    label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                                    icon="fa-fw fas fa-edit" />
+                                                    href="{{ route(Request::segment(1) . '.management.user.level.trash.restore', $level->uuid) }}"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                                    icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.management.user.level.delete', $level->uuid) }}"
-                                                    confirm="{{ $level->name }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.management.user.level.trash.delete', $level->uuid) }}"
+                                                    confirm="permanen {{ $level->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             </td>
