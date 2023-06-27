@@ -13,7 +13,7 @@ class SlideshowTrashController extends Controller
     {
         $search                     = request(['search']);
         $data['slideshows']         = Slideshow::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.slideshow.trash', $data);
+        return view('private.level.developer.slideshow.trash', $data);
     }
 
     public function restore(Request $request, $id)

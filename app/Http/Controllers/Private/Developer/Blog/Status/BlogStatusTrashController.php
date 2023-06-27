@@ -12,7 +12,7 @@ class BlogStatusTrashController extends Controller
     {
         $search                     = request(['search']);
         $data['statuses']           = BlogStatus::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.blog.status.trash', $data);
+        return view('private.level.developer.blog.status.trash', $data);
     }
 
     public function restore(Request $request, $id)

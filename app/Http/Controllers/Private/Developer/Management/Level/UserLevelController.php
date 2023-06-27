@@ -19,7 +19,7 @@ class UserLevelController extends Controller
         $search                     = request(['search']);
         $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']              = UserLevel::onlyTrashed()->get()->count();
-        return view('private.developer.management.level.index', $data);
+        return view('private.level.developer.management.level.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserLevelController extends Controller
      */
     public function create()
     {
-        return view('private.developer.management.level.create');
+        return view('private.level.developer.management.level.create');
     }
 
     /**
@@ -79,7 +79,7 @@ class UserLevelController extends Controller
     public function show($id)
     {
         $data['level']              = UserLevel::where('uuid', $id)->first();
-        return view('private.developer.management.level.show', $data);
+        return view('private.level.developer.management.level.show', $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class UserLevelController extends Controller
     public function edit($id)
     {
         $data['level']              = UserLevel::where('uuid', $id)->first();
-        return view('private.developer.management.level.update', $data);
+        return view('private.level.developer.management.level.update', $data);
     }
 
     /**

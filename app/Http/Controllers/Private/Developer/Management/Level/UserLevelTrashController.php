@@ -13,7 +13,7 @@ class UserLevelTrashController extends Controller
     {
         $search                         = request(['search']);
         $data['levels']                 = UserLevel::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.management.level.trash', $data);
+        return view('private.level.developer.management.level.trash', $data);
     }
 
     public function restore(Request $request, $id)

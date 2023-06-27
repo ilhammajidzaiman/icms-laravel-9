@@ -13,7 +13,7 @@ class PageTrashController extends Controller
     {
         $search                     = request(['search']);
         $data['pages']              = Page::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.page.trash', $data);
+        return view('private.level.developer.page.trash', $data);
     }
 
     public function restore(Request $request, $id)

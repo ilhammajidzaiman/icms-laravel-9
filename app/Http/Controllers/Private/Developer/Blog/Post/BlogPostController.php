@@ -24,7 +24,7 @@ class BlogPostController extends Controller
         $search                         = request(['search']);
         $data['articles']               = BlogArticle::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']                  = BlogArticle::onlyTrashed()->get()->count();
-        return view('private.developer.blog.post.index', $data);
+        return view('private.level.developer.blog.post.index', $data);
     }
 
     /**
@@ -36,7 +36,7 @@ class BlogPostController extends Controller
     {
         $data['statuses']               = BlogStatus::orderBy('id')->get();
         $data['categories']             = BlogCategory::orderBy('name')->get();
-        return view('private.developer.blog.post.create', $data);
+        return view('private.level.developer.blog.post.create', $data);
     }
 
     /**
@@ -129,7 +129,7 @@ class BlogPostController extends Controller
     {
         $data['article']                = BlogArticle::where('uuid', $id)->first();
         $data['blogPosts']              = BlogPost::where('blog_article_id', $data['article']->id)->orderBy('id')->with(['category'])->get();
-        return view('private.developer.blog.post.show', $data);
+        return view('private.level.developer.blog.post.show', $data);
     }
 
     /**
@@ -144,7 +144,7 @@ class BlogPostController extends Controller
         $data['categories']             = BlogCategory::orderBy('name')->get();
         $data['article']                = BlogArticle::where('uuid', $id)->first();
         $data['blogPosts']              = BlogPost::where('blog_article_id', $data['article']->id)->orderBy('id')->with(['category'])->get();
-        return view('private.developer.blog.post.update', $data);
+        return view('private.level.developer.blog.post.update', $data);
     }
 
     /**

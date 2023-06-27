@@ -12,7 +12,7 @@ class BlogCategoryTrashController extends Controller
     {
         $search                     = request(['search']);
         $data['categories']           = BlogCategory::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.blog.category.trash', $data);
+        return view('private.level.developer.blog.category.trash', $data);
     }
 
     public function restore(Request $request, $id)

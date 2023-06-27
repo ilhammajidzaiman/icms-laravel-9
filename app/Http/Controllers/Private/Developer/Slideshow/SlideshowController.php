@@ -22,7 +22,7 @@ class SlideshowController extends Controller
         $search                         = request(['search']);
         $data['slideshows']             = Slideshow::filter($search)->orderByDesc('id')->paginate(4)->withQueryString();
         $data['count']                  = Slideshow::onlyTrashed()->get()->count();
-        return view('private.developer.slideshow.index', $data);
+        return view('private.level.developer.slideshow.index', $data);
     }
 
     /**
@@ -33,7 +33,7 @@ class SlideshowController extends Controller
     public function create()
     {
         $data['statuses']               = Status::orderBy('id')->get();
-        return view('private.developer.slideshow.create', $data);
+        return view('private.level.developer.slideshow.create', $data);
     }
 
     /**
@@ -107,7 +107,7 @@ class SlideshowController extends Controller
     public function show($id)
     {
         $data['slideshow']              = Slideshow::where('uuid', $id)->first();
-        return view('private.developer.slideshow.show', $data);
+        return view('private.level.developer.slideshow.show', $data);
     }
 
     /**
@@ -120,7 +120,7 @@ class SlideshowController extends Controller
     {
         $data['statuses']               = Status::orderBy('id')->get();
         $data['slideshow']              = Slideshow::where('uuid', $id)->first();
-        return view('private.developer.slideshow.update', $data);
+        return view('private.level.developer.slideshow.update', $data);
     }
 
     /**

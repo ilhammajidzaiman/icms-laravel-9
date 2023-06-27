@@ -22,7 +22,7 @@ class ArchiveController extends Controller
         $search                         = request(['search']);
         $data['archives']               = Archive::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']                  = Archive::onlyTrashed()->orderByDesc('id')->get()->count();
-        return view('private.developer.archive.index', $data);
+        return view('private.level.developer.archive.index', $data);
     }
 
     /**
@@ -33,7 +33,7 @@ class ArchiveController extends Controller
     public function create()
     {
         $data['statuses']               = Status::orderBy('id')->get();
-        return view('private.developer.archive.create', $data);
+        return view('private.level.developer.archive.create', $data);
     }
 
     /**
@@ -104,7 +104,7 @@ class ArchiveController extends Controller
     public function show($id)
     {
         $data['archive']                = Archive::where('uuid', $id)->first();
-        return view('private.developer.archive.show', $data);
+        return view('private.level.developer.archive.show', $data);
     }
 
     /**
@@ -117,7 +117,7 @@ class ArchiveController extends Controller
     {
         $data['statuses']               = Status::orderBy('id')->get();
         $data['archive']                = Archive::where('uuid', $id)->first();
-        return view('private.developer.archive.update', $data);
+        return view('private.level.developer.archive.update', $data);
     }
 
     /**

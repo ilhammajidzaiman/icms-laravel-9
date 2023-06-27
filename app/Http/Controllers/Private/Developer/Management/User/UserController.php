@@ -24,7 +24,7 @@ class UserController extends Controller
         $search                         = request(['search']);
         $data['users']                  = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']                  = User::onlyTrashed()->get()->count();
-        return view('private.developer.management.user.index', $data);
+        return view('private.level.developer.management.user.index', $data);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $data['statuses']               = UserStatus::orderBy('id')->get();
         $data['levels']                 = UserLevel::orderByDesc('id')->get();
-        return view('private.developer.management.user.create', $data);
+        return view('private.level.developer.management.user.create', $data);
     }
 
     /**
@@ -118,7 +118,7 @@ class UserController extends Controller
     public function show($id)
     {
         $data['user']                   = User::where('uuid', $id)->first();
-        return view('private.developer.management.user.show', $data);
+        return view('private.level.developer.management.user.show', $data);
     }
 
     /**
@@ -132,7 +132,7 @@ class UserController extends Controller
         $data['user']                   = User::where('uuid', $id)->first();
         $data['statuses']               = UserStatus::orderBy('id')->get();
         $data['levels']                 = UserLevel::orderByDesc('id')->get();
-        return view('private.developer.management.user.update', $data);
+        return view('private.level.developer.management.user.update', $data);
     }
 
     /**
@@ -244,7 +244,7 @@ class UserController extends Controller
     public function password($id)
     {
         $data['user']                   = User::where('uuid', $id)->first();
-        return view('private.developer.management.user.password', $data);
+        return view('private.level.developer.management.user.password', $data);
     }
 
     public function reset(Request $request, $id)

@@ -19,7 +19,7 @@ class PageController extends Controller
         $search                         = request(['search']);
         $data['pages']                  = Page::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']                  = Page::onlyTrashed()->get()->count();
-        return view('private.developer.page.index', $data);
+        return view('private.level.developer.page.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('private.developer.page.create');
+        return view('private.level.developer.page.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class PageController extends Controller
     public function show($id)
     {
         $data['page']                   = Page::where('uuid', $id)->first();
-        return view('private.developer.page.show', $data);
+        return view('private.level.developer.page.show', $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class PageController extends Controller
     public function edit($id)
     {
         $data['page']                   = Page::where('uuid', $id)->first();
-        return view('private.developer.page.update', $data);
+        return view('private.level.developer.page.update', $data);
     }
 
     /**

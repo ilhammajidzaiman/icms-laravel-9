@@ -18,7 +18,7 @@ class UserMenuChildController extends Controller
     public function create($id)
     {
         $data['menuParent']             = UserMenuParent::where('uuid', $id)->first();
-        return view('private.developer.management.menu.child.create', $data);
+        return view('private.level.developer.management.menu.child.create', $data);
     }
 
     /**
@@ -82,7 +82,7 @@ class UserMenuChildController extends Controller
     public function show($id)
     {
         $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
-        return view('private.developer.management.menu.child.show', $data);
+        return view('private.level.developer.management.menu.child.show', $data);
     }
 
     /**
@@ -94,7 +94,7 @@ class UserMenuChildController extends Controller
     public function edit($id)
     {
         $data['menuChild']              = UserMenuChild::where('uuid', $id)->first();
-        return view('private.developer.management.menu.child.update', $data);
+        return view('private.level.developer.management.menu.child.update', $data);
     }
 
     /**

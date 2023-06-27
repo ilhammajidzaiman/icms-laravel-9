@@ -22,7 +22,7 @@ class GaleryController extends Controller
         $search                         = request(['search']);
         $data['galeries']               = Galery::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']                  = Galery::onlyTrashed()->get()->count();
-        return view('private.developer.galery.index', $data);
+        return view('private.level.developer.galery.index', $data);
     }
 
     /**
@@ -33,7 +33,7 @@ class GaleryController extends Controller
     public function create()
     {
         $data['statuses']               = Status::orderBy('id')->get();
-        return view('private.developer.galery.create', $data);
+        return view('private.level.developer.galery.create', $data);
     }
 
     /**
@@ -104,7 +104,7 @@ class GaleryController extends Controller
     public function show($id)
     {
         $data['galery']                 = Galery::where('uuid', $id)->first();
-        return view('private.developer.galery.show', $data);
+        return view('private.level.developer.galery.show', $data);
     }
 
     /**
@@ -117,7 +117,7 @@ class GaleryController extends Controller
     {
         $data['statuses']               = Status::orderBy('id')->get();
         $data['galery']                 = Galery::where('uuid', $id)->first();
-        return view('private.developer.galery.update', $data);
+        return view('private.level.developer.galery.update', $data);
     }
 
     /**

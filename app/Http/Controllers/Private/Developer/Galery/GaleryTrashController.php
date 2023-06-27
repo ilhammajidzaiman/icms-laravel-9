@@ -13,7 +13,7 @@ class GaleryTrashController extends Controller
     {
         $search                         = request(['search']);
         $data['galeries']               = Galery::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.galery.trash', $data);
+        return view('private.level.developer.galery.trash', $data);
     }
 
     public function restore(Request $request, $id)

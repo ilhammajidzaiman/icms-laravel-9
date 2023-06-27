@@ -14,7 +14,7 @@ class BlogPostTrashController extends Controller
     {
         $search                     = request(['search']);
         $data['articles']           = BlogArticle::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.blog.post.trash', $data);
+        return view('private.level.developer.blog.post.trash', $data);
     }
 
     public function restore(Request $request, $id)

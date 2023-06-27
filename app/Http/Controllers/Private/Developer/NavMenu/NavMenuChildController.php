@@ -28,7 +28,7 @@ class NavMenuChildController extends Controller
     public function create($id)
     {
         $data['navMenuParent']              = NavMenuParent::where('uuid', $id)->first();
-        return view('private.developer.nav-menu.child.create', $data);
+        return view('private.level.developer.nav-menu.child.create', $data);
     }
 
     /**
@@ -86,7 +86,7 @@ class NavMenuChildController extends Controller
     public function show($id)
     {
         $data['navMenuChild']              = NavMenuChild::where('uuid', $id)->first();
-        return view('private.developer.nav-menu.child.show', $data);
+        return view('private.level.developer.nav-menu.child.show', $data);
     }
 
     /**
@@ -98,7 +98,7 @@ class NavMenuChildController extends Controller
     public function edit($id)
     {
         $data['navMenuChild']              = NavMenuChild::where('uuid', $id)->first();
-        return view('private.developer.nav-menu.child.update', $data);
+        return view('private.level.developer.nav-menu.child.update', $data);
     }
 
     /**

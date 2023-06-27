@@ -19,7 +19,7 @@ class BlogCategoryController extends Controller
         $search                     = request(['search']);
         $data['categories']         = BlogCategory::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']              = BlogCategory::onlyTrashed()->get()->count();
-        return view('private.developer.blog.category.index', $data);
+        return view('private.level.developer.blog.category.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class BlogCategoryController extends Controller
      */
     public function create()
     {
-        return view('private.developer.blog.category.create');
+        return view('private.level.developer.blog.category.create');
     }
 
     /**
@@ -77,7 +77,7 @@ class BlogCategoryController extends Controller
     public function show($id)
     {
         $data['category']           = BlogCategory::where('uuid', $id)->first();
-        return view('private.developer.blog.category.show', $data);
+        return view('private.level.developer.blog.category.show', $data);
     }
 
     /**
@@ -89,7 +89,7 @@ class BlogCategoryController extends Controller
     public function edit($id)
     {
         $data['category']           = BlogCategory::where('uuid', $id)->first();
-        return view('private.developer.blog.category.update', $data);
+        return view('private.level.developer.blog.category.update', $data);
     }
 
     /**

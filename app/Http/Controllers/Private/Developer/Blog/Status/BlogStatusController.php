@@ -19,7 +19,7 @@ class BlogStatusController extends Controller
         $search                     = request(['search']);
         $data['statuses']           = BlogStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']              = BlogStatus::onlyTrashed()->get()->count();
-        return view('private.developer.blog.status.index', $data);
+        return view('private.level.developer.blog.status.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class BlogStatusController extends Controller
      */
     public function create()
     {
-        return view('private.developer.blog.status.create');
+        return view('private.level.developer.blog.status.create');
     }
 
     /**
@@ -79,7 +79,7 @@ class BlogStatusController extends Controller
     public function show($id)
     {
         $data['status']           = BlogStatus::where('uuid', $id)->first();
-        return view('private.developer.blog.status.show', $data);
+        return view('private.level.developer.blog.status.show', $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class BlogStatusController extends Controller
     public function edit($id)
     {
         $data['status']           = BlogStatus::where('uuid', $id)->first();
-        return view('private.developer.blog.status.update', $data);
+        return view('private.level.developer.blog.status.update', $data);
     }
 
     /**

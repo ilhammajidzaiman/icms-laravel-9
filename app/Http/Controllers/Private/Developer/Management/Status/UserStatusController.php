@@ -19,7 +19,7 @@ class UserStatusController extends Controller
         $search                     = request(['search']);
         $data['statuses']           = UserStatus::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
         $data['count']              = UserStatus::onlyTrashed()->get()->count();
-        return view('private.developer.management.status.index', $data);
+        return view('private.level.developer.management.status.index', $data);
     }
 
     /**
@@ -29,7 +29,7 @@ class UserStatusController extends Controller
      */
     public function create()
     {
-        return view('private.developer.management.status.create');
+        return view('private.level.developer.management.status.create');
     }
 
     /**
@@ -79,7 +79,7 @@ class UserStatusController extends Controller
     public function show($id)
     {
         $data['status']             = UserStatus::where('uuid', $id)->first();
-        return view('private.developer.management.status.show', $data);
+        return view('private.level.developer.management.status.show', $data);
     }
 
     /**
@@ -91,7 +91,7 @@ class UserStatusController extends Controller
     public function edit($id)
     {
         $data['status']             = UserStatus::where('uuid', $id)->first();
-        return view('private.developer.management.status.update', $data);
+        return view('private.level.developer.management.status.update', $data);
     }
 
     /**

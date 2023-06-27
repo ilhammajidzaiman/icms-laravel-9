@@ -20,7 +20,7 @@ class UserAccessController extends Controller
     {
         $search                     = request(['search']);
         $data['levels']             = UserLevel::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.management.access.index', $data);
+        return view('private.level.developer.management.access.index', $data);
     }
 
     /**
@@ -32,7 +32,7 @@ class UserAccessController extends Controller
     public function show($id)
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
-        return view('private.developer.management.access.show', $data);
+        return view('private.level.developer.management.access.show', $data);
     }
 
     /**
@@ -45,7 +45,7 @@ class UserAccessController extends Controller
     {
         $data['level']              = UserLevel::where('slug', $id)->first();
         $data['menus']              = UserMenuParent::orderBy('order')->get();
-        return view('private.developer.management.access.update', $data);
+        return view('private.level.developer.management.access.update', $data);
     }
 
     public function updateParent($level, $parent)

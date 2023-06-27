@@ -13,7 +13,7 @@ class UserStatusTrashController extends Controller
     {
         $search                         = request(['search']);
         $data['statuses']               = UserStatus::onlyTrashed()->filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        return view('private.developer.management.status.trash', $data);
+        return view('private.level.developer.management.status.trash', $data);
     }
 
     public function restore(Request $request, $id)
