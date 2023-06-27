@@ -21,9 +21,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $search                     = request(['search']);
-        $data['users']              = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
-        $data['count']              = User::onlyTrashed()->get()->count();
+        $search                         = request(['search']);
+        $data['users']                  = User::filter($search)->orderByDesc('id')->paginate(20)->withQueryString();
+        $data['count']                  = User::onlyTrashed()->get()->count();
         return view('private.developer.management.user.index', $data);
     }
 
@@ -34,8 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data['statuses']           = UserStatus::orderBy('id')->get();
-        $data['levels']             = UserLevel::orderByDesc('id')->get();
+        $data['statuses']               = UserStatus::orderBy('id')->get();
+        $data['levels']                 = UserLevel::orderByDesc('id')->get();
         return view('private.developer.management.user.create', $data);
     }
 
@@ -48,28 +48,28 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // data input...
-        $name                       = $request->name;
-        $username                   = $request->username;
-        $email                      = $request->email;
-        $status                     = $request->status;
-        $level                      = $request->level;
-        $file                       = $request->file('file');
-        $message                    = $request->name;
-        $uuid                       = Str::uuid();
-        $slug                       = Str::slug($name, '-');
-        $password                   = Hash::make($request->password);
-        $folder                     = 'user/' . date('Y/m/');
-        $default                    = 'default-user.svg';
+        $name                           = $request->name;
+        $username                       = $request->username;
+        $email                          = $request->email;
+        $status                         = $request->status;
+        $level                          = $request->level;
+        $file                           = $request->file('file');
+        $message                        = $request->name;
+        $uuid                           = Str::uuid();
+        $slug                           = Str::slug($name, '-');
+        $password                       = Hash::make($request->password);
+        $folder                         = 'user/' . date('Y/m/');
+        $default                        = 'default-user.svg';
 
         // validation input...
-        $validatedData              = $request->validate([
-            'name'                  => ['required', 'max:255'],
-            'username'              => ['required', 'max:255', 'unique:users'],
-            'email'                 => ['required', 'max:255', 'unique:users'],
-            'password'              => ['required', 'min:6', 'same:confirmation'],
-            'confirmation'          => ['required', 'min:6', 'same:password'],
-            'status'                => ['required', 'max:255'],
-            'level'                 => ['required', 'max:255'],
+        $validatedData                  = $request->validate([
+            'name'                      => ['required', 'max:255'],
+            'username'                  => ['required', 'max:255', 'unique:users'],
+            'email'                     => ['required', 'max:255', 'unique:users'],
+            'password'                  => ['required', 'max:255', 'min:6', 'same:confirmation'],
+            'confirmation'              => ['required', 'max:255', 'min:6', 'same:password'],
+            'status'                    => ['required', 'max:255'],
+            'level'                     => ['required', 'max:255'],
         ]);
         // upload file to storage...
         if ($file) :
@@ -87,24 +87,24 @@ class UserController extends Controller
 
         // insert data to table..
         $data = [
-            'user_level_id'         => $level,
-            'user_status_id'        => $status,
-            'uuid'                  => $uuid,
-            'password'              => $password,
-            'username'              => $username,
-            'email'                 => $email,
-            'name'                  => $name,
-            'slug'                  => $slug,
-            'path'                  => $path,
-            'file'                  => $fileName,
+            'user_level_id'             => $level,
+            'user_status_id'            => $status,
+            'uuid'                      => $uuid,
+            'password'                  => $password,
+            'username'                  => $username,
+            'email'                     => $email,
+            'name'                      => $name,
+            'slug'                      => $slug,
+            'path'                      => $path,
+            'file'                      => $fileName,
         ];
         User::create($data);
 
         // flashdata...
         $flashData = [
-            'message'               => 'Data "' . $message . '" ditambahkan',
-            'alert'                 => 'primary',
-            'icon'                  => 'fa-fw fas fa-check',
+            'message'                   => 'Data "' . $message . '" ditambahkan',
+            'alert'                     => 'primary',
+            'icon'                      => 'fa-fw fas fa-check',
         ];
         return redirect()->route($request->segment(1) . '.management.user.index')->with($flashData);
     }
@@ -117,7 +117,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $data['user']               = User::where('uuid', $id)->first();
+        $data['user']                   = User::where('uuid', $id)->first();
         return view('private.developer.management.user.show', $data);
     }
 
@@ -129,9 +129,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data['user']               = User::where('uuid', $id)->first();
-        $data['statuses']           = UserStatus::orderBy('id')->get();
-        $data['levels']             = UserLevel::orderByDesc('id')->get();
+        $data['user']                   = User::where('uuid', $id)->first();
+        $data['statuses']               = UserStatus::orderBy('id')->get();
+        $data['levels']                 = UserLevel::orderByDesc('id')->get();
         return view('private.developer.management.user.update', $data);
     }
 
@@ -145,35 +145,35 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         // data detail...
-        $data['user']               = User::where('uuid', $id)->first();
-        $oldUsername                = $data['user']->username;
-        $oldEmail                   = $data['user']->email;
-        $oldPath                    = $data['user']->path;
-        $oldFile                    = $data['user']->file;
+        $data['user']                   = User::where('uuid', $id)->first();
+        $oldUsername                    = $data['user']->username;
+        $oldEmail                       = $data['user']->email;
+        $oldPath                        = $data['user']->path;
+        $oldFile                        = $data['user']->file;
 
         // data input...
-        $name                       = $request->name;
-        $username                   = $request->username;
-        $email                      = $request->email;
-        $status                     = $request->status;
-        $level                      = $request->level;
-        $file                       = $request->file('file');
-        $message                    = $request->name;
-        $slug                       = Str::slug($name, '-');
-        $folder                     = 'user/' . date('Y/m/');
-        $default                    = 'default-user.svg';
+        $name                           = $request->name;
+        $username                       = $request->username;
+        $email                          = $request->email;
+        $status                         = $request->status;
+        $level                          = $request->level;
+        $file                           = $request->file('file');
+        $message                        = $request->name;
+        $slug                           = Str::slug($name, '-');
+        $folder                         = 'user/' . date('Y/m/');
+        $default                        = 'default-user.svg';
 
         // validation logic...
-        $oldUsername                !== $username ? $uUsername = "unique:users" : $uUsername = "";
-        $oldEmail                   !== $email ? $uEmail = "unique:users" : $uEmail = "";
+        $oldUsername                    !== $username ? $uUsername = "unique:users" : $uUsername = "";
+        $oldEmail                       !== $email ? $uEmail = "unique:users" : $uEmail = "";
 
         // validation input...
-        $validatedData              = $request->validate([
-            'name'                  => ['required', 'max:255'],
-            'username'              => ['required', 'max:255', $uUsername],
-            'email'                 => ['required', 'max:255', $uEmail],
-            'status'                => ['required', 'max:255'],
-            'level'                 => ['required', 'max:255'],
+        $validatedData                  = $request->validate([
+            'name'                      => ['required', 'max:255'],
+            'username'                  => ['required', 'max:255', $uUsername],
+            'email'                     => ['required', 'max:255', $uEmail],
+            'status'                    => ['required', 'max:255'],
+            'level'                     => ['required', 'max:255'],
         ]);
 
         // upload file to storage...
@@ -197,22 +197,22 @@ class UserController extends Controller
 
         // insert data to table...
         $data = [
-            'user_level_id'         => $level,
-            'user_status_id'        => $status,
-            'username'              => $username,
-            'email'                 => $email,
-            'name'                  => $name,
-            'slug'                  => $slug,
-            'path'                  => $path,
-            'file'                  => $fileName,
+            'user_level_id'             => $level,
+            'user_status_id'            => $status,
+            'username'                  => $username,
+            'email'                     => $email,
+            'name'                      => $name,
+            'slug'                      => $slug,
+            'path'                      => $path,
+            'file'                      => $fileName,
         ];
         User::where('uuid', $id)->update($data);
 
         // flashdata...
         $flashData = [
-            'message'               => 'Data "' . $message . '" diubah',
-            'alert'                 => 'success',
-            'icon'                  => 'fa-fw fas fa-edit',
+            'message'                   => 'Data "' . $message . '" diubah',
+            'alert'                     => 'success',
+            'icon'                      => 'fa-fw fas fa-edit',
         ];
         return redirect()->route($request->segment(1) . '.management.user.index')->with($flashData);
     }
@@ -226,18 +226,50 @@ class UserController extends Controller
     public function destroy(Request $request, $id)
     {
         // data detail...
-        $data['user']               = User::where('uuid', $id)->first();
-        $message                    = $data['user']->name;
+        $data['user']                   = User::where('uuid', $id)->first();
+        $message                        = $data['user']->name;
 
         // delete data on table...
         User::where('uuid', $id)->delete();
 
         // flashdata...
         $flashData = [
-            'message'               => 'Data "' . $message . '" dihapus!',
-            'alert'                 => 'danger',
-            'icon'                  => 'fa-fw fas fa-trash',
+            'message'                   => 'Data "' . $message . '" dihapus!',
+            'alert'                     => 'danger',
+            'icon'                      => 'fa-fw fas fa-trash',
         ];
         return redirect()->route($request->segment(1) . '.management.user.index')->with($flashData);
+    }
+
+    public function password($id)
+    {
+        $data['user']                   = User::where('uuid', $id)->first();
+        return view('private.developer.management.user.password', $data);
+    }
+
+    public function reset(Request $request, $id)
+    {
+        // data input...
+        $password                       = Hash::make($request->password);
+
+        // validation input...
+        $validatedData                  = $request->validate([
+            'password'                  => ['required', 'max:255', 'min:6', 'same:confirmation'],
+            'confirmation'              => ['required', 'max:255', 'min:6', 'same:password'],
+        ]);
+
+        // insert data to table...
+        $data = [
+            'password'                  => $password,
+        ];
+        User::where('uuid', $id)->update($data);
+
+        // flashdata...
+        $flashData = [
+            'message'                   => 'Password berhasil diubah!',
+            'alert'                     => 'success',
+            'icon'                      => 'fa-fw fas fa-key',
+        ];
+        return redirect()->route($request->segment(1) . '.management.user.edit', $id)->with($flashData);
     }
 }

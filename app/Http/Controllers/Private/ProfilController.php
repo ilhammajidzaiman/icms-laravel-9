@@ -54,10 +54,10 @@ class ProfilController extends Controller
 
         // data input...
         $name                       = $request->name;
-        $slug                       = Str::slug($name, '-');
         $username                   = $request->username;
         $email                      = $request->email;
         $file                       = $request->file('file');
+        $slug                       = Str::slug($name, '-');
         $folder                     = 'user/' . date('Y/m/');
         $default                    = 'default-user.svg';
 
@@ -117,13 +117,6 @@ class ProfilController extends Controller
         return view('private.profil.password', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Profil  $profil
-     * @return \Illuminate\Http\Response
-     */
     public function passwordUpdate(Request $request, $id)
     {
         // data input...
@@ -131,8 +124,8 @@ class ProfilController extends Controller
 
         // validation input...
         $validatedData              = $request->validate([
-            'password'              => ['required', 'min:6', 'same:confirmation'],
-            'confirmation'          => ['required', 'min:6', 'same:password'],
+            'password'              => ['required', 'max:255', 'min:6', 'same:confirmation'],
+            'confirmation'          => ['required', 'max:255', 'min:6', 'same:password'],
         ]);
 
         // insert data to table...

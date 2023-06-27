@@ -54,7 +54,10 @@
                                     <label for="password" class="form-label text-capitalize">password</label>
                                     <div class="form-control-static" id="password">
                                         Reset password user
-                                        <a href="" class="fw-bold">disini</a>
+                                        <a href="{{ route(Request::segment(1) . '.management.user.password', $user->uuid) }}"
+                                            class="fw-bold">
+                                            disini
+                                        </a>
                                     </div>
                                 </div>
                             </div>

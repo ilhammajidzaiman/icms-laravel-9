@@ -132,6 +132,8 @@ Route::middleware('auth')->group(
                             Route::get('/{id}/edit', 'edit')->name('developer.management.user.edit');
                             Route::put('/{id}/update', 'update')->name('developer.management.user.update');
                             Route::delete('/{id}/delete', 'destroy')->name('developer.management.user.delete');
+                            Route::get('/{id}/password', 'password')->name('developer.management.user.password');
+                            Route::put('/{id}/reset', 'reset')->name('developer.management.user.reset');
                             Route::prefix('trash')->controller(UserTrashController::class)->group(function () {
                                 Route::get('', 'index')->name('developer.management.user.trash.index');
                                 Route::get('/{id}/restore', 'restore')->name('developer.management.user.trash.restore');
