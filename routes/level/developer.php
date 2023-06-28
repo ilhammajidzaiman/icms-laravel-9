@@ -12,21 +12,23 @@ use App\Http\Controllers\Private\Developer\Galery\GaleryTrashController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowController;
 use App\Http\Controllers\Private\Developer\Archive\ArchiveTrashController;
 use App\Http\Controllers\Private\Developer\Management\User\UserController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuChildController;
-use App\Http\Controllers\Private\Developer\NavMenu\NavMenuParentController;
 use App\Http\Controllers\Private\Developer\Blog\Status\BlogStatusController;
 use App\Http\Controllers\Private\Developer\Blog\Post\BlogPostTrashController;
 use App\Http\Controllers\Private\Developer\Slideshow\SlideshowTrashController;
 use App\Http\Controllers\Private\Developer\Management\User\UserTrashController;
 use App\Http\Controllers\Private\Developer\Blog\Category\BlogCategoryController;
 use App\Http\Controllers\Private\Developer\Management\Level\UserLevelController;
+use App\Http\Controllers\Private\Developer\NavMenu\Child\NavMenuChildController;
 use App\Http\Controllers\Private\Developer\Blog\Status\BlogStatusTrashController;
 use App\Http\Controllers\Private\Developer\Management\Access\UserAccessController;
 use App\Http\Controllers\Private\Developer\Management\Status\UserStatusController;
+use App\Http\Controllers\Private\Developer\NavMenu\Parent\NavMenuParentController;
 use App\Http\Controllers\Private\Developer\Blog\Category\BlogCategoryTrashController;
 use App\Http\Controllers\Private\Developer\Management\Level\UserLevelTrashController;
+use App\Http\Controllers\Private\Developer\NavMenu\Child\NavMenuChildTrashController;
 use App\Http\Controllers\Private\Developer\Management\Access\UserAccessTrashController;
 use App\Http\Controllers\Private\Developer\Management\Status\UserStatusTrashController;
+use App\Http\Controllers\Private\Developer\NavMenu\Parent\NavMenuParentTrashController;
 use App\Http\Controllers\Private\Developer\Management\Menu\Child\UserMenuChildController;
 use App\Http\Controllers\Private\Developer\Management\Menu\Parent\UserMenuParentController;
 use App\Http\Controllers\Private\Developer\Management\Menu\Child\UserMenuChildTrashController;
@@ -226,6 +228,12 @@ Route::middleware('auth')->group(
                     Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.parent.edit');
                     Route::put('/{id}/update', 'update')->name('developer.nav-menu.parent.update');
                     Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.parent.delete');
+                    Route::prefix('trash')->controller(NavMenuParentTrashController::class)->group(function () {
+                        Route::get('', 'index')->name('developer.nav-menu.parent.trash.index');
+                        Route::get('/{id}/restore', 'restore')->name('developer.nav-menu.parent.trash.restore');
+                        Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.parent.trash.delete');
+                    });
+
                     // 
                     Route::prefix('/child')->controller(NavMenuChildController::class)->group(function () {
                         Route::get('/create/{id}', 'create')->name('developer.nav-menu.child.create');
@@ -234,6 +242,11 @@ Route::middleware('auth')->group(
                         Route::get('/{id}/edit', 'edit')->name('developer.nav-menu.child.edit');
                         Route::put('/{id}/update', 'update')->name('developer.nav-menu.child.update');
                         Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.child.delete');
+                        Route::prefix('trash')->controller(NavMenuChildTrashController::class)->group(function () {
+                            Route::get('', 'index')->name('developer.nav-menu.child.trash.index');
+                            Route::get('/{id}/restore', 'restore')->name('developer.nav-menu.child.trash.restore');
+                            Route::delete('/{id}/delete', 'destroy')->name('developer.nav-menu.child.trash.delete');
+                        });
                     });
                 });
                 Route::prefix('galery')->controller(GaleryController::class)->group(function () {

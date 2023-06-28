@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\NavMenu;
+namespace App\Http\Controllers\Private\Developer\NavMenu\Child;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

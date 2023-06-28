@@ -1,17 +1,12 @@
 @extends('private.templates.layout')
 
 @section('header')
-    nav menu
+    sampah
 @endsection
 
 @section('container')
-    <x-button-link href="{{ route(Request::segment(1) . '.nav-menu.parent.create') }}" label="baru"
-        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-plus" />
-
-    @can('developer')
-        <x-button-link href="{{ route(Request::segment(1) . '.nav-menu.parent.trash.index') }}"
-            label="sampah ({{ $count }})" class="float-end" icon="fa-fw fas fa-trash" />
-    @endcan
+    <x-button-link href="{{ route(Request::segment(1) . '.nav-menu.parent.index') }}" label="kembali"
+        class="rounded-pill btn btn-md btn-outline-primary mb-3" icon="fa-fw fas fa-arrow-left" />
 
     <x-alert-dismissing />
 
@@ -31,11 +26,16 @@
                                 <tbody>
                                     @forelse ($navMenuParents as $navMenuParent)
                                         @php
-                                            $hasParent = App\Models\NavMenu\navMenuParent::where('id', $navMenuParent->id)->first();
+                                            $hasParent = App\Models\NavMenu\navMenuParent::onlyTrashed()
+                                                ->where('id', $navMenuParent->id)
+                                                ->first();
                                             //
-                                            $hasChild = App\Models\NavMenu\NavMenuChild::where('nav_menu_parent_id', $navMenuParent->id)->first();
+                                            $hasChild = App\Models\NavMenu\NavMenuChild::onlyTrashed()
+                                                ->where('nav_menu_parent_id', $navMenuParent->id)
+                                                ->first();
                                             //
-                                            $navMenuChildren = App\Models\NavMenu\NavMenuChild::where('nav_menu_parent_id', $navMenuParent->id)
+                                            $navMenuChildren = App\Models\NavMenu\NavMenuChild::onlyTrashed()
+                                                ->where('nav_menu_parent_id', $navMenuParent->id)
                                                 ->orderBy('order')
                                                 ->get();
                                         @endphp
@@ -45,7 +45,7 @@
                                                 {{ $navMenuParent->name }}
                                             </td>
                                             <td class="text-end">
-                                                @if (empty($hasParent->url) || $hasParent->url === '#')
+                                                {{-- @if (empty($hasParent->url) || $hasParent->url === '#')
                                                     <x-button-link
                                                         href="{{ route(Request::segment(1) . '.nav-menu.child.create', $navMenuParent->uuid) }} "
                                                         label="sub baru"
@@ -59,11 +59,15 @@
                                                 <x-button-link
                                                     href="{{ route(Request::segment(1) . '.nav-menu.parent.edit', $navMenuParent->uuid) }} "
                                                     label="edit" class="rounded-pill btn btn-sm btn-outline-success"
-                                                    icon="fa-fw fas fa-edit" />
+                                                    icon="fa-fw fas fa-edit" /> --}}
                                             @empty($hasChild)
+                                                <x-button-link
+                                                    href="{{ route(Request::segment(1) . '.nav-menu.parent.trash.restore', $navMenuParent->uuid) }}"
+                                                    label="pulihkan" class="rounded-pill btn btn-sm btn-outline-info"
+                                                    icon="fa-fw fas fa-recycle" />
                                                 <x-button-delete
-                                                    href="{{ route(Request::segment(1) . '.nav-menu.parent.delete', $navMenuParent->uuid) }}"
-                                                    confirm="{{ $navMenuParent->name }}" label="hapus"
+                                                    href="{{ route(Request::segment(1) . '.nav-menu.parent.trash.delete', $navMenuParent->uuid) }}"
+                                                    confirm="permanen {{ $navMenuParent->name }}" label="hapus"
                                                     class="rounded-pill btn btn-sm btn-outline-danger"
                                                     icon="fa-fw fas fa-trash" />
                                             @endempty
@@ -80,19 +84,15 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-end">
+
                                                     <x-button-link
-                                                        href="{{ route(Request::segment(1) . '.nav-menu.child.show', $navMenuChild->uuid) }}"
-                                                        label="lihat"
-                                                        class="rounded-pill btn btn-sm btn-outline-primary"
-                                                        icon="fa-fw fas fa-eye" />
-                                                    <x-button-link
-                                                        href="{{ route(Request::segment(1) . '.nav-menu.child.edit', $navMenuChild->uuid) }} "
-                                                        label="edit"
-                                                        class="rounded-pill btn btn-sm btn-outline-success"
-                                                        icon="fa-fw fas fa-edit" />
+                                                        href="{{ route(Request::segment(1) . '.nav-menu.child.trash.restore', $navMenuChild->uuid) }}"
+                                                        label="pulihkan"
+                                                        class="rounded-pill btn btn-sm btn-outline-info"
+                                                        icon="fa-fw fas fa-recycle" />
                                                     <x-button-delete
-                                                        href="{{ route(Request::segment(1) . '.nav-menu.child.delete', $navMenuChild->uuid) }}"
-                                                        confirm="{{ $navMenuChild->name }}" label="hapus"
+                                                        href="{{ route(Request::segment(1) . '.nav-menu.child.trash.delete', $navMenuChild->uuid) }}"
+                                                        confirm="permanen {{ $navMenuChild->name }}" label="hapus"
                                                         class="rounded-pill btn btn-sm btn-outline-danger"
                                                         icon="fa-fw fas fa-trash" />
                                                 </td>
@@ -102,7 +102,8 @@
                                 @empty
                                     <tr>
                                         <td colspan="2">
-                                            <x-alert-empty label="Data tidak ditemukan..." />
+                                            <x-alert-empty-icon label="Tidak ada sampah ditemukan..."
+                                                icon="fa-fw fas fa-trash-alt fs-1" />
                                         </td>
                                     </tr>
                                 @endforelse

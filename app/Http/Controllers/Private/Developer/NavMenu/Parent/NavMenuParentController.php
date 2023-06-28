@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Private\Developer\NavMenu;
+namespace App\Http\Controllers\Private\Developer\NavMenu\Parent;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -17,6 +17,7 @@ class NavMenuParentController extends Controller
     public function index()
     {
         $data['navMenuParents']         = NavMenuParent::orderBy('order')->get();
+        $data['count']                  = NavMenuParent::onlyTrashed()->get()->count();
         return view('private.level.developer.nav-menu.parent.index', $data);
     }
 
